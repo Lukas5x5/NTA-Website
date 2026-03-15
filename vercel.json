@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/tiles/:z/:x/:y.png",
-      "destination": "/api/tiles/:z/:x/:y"
+      "destination": "/api/tiles?z=:z&x=:x&y=:y"
     }
   ]
 }

@@ -4,8 +4,10 @@ export const config = {
 
 export default async function handler(request) {
   const url = new URL(request.url)
-  const parts = url.pathname.replace('/api/tiles/', '').replace('.png', '').split('/')
-  const [z, x, y] = parts
+  // URL format: /api/tiles?z=10&x=548&y=358
+  const z = url.searchParams.get('z')
+  const x = url.searchParams.get('x')
+  const y = url.searchParams.get('y')
 
   // Validate params
   if (!z || !x || !y || isNaN(z) || isNaN(x) || isNaN(y)) {
@@ -19,8 +21,8 @@ export default async function handler(request) {
   try {
     const tileRes = await fetch(tileUrl, {
       headers: {
-        'User-Agent': 'NTA-SkyNav/1.0 (https://ntaskynav.com; balloon flight navigation app)',
-        'Referer': 'https://ntaskynav.com/',
+        'User-Agent': 'NTA-SkyNav/1.0 (https://ntaskynav.app; balloon flight navigation app)',
+        'Referer': 'https://ntaskynav.app/',
         'Accept': 'image/png,image/*',
       },
     })
