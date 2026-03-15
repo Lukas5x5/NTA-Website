@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beta Access – NTA SkyNav</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="nta-logo.png">
+  <link rel="apple-touch-icon" href="nta-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ═══ Access Gate ═══ */
+    .access-gate {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      font-family: 'Barlow', sans-serif;
+      color: rgba(200, 212, 240, 0.5);
+      font-size: 16px;
+    }
+
+    .access-gate .lock-icon {
+      width: 48px;
+      height: 48px;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+
+    .access-gate h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .access-gate.hidden { display: none; }
+
+    /* ═══ Beta Page Styles ═══ */
+    .beta-hero {
+      min-height: calc(100vh - var(--nav-height));
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 24px 80px;
+    }
+
+    .beta-card {
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .beta-logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      margin-bottom: 28px;
+      animation: fadeSlideUp 0.7s ease-out both;
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .beta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 8px;
+      padding: 6px 16px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #22c55e;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      animation: fadeSlideUp 0.7s ease-out both;
+      animation-delay: 0.1s;
+    }
+
+    .beta-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      animation: fadeSlideUp 0.7s ease-out both;
+      animation-delay: 0.2s;
+    }
+
+    .beta-title span {
+      color: var(--amber);
+    }
+
+    .beta-desc {
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 40px;
+      animation: fadeSlideUp 0.7s ease-out both;
+      animation-delay: 0.3s;
+    }
+
+    /* ═══ Form ═══ */
+    .beta-form {
+      animation: fadeSlideUp 0.7s ease-out both;
+      animation-delay: 0.4s;
+    }
+
+    .form-section {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(200, 212, 240, 0.45);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    /* Platform toggle */
+    .platform-toggle {
+      display: flex;
+      gap: 12px;
+    }
+
+    .platform-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 20px;
+      background: rgba(17, 24, 39, 0.6);
+      border: 2px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      color: var(--text-dim);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .platform-btn:hover {
+      border-color: rgba(200, 212, 240, 0.2);
+      background: rgba(17, 24, 39, 0.8);
+    }
+
+    .platform-btn.active {
+      border-color: var(--amber);
+      background: rgba(255, 165, 0, 0.08);
+      color: #fff;
+    }
+
+    .platform-btn.active svg {
+      color: var(--amber);
+    }
+
+    .platform-btn svg {
+      flex-shrink: 0;
+      color: rgba(200, 212, 240, 0.4);
+      transition: color 0.25s ease;
+    }
+
+    /* Email input */
+    .email-input-wrap {
+      position: relative;
+    }
+
+    .email-input {
+      width: 100%;
+      padding: 16px 20px;
+      background: rgba(17, 24, 39, 0.6);
+      border: 2px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .email-input::placeholder {
+      color: rgba(200, 212, 240, 0.3);
+    }
+
+    .email-input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(0, 200, 255, 0.12);
+    }
+
+    .email-input.error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+    }
+
+    .email-hint {
+      font-size: 12px;
+      color: rgba(200, 212, 240, 0.35);
+      margin-top: 8px;
+      text-align: left;
+    }
+
+    /* Submit button */
+    .submit-btn {
+      width: 100%;
+      padding: 18px 32px;
+      background: var(--amber);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: var(--navy);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+      margin-top: 28px;
+    }
+
+    .submit-btn:hover {
+      background: #ffb732;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 165, 0, 0.25);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ═══ Trust elements ═══ */
+    .trust-items {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: fadeSlideUp 0.7s ease-out both;
+      animation-delay: 0.5s;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      color: rgba(200, 212, 240, 0.45);
+      justify-content: center;
+    }
+
+    .trust-item .icon {
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ═══ Divider ═══ */
+    .beta-divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+      margin: 36px auto;
+      animation: fadeSlideUp 0.7s ease-out both;
+      animation-delay: 0.6s;
+    }
+
+    /* ═══ Footer note ═══ */
+    .beta-footer-note {
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      color: rgba(200, 212, 240, 0.35);
+      line-height: 1.6;
+      animation: fadeSlideUp 0.7s ease-out both;
+      animation-delay: 0.65s;
+    }
+
+    .beta-footer-note a {
+      color: var(--amber);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .beta-footer-note a:hover {
+      opacity: 0.8;
+    }
+
+    /* ═══ Success state ═══ */
+    .success-card {
+      display: none;
+      text-align: center;
+      animation: fadeSlideUp 0.5s ease-out both;
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 2px solid rgba(34, 197, 94, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: #22c55e;
+    }
+
+    .success-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .success-desc {
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .success-steps {
+      text-align: left;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .success-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .success-step:last-child {
+      border-bottom: none;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 165, 0, 0.1);
+      border: 1px solid rgba(255, 165, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--amber);
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .step-text strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ═══ Lang toggle (in card) ═══ */
+    .beta-lang-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 24px;
+      background: rgba(17, 24, 39, 0.6);
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 4px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeSlideUp 0.7s ease-out both;
+    }
+
+    .beta-lang-btn {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 1px;
+    }
+
+    .beta-lang-btn.active {
+      color: var(--amber);
+      background: rgba(255, 165, 0, 0.1);
+    }
+
+    .beta-lang-btn:hover:not(.active) {
+      color: #fff;
+    }
+
+    /* ═══ Responsive ═══ */
+    @media (max-width: 600px) {
+      .beta-hero { padding: 100px 16px 60px; }
+      .platform-toggle { flex-direction: column; gap: 10px; }
+      .beta-title { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Access Gate removed — whitelist check handles authorization -->
+
+<canvas id="starfield"></canvas>
+<div class="grid-overlay"></div>
+
+<!-- ═══ Navigation ═══ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="beta.html">Beta</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="features.html">Features</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="beta.html">Beta</a>
+  <a href="about.html">About</a>
+</div>
+
+<main>
+  <section class="beta-hero">
+    <div class="beta-card" id="formCard">
+
+      <div class="beta-lang-toggle">
+        <button class="beta-lang-btn active" data-lang="de">DE</button>
+        <button class="beta-lang-btn" data-lang="en">EN</button>
+      </div>
+
+      <div class="beta-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span data-i18n="badge">Beta Tester — Nur mit Einladung</span>
+      </div>
+
+      <h1 class="beta-title" data-i18n="title">Willkommen zur<br><span>NTA SkyNav Beta.</span></h1>
+
+      <p class="beta-desc" data-i18n="desc">Du gehörst zu den ersten 50 Piloten, die NTA SkyNav vor allen anderen testen. Als einer der allerersten Tester ist dein Feedback absolut entscheidend — es formt die Zukunft dieser App direkt mit. Danke für dein Vertrauen.</p>
+
+      <!-- Form -->
+      <div class="beta-form" id="betaForm">
+
+        <div class="form-section">
+          <div class="form-label" data-i18n="label_platform">Deine Plattform</div>
+          <div class="platform-toggle">
+            <button type="button" class="platform-btn" data-platform="ios" onclick="selectPlatform('ios')">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.32 2.32-2.12 4.55-3.74 4.25z"/></svg>
+              iOS
+            </button>
+            <button type="button" class="platform-btn" data-platform="android" onclick="selectPlatform('android')">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85-.31-.16-.69-.04-.85.26l-1.87 3.23C14.87 8.34 13.47 8 12 8s-2.87.34-4.46.94L5.67 5.71c-.16-.31-.54-.43-.85-.26-.31.16-.43.54-.26.85L6.4 9.48C3.3 11.25 1.28 14.44 1 18h22c-.28-3.56-2.3-6.75-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>
+              Android
+            </button>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-label" data-i18n="label_verify_email">Deine E-Mail (Verifizierung)</div>
+          <div style="background: rgba(0, 200, 255, 0.06); border: 1px solid rgba(0, 200, 255, 0.2); border-radius: 10px; padding: 12px 16px; margin-bottom: 14px; display: flex; align-items: flex-start; gap: 10px; text-align: left;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0; margin-top:1px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span data-i18n="verify_hint" style="font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(0, 200, 255, 0.85); line-height: 1.5;">Gib die E-Mail-Adresse ein, mit der du zur Beta eingeladen wurdest. Damit bestätigen wir, dass du berechtigt bist.</span>
+          </div>
+          <div class="email-input-wrap">
+            <input type="email" class="email-input" id="verifyEmail" placeholder="deine@email.com" autocomplete="email">
+          </div>
+          <div id="verifyError" style="display:none; color: #ef4444; font-size: 13px; margin-top: 8px; font-family: 'Barlow', sans-serif;" data-i18n="verify_error">Diese E-Mail ist nicht für die Beta berechtigt.</div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-label" data-i18n="label_email">Deine Store-E-Mail</div>
+          <div style="background: rgba(255, 165, 0, 0.06); border: 1px solid rgba(255, 165, 0, 0.2); border-radius: 10px; padding: 12px 16px; margin-bottom: 14px; display: flex; align-items: flex-start; gap: 10px; text-align: left;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" style="flex-shrink:0; margin-top:1px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span data-i18n="email_warning" style="font-family: 'Barlow', sans-serif; font-size: 13px; color: rgba(255, 165, 0, 0.85); line-height: 1.5;"><strong style="color: var(--amber);">Wichtig:</strong> Verwende die E-Mail-Adresse deiner Apple ID oder deines Google Play Kontos. Wir benötigen diese, um dir die TestFlight / Play Store Einladung zu senden.</span>
+          </div>
+          <div class="email-input-wrap">
+            <input type="email" class="email-input" id="betaEmail" placeholder="deine.apple-id@email.com" autocomplete="email">
+          </div>
+        </div>
+
+        <button type="button" class="submit-btn" id="submitBtn" onclick="submitBetaAccess()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <span data-i18n="submit_btn">Beta-Zugang anfordern</span>
+        </button>
+      </div>
+
+      <!-- Trust elements -->
+      <div class="trust-items">
+        <div class="trust-item">
+          <span class="icon">&#128274;</span>
+          <span data-i18n="trust_data">Deine Daten werden ausschließlich für den Beta-Zugang verwendet.</span>
+        </div>
+      </div>
+
+      <div class="beta-divider"></div>
+
+      <div class="beta-footer-note" data-i18n="footer_note">
+        Fragen? <a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a> — Lukas & das NTA Team
+      </div>
+
+    </div>
+
+    <!-- Success Card -->
+    <div class="beta-card success-card" id="successCard">
+      <div class="success-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+
+      <h2 class="success-title" data-i18n="success_title">Danke!</h2>
+      <p class="success-desc" data-i18n="success_desc">Deine E-Mail wurde gespeichert. Wir senden dir die Einladung, sobald es losgeht.</p>
+
+      <div class="success-steps">
+        <div class="success-step">
+          <div class="step-num">1</div>
+          <div class="step-text" data-i18n="step1"><strong>Warte auf die Einladung</strong> — wir melden uns per E-Mail bei dir, sobald dein Beta-Zugang bereit ist.</div>
+        </div>
+        <div class="success-step">
+          <div class="step-num">2</div>
+          <div class="step-text" data-i18n="step2"><strong>Installieren & erkunden</strong> — teste alle Funktionen und fahre damit.</div>
+        </div>
+        <div class="success-step">
+          <div class="step-num">3</div>
+          <div class="step-text" data-i18n="step3"><strong>Feedback teilen</strong> — direkt in der App oder per <a href="mailto:info@ntaskynav.app" style="color: var(--amber);">info@ntaskynav.app</a></div>
+        </div>
+      </div>
+
+      <div class="beta-divider"></div>
+
+      <div class="beta-footer-note">
+        <span data-i18n="success_footer">Folge uns für Updates:</span><br>
+        <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 10px 20px; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-radius: 10px; color: #fff; text-decoration: none; font-size: 14px; font-weight: 600; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+          @nta_skynav
+        </a>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">The navigation app for balloon pilots.<br>Developed in Austria.</p>
+      </div>
+      <div><div class="footer-heading">Product</div><ul class="footer-links"><li><a href="features.html">Features</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="beta.html">Beta</a></li></ul></div>
+      <div><div class="footer-heading">Legal</div><ul class="footer-links"><li><a href="datenschutz.html">Privacy</a></li><li><a href="agb.html">Terms</a></li><li><a href="impressum.html">Imprint</a></li></ul></div>
+      <div><div class="footer-heading">Contact</div><ul class="footer-links"><li><a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a></li><li><a href="about.html">About us</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div>Made in Austria · For Balloon Pilots Worldwide</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  // ═══ Access Gate removed — whitelist check handles authorization ═══
+
+  // ═══ Platform selection ═══
+  let selectedPlatform = null;
+
+  function selectPlatform(platform) {
+    selectedPlatform = platform;
+    document.querySelectorAll('.platform-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.platform === platform);
+    });
+    // Update email placeholder based on platform
+    const lang = document.documentElement.lang || 'de';
+    const key = 'email_placeholder_' + platform;
+    const emailInput = document.getElementById('betaEmail');
+    if (emailInput && betaI18n[key] && betaI18n[key][lang]) {
+      emailInput.placeholder = betaI18n[key][lang];
+    }
+  }
+
+  function resetBtnText(btn) {
+    const lang = document.documentElement.lang || 'en';
+    const text = lang === 'de' ? 'Beta-Zugang anfordern' : 'Request Beta Access';
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> <span data-i18n="submit_btn">' + text + '</span>';
+  }
+
+  // ═══ Supabase client ═══
+  const { createClient } = supabase;
+  const sb = createClient(
+    'https://vbemzgqxvbezyakllzfv.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZiZW16Z3F4dmJlenlha2xsemZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4Mjc5MzEsImV4cCI6MjA4ODQwMzkzMX0.v4Wrm3c8k9o3hYrUcOPbraVqq3CLievZWKS-BcYMjMQ'
+  );
+
+  // ═══ Form submission ═══
+  async function submitBetaAccess() {
+    const verifyInput = document.getElementById('verifyEmail');
+    const verifyEmail = verifyInput.value.trim().toLowerCase();
+    const emailInput = document.getElementById('betaEmail');
+    const storeEmail = emailInput.value.trim();
+    const btn = document.getElementById('submitBtn');
+    const verifyError = document.getElementById('verifyError');
+
+    // Hide previous errors
+    verifyError.style.display = 'none';
+    verifyInput.classList.remove('error');
+
+    // Validate platform
+    if (!selectedPlatform) {
+      document.querySelectorAll('.platform-btn').forEach(b => {
+        b.style.borderColor = '#ef4444';
+        setTimeout(() => b.style.borderColor = '', 2000);
+      });
+      return;
+    }
+
+    // Validate verify email
+    if (!verifyEmail || !verifyEmail.includes('@') || !verifyEmail.includes('.')) {
+      verifyInput.classList.add('error');
+      verifyInput.focus();
+      setTimeout(() => verifyInput.classList.remove('error'), 2000);
+      return;
+    }
+
+    // Validate store email
+    if (!storeEmail || !storeEmail.includes('@') || !storeEmail.includes('.')) {
+      emailInput.classList.add('error');
+      emailInput.focus();
+      setTimeout(() => emailInput.classList.remove('error'), 2000);
+      return;
+    }
+
+    btn.disabled = true;
+    const lang = document.documentElement.lang || 'en';
+    const loadingText = lang === 'de' ? 'Wird geprüft...' : 'Verifying...';
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: spin 1s linear infinite;"><path d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4m-3.93 7.07l-2.83-2.83M7.76 7.76L4.93 4.93"/></svg> ' + loadingText;
+
+    try {
+      // Step 1: Check whitelist
+      const { data: whitelistData, error: whitelistError } = await sb
+        .from('beta_whitelist')
+        .select('email')
+        .eq('email', verifyEmail)
+        .limit(1);
+
+      if (whitelistError) throw whitelistError;
+
+      if (!whitelistData || whitelistData.length === 0) {
+        // Not on the whitelist
+        btn.disabled = false;
+        resetBtnText(btn);
+        verifyInput.classList.add('error');
+        verifyError.style.display = 'block';
+        return;
+      }
+
+      // Step 2: Check if already signed up in either table
+      const { data: iosCheck } = await sb
+        .from('beta_signups_ios')
+        .select('email')
+        .eq('verify_email', verifyEmail)
+        .limit(1);
+
+      const { data: androidCheck } = await sb
+        .from('beta_signups_android')
+        .select('email')
+        .eq('verify_email', verifyEmail)
+        .limit(1);
+
+      if ((iosCheck && iosCheck.length > 0) || (androidCheck && androidCheck.length > 0)) {
+        btn.disabled = false;
+        resetBtnText(btn);
+        const alreadyMsg = lang === 'de'
+          ? 'Du hast dich bereits für die Beta angemeldet!'
+          : 'You have already signed up for the beta!';
+        alert(alreadyMsg);
+        return;
+      }
+
+      // Step 3: Save store email to platform table
+      const tableName = selectedPlatform === 'ios' ? 'beta_signups_ios' : 'beta_signups_android';
+      const { error } = await sb
+        .from(tableName)
+        .insert([{
+          email: storeEmail,
+          verify_email: verifyEmail,
+          created_at: new Date().toISOString()
+        }]);
+
+      if (error && error.code === '23505') {
+        btn.disabled = false;
+        resetBtnText(btn);
+        alert(lang === 'de' ? 'Du hast bereits Beta-Zugang mit dieser E-Mail angefordert!' : 'You have already requested beta access with this email!');
+        return;
+      } else if (error) {
+        throw error;
+      }
+
+      // Show success
+      document.getElementById('formCard').style.display = 'none';
+      document.getElementById('successCard').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch (e) {
+      console.error('Beta signup error:', e);
+      btn.disabled = false;
+      resetBtnText(btn);
+      alert(lang === 'de' ? 'Etwas ist schiefgelaufen. Bitte versuche es erneut.' : 'Something went wrong. Please try again.');
+    }
+  }
+
+  // Enter key to submit
+  document.getElementById('betaEmail')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') submitBetaAccess();
+  });
+  document.getElementById('verifyEmail')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') submitBetaAccess();
+  });
+</script>
+
+<style>
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+</style>
+
+<script>
+  // ═══ Self-contained i18n for beta-access page ═══
+  var betaI18n = {
+    gate_title:       { de: 'Zugang eingeschränkt', en: 'Access Restricted' },
+    gate_desc:        { de: 'Diese Seite ist nur mit einem gültigen Einladungslink zugänglich.', en: 'This page is only available with a valid invite link.' },
+    badge:            { de: 'Beta Tester — Nur mit Einladung', en: 'Beta Tester — Invite Only' },
+    title:            { de: 'Willkommen zur<br><span>NTA SkyNav Beta.</span>', en: 'Welcome to the<br><span>NTA SkyNav Beta.</span>' },
+    desc:             { de: 'Du gehörst zu den ersten 50 Piloten, die NTA SkyNav vor allen anderen testen. Als einer der allerersten Tester ist dein Feedback absolut entscheidend — es formt die Zukunft dieser App direkt mit. Danke für dein Vertrauen.', en: 'You\'re one of the first 50 pilots testing NTA SkyNav before anyone else. As one of the very first testers, your feedback is absolutely essential — it directly shapes the future of this app. Thank you for your trust.' },
+    label_platform:   { de: 'Deine Plattform', en: 'Your Platform' },
+    label_verify_email: { de: 'Deine E-Mail (Verifizierung)', en: 'Your Email (Verification)' },
+    verify_hint:      { de: 'Gib die E-Mail-Adresse ein, mit der du zur Beta eingeladen wurdest. Damit bestätigen wir, dass du berechtigt bist.', en: 'Enter the email address you were invited with. This confirms you\'re authorized.' },
+    verify_error:     { de: 'Diese E-Mail ist nicht für die Beta berechtigt.', en: 'This email is not authorized for the beta.' },
+    label_email:      { de: 'Deine Store-E-Mail', en: 'Your Store Email' },
+    email_warning:    { de: '<strong style="color: var(--amber);">Wichtig:</strong> Verwende die E-Mail-Adresse deiner Apple ID oder deines Google Play Kontos. Wir benötigen diese, um dir die TestFlight / Play Store Einladung zu senden.', en: '<strong style="color: var(--amber);">Important:</strong> Use the email linked to your Apple ID or Google Play account. We need this to send your TestFlight / Play Store invite.' },
+    email_placeholder_ios:{ de: 'deine.apple-id@email.com', en: 'your.apple-id@email.com' },
+    email_placeholder_android:{ de: 'deine.google-play@email.com', en: 'your.google-play@email.com' },
+    submit_btn:       { de: 'Beta-Zugang anfordern', en: 'Request Beta Access' },
+    trust_data:       { de: 'Deine Daten werden ausschließlich für den Beta-Zugang verwendet.', en: 'Your data is only used for beta access.' },
+    footer_note:      { de: 'Fragen? <a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a> — Lukas & das NTA Team', en: 'Questions? <a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a> — Lukas & the NTA Team' },
+    success_title:    { de: 'Danke!', en: 'Thank you!' },
+    success_desc:     { de: 'Deine E-Mail wurde gespeichert. Wir senden dir die Einladung, sobald es losgeht.', en: 'Your email has been saved. We\'ll send you the invite as soon as we\'re ready.' },
+    step1:            { de: '<strong>Warte auf die Einladung</strong> — wir melden uns per E-Mail bei dir, sobald dein Beta-Zugang bereit ist.', en: '<strong>Wait for the invite</strong> — we\'ll reach out via email as soon as your beta access is ready.' },
+    step2:            { de: '<strong>Installieren & erkunden</strong> — teste alle Funktionen und fahre damit.', en: '<strong>Install & explore</strong> — test all features and fly with it.' },
+    step3:            { de: '<strong>Feedback teilen</strong> — direkt in der App oder per <a href="mailto:info@ntaskynav.app" style="color: var(--amber);">info@ntaskynav.app</a>', en: '<strong>Share your feedback</strong> — directly in the app or via <a href="mailto:info@ntaskynav.app" style="color: var(--amber);">info@ntaskynav.app</a>' },
+    success_footer:   { de: 'Folge uns für Updates:', en: 'Follow us for updates:' },
+    'footer.tagline': { de: 'Die Navigations-App für Ballonpiloten.<br>Entwickelt in Österreich.', en: 'The navigation app for balloon pilots.<br>Developed in Austria.' },
+  };
+
+  function betaSetLang(lang) {
+    localStorage.setItem('nta-lang', lang);
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (betaI18n[key] && betaI18n[key][lang]) {
+        var attr = el.getAttribute('data-i18n-attr');
+        if (attr) {
+          el.setAttribute(attr, betaI18n[key][lang]);
+        } else {
+          el.innerHTML = betaI18n[key][lang];
+        }
+      }
+    });
+
+    // Update email placeholder based on selected platform
+    var platform = selectedPlatform || 'ios';
+    var phKey = 'email_placeholder_' + platform;
+    var emailInput = document.getElementById('betaEmail');
+    if (emailInput && betaI18n[phKey] && betaI18n[phKey][lang]) {
+      emailInput.placeholder = betaI18n[phKey][lang];
+    }
+
+    document.querySelectorAll('.beta-lang-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+  }
+
+  // Bind lang toggle buttons
+  document.querySelectorAll('.beta-lang-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      betaSetLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  // Apply saved language on load
+  (function() {
+    var saved = localStorage.getItem('nta-lang');
+    var lang = (saved === 'de' || saved === 'en') ? saved : 'de';
+    betaSetLang(lang);
+  })();
+</script>
+<script src="nav.js"></script>
+</body>
+</html>

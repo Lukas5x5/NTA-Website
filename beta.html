@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warteliste – NTA SkyNav</title>
+  <meta name="description" content="NTA SkyNav – Trage dich auf die Warteliste ein und werde benachrichtigt beim Launch. 7 Tage kostenlos testen.">
+  <link rel="icon" type="image/png" href="nta-logo.png">
+  <link rel="apple-touch-icon" href="nta-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero-notify-box {
+      display: flex;
+      gap: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,165,0,0.25);
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(12px);
+    }
+    .hero-notify-box input {
+      flex: 1;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      outline: none;
+      min-width: 0;
+    }
+    .hero-notify-box input::placeholder {
+      color: rgba(200,212,240,0.35);
+    }
+    .hero-notify-box button {
+      padding: 16px 28px;
+      background: var(--amber);
+      border: none;
+      color: var(--navy);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-notify-box button:hover {
+      background: #ffb732;
+    }
+    @media (max-width: 600px) {
+      .hero-notify-box { flex-direction: column; border-radius: 12px; }
+      .hero-notify-box input { padding: 14px 16px; font-size: 14px; }
+      .hero-notify-box button { padding: 14px 18px; font-size: 12px; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="grid-overlay"></div>
+
+<!-- ═══ Navigation ═══ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+      <li><a href="features.html" data-i18n="nav.features">Features</a></li>
+      <li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li>
+      <li><a href="beta.html" class="active" data-i18n="nav.beta">Beta</a></li>
+      <li><a href="about.html" data-i18n="nav.about">Über uns</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-toggle-btn active" data-lang="de">DE</button>
+      <button class="lang-toggle-btn" data-lang="en">EN</button>
+    </div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html" data-i18n="nav.home">Home</a>
+  <a href="features.html" data-i18n="nav.features">Features</a>
+  <a href="pricing.html" data-i18n="nav.pricing">Preise</a>
+  <a href="beta.html" class="active" data-i18n="nav.beta">Beta</a>
+  <a href="about.html" data-i18n="nav.about">Über uns</a>
+</div>
+
+<main>
+
+  <!-- ─── Founder Programm geschlossen ─── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div style="display:inline-block; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3); border-radius:8px; padding:6px 16px; font-size:13px; font-weight:600; color:#22c55e; letter-spacing:1px; margin-bottom:16px;" data-i18n="beta.founderCheck">Founder Programm geschlossen</div>
+        <h1 class="section-title" data-i18n="beta.closedTitle">Alle 50 Plätze wurden in 72 Stunden vergeben</h1>
+        <p class="section-desc" data-i18n="beta.closedDesc">Sei dabei wenn wir live gehen — trage dich auf die Warteliste ein und teste NTA SkyNav 7 Tage kostenlos.</p>
+      </div>
+
+      <!-- ─── Warteliste Signup ─── -->
+      <div class="reveal delay-2" style="max-width: 480px; margin: 32px auto 0; background: rgba(212,160,23,0.06); border: 1px solid rgba(212,160,23,0.2); border-radius: 16px; padding: 28px 32px; text-align: center;">
+        <div style="font-family:'Tektur',sans-serif; font-weight:700; font-size:20px; color:var(--amber); letter-spacing:1px;" data-i18n="beta.waitlistTitle">Auf die Warteliste</div>
+        <div style="font-size:14px; color:rgba(255,255,255,0.6); margin-top:8px; margin-bottom:18px;" data-i18n="beta.waitlistDesc">Launch-Benachrichtigung + 7 Tage kostenlos testen.</div>
+        <div class="hero-notify-box" id="betaWaitlistBox">
+          <input type="email" id="betaWaitlistEmail" placeholder="deine@email.at" autocomplete="email" style="flex:1;" data-i18n="beta.waitlistPlaceholder" data-i18n-attr="placeholder">
+          <button onclick="handleBetaWaitlist()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span data-i18n="beta.waitlistBtn">Auf die Warteliste</span>
+          </button>
+        </div>
+        <div id="betaWaitlistSuccess" style="display:none; margin-top:16px; padding: 14px 20px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 14px;">
+          <div style="font-size:14px; font-weight:600; color:#22c55e;" data-i18n="beta.waitlistSuccess">Du bist auf der Warteliste! Wir melden uns beim Launch.</div>
+          <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px; padding: 10px 18px; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-radius: 10px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+            <span data-i18n="index.igFollow">Folge uns auf Instagram für Updates!</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Was du bekommst ─── -->
+  <section class="section" style="border-top: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label" data-i18n="beta.whatYouGet">Was dich erwartet</div>
+        <h2 class="section-title" data-i18n="beta.whatTitle">NTA SkyNav zum Launch</h2>
+      </div>
+
+      <div class="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="card reveal delay-1">
+          <div class="card-icon amber">🎁</div>
+          <h3 data-i18n="beta.perk1Title">7 Tage kostenlos</h3>
+          <p data-i18n="beta.perk1Desc">Teste alle Pro-Features 7 Tage lang gratis. Keine Kreditkarte nötig zum Start.</p>
+        </div>
+        <div class="card reveal delay-2">
+          <div class="card-icon cyan">🗺️</div>
+          <h3 data-i18n="beta.perk2Title">Alles in einer App</h3>
+          <p data-i18n="beta.perk2Desc">GPS, ICAO-Karten, Wettermodelle, Load Calculator und Team Tracking — auch offline.</p>
+        </div>
+        <div class="card reveal delay-3">
+          <div class="card-icon amber">📱</div>
+          <h3 data-i18n="beta.perk3Title">iPhone & Android</h3>
+          <p data-i18n="beta.perk3Desc">Verfügbar für iOS und Android. Eine App für alle deine Geräte.</p>
+        </div>
+        <div class="card reveal delay-4">
+          <div class="card-icon cyan">💬</div>
+          <h3 data-i18n="beta.perk4Title">Direkter Draht</h3>
+          <p data-i18n="beta.perk4Desc">Feedback direkt an den Entwickler. Deine Wünsche fließen in die Entwicklung ein.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Store Badges ─── -->
+  <section class="section-sm" style="text-align: center; border-top: 1px solid var(--border);">
+    <div class="container reveal">
+      <div class="section-label" style="margin-bottom: 24px;" data-i18n="beta.soonLabel">Bald verfügbar</div>
+      <div class="store-badges" style="justify-content: center;">
+        <a href="#" class="store-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.32 2.32-2.12 4.55-3.74 4.25z"/></svg>
+          <div>
+            <span class="store-badge-sub" data-i18n="beta.soonAppStore">Bald im</span>
+            App Store
+          </div>
+        </a>
+        <a href="#" class="store-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83.52-1.28 1-1.5l10 10-10 10c-.48-.22-1-.67-1-1.5zm13.5-5.5L5 22l9-9-9-9 11.5 7z"/><path d="M16.5 15L5 22l11.5-7zm0-6L5 2l11.5 7z" opacity="0.5"/></svg>
+          <div>
+            <span class="store-badge-sub" data-i18n="beta.soonPlayStore">Bald auf</span>
+            Google Play
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  async function handleBetaWaitlist() {
+    const input = document.getElementById('betaWaitlistEmail')
+    const box = document.getElementById('betaWaitlistBox')
+    const success = document.getElementById('betaWaitlistSuccess')
+    const email = input.value.trim()
+
+    if (!email || !email.includes('@')) {
+      input.style.borderColor = '#ef4444'
+      input.focus()
+      return
+    }
+
+    const btn = box.querySelector('button')
+    btn.disabled = true
+    btn.innerHTML = 'Wird gesendet...'
+
+    try {
+      const { createClient } = supabase
+      const sb = createClient('https://vbemzgqxvbezyakllzfv.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZiZW16Z3F4dmJlenlha2xsemZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4Mjc5MzEsImV4cCI6MjA4ODQwMzkzMX0.v4Wrm3c8k9o3hYrUcOPbraVqq3CLievZWKS-BcYMjMQ')
+      const { error } = await sb
+        .from('notify_signups')
+        .insert([{ email, created_at: new Date().toISOString() }])
+
+      if (error && error.code === '23505') {
+        btn.disabled = false
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Auf die Warteliste'
+        alert('Du bist bereits auf der Warteliste!')
+        return
+      } else if (error) {
+        throw error
+      }
+      box.style.display = 'none'
+      success.style.display = 'block'
+    } catch (e) {
+      console.error('Waitlist error:', e)
+      btn.disabled = false
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Auf die Warteliste'
+      alert('Etwas ist schief gelaufen. Versuche es nochmal.')
+    }
+  }
+
+  document.getElementById('betaWaitlistEmail')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleBetaWaitlist()
+  })
+</script>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">Die Navigations-App für Ballonpiloten.<br>Entwickelt in Österreich.</p>
+        <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 16px; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-radius: 8px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+          <span data-i18n="index.igBtn">@nta_skynav folgen</span>
+        </a>
+      </div>
+      <div><div class="footer-heading" data-i18n="footer.product">Produkt</div><ul class="footer-links"><li><a href="features.html">Features</a></li><li><a href="pricing.html">Preise</a></li><li><a href="beta.html">Beta &amp; Download</a></li></ul></div>
+      <div><div class="footer-heading" data-i18n="footer.legal">Rechtliches</div><ul class="footer-links"><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="agb.html">AGB</a></li><li><a href="impressum.html">Impressum</a></li></ul></div>
+      <div><div class="footer-heading" data-i18n="footer.contact">Kontakt</div><ul class="footer-links"><li><a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a></li><li><a href="about.html">Über uns</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div data-i18n="footer.madeIn">Made in Austria 🇦🇹 · For Balloon Pilots Worldwide</div>
+      <div><a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather data by Open-Meteo.com</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datenschutzerklärung – NTA SkyNav</title>
+  <meta name="description" content="Datenschutzerklärung von NTA SkyNav – Informationen zum Schutz deiner Daten.">
+  <link rel="icon" type="image/png" href="nta-logo.png">
+  <link rel="apple-touch-icon" href="nta-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="grid-overlay"></div>
+
+<!-- ═══ Navigation ═══ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+      <li><a href="features.html" data-i18n="nav.features">Features</a></li>
+      <li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li>
+      <li><a href="beta.html" data-i18n="nav.beta">Beta</a></li>
+      <li><a href="about.html" data-i18n="nav.about">Über uns</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-toggle-btn active" data-lang="de">DE</button>
+      <button class="lang-toggle-btn" data-lang="en">EN</button>
+    </div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html" data-i18n="nav.home">Home</a>
+  <a href="features.html" data-i18n="nav.features">Features</a>
+  <a href="pricing.html" data-i18n="nav.pricing">Preise</a>
+  <a href="beta.html" data-i18n="nav.beta">Beta</a>
+  <a href="about.html" data-i18n="nav.about">Über uns</a>
+</div>
+
+<main>
+
+  <section class="about-hero">
+    <div class="container reveal">
+      <div class="section-label">Rechtliches</div>
+      <h1 class="section-title">Datenschutzerklärung</h1>
+      <div class="divider divider-center"></div>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="about-content">
+
+      <div class="about-block reveal">
+        <h3>1. Verantwortlicher</h3>
+        <p>
+          <strong>Lukas Reinberger</strong><br>
+          Grestnerstraße 26/6/8<br>
+          3250 Wieselburg<br>
+          Österreich<br><br>
+          E-Mail: <a href="mailto:info@ntaskynav.app" style="color: var(--amber);">info@ntaskynav.app</a>
+        </p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3>2. Erhobene Daten</h3>
+        <p>Wir erheben und verarbeiten folgende Daten:</p>
+        <ul style="margin-top: 8px; padding-left: 20px; color: var(--text-dim);">
+          <li><strong>E-Mail-Adresse:</strong> Bei Anmeldung zur Beta oder zum Newsletter über unsere Website.</li>
+          <li><strong>GPS-Daten:</strong> Standortdaten werden ausschließlich lokal auf deinem Gerät verarbeitet und nicht an unsere Server übertragen.</li>
+          <li><strong>Nutzungsdaten:</strong> Anonymisierte technische Daten zur Verbesserung der App (z.B. Gerätetyp, App-Version).</li>
+        </ul>
+      </div>
+
+      <div class="about-block reveal">
+        <h3>3. Zweck der Datenverarbeitung</h3>
+        <ul style="padding-left: 20px; color: var(--text-dim);">
+          <li>Bereitstellung und Verbesserung der NTA SkyNav App</li>
+          <li>Benachrichtigung über Beta-Verfügbarkeit und Updates</li>
+          <li>Beantwortung von Kontaktanfragen</li>
+        </ul>
+      </div>
+
+      <div class="about-block reveal">
+        <h3>4. Rechtsgrundlage</h3>
+        <p>
+          Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO (Einwilligung) bei der Newsletter-Anmeldung sowie Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung) bei der Nutzung der App.
+        </p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3>5. Speicherung & Löschung</h3>
+        <p>
+          Deine Daten werden nur so lange gespeichert, wie es für den jeweiligen Zweck erforderlich ist. E-Mail-Adressen für Beta-Benachrichtigungen werden nach Ende der Beta-Phase gelöscht, sofern du nicht in eine weitere Nutzung einwilligst.
+        </p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3>6. Drittanbieter & Dienste</h3>
+        <p>Wir nutzen folgende Drittanbieter-Dienste:</p>
+        <ul style="margin-top: 8px; padding-left: 20px; color: var(--text-dim);">
+          <li><strong>Supabase:</strong> Speicherung von Beta-Anmeldungen (EU-Server).</li>
+          <li><strong>Vercel:</strong> Hosting der Website.</li>
+          <li><strong>Open-Meteo:</strong> Wetterdaten (keine personenbezogenen Daten übertragen).</li>
+          <li><strong>OpenStreetMap / OpenTopoMap:</strong> Kartendarstellung (keine personenbezogenen Daten übertragen).</li>
+        </ul>
+      </div>
+
+      <div class="about-block reveal">
+        <h3>7. Deine Rechte</h3>
+        <p>Du hast jederzeit das Recht auf:</p>
+        <ul style="margin-top: 8px; padding-left: 20px; color: var(--text-dim);">
+          <li>Auskunft über deine gespeicherten Daten</li>
+          <li>Berichtigung unrichtiger Daten</li>
+          <li>Löschung deiner Daten</li>
+          <li>Einschränkung der Verarbeitung</li>
+          <li>Widerspruch gegen die Verarbeitung</li>
+          <li>Datenübertragbarkeit</li>
+        </ul>
+        <p style="margin-top: 12px;">
+          Wende dich dazu an <a href="mailto:info@ntaskynav.app" style="color: var(--amber);">info@ntaskynav.app</a>.
+        </p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3>8. Cookies</h3>
+        <p>
+          Unsere Website verwendet keine Tracking-Cookies. Es werden ausschließlich technisch notwendige Cookies eingesetzt, die für die Funktion der Website erforderlich sind.
+        </p>
+      </div>
+
+      <div class="about-block reveal" style="border-bottom: none;">
+        <h3>9. Änderungen</h3>
+        <p>
+          Diese Datenschutzerklärung kann gelegentlich aktualisiert werden. Die aktuelle Version ist stets auf dieser Seite verfügbar.
+        </p>
+        <p style="margin-top: 16px; color: var(--text-muted); font-size: 14px;">
+          Stand: März 2026
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">Die Navigations-App für Ballonpiloten.<br>Entwickelt in Österreich.</p>
+      </div>
+      <div><div class="footer-heading" data-i18n="footer.product">Produkt</div><ul class="footer-links"><li><a href="features.html">Features</a></li><li><a href="pricing.html">Preise</a></li><li><a href="beta.html">Beta & Download</a></li></ul></div>
+      <div><div class="footer-heading" data-i18n="footer.legal">Rechtliches</div><ul class="footer-links"><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="agb.html">AGB</a></li><li><a href="impressum.html">Impressum</a></li></ul></div>
+      <div><div class="footer-heading" data-i18n="footer.contact">Kontakt</div><ul class="footer-links"><li><a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a></li><li><a href="about.html">Über uns</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div data-i18n="footer.madeIn">Made in Austria 🇦🇹 · For Balloon Pilots Worldwide</div>
+      <div><a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather data by Open-Meteo.com</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
+</body>
+</html>

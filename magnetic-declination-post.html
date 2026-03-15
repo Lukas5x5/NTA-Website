@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magnetic Declination – NTA SkyNav Social Post</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      background: #0a0e1a;
+      overflow: hidden;
+      position: relative;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    /* Animated starfield */
+    .stars {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(200, 212, 240, 0.6);
+      border-radius: 50%;
+      animation: twinkle 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Grid overlay */
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 200, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 200, 255, 0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+    }
+
+    /* Radial glow */
+    .glow {
+      position: absolute;
+      width: 1000px;
+      height: 1000px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(0, 200, 255, 0.06) 0%, rgba(255, 165, 0, 0.03) 35%, transparent 65%);
+      z-index: 0;
+    }
+
+    /* Decorative corner accents */
+    .corner {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      z-index: 1;
+    }
+
+    .corner-tl { top: 24px; left: 24px; border-top: 2px solid rgba(0, 200, 255, 0.15); border-left: 2px solid rgba(0, 200, 255, 0.15); }
+    .corner-tr { top: 24px; right: 24px; border-top: 2px solid rgba(0, 200, 255, 0.15); border-right: 2px solid rgba(0, 200, 255, 0.15); }
+    .corner-bl { bottom: 24px; left: 24px; border-bottom: 2px solid rgba(0, 200, 255, 0.15); border-left: 2px solid rgba(0, 200, 255, 0.15); }
+    .corner-br { bottom: 24px; right: 24px; border-bottom: 2px solid rgba(0, 200, 255, 0.15); border-right: 2px solid rgba(0, 200, 255, 0.15); }
+
+    /* ===================== LAYOUT ===================== */
+    .content {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Top section */
+    .top-section {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      animation: fadeSlideDown 0.8s ease-out both;
+      animation-delay: 0.2s;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+    }
+
+    .logo-text {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: rgba(200, 212, 240, 0.45);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 200, 255, 0.1);
+      border: 1px solid rgba(0, 200, 255, 0.3);
+      border-radius: 6px;
+      padding: 5px 14px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #00C8FF;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      animation: fadeSlideDown 0.8s ease-out both;
+      animation-delay: 0.4s;
+    }
+
+    .title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 54px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 8px;
+      animation: fadeSlideDown 0.8s ease-out both;
+      animation-delay: 0.6s;
+    }
+
+    .title span { color: #00C8FF; }
+    .title .amber { color: #FFA500; }
+
+    .subtitle {
+      font-family: 'Barlow', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: rgba(200, 212, 240, 0.5);
+      line-height: 1.5;
+      animation: fadeSlideDown 0.8s ease-out both;
+      animation-delay: 0.8s;
+    }
+
+    /* ===================== PHONES ===================== */
+    .phones-row {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 28px;
+      animation: fadeSlideUp 1s ease-out both;
+      animation-delay: 0.5s;
+    }
+
+    .phone-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .phone-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .phone-label.true-north { color: #00C8FF; }
+    .phone-label.magnetic { color: #FFA500; }
+
+    .mockup-iphone {
+      position: relative;
+      width: 280px;
+      height: 560px;
+      background: #111827;
+      border-radius: 40px;
+      border: 3px solid rgba(200, 212, 240, 0.15);
+      box-shadow:
+        0 0 0 1px rgba(200, 212, 240, 0.05),
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 80px rgba(0, 200, 255, 0.05);
+      overflow: hidden;
+    }
+
+    .phone-group:nth-child(1) .mockup-iphone {
+      animation: floatLeft 5s ease-in-out infinite;
+    }
+
+    .phone-group:nth-child(2) .mockup-iphone {
+      animation: floatRight 5s ease-in-out infinite;
+    }
+
+    @keyframes floatLeft {
+      0%, 100% { transform: translateY(0px) rotate(-1deg); }
+      50% { transform: translateY(-8px) rotate(-1deg); }
+    }
+
+    @keyframes floatRight {
+      0%, 100% { transform: translateY(0px) rotate(1deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
+    }
+
+    .mockup-iphone .notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 28px;
+      background: #111827;
+      border-radius: 0 0 18px 18px;
+      z-index: 3;
+    }
+
+    .mockup-iphone .screen {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      border-radius: 32px;
+      overflow: hidden;
+      background: #0d1117;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mockup-iphone .screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 32px;
+    }
+
+    .screenshot-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: rgba(200, 212, 240, 0.2);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .screenshot-placeholder svg {
+      opacity: 0.15;
+    }
+
+    .mockup-iphone .shine {
+      position: absolute;
+      inset: 0;
+      border-radius: 40px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 35%, transparent 65%, rgba(255,255,255,0.02) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .mockup-iphone .home-indicator {
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(200, 212, 240, 0.15);
+      z-index: 3;
+    }
+
+    /* Compass visual between phones */
+    .compass-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      animation: fadeSlideUp 1s ease-out both;
+      animation-delay: 0.7s;
+    }
+
+    .compass-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid rgba(200, 212, 240, 0.1);
+      background: rgba(17, 24, 39, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: compassSpin 12s linear infinite;
+    }
+
+    @keyframes compassSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .compass-icon svg {
+      animation: compassSpinReverse 12s linear infinite;
+    }
+
+    @keyframes compassSpinReverse {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+
+    .declination-value {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFA500;
+      letter-spacing: 0.5px;
+    }
+
+    .declination-label {
+      font-family: 'Barlow', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      color: rgba(200, 212, 240, 0.3);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Bottom pills */
+    .feature-pills {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+      animation: fadeSlideUp 0.8s ease-out both;
+      animation-delay: 1s;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(17, 24, 39, 0.7);
+      border: 1px solid rgba(200, 212, 240, 0.08);
+      border-radius: 8px;
+      padding: 6px 14px;
+    }
+
+    .pill.cyan { border-color: rgba(0, 200, 255, 0.2); }
+    .pill.amber { border-color: rgba(255, 165, 0, 0.2); }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pill-dot.cyan { background: #00C8FF; }
+    .pill-dot.amber { background: #FFA500; }
+
+    .pill-text {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(200, 212, 240, 0.8);
+      letter-spacing: 0.5px;
+    }
+
+    /* ===================== BOTTOM BAR ===================== */
+    .bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      background: linear-gradient(transparent, rgba(10, 14, 26, 0.95));
+      padding-bottom: 6px;
+    }
+
+    .url {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: rgba(200, 212, 240, 0.28);
+      letter-spacing: 1px;
+      animation: fadeSlideUp 0.8s ease-out both;
+      animation-delay: 1.3s;
+    }
+
+    /* ===================== ANIMATIONS ===================== */
+    @keyframes fadeSlideDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Starfield -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Grid -->
+  <div class="grid"></div>
+
+  <!-- Glow -->
+  <div class="glow"></div>
+
+  <!-- Corner accents -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Top text -->
+    <div class="top-section">
+      <div class="logo-row">
+        <img src="nta-logo.png" alt="NTA SkyNav" class="logo">
+        <span class="logo-text">NTA SkyNav</span>
+      </div>
+
+      <div class="badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2 L12 6"/>
+          <path d="M12 18 L12 22"/>
+          <path d="M2 12 L6 12"/>
+          <path d="M18 12 L22 12"/>
+          <path d="M12 8 L12 12 L15 15"/>
+        </svg>
+        New Feature
+      </div>
+
+      <div class="title">
+        <span>True North</span> or<br>
+        <span class="amber">Magnetic?</span><br>
+        You Choose.
+      </div>
+
+      <div class="subtitle">Automatic magnetic declination correction<br>based on your GPS position &amp; the World Magnetic Model.</div>
+    </div>
+
+    <!-- Two phones with compass divider -->
+    <div class="phones-row">
+
+      <!-- Phone 1: Info Popup -->
+      <div class="phone-group">
+        <span class="phone-label true-north">Auto Correction</span>
+        <div class="mockup-iphone">
+          <div class="notch"></div>
+          <div class="screen">
+            <img src="screenshot-magnetic-info.jpg" alt="Magnetic Declination Info">
+          </div>
+          <div class="home-indicator"></div>
+          <div class="shine"></div>
+        </div>
+      </div>
+
+      <!-- Compass divider -->
+      <div class="compass-divider">
+        <div class="compass-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10" stroke="rgba(200,212,240,0.3)"/>
+            <polygon points="12,2 14,10 12,8 10,10" fill="#00C8FF" stroke="none"/>
+            <polygon points="12,22 14,14 12,16 10,14" fill="#FFA500" stroke="none"/>
+          </svg>
+        </div>
+        <span class="declination-value">+4.2°</span>
+        <span class="declination-label">Declination</span>
+      </div>
+
+      <!-- Phone 2: Navigation in Flight -->
+      <div class="phone-group">
+        <span class="phone-label magnetic">In Flight</span>
+        <div class="mockup-iphone">
+          <div class="notch"></div>
+          <div class="screen">
+            <img src="screenshot-true-north.jpg" alt="Navigation True North">
+          </div>
+          <div class="home-indicator"></div>
+          <div class="shine"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Feature pills -->
+    <div class="feature-pills">
+      <div class="pill cyan">
+        <div class="pill-dot cyan"></div>
+        <span class="pill-text">WMM 2025</span>
+      </div>
+      <div class="pill cyan">
+        <div class="pill-dot cyan"></div>
+        <span class="pill-text">Auto GPS</span>
+      </div>
+      <div class="pill amber">
+        <div class="pill-dot amber"></div>
+        <span class="pill-text">HDG · BRG · Wind</span>
+      </div>
+      <div class="pill cyan">
+        <div class="pill-dot cyan"></div>
+        <span class="pill-text">One Tap Toggle</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="bottom-bar">
+    <span class="url">ntaskynav.app</span>
+  </div>
+
+  <script>
+    // Generate random stars
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.width = (0.5 + Math.random() * 2) + 'px';
+      star.style.height = star.style.width;
+      star.style.animationDelay = (Math.random() * 3) + 's';
+      star.style.animationDuration = (2 + Math.random() * 3) + 's';
+      starsContainer.appendChild(star);
+    }
+  </script>
+</body>
+</html>

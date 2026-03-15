@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"C:/Users/LRAus/AppData/Local/Programs/Python/Python312/python.exe\" -c \":*)",
+      "Bash(C:/Users/LRAus/AppData/Local/Programs/Python/Python312/python.exe -m pip list)",
+      "Bash(\"C:/Users/LRAus/AppData/Local/Programs/Python/Python312/python.exe\" -m pip install playwright)",
+      "Bash(\"C:/Users/LRAus/AppData/Local/Programs/Python/Python312/python.exe\" -m playwright install chromium)",
+      "Bash(\"C:/Users/LRAus/AppData/Local/Programs/Python/Python312/python.exe\" -c \"from playwright.sync_api import sync_playwright; print\\(''OK''\\)\")",
+      "Bash(\"C:/Users/LRAus/AppData/Local/Programs/Python/Python312/python.exe\" \"c:/Users/LRAus/Desktop/NTA-Website/record-post.py\")",
+      "Bash(ffmpeg -version)",
+      "Bash(winget install:*)",
+      "Read(//c/Users/LRAus/AppData/Local/Microsoft/WinGet/Links/**)",
+      "Read(//c/ProgramData/**)",
+      "Read(//c/Users/LRAus/AppData/**)",
+      "Bash(where.exe ffmpeg:*)",
+      "Bash(cmd.exe /c \"where ffmpeg\")",
+      "Read(//c/ffmpeg/bin/**)",
+      "Read(//c/Program Files/ffmpeg/bin/**)",
+      "Bash(winget list:*)",
+      "Read(//c/tools/ffmpeg/bin/**)",
+      "Bash(FFMPEG=\"/c/Users/LRAus/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.0.1-full_build/bin/ffmpeg.exe\")",
+      "Bash(\"$FFMPEG\" -i \"C:/Users/LRAus/Desktop/weather-briefing-post.webm\" -c:v libx264 -pix_fmt yuv420p -crf 18 -preset slow \"C:/Users/LRAus/Desktop/weather-briefing-post.mp4\")",
+      "Read(//c/Users/LRAus/Desktop/_frames/**)",
+      "Bash(npx vercel:*)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\LRAus\\Desktop"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/tiles/:z/:x/:y.png",
+      "destination": "/api/tiles/:z/:x/:y"
+    }
+  ]
+}

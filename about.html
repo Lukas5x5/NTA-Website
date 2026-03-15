@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Über uns – NTA SkyNav</title>
+  <meta name="description" content="NTA SkyNav – gebaut von einem Ballonpiloten für Ballonpiloten. Die Geschichte hinter der App.">
+  <link rel="icon" type="image/png" href="nta-logo.png">
+  <link rel="apple-touch-icon" href="nta-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="grid-overlay"></div>
+
+<!-- ═══ Navigation ═══ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+      <li><a href="features.html" data-i18n="nav.features">Features</a></li>
+      <li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li>
+      <li><a href="beta.html" data-i18n="nav.beta">Beta</a></li>
+      <li><a href="about.html" class="active" data-i18n="nav.about">Über uns</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-toggle-btn active" data-lang="de">DE</button>
+      <button class="lang-toggle-btn" data-lang="en">EN</button>
+    </div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html" data-i18n="nav.home">Home</a>
+  <a href="features.html" data-i18n="nav.features">Features</a>
+  <a href="pricing.html" data-i18n="nav.pricing">Preise</a>
+  <a href="beta.html" data-i18n="nav.beta">Beta</a>
+  <a href="about.html" class="active" data-i18n="nav.about">Über uns</a>
+</div>
+
+<main>
+
+  <!-- ─── Hero ─── -->
+  <section class="about-hero">
+    <div class="container reveal">
+      <div class="section-label" data-i18n="about.label">Über NTA SkyNav</div>
+      <h1 class="section-title" data-i18n="about.title">Gebaut von einem Ballonpiloten<br><span style="color: var(--amber);">für Ballonpiloten</span></h1>
+      <div class="divider divider-center"></div>
+      <p class="section-desc" data-i18n="about.desc" style="margin: 0 auto;">
+        NTA SkyNav ist keine generische Luftfahrt-App. Sie wurde aus der täglichen Praxis heraus entwickelt – am Startplatz, im Korb und bei Wettbewerben.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── Content ─── -->
+  <section class="section-sm">
+    <div class="about-content">
+
+      <div class="about-block reveal">
+        <h3 data-i18n="about.storyTitle">🎈 Die Geschichte</h3>
+        <p data-i18n="about.storyP1">
+          Als aktiver Ballonpilot und Mitglied des Austrian National Balloon Teams habe ich jahrelang nach einer App gesucht, die wirklich für Ballonpiloten gemacht ist. Generische Luftfahrt-Apps kennen keine Tragkraftberechnung, kein Gas-Management und kein Team Tracking für mehrere Ballone. Also habe ich NTA SkyNav selbst gebaut.
+        </p>
+        <p style="margin-top: 12px;" data-i18n="about.storyP2">
+          Was als persönliches Tool begann, ist zu einer vollständigen Navigations- und Planungsplattform gewachsen – entwickelt mit dem Feedback von Piloten aus dem Wettbewerbs- und Passagierfahrt-Bereich.
+        </p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3 data-i18n="about.devTitle">⚙️ Entwicklung & Technik</h3>
+        <p data-i18n="about.devP1">
+          NTA SkyNav wird als Ein-Mann-Projekt entwickelt und betrieben. Die App basiert auf modernen Web-Technologien (React, TypeScript, Capacitor) und ist für iPhone, iPad und Android-Geräte (Smartphones &amp; Tablets) verfügbar.
+        </p>
+        <p style="margin-top: 12px;" data-i18n="about.devP2">
+          Wetterdaten kommen von mehreren Modellen (ECMWF, GFS, ICON u.a.) über die Open-Meteo API. Kartenmaterial wird von OpenStreetMap und OpenTopoMap bereitgestellt. GPS-Daten werden in Echtzeit verarbeitet – für präzise Navigation direkt im Korb.
+        </p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3 data-i18n="about.testedTitle">🧪 Getestet im echten Einsatz</h3>
+        <p data-i18n="about.testedDesc">
+          Jede Funktion wurde unter realen Bedingungen getestet – bei Trainingsfahrten, Wettbewerben und Passagierfahrten. Von der Tragkraftberechnung bei verschiedenen Temperaturen bis zur Zielnavigation bei wechselnden Windverhältnissen. Das Ergebnis ist eine App, die genau das tut, was ein Ballonpilot braucht.
+        </p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3 data-i18n="about.visionTitle">🗺️ Die Vision</h3>
+        <p data-i18n="about.visionDesc">
+          NTA SkyNav soll die Referenz-App für Ballonpiloten weltweit werden. Geplant sind weitere Features wie erweiterte Windanalyse, Flugbuch-Integration, Community-Features und noch mehr Wettermodelle. Dein Feedback als Beta-Tester fließt direkt in die Entwicklung ein.
+        </p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3 data-i18n="about.privacyTitle">🛡️ Datenschutz & Sicherheit</h3>
+        <p data-i18n="about.privacyDesc">
+          Deine Daten gehören dir. GPS-Positionen werden nur lokal und in deinem persönlichen Cloud-Account gespeichert. Team Tracking Daten werden verschlüsselt übertragen und Sessions laufen automatisch nach 24 Stunden ab. Wir verkaufen keine Daten an Dritte.
+        </p>
+      </div>
+
+      <div class="about-block reveal">
+        <h3 data-i18n="about.sourcesTitle">📡 Open-Source Datenquellen</h3>
+        <div class="attribution-box">
+          <p><strong>Open-Meteo:</strong> Wetterdaten bereitgestellt von <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>. Datenquellen: DWD (ICON), ECMWF u.a. Lizenz: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</p>
+          <p style="margin-top: 8px;"><strong>OpenStreetMap:</strong> Kartendaten © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>, lizenziert unter ODbL.</p>
+          <p style="margin-top: 8px;"><strong>OpenTopoMap:</strong> Kartographie © <a href="https://opentopomap.org/" target="_blank" rel="noopener">OpenTopoMap</a>, lizenziert unter CC-BY-SA.</p>
+          <p style="margin-top: 8px;"><strong>ICAO-Karten:</strong> Luftraumdaten basierend auf öffentlich verfügbaren Informationen der jeweiligen nationalen Luftfahrtbehörden.</p>
+        </div>
+      </div>
+
+      <div class="about-block reveal" style="border-bottom: none;">
+        <h3 data-i18n="about.contactTitle">📬 Kontakt</h3>
+        <p data-i18n="about.contactDesc">Fragen, Feedback oder Kooperationsanfragen?</p>
+        <p style="margin-top: 12px;">
+          <a href="mailto:info@ntaskynav.app" style="color: var(--amber); font-weight: 600;">info@ntaskynav.app</a>
+        </p>
+        <div style="display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap;">
+          <a href="datenschutz.html" class="btn btn-outline btn-sm">Datenschutz</a>
+          <a href="agb.html" class="btn btn-outline btn-sm">AGB</a>
+          <a href="impressum.html" class="btn btn-outline btn-sm">Impressum</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── CTA ─── -->
+  <section class="section" style="text-align: center; border-top: 1px solid var(--border);">
+    <div class="container reveal">
+      <h2 class="section-title" data-i18n="cta.title">Bereit zum Abheben?</h2>
+      <p class="section-desc" data-i18n="cta.descAbout" style="margin: 0 auto 32px;">Teste NTA SkyNav als einer der ersten Beta-Tester.</p>
+      <a href="beta.html" class="btn btn-amber" data-i18n="cta.betaTest">Beta testen</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">Die Navigations-App für Ballonpiloten.<br>Entwickelt in Österreich.</p>
+        <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 16px; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-radius: 8px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+          <span data-i18n="index.igBtn">@nta_skynav folgen</span>
+        </a>
+      </div>
+      <div><div class="footer-heading" data-i18n="footer.product">Produkt</div><ul class="footer-links"><li><a href="features.html">Features</a></li><li><a href="pricing.html">Preise</a></li><li><a href="beta.html">Beta & Download</a></li></ul></div>
+      <div><div class="footer-heading" data-i18n="footer.legal">Rechtliches</div><ul class="footer-links"><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="agb.html">AGB</a></li><li><a href="impressum.html">Impressum</a></li></ul></div>
+      <div><div class="footer-heading" data-i18n="footer.contact">Kontakt</div><ul class="footer-links"><li><a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a></li><li><a href="about.html">Über uns</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div data-i18n="footer.madeIn">Made in Austria 🇦🇹 · For Balloon Pilots Worldwide</div>
+      <div><a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather data by Open-Meteo.com</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
+</body>
+</html>

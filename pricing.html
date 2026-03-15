@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preise – NTA SkyNav</title>
+  <meta name="description" content="NTA SkyNav Preise: Jahresabo €89.99, Monatsabo €9.99. 7 Tage kostenlos testen.">
+  <link rel="icon" type="image/png" href="nta-logo.png">
+  <link rel="apple-touch-icon" href="nta-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="grid-overlay"></div>
+
+<!-- ═══ Navigation ═══ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+      <li><a href="features.html" data-i18n="nav.features">Features</a></li>
+      <li><a href="pricing.html" class="active" data-i18n="nav.pricing">Preise</a></li>
+      <li><a href="beta.html" data-i18n="nav.beta">Beta</a></li>
+      <li><a href="about.html" data-i18n="nav.about">Über uns</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-toggle-btn active" data-lang="de">DE</button>
+      <button class="lang-toggle-btn" data-lang="en">EN</button>
+    </div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html" data-i18n="nav.home">Home</a>
+  <a href="features.html" data-i18n="nav.features">Features</a>
+  <a href="pricing.html" class="active" data-i18n="nav.pricing">Preise</a>
+  <a href="beta.html" data-i18n="nav.beta">Beta</a>
+  <a href="about.html" data-i18n="nav.about">Über uns</a>
+</div>
+
+<main>
+
+  <!-- ─── Header ─── -->
+  <section class="section" style="padding-bottom: 20px;">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label" data-i18n="index.priceLabel">Preise</div>
+        <h1 class="section-title" data-i18n="price.title">Einfach &amp; transparent</h1>
+        <p class="section-desc" data-i18n="price.desc">7 Tage kostenlos testen. Kein Risiko, jederzeit kündbar. Basis-Funktionen ohne Account nutzbar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Free Tier ─── -->
+  <section style="text-align: center; padding-bottom: 40px;">
+    <div class="container reveal">
+      <div style="display: inline-flex; align-items: center; gap: 12px; background: rgba(17,24,39,0.6); border: 1px solid var(--border); border-radius: 12px; padding: 16px 28px;">
+        <span style="font-size: 20px;">🆓</span>
+        <div style="text-align: left;">
+          <div style="font-family: 'Tektur', sans-serif; font-size: 14px; font-weight: 600; color: #fff;" data-i18n="price.freeTitle">Ohne Account</div>
+          <div style="font-size: 13px; color: var(--text-dim);" data-i18n="price.freeDesc">GPS-Navigation + Karte kostenlos nutzbar</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Pricing Cards ─── -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="pricing-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 800px; margin: 0 auto;">
+
+        <!-- Jährlich -->
+        <div class="pricing-card popular reveal delay-1" style="border-color: var(--amber); box-shadow: 0 0 40px var(--amber-dim);">
+          <div class="pricing-badge" data-i18n="price.yearlyBadge">Beliebteste Wahl</div>
+          <div class="pricing-icon">⭐</div>
+          <div class="pricing-name" data-i18n="price.yearlyName">Jährlich</div>
+          <div class="pricing-price"><span class="currency">€</span>89<span style="font-size: 24px;">.99</span></div>
+          <div class="pricing-period" data-i18n="price.yearlyPeriod">pro Jahr</div>
+          <div class="pricing-note" data-i18n="price.yearlyNote">2 Monate gratis vs. Monatsabo</div>
+          <ul class="pricing-features">
+            <li data-i18n="price.f1">Alle Pro-Features unbegrenzt</li>
+            <li data-i18n="price.f2">ICAO Karten &amp; Offline-Maps</li>
+            <li data-i18n="price.f3">5 Wettermodelle</li>
+            <li data-i18n="price.f4">Load Calculator</li>
+            <li data-i18n="price.f5">Live Team Tracking</li>
+            <li data-i18n="price.f6">Gas Management &amp; Logbuch</li>
+            <li data-i18n="price.f7">Excel Export</li>
+            <li data-i18n="price.fTrial">7 Tage kostenlos testen</li>
+            <li data-i18n="price.fCancel">Jederzeit kündbar</li>
+          </ul>
+          <a href="beta.html" class="btn btn-amber" style="width: 100%; justify-content: center;" data-i18n="price.yearlyBtn">7 Tage gratis testen</a>
+        </div>
+
+        <!-- Monatlich -->
+        <div class="pricing-card reveal delay-2">
+          <div class="pricing-icon">📅</div>
+          <div class="pricing-name" data-i18n="price.monthlyName">Monatlich</div>
+          <div class="pricing-price"><span class="currency">€</span>9<span style="font-size: 24px;">.99</span></div>
+          <div class="pricing-period" data-i18n="price.monthlyPeriod">pro Monat</div>
+          <div class="pricing-note" data-i18n="price.monthlyNote">Jederzeit kündbar</div>
+          <ul class="pricing-features">
+            <li data-i18n="price.f1">Alle Pro-Features unbegrenzt</li>
+            <li data-i18n="price.f2">ICAO Karten &amp; Offline-Maps</li>
+            <li data-i18n="price.f3">5 Wettermodelle</li>
+            <li data-i18n="price.f4">Load Calculator</li>
+            <li data-i18n="price.f5">Live Team Tracking</li>
+            <li data-i18n="price.f6">Gas Management &amp; Logbuch</li>
+            <li data-i18n="price.f7">Excel Export</li>
+            <li data-i18n="price.fTrial">7 Tage kostenlos testen</li>
+            <li data-i18n="price.fFlex">Flexibel ohne Bindung</li>
+          </ul>
+          <a href="beta.html" class="btn btn-outline" style="width: 100%; justify-content: center;" data-i18n="price.monthlyBtn">7 Tage gratis testen</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 7-Day Trial Banner ─── -->
+  <section style="text-align: center; padding: 40px 0;">
+    <div class="container reveal">
+      <div style="background: linear-gradient(135deg, rgba(0,200,255,0.08), rgba(255,165,0,0.08)); border: 1px solid var(--border-light); border-radius: var(--radius); padding: 32px; max-width: 600px; margin: 0 auto;">
+        <div style="font-size: 32px; margin-bottom: 12px;">🎁</div>
+        <h3 style="font-size: 22px; margin-bottom: 8px;" data-i18n="price.trialTitle">7 Tage kostenlos testen</h3>
+        <p style="color: var(--text-dim); font-size: 14px; line-height: 1.7;" data-i18n="price.trialDesc">Alle Pro-Features uneingeschränkt. Keine Kreditkarte nötig. Nach dem Trial entscheidest du, ob du weitermachen willst.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Comparison Table ─── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label" data-i18n="price.compLabel">Vergleich</div>
+        <h2 class="section-title" data-i18n="price.compTitle">Warum NTA SkyNav?</h2>
+      </div>
+
+      <div style="overflow-x: auto;" class="reveal">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th data-i18n="price.compFeature">Feature</th>
+              <th class="highlight">NTA SkyNav</th>
+              <th>VFRnav</th>
+              <th data-i18n="price.compGeneric">Generische Luftfahrt-Apps</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-i18n="price.compBallooning">Speziell für Ballonfahrt</td>
+              <td class="check">✓</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+            </tr>
+            <tr>
+              <td>Load Calculator</td>
+              <td class="check">✓</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+            </tr>
+            <tr>
+              <td>Live Team Tracking</td>
+              <td class="check">✓</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+            </tr>
+            <tr>
+              <td>Gas Management</td>
+              <td class="check">✓</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+            </tr>
+            <tr>
+              <td>5 Wettermodelle</td>
+              <td class="check">✓</td>
+              <td class="cross">✗</td>
+              <td data-i18n="price.compPartial">Teilweise</td>
+            </tr>
+            <tr>
+              <td>Landeprognose</td>
+              <td class="check">✓</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+            </tr>
+            <tr>
+              <td>Chase Crew Link</td>
+              <td class="check">✓</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+            </tr>
+            <tr>
+              <td>ICAO Karten offline</td>
+              <td class="check">✓</td>
+              <td class="check">✓</td>
+              <td class="check">✓</td>
+            </tr>
+            <tr>
+              <td>Logbuch &amp; Excel Export</td>
+              <td class="check">✓</td>
+              <td class="cross">✗</td>
+              <td data-i18n="price.compPartial">Teilweise</td>
+            </tr>
+            <tr>
+              <td>Offline-Modus (Fahrten)</td>
+              <td class="check">✓</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+            </tr>
+            <tr>
+              <td>Wettbewerbs-Timer</td>
+              <td class="check">✓</td>
+              <td class="cross">✗</td>
+              <td class="cross">✗</td>
+            </tr>
+            <tr>
+              <td data-i18n="price.compPriceFrom">Preis ab</td>
+              <td style="color: var(--amber); font-weight: 700;">€89,99/Jahr</td>
+              <td>€99+/Jahr</td>
+              <td>€49+/Jahr</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FAQ ─── -->
+  <section class="section" style="border-top: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label" data-i18n="price.faqLabel">FAQ</div>
+        <h2 class="section-title" data-i18n="price.faqTitle">Häufige Fragen</h2>
+      </div>
+
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-i18n="price.faq1q">Kann ich jederzeit kündigen?</span>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="price.faq1a">Ja, du kannst dein Abo jederzeit kündigen. Nach der Kündigung hast du noch Zugriff bis zum Ende der bezahlten Laufzeit. Es gibt keine versteckten Kosten oder Kündigungsfristen.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-i18n="price.faq2q">Was passiert nach dem 7-Tage Trial?</span>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="price.faq2a">Nach 7 Tagen kannst du entweder ein Abo abschließen oder die App weiter mit Basis-Funktionen (GPS + Karte) nutzen. Es wird nichts automatisch abgebucht.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-i18n="price.faq3q">Funktioniert die App offline?</span>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="price.faq3a">Ja! Karten können vorab heruntergeladen werden (4-Ecken-System). Fahrten und Logbuch-Einträge funktionieren komplett offline. Die App synchronisiert automatisch, sobald du wieder online bist. Der Pro-Status bleibt bis zu 7 Tage offline erhalten.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-i18n="price.faq4q">Auf wie vielen Geräten kann ich die App nutzen?</span>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="price.faq4a">Du kannst die App auf beliebig vielen Geräten nutzen – einfach mit demselben Account anmelden. Perfekt für Tablet im Korb und Handy als Backup.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-i18n="price.faq5q">Brauche ich eine Kreditkarte für den Trial?</span>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="price.faq5a">Nein, du kannst die 7-Tage-Testphase ohne Zahlungsdaten starten. Erst wenn du dich für ein Abo entscheidest, wird bezahlt.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-i18n="price.faq6q">Für welche Geräte ist die App verfügbar?</span>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="price.faq6a">NTA SkyNav ist für Android (Smartphones + Tablets) und iOS (iPhone + iPad) verfügbar. Optimiert für Tablets im Querformat, funktioniert aber genauso auf dem Smartphone.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">Die Navigations-App für Ballonpiloten.<br>Entwickelt in Österreich.</p>
+        <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 16px; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-radius: 8px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+          <span data-i18n="index.igBtn">@nta_skynav folgen</span>
+        </a>
+      </div>
+      <div><div class="footer-heading" data-i18n="footer.product">Produkt</div><ul class="footer-links"><li><a href="features.html" data-i18n="nav.features">Features</a></li><li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li><li><a href="beta.html" data-i18n="footer.betaDownload">Beta &amp; Download</a></li></ul></div>
+      <div><div class="footer-heading" data-i18n="footer.legal">Rechtliches</div><ul class="footer-links"><li><a href="datenschutz.html" data-i18n="footer.privacy">Datenschutz</a></li><li><a href="agb.html" data-i18n="footer.terms">AGB</a></li><li><a href="impressum.html" data-i18n="footer.imprint">Impressum</a></li></ul></div>
+      <div><div class="footer-heading" data-i18n="footer.contact">Kontakt</div><ul class="footer-links"><li><a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a></li><li><a href="about.html" data-i18n="nav.about">Über uns</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div data-i18n="footer.madeIn">Made in Austria 🇦🇹 · For Balloon Pilots Worldwide</div>
+      <div><a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather data by Open-Meteo.com</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
+</body>
+</html>

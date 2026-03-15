@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features – NTA SkyNav</title>
+  <meta name="description" content="Alle Features von NTA SkyNav: GPS Navigation, ICAO Karten, 5 Wettermodelle, Load Calculator, Live Team Tracking, Gas Management und mehr.">
+  <link rel="icon" type="image/png" href="nta-logo.png">
+  <link rel="apple-touch-icon" href="nta-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="grid-overlay"></div>
+
+<!-- ═══ Navigation ═══ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+      
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+      <li><a href="features.html" class="active" data-i18n="nav.features">Features</a></li>
+      <li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li>
+      <li><a href="beta.html" data-i18n="nav.beta">Beta</a></li>
+      <li><a href="about.html" data-i18n="nav.about">Über uns</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-toggle-btn active" data-lang="de">DE</button>
+      <button class="lang-toggle-btn" data-lang="en">EN</button>
+    </div>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html" data-i18n="nav.home">Home</a>
+  <a href="features.html" class="active" data-i18n="nav.features">Features</a>
+  <a href="pricing.html" data-i18n="nav.pricing">Preise</a>
+  <a href="beta.html" data-i18n="nav.beta">Beta</a>
+  <a href="about.html" data-i18n="nav.about">Über uns</a>
+</div>
+
+<main>
+
+  <!-- ─── Page Header ─── -->
+  <section class="section" style="padding-bottom: 40px;">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label" data-i18n="nav.features">Features</div>
+        <h1 class="section-title" data-i18n="feat.pageTitle">Gebaut für die Ballonfahrt</h1>
+        <p class="section-desc" style="max-width: 720px;" data-i18n="feat.pageDesc">
+          Jede Funktion wurde von einem aktiven Ballonpiloten entwickelt. Kein generisches Luftfahrt-Tool – sondern speziell für die Ballonfahrt gebaut. Von der Startplanung mit Wettermodellen über die Navigation in der Luft bis zur automatischen Fahrtendokumentation im Logbuch – alles in einer App, die auch komplett offline funktioniert.
+        </p>
+      </div>
+
+      <!-- Feature Highlights -->
+      <div class="features-highlights">
+        <div class="highlight-pill reveal delay-1" data-i18n="feat.pillGPS">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Echtzeit GPS
+        </div>
+        <div class="highlight-pill reveal delay-2" data-i18n="feat.pillCalc">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          Load Calculator
+        </div>
+        <div class="highlight-pill reveal delay-3" data-i18n="feat.pillTimer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Stoppuhr
+        </div>
+        <div class="highlight-pill reveal delay-4" data-i18n="feat.pillTeam">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Team Tracking
+        </div>
+        <div class="highlight-pill reveal delay-5" data-i18n="feat.pillLog">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Logbuch
+        </div>
+        <div class="highlight-pill reveal delay-3" data-i18n="feat.pillLanding">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Landeprognose
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Feature Sections ═══ -->
+  <div class="container">
+    <!-- ─── 1. Navigation & GPS ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--amber-dim); color: var(--amber);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.navLabel">Navigation</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.navTitle">GPS Navigation &amp; Karten</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.navDesc">
+          Präzise GPS-Daten in Echtzeit: Höhe (MSL &amp; AGL), Geschwindigkeit, Heading und QNH-korrigierte Barometerhöhe. Höhendaten (HGT) können importiert oder direkt in der App heruntergeladen werden für präzise AGL-Berechnung.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.nav.l1">GPS-Anzeige: ALT (m/ft), AGL, SPD (km/h), HDG (°), ELEV, Koordinaten</li>
+          <li data-i18n="feat.nav.l2">QNH-Korrektur für präzise Druckhöhe</li>
+          <li data-i18n="feat.nav.l3">HGT-Höhendaten importieren oder in-App herunterladen</li>
+          <li data-i18n="feat.nav.l4">Präzise AGL-Berechnung (Höhe über Grund) in jedem Gelände</li>
+          <li data-i18n="feat.nav.l5">ICAO-Karten mit Lufträumen (A–G), CTR, TMA</li>
+          <li data-i18n="feat.nav.l6">OSM + OpenTopoMap als Basiskarten</li>
+          <li data-i18n="feat.nav.l7">Offline-Karten: Bereich wählen &amp; downloaden</li>
+          <li data-i18n="feat.nav.l8">Positionsmarker mit Heading-Anzeige und Trail</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <!-- SCREENSHOT: iPhone mit GPS Navigation HUD (ALT, SPD, HDG Anzeigen) -->
+        <div class="mockup-iphone mockup-md reveal-right delay-2">
+          <div class="screen">
+            <img src="GPS HUD.jpeg" alt="GPS HUD Navigation">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 2. Landeprognose ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--cyan-dim); color: var(--cyan);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.toolsLabel">Werkzeuge</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.landingTitle">Landeprognose</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.landingDesc">
+          Berechnet den voraussichtlichen Landepunkt basierend auf aktueller Position, Wind und einstellbarer Sinkrate. Live auf der Karte angezeigt.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.landing.l1">Prognosepunkt live auf der Karte dargestellt</li>
+          <li data-i18n="feat.landing.l2">Sinkrate (m/s) individuell einstellbar</li>
+          <li data-i18n="feat.landing.l3">Berücksichtigt aktuelle Windrichtung und -stärke</li>
+          <li data-i18n="feat.landing.l4">Hilft bei der Wahl des Landepunkts während der Fahrt</li>
+          <li data-i18n="feat.landing.l5">Aktualisiert sich automatisch mit jeder Positionsänderung</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <div class="mockup-iphone mockup-md reveal-left delay-2">
+          <div class="screen">
+            <img src="Landeprognose.jpeg" alt="Landeprognose">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 3. Load Calculator ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--amber-dim); color: var(--amber);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.toolsLabel">Werkzeuge</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.calcTitle">Load Calculator</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.calcDesc">
+          Professionelle Tragkraftberechnung nach physikalischen Formeln. GO/NO-GO Entscheidung auf einen Blick.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.calc.l1">Ballonprofil mit Hüllenvolumen und MTOW hinterlegen</li>
+          <li data-i18n="feat.calc.l2">QNH, Temperatur und Startplatzhöhe als Eingabe</li>
+          <li data-i18n="feat.calc.l3">Individuelle Passagiergewichte (bis 20 Passagiere)</li>
+          <li data-i18n="feat.calc.l4">Bruttotragkraft, Gesamtgewicht, Reserve, Nutzlast</li>
+          <li data-i18n="feat.calc.l5">GO/NO-GO Entscheidung mit MTOW- und MLW-Prüfung</li>
+          <li data-i18n="feat.calc.l6">Ergebnis wird automatisch im Logbuch gespeichert</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <div class="mockup-iphone mockup-md reveal-right delay-2">
+          <div class="screen">
+            <img src="Load Calculator 1.jpeg" alt="Load Calculator">
+          </div>
+          <div class="shine"></div>
+        </div>
+        <div class="mockup-iphone mockup-md reveal-right delay-3" style="margin-left: -40px;">
+          <div class="screen">
+            <img src="Load Calkculator 2.jpeg" alt="Load Calculator Ergebnis">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 4. Gas Management ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--cyan-dim); color: var(--cyan);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.gasLabel">Gas</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.gasTitle">Gas Management</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.gasDesc">
+          Behalte den Überblick über deinen Gasvorrat. Flaschen einzeln verwalten, Verbrauch pro Fahrt tracken und immer wissen, wie viel noch übrig ist.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.gas.l1">Gasflaschen individuell anlegen und benennen</li>
+          <li data-i18n="feat.gas.l2">Füllstand per Slider oder manuell einstellen</li>
+          <li data-i18n="feat.gas.l3">Verbrauch pro Fahrt automatisch berechnet</li>
+          <li data-i18n="feat.gas.l4">Restmenge in Litern und Prozent</li>
+          <li data-i18n="feat.gas.l5">Daten werden im Logbuch mitgespeichert</li>
+          <li data-i18n="feat.gas.l6">Excel-Export mit Flaschen-Details pro Fahrt</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <!-- SCREENSHOT: iPhone mit Gas Management Ansicht (Flaschen mit Füllstand) -->
+        <div class="mockup-iphone mockup-md reveal-left delay-2">
+          <div class="screen">
+            <img src="Gas Managment.jpeg" alt="Gas Management">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 5. Wetter ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--cyan-dim); color: var(--cyan);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.weatherLabel">Wetter</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.weatherTitle">5 Wettermodelle in einer App</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.weatherDesc">
+          Von der hochauflösenden Nahbereichs-Vorhersage bis zum globalen Modell – du hast alle relevanten Wetterdaten direkt in der App. Windrichtung und Windstärke als Overlay auf der Karte.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.weather.l1">ICON-D2 – 2km Auflösung, ideal für Mitteleuropa</li>
+          <li data-i18n="feat.weather.l2">ICON-EU – europäische Abdeckung</li>
+          <li data-i18n="feat.weather.l3">ICON Global – weltweite Vorhersage</li>
+          <li data-i18n="feat.weather.l4">ECMWF IFS – europäisches Referenzmodell</li>
+          <li data-i18n="feat.weather.l5">GPS Live-Daten – Echtzeit-Wind vom Gerät</li>
+          <li data-i18n="feat.weather.l6">Zeitauswahl bis +12 Stunden voraus</li>
+          <li data-i18n="feat.weather.l7">Windprofil als Overlay direkt auf der Karte</li>
+          <li data-i18n="feat.weather.l8">Powered by Open-Meteo.com (freie Wetterdaten)</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <!-- SCREENSHOT: iPhone mit Wettermodell-Overlay auf der Karte (Windpfeile) -->
+        <div class="mockup-iphone mockup-md reveal-left delay-2">
+          <div class="screen">
+            <img src="Wettermodell.jpeg" alt="Wettermodell Overlay">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 6. Karte: OSM ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--amber-dim); color: var(--amber);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.mapLabel">Karte &amp; Layer</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.mapTitle">Karten &amp; Offline-Download</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.mapDesc">
+          Zwei Kartentypen zur Auswahl, beide offline verfügbar. Mit dem 4-Ecken Download-System lädst du genau das Gebiet herunter, das du brauchst.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.map.l1">OSM (OpenStreetMap) – Straßen, Wege, Ortschaften</li>
+          <li data-i18n="feat.map.l2">OpenTopoMap (OTM) – Höhenlinien und Geländedetails</li>
+          <li data-i18n="feat.map.l3">4-Ecken Offline-System: Gebiet markieren → herunterladen</li>
+          <li data-i18n="feat.map.l4">Karten im Hintergrund vorladen</li>
+          <li data-i18n="feat.map.l5">Funktioniert komplett ohne Internetverbindung</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <div class="mockup-iphone mockup-md reveal-right delay-2">
+          <div class="screen">
+            <img src="Kartentypen.jpeg" alt="Kartentypen">
+          </div>
+          <div class="shine"></div>
+        </div>
+        <div class="mockup-iphone mockup-md reveal-right delay-3" style="margin-left: -40px;">
+          <div class="screen">
+            <img src="Karte 2.jpeg" alt="Karten Offline Download">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 7. Hindernisse ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--cyan-dim); color: var(--cyan);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.mapLabel">Karte &amp; Layer</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.obstTitle">Hindernisse</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.obstDesc">
+          Hochspannungsleitungen, Windräder, Masten und andere Luftfahrthindernisse direkt auf der Karte sichtbar. Für mehr Sicherheit bei der Landung.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.obst.l1">Hochspannungsleitungen als Layer auf der Karte</li>
+          <li data-i18n="feat.obst.l2">Windräder und Windparks eingezeichnet</li>
+          <li data-i18n="feat.obst.l3">Masten und Hindernisse mit Höhenangabe</li>
+          <li data-i18n="feat.obst.l4">Ein-/Ausschaltbar als separater Layer</li>
+          <li data-i18n="feat.obst.l5">Hilft bei der Wahl sicherer Landeplätze</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <div class="mockup-iphone mockup-md reveal-left delay-2">
+          <div class="screen">
+            <img src="Hindernisse.jpeg" alt="Hindernisse">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 8. Lufträume ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--cyan-dim); color: var(--cyan);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.mapLabel">Karte &amp; Layer</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.airTitle">Lufträume</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.airDesc">
+          Alle Lufträume auf der Karte dargestellt – von Klasse A bis G. CTR, TMA und Sperrgebiete farblich codiert für sofortige Orientierung.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.air.l1">Luftraumklassen A bis G farblich dargestellt</li>
+          <li data-i18n="feat.air.l2">CTR (Kontrollzonen) um Flugplätze</li>
+          <li data-i18n="feat.air.l3">TMA (Terminal Areas) und Sperrgebiete</li>
+          <li data-i18n="feat.air.l4">Ober- und Untergrenzen der Lufträume sichtbar</li>
+          <li data-i18n="feat.air.l5">Ein-/Ausschaltbar als separater Layer</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <div class="mockup-iphone mockup-md reveal-left delay-2">
+          <div class="screen">
+            <img src="Lufträume.jpeg" alt="Lufträume">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 9. Radar ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--amber-dim); color: var(--amber);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.mapLabel">Karte &amp; Layer</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.radarTitle">Radar</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.radarDesc">
+          Echtzeit-Flugverkehr als Overlay auf der Karte. Sieh andere Luftfahrzeuge in deiner Umgebung – Flugzeuge, Helikopter, Segelflugzeuge, Paragleiter und andere Ballone.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.radar.l1">Flugzeuge, Helikopter und Segelflugzeuge auf der Karte</li>
+          <li data-i18n="feat.radar.l2">Paragleiter und andere Ballone sichtbar</li>
+          <li data-i18n="feat.radar.l3">Echtzeit-Aktualisierung der Positionen</li>
+          <li data-i18n="feat.radar.l4">Ein-/Ausschaltbar als separater Layer</li>
+          <li data-i18n="feat.radar.l5">Besseres Situationsbewusstsein in der Luft</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <div class="mockup-iphone mockup-md reveal-right delay-2">
+          <div class="screen">
+            <img src="Radar overlay.jpeg" alt="Radar Overlay">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 10. Logbuch ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--cyan-dim); color: var(--cyan);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.logLabel">Logbuch</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.logTitle">Digitales Fahrtenbuch</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.logDesc">
+          Jede Fahrt wird automatisch aufgezeichnet und im Logbuch gespeichert. Fahrten in Ordnern organisieren. Excel-Export für die Dokumentation.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.log.l1">Automatische Track-Aufzeichnung mit GPS-Positionen</li>
+          <li data-i18n="feat.log.l2">Start- und Ende-Ort, Maximalhöhe (m + ft), Dauer</li>
+          <li data-i18n="feat.log.l3">QNH und Beladungsdaten werden mitgespeichert</li>
+          <li data-i18n="feat.log.l4">Gasverbrauch pro Fahrt automatisch erfasst</li>
+          <li data-i18n="feat.log.l5">Fahrten-Ordner zur Organisation</li>
+          <li data-i18n="feat.log.l6">Excel-Export: Übersicht, Beladung, Gas, Track-Daten</li>
+          <li data-i18n="feat.log.l7">Offline-Speicherung, Auto-Sync bei Verbindung</li>
+          <li data-i18n="feat.log.l8">Cloud-Backup über Supabase</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <!-- SCREENSHOT: iPhone mit Logbuch/Fahrten-Übersicht -->
+        <div class="mockup-iphone mockup-md reveal-left delay-2">
+          <div class="screen">
+            <img src="Logbuch Übersicht.jpeg" alt="Logbuch Übersicht">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 11. Ziel / Target Navigation ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--amber-dim); color: var(--amber);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.toolsLabel">Werkzeuge</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.targetTitle">Ziel / Target Navigation</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.targetDesc">
+          Setze Ziele direkt auf der Karte und navigiere in Echtzeit dorthin. Distanz, Richtung und voraussichtliche Ankunft werden live berechnet.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.target.l1">Ziel auf der Karte antippen oder Koordinaten eingeben</li>
+          <li data-i18n="feat.target.l2">Distanz und Richtung zum Ziel in Echtzeit</li>
+          <li data-i18n="feat.target.l3">Kompass-Anzeige mit Richtungspfeil</li>
+          <li data-i18n="feat.target.l4">Perfekt für Wettbewerbs-Tasks und Zielnavigation</li>
+          <li data-i18n="feat.target.l5">Mehrere Ziele nacheinander setzen</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <div class="mockup-iphone mockup-md reveal-right delay-2">
+          <div class="screen">
+            <img src="Ziel navigation.jpeg" alt="Ziel Navigation">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 12. Uhr / Stoppuhr ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--cyan-dim); color: var(--cyan);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.toolsLabel">Werkzeuge</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.timerTitle">Uhr / Stoppuhr</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.timerDesc">
+          Stoppuhr und Timer direkt in der Navigation integriert. Immer im Blick, auch während der Fahrt.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.timer.l1">Stoppuhr mit Start, Stop und Reset</li>
+          <li data-i18n="feat.timer.l2">Countdown-Timer mit einstellbarer Dauer</li>
+          <li data-i18n="feat.timer.l3">Timer läuft im Hintergrund weiter</li>
+          <li data-i18n="feat.timer.l4">Direkt im Navigations-HUD sichtbar</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <div class="mockup-iphone mockup-md reveal-left delay-2">
+          <div class="screen">
+            <img src="Stoppuuhr.jpeg" alt="Stoppuhr">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 13. Outdoor-Modus ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--amber-dim); color: var(--amber);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.outdoorLabel">Steuerung</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.outdoorTitle">Outdoor-Modus</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.outdoorDesc">
+          Optimierte Darstellung für den Einsatz bei direkter Sonneneinstrahlung. Höherer Kontrast und größere Elemente für bessere Lesbarkeit im Korb.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.outdoor.l1">Hoher Kontrast für direktes Sonnenlicht</li>
+          <li data-i18n="feat.outdoor.l2">Größere UI-Elemente und Schrift</li>
+          <li data-i18n="feat.outdoor.l3">Optimierte Farben für Outdoor-Nutzung</li>
+          <li data-i18n="feat.outdoor.l4">Per Menü ein- und ausschaltbar</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <div class="mockup-iphone mockup-md reveal-right delay-2">
+          <div class="screen">
+            <img src="Outdoor 1.jpeg" alt="Outdoor-Modus">
+          </div>
+          <div class="shine"></div>
+        </div>
+        <div class="mockup-iphone mockup-md reveal-right delay-3" style="margin-left: -40px;">
+          <div class="screen">
+            <img src="Outdoor 2.jpeg" alt="Outdoor-Modus Detail">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 14. Live Team ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--amber-dim); color: var(--amber);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.teamLabel">Live Team</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.teamTitle">Team Tracking &amp; Chase Crew</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.teamDesc">
+          Mehrere Ballone gleichzeitig auf einer Karte verfolgen. Echtzeit-Positionsaustausch über verschlüsselte Verbindung. Chase Crew braucht keine App – nur einen Browserlink.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.team.l1">Team-Session erstellen mit 4-stelligem Join-Code</li>
+          <li data-i18n="feat.team.l2">Bis zu 6 Piloten gleichzeitig auf einer Karte</li>
+          <li data-i18n="feat.team.l3">Callsign und individuelle Farbe pro Teilnehmer</li>
+          <li data-i18n="feat.team.l4">Echtzeit via Supabase Realtime (verschlüsselt)</li>
+          <li data-i18n="feat.team.l5">Chase Crew Link: Verfolger sehen alles im Browser</li>
+          <li data-i18n="feat.team.l6">Position, Höhe, Heading, Geschwindigkeit live</li>
+          <li data-i18n="feat.team.l7">Session läuft automatisch nach 24h ab</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <!-- SCREENSHOT: iPhone mit Team Tracking (mehrere Ballone auf Karte) -->
+        <div class="mockup-iphone mockup-md reveal-right delay-2">
+          <div class="screen">
+            <img src="Team Tracking.jpeg" alt="Team Tracking">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 15. Einstellungen ─── -->
+    <div class="feature-detail reveal" style="border-bottom: none;">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--amber-dim); color: var(--amber);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.settingsLabel">Einstellungen</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.settingsTitle">Alles anpassbar</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.settingsDesc">
+          9 Einstellungs-Kategorien für maximale Kontrolle. Von der Darstellung bis zur Aufzeichnung – du bestimmst, wie die App funktioniert.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.settings.l1">Footer-Buttons: Welche Tools sichtbar sind</li>
+          <li data-i18n="feat.settings.l2">Einheiten: Meter/Fuß, km/h/kts, °C/°F</li>
+          <li data-i18n="feat.settings.l3">Pilotenprofil: Name, Callsign, Ballon</li>
+          <li data-i18n="feat.settings.l4">Navigation: Kartentyp, Zoom, Nordausrichtung</li>
+          <li data-i18n="feat.settings.l5">Windlinien: Farbe, Länge, Dichte</li>
+          <li data-i18n="feat.settings.l6">Positionsmarker: Größe, Trail-Länge, Farbe</li>
+          <li data-i18n="feat.settings.l7">Audio: Höhenansagen, Vario-Ton</li>
+          <li data-i18n="feat.settings.l8">UI-Größe: Schrift- und Panel-Skalierung</li>
+          <li data-i18n="feat.settings.l9">Aufzeichnung: Intervall, Auto-Start, Format</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <!-- SCREENSHOT: Android Phone mit Einstellungen-Panel -->
+        <div class="mockup-android mockup-md reveal-right delay-2">
+          <div class="screen">
+            <img src="Android Einstellungen.jpeg" alt="Einstellungen">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── CTA ─── -->
+  <section class="section" style="text-align: center; border-top: 1px solid var(--border);">
+    <div class="container reveal">
+      <h2 class="section-title" data-i18n="cta.title">Bereit zum Abheben?</h2>
+      <p class="section-desc" style="margin: 0 auto 32px;" data-i18n="cta.descFeat">Teste NTA SkyNav 7 Tage kostenlos – alle Features, voller Umfang.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="beta.html" class="btn btn-amber" data-i18n="cta.betaTest">Beta testen</a>
+        <a href="pricing.html" class="btn btn-outline" data-i18n="cta.viewPricing">Preise ansehen</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+          
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">Die Navigations-App für Ballonpiloten.<br>Entwickelt in Österreich.</p>
+        <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 16px; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-radius: 8px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+          <span data-i18n="index.igBtn">@nta_skynav folgen</span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer.product">Produkt</div>
+        <ul class="footer-links"><li><a href="features.html" data-i18n="nav.features">Features</a></li><li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li><li><a href="beta.html" data-i18n="footer.betaDownload">Beta &amp; Download</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer.legal">Rechtliches</div>
+        <ul class="footer-links"><li><a href="datenschutz.html" data-i18n="footer.privacy">Datenschutz</a></li><li><a href="agb.html" data-i18n="footer.terms">AGB</a></li><li><a href="impressum.html" data-i18n="footer.imprint">Impressum</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer.contact">Kontakt</div>
+        <ul class="footer-links"><li><a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a></li><li><a href="about.html" data-i18n="footer.aboutUs">Über uns</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div data-i18n="footer.madeIn">Made in Austria 🇦🇹 · For Balloon Pilots Worldwide</div>
+      <div><a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather data by Open-Meteo.com</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
+</body>
+</html>
