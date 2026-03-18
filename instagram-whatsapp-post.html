@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NTA SkyNav – Instagram WhatsApp Reel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0A0E1A; --navy-light: #111827; --amber: #FFA500;
+    --amber-dim: rgba(255,165,0,0.15); --cyan: #00C8FF;
+    --text: #C8D4F0; --text-dim: rgba(200,212,240,0.75);
+    --text-muted: rgba(200,212,240,0.55);
+    --green: #25D366;
+  }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+    flex-direction: column;
+    gap: 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .reel {
+    width: 1080px;
+    height: 1920px;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Grid */
+  .reel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,212,240,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,212,240,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Amber lines */
+  .line-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--amber), #ffb732, var(--amber));
+    z-index: 10;
+  }
+  .line-bot {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--amber), #ffb732, var(--amber));
+    z-index: 10;
+  }
+
+  /* Glows */
+  .glow-tl {
+    position: absolute;
+    top: -180px; left: -180px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(37,211,102,0.1) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .glow-br {
+    position: absolute;
+    bottom: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* Logo watermark */
+  .logo-bg {
+    position: absolute;
+    top: 100px;
+    right: -40px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .logo-bg img {
+    width: 450px;
+    height: 450px;
+    object-fit: contain;
+    opacity: 0.08;
+  }
+
+  .content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 80px;
+    text-align: center;
+    gap: 36px;
+  }
+
+  /* Brand */
+  .brand {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+  .brand .accent { color: var(--amber); }
+
+  /* WhatsApp icon */
+  .wa-icon {
+    width: 140px;
+    height: 140px;
+    border-radius: 32px;
+    background: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 40px rgba(37,211,102,0.3);
+  }
+  .wa-icon svg {
+    width: 80px;
+    height: 80px;
+    fill: #fff;
+  }
+
+  /* Headline */
+  .headline {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 82px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.05;
+    max-width: 800px;
+  }
+  .headline .green { color: var(--green); }
+
+  /* Subtext */
+  .subtext {
+    font-size: 28px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    max-width: 750px;
+  }
+  .subtext strong { color: #fff; }
+
+  /* Divider */
+  .divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green), transparent);
+  }
+
+  /* Benefits */
+  .benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 700px;
+  }
+  .benefit {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(37,211,102,0.06);
+    border: 1px solid rgba(37,211,102,0.15);
+    border-radius: 16px;
+    padding: 22px 28px;
+    text-align: left;
+  }
+  .benefit-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+  .benefit-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  /* CTA */
+  .cta-box {
+    background: var(--green);
+    border-radius: 16px;
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.3);
+  }
+  .cta-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* Arrow */
+  .arrow {
+    font-size: 48px;
+    color: var(--green);
+    animation: bounce 1.5s ease infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  /* Link hint */
+  .link-hint {
+    font-family: 'Barlow', sans-serif;
+    font-size: 22px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  .hint {
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    color: rgba(200,212,240,0.4);
+  }
+</style>
+</head>
+<body>
+
+<div class="reel">
+  <div class="line-top"></div>
+  <div class="line-bot"></div>
+  <div class="glow-tl"></div>
+  <div class="glow-br"></div>
+
+  <div class="logo-bg">
+    <img src="nta-logo-b.png" alt="">
+  </div>
+
+  <div class="content">
+    <div class="brand">NTA <span class="accent">SkyNav</span></div>
+
+    <div class="wa-icon">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </div>
+
+    <h1 class="headline">Join our<br><span class="green">WhatsApp Group</span></h1>
+
+    <div class="subtext">
+      Stay in the loop. Get <strong>updates, patch notes &amp; beta news</strong> before anyone else.
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="benefits">
+      <div class="benefit">
+        <div class="benefit-icon">&#9889;</div>
+        <div class="benefit-text">Instant updates &amp; patch notes</div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">&#128172;</div>
+        <div class="benefit-text">Direct contact with the dev team</div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">&#127880;</div>
+        <div class="benefit-text">Be the first to know about new features</div>
+      </div>
+    </div>
+
+    <div class="arrow">&#8595;</div>
+
+    <div class="cta-box">
+      <div class="cta-text">Link in Bio</div>
+    </div>
+
+    <div class="link-hint">Don't miss a thing.</div>
+  </div>
+</div>
+
+<div class="hint">1080 &times; 1920px &middot; Instagram Reel / Story &middot; Export as PNG or use as cover</div>
+
+</body>
+</html>

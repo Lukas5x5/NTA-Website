@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Updates & Patches – NTA SkyNav</title>
+  <meta name="description" content="NTA SkyNav – Alle Updates, Patch Notes und Neuigkeiten für Ballonpiloten.">
+  <link rel="icon" type="image/png" href="nta-logo.png">
+  <link rel="apple-touch-icon" href="nta-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .updates-hero {
+      padding: 140px 0 60px;
+      text-align: center;
+    }
+
+    .updates-feed {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .update-card {
+      position: relative;
+      background: var(--navy-light);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 32px;
+      transition: border-color 0.3s;
+    }
+    .update-card:hover {
+      border-color: rgba(255,165,0,0.25);
+    }
+
+    .update-date {
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .update-version {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .update-version.patch {
+      background: rgba(34,197,94,0.12);
+      color: var(--green);
+      border: 1px solid rgba(34,197,94,0.25);
+    }
+    .update-version.feature {
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      border: 1px solid rgba(0,200,255,0.25);
+    }
+    .update-version.announcement {
+      background: var(--amber-dim);
+      color: var(--amber);
+      border: 1px solid rgba(255,165,0,0.25);
+    }
+
+    .update-title {
+      font-size: 24px;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .update-body {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+    .update-body p {
+      margin-bottom: 12px;
+    }
+    .update-body p:last-child {
+      margin-bottom: 0;
+    }
+    .update-body strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .change-section-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      margin: 20px 0 10px;
+    }
+    .change-section-label:first-of-type {
+      margin-top: 8px;
+    }
+
+    .change-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .change-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .change-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .change-tag.fix {
+      background: rgba(34,197,94,0.12);
+      color: var(--green);
+    }
+    .change-tag.new {
+      background: var(--cyan-dim);
+      color: var(--cyan);
+    }
+    .change-tag.change {
+      background: var(--amber-dim);
+      color: var(--amber);
+    }
+    .change-tag.remove {
+      background: rgba(239,68,68,0.12);
+      color: var(--red);
+    }
+
+    .update-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    @media (max-width: 600px) {
+      .update-card {
+        padding: 24px 20px;
+      }
+      .update-title {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="grid-overlay"></div>
+
+<!-- ═══ Navigation ═══ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+      <li><a href="features.html" data-i18n="nav.features">Features</a></li>
+      <li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li>
+      <li><a href="beta.html" data-i18n="nav.beta">Beta</a></li>
+      <li><a href="about.html" data-i18n="nav.about">Über uns</a></li>
+      <li><a href="updates.html" data-i18n="nav.updates">Updates</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-toggle-btn active" data-lang="de">DE</button>
+      <button class="lang-toggle-btn" data-lang="en">EN</button>
+    </div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html" data-i18n="nav.home">Home</a>
+  <a href="features.html" data-i18n="nav.features">Features</a>
+  <a href="pricing.html" data-i18n="nav.pricing">Preise</a>
+  <a href="beta.html" data-i18n="nav.beta">Beta</a>
+  <a href="about.html" data-i18n="nav.about">Über uns</a>
+<a href="updates.html" data-i18n="nav.updates">Updates</a>
+</div>
+
+<main>
+
+  <!-- ─── Hero ─── -->
+  <section class="updates-hero">
+    <div class="container reveal">
+      <div class="section-label" data-i18n="updates.label">Changelog & News</div>
+      <h1 class="section-title" data-i18n="updates.title">Updates & <span style="color: var(--amber);">Patches</span></h1>
+      <div class="divider divider-center"></div>
+      <p class="section-desc" data-i18n="updates.desc" style="margin: 0 auto;">Alle Updates, Fixes und neuen Features für NTA SkyNav auf einen Blick.</p>
+    </div>
+  </section>
+
+  <!-- ─── Updates Feed ─── -->
+  <section class="updates-feed">
+
+    <!-- ═══ v1.0.4 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.104date">18. März 2026</div>
+      <div class="update-version patch">v1.0.4 – Patch</div>
+      <h2 class="update-title" data-i18n="updates.104title">Großes Update – Tap-to-Measure, Offline-Karten, Tracks & Stabilität</h2>
+      <div class="update-body">
+        <p data-i18n="updates.104desc">Neues Tap-to-Measure Feature, Offline-Karten komplett überarbeitet, Track-Sync im Hintergrund, IndexedDB statt localStorage, und zahlreiche Bugfixes für ein stabileres Erlebnis.</p>
+
+        <div class="change-section-label" data-i18n="updates.added">Hinzugefügt</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.104f1">Windgeschwindigkeit in <strong>Knoten (kt)</strong> als Einheit in Onboarding, Einstellungen und allen Windanzeigen</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.104f2"><strong>Tap-to-Measure</strong>: Auf Karte tippen zeigt gestrichelte Linie vom GPS-Cursor zum Punkt mit Live-Distanz (km/m) und Bearing (°), aktualisiert sich mit Bewegung, Linienfarbe einstellbar</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.changed">Geändert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.104c1">Offline-Karten-Panel neu gestaltet: Größen-Chips, Progress-Stepper, kompakteres Layout</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.104c2">Offline-Download über eigenen Proxy – 3× schneller (12 parallele Tiles, Retry-Logik)</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.104c3">Geschwindigkeits-Label überall auf <strong>kt</strong> vereinheitlicht</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.104c4">Track-Liste nach Datum sortiert (neueste oben)</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.104c5">Tracks werden sofort lokal gespeichert und im Hintergrund synchronisiert</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.104c8">Hintergrund-Sync läuft global (auch bei geschlossenem Fahrten-Panel) und aktualisiert die UI live</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.104c6">Flugdaten in IndexedDB statt localStorage (kein 5-MB-Limit mehr)</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.104c9">PDF-Base64 nicht mehr im Flight-Cache – verhindert verschwindende Temp-Flights</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.104c10">Tatsächlicher Gasverbrauch: gespeicherter Wert wird mit „Bearbeiten"-Button angezeigt</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.104c7">Online-Karte lädt immer die gesamte Welt, Offline-Cache beschleunigt nur das gespeicherte Gebiet</span></li>
+          <li><span class="change-tag remove">Removed</span> <span data-i18n="updates.104r1">Seemeilen (NM) aus den Distanz-Einheiten entfernt</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x15"><strong>OSM-Karte 403</strong>: Live-Tiles wieder über Vercel-Proxy (Capacitor blockte direkte OSM-Anfragen)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x16"><strong>Start/Landung „Unknown"</strong> bei Offline: zeigt Koordinaten als Fallback</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x17"><strong>Offline-Karte grau beim Reinzoomen</strong>: maxNativeZoom wird offline begrenzt, Leaflet skaliert automatisch hoch</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x18"><strong>Gelber Duplikat-Track</strong> nach Sync: Temp-Flights werden beim Cache-Load gegen Offline-Queue geprüft</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x19"><strong>Sprachchat</strong>: „Verbinde…" und „aktivieren" überlappen nicht mehr</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x20"><strong>Sprachchat Verbindung</strong>: Alter Room wird aufgeräumt, 15 s Timeout, sauberes Schließen bei Fehler</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x1"><strong>Pro-Status</strong> wird sofort beim Profil-Laden gesetzt</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x2"><strong>Ghost-Flight</strong> bei Logout/Kontowechsel verhindert</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x3"><strong>Flugdauer</strong> nutzt endTime als Fallback</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x4"><strong>GPS-Cursor</strong> springt weniger bei hoher Geschwindigkeit (Speed+Heading-Extrapolation)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x5"><strong>TrackLine</strong> aktualisiert häufiger und zeigt Live-GPS-Endpunkt</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x21"><strong>GPS maximumAge</strong> auf 0 gesetzt für frischere Positionsdaten</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x6"><strong>Offline-Sync</strong> entfernt Temp-Flights nach Upload (keine Duplikate)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x22"><strong>Duplikat-Anzeige</strong> nach Sync – gelber Temp-Eintrag und grüner Server-Eintrag nicht mehr gleichzeitig</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x7"><strong>Slider-Bedienung</strong> per Touch in Onboardings und Einstellungen ziehbar</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x8"><strong>Load Calculator</strong> Custom-Hersteller-Eingabe springt nicht mehr zurück</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x9"><strong>Wetter-PDF</strong> kein stiller Fallback auf Salzburg mehr</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x10"><strong>Karten-Toggle</strong> zeigt korrekten Ein/Aus-Status</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x11">Ordner löschen entfernt auch IndexedDB-Daten</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x12">Fahrten-Panel „Laden…" blockiert nicht mehr bei vorhandenem Cache</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x13">Wetter-PDF Karten-Pick: Safe Area für Notch/Dynamic Island</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x14">Warnung „Ungespeicherter Track" nach App-Neustart behoben</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x23">Offline-Fahrten und -Tracks werden gelb mit Lade-Animation markiert</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.104x24">Fehlender i18n-Key <strong>edit</strong> ergänzt; Eingabefeld-Overflow behoben</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══ v1.0.3 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date">17. März 2026</div>
+      <div class="update-version patch">v1.0.3 – Patch</div>
+      <h2 class="update-title" data-i18n="updates.103title">Zweiter Patch – Features, Fixes & Stabilität</h2>
+      <div class="update-body">
+        <p data-i18n="updates.103desc">8 Stunden nach dem Launch, 2 Updates bereits ausgeliefert. Danke an alle, die Probleme gemeldet haben – genau dafür gibt es die Beta.</p>
+
+        <div class="change-section-label" data-i18n="updates.features">Features</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.103f1">Externe Links (WhatsApp, etc.) öffnen jetzt im System-Browser</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.103f2">Announcement-System: In-App Nachrichten über Supabase (DE/EN, einmalig pro User)</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.103f3">Website-Verfolger können jetzt per Voice Chat mit dem Team sprechen</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.103f4">Voice Chat: WebRTC Mesh durch LiveKit SFU ersetzt (stabiler, skalierbar)</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.103f5">iOS: Natives Mikrofon jetzt verfügbar</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.103x1">Ballon-Profile gehen bei Neuinstallation nicht mehr verloren</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.103x2">Feature-Onboardings kommen nach Neuinstallation nicht mehr erneut</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.103x3">Kartenkacheln: Schwarze Linien zwischen Tiles behoben</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.103x4">GPS-Cursor: Weniger Springen bei Autofahrt</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.103x5">Bug Report: „Wird gesendet..." hängt nicht mehr endlos</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.103x6">Pro-Status: Kein „Upgrade zu Pro" Flackern beim App-Start</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.removed">Entfernt</div>
+        <ul class="change-list">
+          <li><span class="change-tag remove">Removed</span> <span data-i18n="updates.103r1">iOS AudioCapturePlugin – nicht mehr nötig durch LiveKit</span></li>
+          <li><span class="change-tag remove">Removed</span> <span data-i18n="updates.103r2">Metered.ca TURN Server – nicht mehr nötig durch LiveKit</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══ v1.0.1 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date">17. März 2026</div>
+      <div class="update-version patch">v1.0.1 – Patch</div>
+      <h2 class="update-title" data-i18n="updates.101title">Erster Patch – Höhe & Variometer</h2>
+      <div class="update-body">
+        <p data-i18n="updates.101desc">Einige von euch haben Höhenprobleme gemeldet – wir haben die Ursache gefunden und innerhalb von Stunden gefixt.</p>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.101x1"><strong>Höhenanzeige</strong> – Nur noch GPS + EGM96 statt Baro-Sensor (iOS Baro lieferte falsche Absolutwerte)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.101x2"><strong>Android Variometer</strong> – Barometer-Plugin für Variometer hinzugefügt (TYPE_PRESSURE Sensor)</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.prefixes">Fixes (Pre-Launch)</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.101p1">MSL-Höhenkorrektur für gespeicherte Trackpunkte, Marker, LogPoints, Goal Declarations</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.101p2">Hindernisse: Prefetch 3×3 Tiles beim GPS-Fix, Cache-TTL verlängert</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.101p3">Ballon-Profile bleiben nach Neuinstallation erhalten (Sync Race-Condition Fix)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.101p4">PDF-Viewer: Safe Area für Notch/Dynamic Island</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.101p5">Android: Datei-Import repariert (WebChromeClient Fix)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.101p6">Startplatz-Suche im Onboarding (Autocomplete statt manuelle Koordinaten)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.101p7">Share-Button Übersetzung korrigiert</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.101p8">GPS-Vario Anzeige-Text gekürzt</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══ v1.0.0 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date">17. März 2026</div>
+      <div class="update-version announcement">v1.0.0 – Beta Launch</div>
+      <h2 class="update-title" data-i18n="updates.100title">NTA SkyNav Beta ist live</h2>
+      <div class="update-body">
+        <p data-i18n="updates.100desc">Die erste Beta-Version von NTA SkyNav ist jetzt verfügbar für <strong>Android</strong> (Google Play) und <strong>iOS</strong> (TestFlight). Danke an alle Piloten, die sich angemeldet haben – euer Feedback formt diese App.</p>
+
+        <div class="change-section-label" data-i18n="updates.features">Features</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.100f1"><strong>ICAO Karten</strong> mit Lufträumen, Hindernissen & Hochspannungsleitungen</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.100f2"><strong>GPS HUD</strong> – Höhe, Geschwindigkeit, Heading, Variometer</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.100f3"><strong>Zielnavigation</strong> – Peilung, Distanz, ETA</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.100f4"><strong>Wetter Briefing</strong> – Wind-Layer, Temperatur, Niederschlag</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.100f5"><strong>Load Calculator</strong> – Hülle, Gas, Passagiere, Zuladung</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.100f6"><strong>Live Team Tracking</strong> – Position mit der Crew teilen</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.100f7"><strong>Digitales Logbuch</strong> – Fahrten mit GPS-Tracks aufzeichnen</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.100f8"><strong>Hindernisdatenbank</strong> – Türme, Masten, Leitungen</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">Die Navigations-App für Ballonpiloten.<br>Entwickelt in Österreich.</p>
+        <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 16px; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-radius: 8px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+          <span data-i18n="index.igBtn">@nta_skynav folgen</span>
+        </a>
+      </div>
+      <div><div class="footer-heading" data-i18n="footer.product">Produkt</div><ul class="footer-links"><li><a href="features.html">Features</a></li><li><a href="pricing.html">Preise</a></li><li><a href="beta.html">Beta & Download</a></li></ul></div>
+      <div><div class="footer-heading" data-i18n="footer.legal">Rechtliches</div><ul class="footer-links"><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="agb.html">AGB</a></li><li><a href="impressum.html">Impressum</a></li></ul></div>
+      <div><div class="footer-heading" data-i18n="footer.contact">Kontakt</div><ul class="footer-links"><li><a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a></li><li><a href="about.html">Über uns</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div data-i18n="footer.madeIn">Made in Austria 🇦🇹 · For Balloon Pilots Worldwide</div>
+      <div><a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather data by Open-Meteo.com</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
+</body>
+</html>

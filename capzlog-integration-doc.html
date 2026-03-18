@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NTA SkyNav — Integrationsdokumentation f&uuml;r CapzLog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    @media print {
+      body { background: #0b0f1a !important; }
+      .cover, .page {
+        width: 210mm !important;
+        page-break-after: always !important;
+      }
+      /* Fix: backdrop-filter bricht Tabellen in PDF */
+      .card,
+      [style*="backdrop-filter"] {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: #111827 !important;
+      }
+      /* Tabellen-Borders sichtbar machen in PDF */
+      table {
+        border: 1px solid rgba(255,165,0,0.2) !important;
+      }
+      th {
+        background: #1a1500 !important;
+        color: #ffa500 !important;
+        border-bottom: 2px solid #ffa500 !important;
+      }
+      td {
+        border-bottom: 1px solid #2a2a3a !important;
+        color: #cbd5e1 !important;
+      }
+      /* Badges sichtbar machen */
+      .badge-green {
+        background: #0a2e14 !important;
+        color: #4ade80 !important;
+        border-color: #22c55e !important;
+      }
+      .badge-amber {
+        background: #2e1a00 !important;
+        color: #ffa500 !important;
+        border-color: #ffa500 !important;
+      }
+      .badge-blue {
+        background: #0a1a2e !important;
+        color: #60a5fa !important;
+        border-color: #3b82f6 !important;
+      }
+      /* Highlight-Box */
+      .highlight-box {
+        background: #111827 !important;
+        border-left: 3px solid #ffa500 !important;
+      }
+      /* Code-Blöcke */
+      pre {
+        background: #050810 !important;
+        border-color: #2a2a3a !important;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: #0b0f1a;
+      color: #e2e8f0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── Page 1: Cover ── */
+    .cover {
+      width: 210mm;
+      height: 297mm;
+      background: #0b0f1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 50px;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,165,0,0.08) 0%, transparent 70%);
+      z-index: 3;
+      pointer-events: none;
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: -100px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,165,0,0.05) 0%, transparent 70%);
+      z-index: 3;
+      pointer-events: none;
+    }
+    .cover-logo {
+      width: 120px;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 0 30px rgba(255,165,0,0.2));
+      position: relative;
+      z-index: 2;
+    }
+    .cover-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .cover-subtitle {
+      font-size: 18px;
+      color: rgba(255,165,0,0.9);
+      font-weight: 500;
+      margin-bottom: 60px;
+      letter-spacing: 0.5px;
+    }
+    .cover-doc-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .cover-doc-sub {
+      font-size: 16px;
+      color: #94a3b8;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 60px;
+      margin-top: 20px;
+    }
+    .cover-meta-block {
+      text-align: center;
+    }
+    .cover-meta-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255,165,0,0.7);
+      margin-bottom: 6px;
+    }
+    .cover-meta-value {
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+    .cover-footer {
+      position: absolute;
+      bottom: 40px;
+      font-size: 12px;
+      color: #475569;
+    }
+    .cover-divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,165,0,0.6), transparent);
+      margin: 20px 0 30px;
+    }
+
+    /* ── Content Pages ── */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: #0b0f1a;
+      padding: 35px 50px;
+      page-break-after: always;
+      position: relative;
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,165,0,0.15);
+    }
+    .page-header-logo {
+      height: 28px;
+      opacity: 0.6;
+    }
+    .page-header-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      color: rgba(255,165,0,0.5);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    h1 .accent { color: rgba(255,165,0,0.9); }
+    h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: rgba(255,165,0,0.9);
+      margin-top: 22px;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,165,0,0.12);
+    }
+    h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+    p, li {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #cbd5e1;
+    }
+    p { margin-bottom: 10px; }
+    ul { padding-left: 20px; margin-bottom: 12px; }
+    li { margin-bottom: 4px; }
+    strong { color: #e2e8f0; }
+
+    .card {
+      background: rgba(17, 24, 39, 0.7);
+      border: 1px solid rgba(255,165,0,0.15);
+      border-radius: 14px;
+      padding: 14px 20px;
+      margin: 12px 0;
+      backdrop-filter: blur(12px);
+    }
+    .card-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255,165,0,0.9);
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 12.5px;
+    }
+    th {
+      text-align: left;
+      padding: 7px 12px;
+      background: rgba(255,165,0,0.08);
+      color: rgba(255,165,0,0.9);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(255,165,0,0.2);
+    }
+    td {
+      padding: 5px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: #cbd5e1;
+    }
+    tr:hover td { background: rgba(255,165,0,0.03); }
+
+    pre {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,165,0,0.1);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 10.5px;
+      color: #a5f3fc;
+      overflow-x: auto;
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .key { color: #93c5fd; }
+    .str { color: #86efac; }
+    .num { color: #fbbf24; }
+    .comment { color: #64748b; }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-amber {
+      background: rgba(255,165,0,0.12);
+      color: rgba(255,165,0,0.9);
+      border: 1px solid rgba(255,165,0,0.2);
+    }
+    .badge-green {
+      background: rgba(34,197,94,0.1);
+      color: #4ade80;
+      border: 1px solid rgba(34,197,94,0.2);
+    }
+    .badge-blue {
+      background: rgba(59,130,246,0.1);
+      color: #60a5fa;
+      border: 1px solid rgba(59,130,246,0.2);
+    }
+
+    .section-intro {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 14px;
+    }
+
+    .page-number {
+      position: absolute;
+      bottom: 30px;
+      right: 55px;
+      font-size: 11px;
+      color: #475569;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(255,165,0,0.06), rgba(255,165,0,0.02));
+      border-left: 3px solid rgba(255,165,0,0.5);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px;
+      margin: 12px 0;
+    }
+    .highlight-box p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SEITE 1: COVER                                      -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="cover">
+  <img src="nta-logo.png" class="cover-logo" alt="NTA SkyNav Logo" />
+  <div class="cover-title">NTA SkyNav</div>
+  <div class="cover-subtitle">Die Navigations-App f&uuml;r Ballonpiloten</div>
+
+  <div class="cover-divider"></div>
+
+  <div class="cover-doc-title">Integrationsdokumentation</div>
+  <div class="cover-doc-sub">Flugdaten-Architektur &amp; Integrationsoptionen f&uuml;r CapzLog</div>
+
+  <div class="cover-divider"></div>
+
+  <div class="cover-meta">
+    <div class="cover-meta-block">
+      <div class="cover-meta-label">Erstellt f&uuml;r</div>
+      <div class="cover-meta-value">Philippe M&uuml;ller<br/>CEO, capzlog.aero</div>
+    </div>
+    <div class="cover-meta-block">
+      <div class="cover-meta-label">Datum</div>
+      <div class="cover-meta-value">18. M&auml;rz 2026</div>
+    </div>
+    <div class="cover-meta-block">
+      <div class="cover-meta-label">Version</div>
+      <div class="cover-meta-value">1.0</div>
+    </div>
+  </div>
+
+  <div class="cover-footer">Vertraulich &mdash; NTA SkyNav &middot; Made in Austria</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SEITE 2: &Uuml;BERSICHT                             -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <img src="nta-logo.png" class="page-header-logo" alt="" />
+    <div class="page-header-title">Integrationsdokumentation</div>
+  </div>
+
+  <h1><span class="accent">01</span> &mdash; &Uuml;bersicht</h1>
+  <p class="section-intro">
+    NTA SkyNav ist eine Echtzeit-Navigationsapp f&uuml;r Ballonpiloten, verf&uuml;gbar f&uuml;r iOS und Android.
+    Die App zeichnet vollst&auml;ndige Flugdaten auf &mdash; GPS-Tracks, barometrische Daten, Gasverbrauch,
+    Beladungsrechnungen und alle Informationen, die f&uuml;r das offizielle Fahrtenbuch ben&ouml;tigt werden.
+  </p>
+
+  <h2>Tech-Stack</h2>
+  <table>
+    <tr><th style="width:35%">Komponente</th><th>Technologie</th></tr>
+    <tr><td>Frontend</td><td>React + TypeScript + Vite</td></tr>
+    <tr><td>State Management</td><td>Zustand (mit IndexedDB-Persistenz)</td></tr>
+    <tr><td>Mobile Framework</td><td>Capacitor (iOS &amp; Android)</td></tr>
+    <tr><td>Backend / Datenbank</td><td>Supabase (PostgreSQL + Auth + Storage)</td></tr>
+    <tr><td>Authentifizierung</td><td>Google Sign-In, Apple Sign-In</td></tr>
+    <tr><td>GPS</td><td>Capacitor Geolocation + Background Geolocation</td></tr>
+    <tr><td>H&ouml;he</td><td>EGM96 Geoid-Korrektur (WGS84 &rarr; MSL)</td></tr>
+    <tr><td>Barometer</td><td>Nativer Sensor (iOS &amp; Android) f&uuml;r Variometer</td></tr>
+    <tr><td>Export-Formate</td><td>IGC, Excel (.xlsx), PDF</td></tr>
+    <tr><td>Sprachen</td><td>Deutsch (Standard), Englisch</td></tr>
+  </table>
+
+  <h2>Datenspeicher-Architektur</h2>
+  <table>
+    <tr><th>Schicht</th><th>Technologie</th><th>Zweck</th></tr>
+    <tr>
+      <td><span class="badge badge-green">Live</span></td>
+      <td>Zustand + IndexedDB</td>
+      <td>Aktiver Flug: GPS-Track, Marker, Declarations</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-amber">Persistent</span></td>
+      <td>Supabase PostgreSQL</td>
+      <td>Vollst&auml;ndige Flug-Snapshots als JSONB</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-blue">Offline-Cache</span></td>
+      <td>localStorage + IndexedDB</td>
+      <td>Offline-Warteschlange, synchronisiert bei Reconnect</td>
+    </tr>
+  </table>
+
+  <div class="page-number">2</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SEITE 3: FLUGDATENMODELL                            -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <img src="nta-logo.png" class="page-header-logo" alt="" />
+    <div class="page-header-title">Integrationsdokumentation</div>
+  </div>
+
+  <h1><span class="accent">02</span> &mdash; Flugdatenmodell</h1>
+  <p class="section-intro">
+    Jeder Flug wird als vollst&auml;ndiger Snapshot in der Supabase-Datenbank gespeichert.
+    Nachfolgend alle erfassten Felder, kategorisiert nach ihrer Relevanz f&uuml;r das offizielle Fahrtenbuch.
+  </p>
+
+  <h2>Fahrtenbuch-Pflichtfelder</h2>
+  <div class="card">
+    <table>
+      <tr><th style="width:35%">Feld</th><th>Typ</th><th>Beschreibung</th></tr>
+      <tr><td>Datum &amp; Uhrzeit</td><td>ISO 8601</td><td>Start- und Ende-Zeitstempel des Flugs</td></tr>
+      <tr><td>Dauer</td><td>Zahl (ms)</td><td>Berechnet aus Start &rarr; Ende</td></tr>
+      <tr><td>Startplatz</td><td>GPS + Name</td><td>Koordinaten + Reverse-Geocoding Ortsname</td></tr>
+      <tr><td>Landeplatz</td><td>GPS + Name</td><td>Koordinaten + Reverse-Geocoding Ortsname</td></tr>
+      <tr><td>Pilot</td><td>String</td><td>Pilotenname (aus Benutzereinstellungen)</td></tr>
+      <tr><td>Ballon</td><td>Objekt</td><td>Hersteller, H&uuml;llentyp, Volumen (m&sup3;)</td></tr>
+      <tr><td>Passagiere</td><td>Zahl</td><td>Anzahl der Passagiere an Bord</td></tr>
+      <tr><td>Max. H&ouml;he</td><td>Zahl (m MSL)</td><td>Maximale erreichte H&ouml;he w&auml;hrend des Flugs</td></tr>
+      <tr><td>Gasverbrauch</td><td>Array</td><td>Pro Flasche: Name, Kapazit&auml;t (L), verbraucht (L), Rest (L)</td></tr>
+    </table>
+  </div>
+
+  <h2>Erweiterte Flugdaten</h2>
+  <div class="card">
+    <table>
+      <tr><th style="width:35%">Feld</th><th>Typ</th><th>Beschreibung</th></tr>
+      <tr><td>GPS-Track</td><td>TrackPoint[]</td><td>Lat, Lon, H&ouml;he (MSL), Speed, Heading, Vario &mdash; alle paar Sekunden</td></tr>
+      <tr><td>Barometrische Daten</td><td>BaroData</td><td>QNH, Druckh&ouml;he, Variometer-Werte</td></tr>
+      <tr><td>Marker-Drops</td><td>MarkerDrop[1-18]</td><td>Position, H&ouml;he, Zeitstempel pro Marker</td></tr>
+      <tr><td>Goal Declarations</td><td>GoalDeclaration[]</td><td>Zielkoordinaten mit Zeitstempel</td></tr>
+      <tr><td>Windprofil</td><td>WindLayer[]</td><td>H&ouml;he, Geschwindigkeit, Richtung pro Schicht</td></tr>
+      <tr><td>Beladungsrechnung</td><td>Objekt</td><td>Bruttotragkraft, Gesamtgewicht, Nutzlast, MTOW-Status</td></tr>
+      <tr><td>Wetter-Briefing</td><td>Base64 PDF</td><td>Eingebettetes Wetterbriefing-Dokument</td></tr>
+      <tr><td>Wettbewerbsaufgaben</td><td>Task[]</td><td>Meisterschaftsaufgaben und Ziele (falls zutreffend)</td></tr>
+    </table>
+  </div>
+
+  <div class="page-number">3</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SEITE 4: DATENBANKSCHEMA                            -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <img src="nta-logo.png" class="page-header-logo" alt="" />
+    <div class="page-header-title">Integrationsdokumentation</div>
+  </div>
+
+  <h1><span class="accent">03</span> &mdash; Datenbankschema</h1>
+  <p class="section-intro">
+    Flugdaten sind in zwei Supabase-Tabellen mit Row-Level-Security organisiert.
+    Jeder Benutzer hat nur Zugriff auf seine eigenen Daten.
+  </p>
+
+  <h2>Supabase-Tabellen</h2>
+  <pre><span class="comment">-- Fluggruppen (Meisterschaften oder Einzelfl&uuml;ge)</span>
+<span class="key">CREATE TABLE</span> championships (
+  id          <span class="str">UUID</span> PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id     <span class="str">UUID</span> REFERENCES auth.users(id),
+  name        <span class="str">TEXT</span> NOT NULL,
+  map_id      <span class="str">TEXT</span>,
+  archived    <span class="str">BOOLEAN</span> DEFAULT false,
+  created_at  <span class="str">TIMESTAMPTZ</span> DEFAULT now()
+);
+
+<span class="comment">-- Einzelne Fl&uuml;ge mit vollst&auml;ndigem Daten-Snapshot</span>
+<span class="key">CREATE TABLE</span> championship_flights (
+  id                <span class="str">UUID</span> PRIMARY KEY DEFAULT gen_random_uuid(),
+  championship_id   <span class="str">UUID</span> REFERENCES championships(id),
+  name              <span class="str">TEXT</span> NOT NULL,
+  flight_data       <span class="str">JSONB</span>,        <span class="comment">-- vollst&auml;ndiger Flug-Snapshot</span>
+  created_at        <span class="str">TIMESTAMPTZ</span> DEFAULT now()
+);</pre>
+
+  <h2>Flug-Snapshot Struktur (JSONB)</h2>
+  <pre>{
+  <span class="key">"track"</span>: [
+    {
+      <span class="key">"position"</span>: { <span class="key">"latitude"</span>: <span class="num">47.5123</span>, <span class="key">"longitude"</span>: <span class="num">15.4567</span>, <span class="key">"altitude"</span>: <span class="num">842</span> },
+      <span class="key">"baro"</span>: { <span class="key">"qnh"</span>: <span class="num">1013.25</span>, <span class="key">"pressureAltitude"</span>: <span class="num">835</span>, <span class="key">"variometer"</span>: <span class="num">1.2</span> },
+      <span class="key">"timestamp"</span>: <span class="str">"2026-03-17T08:15:00.000Z"</span>,
+      <span class="key">"speed"</span>: <span class="num">4.2</span>,
+      <span class="key">"heading"</span>: <span class="num">225</span>
+    }
+  ],
+  <span class="key">"markers"</span>: [
+    { <span class="key">"number"</span>: <span class="num">1</span>, <span class="key">"position"</span>: { ... }, <span class="key">"altitude"</span>: <span class="num">650</span>, <span class="key">"timestamp"</span>: <span class="str">"..."</span> }
+  ],
+  <span class="key">"declarations"</span>: [ ... ],
+  <span class="key">"windLayers"</span>: [
+    { <span class="key">"altitude"</span>: <span class="num">500</span>, <span class="key">"speed"</span>: <span class="num">12</span>, <span class="key">"direction"</span>: <span class="num">270</span> }
+  ],
+  <span class="key">"loadCalculation"</span>: { <span class="key">"balloon"</span>: <span class="str">"Cameron A-210"</span>, <span class="key">"volume"</span>: <span class="num">6000</span>, <span class="key">"passengers"</span>: <span class="num">3</span>, ... },
+  <span class="key">"gasUsage"</span>: { <span class="key">"bottles"</span>: [{ <span class="key">"name"</span>: <span class="str">"Flasche 1"</span>, <span class="key">"totalLiters"</span>: <span class="num">40</span>, <span class="key">"usedLiters"</span>: <span class="num">28</span> }] },
+  <span class="key">"savedAt"</span>: <span class="str">"2026-03-17T10:30:00.000Z"</span>
+}</pre>
+
+  <div class="page-number">4</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SEITE 5: INTEGRATIONSOPTIONEN                       -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <img src="nta-logo.png" class="page-header-logo" alt="" />
+    <div class="page-header-title">Integrationsdokumentation</div>
+  </div>
+
+  <h1><span class="accent">04</span> &mdash; Integrationsoptionen</h1>
+  <p class="section-intro">
+    Unser Vorschlag f&uuml;r eine nahtlose Integration zwischen NTA SkyNav und CapzLog.
+  </p>
+
+  <div class="card">
+    <div class="card-title">API Push Integration</div>
+    <p>NTA SkyNav sendet Flugdaten direkt an einen CapzLog-API-Endpunkt nach jeder gespeicherten Fahrt.</p>
+    <ul>
+      <li>Benutzer verkn&uuml;pft seinen CapzLog-Account einmalig (API-Key oder OAuth)</li>
+      <li>&bdquo;An CapzLog senden&ldquo;-Button erscheint nach dem Speichern einer Fahrt</li>
+      <li>NTA mappt die Flugdaten auf das erwartete CapzLog-Format</li>
+      <li>Echtzeit-Sync, kein manueller Export n&ouml;tig</li>
+    </ul>
+    <p><strong>Ben&ouml;tigt von CapzLog:</strong> API-Dokumentation, Authentifizierungsmethode, erwartetes Datenformat</p>
+  </div>
+
+
+  <h2>N&auml;chste Schritte</h2>
+  <div class="highlight-box">
+    <p>
+      Um mit der Integration fortzufahren, ben&ouml;tigen wir folgende Informationen von CapzLog:
+    </p>
+    <ul style="margin-top: 8px; margin-bottom: 0;">
+      <li><strong>API-Dokumentation</strong> &mdash; Bietet CapzLog eine REST-API f&uuml;r den Flugdaten-Import?</li>
+      <li><strong>Datenformat-Spezifikation</strong> &mdash; Welche Felder und welches Format erwartet CapzLog?</li>
+      <li><strong>Authentifizierungsmethode</strong> &mdash; API-Key, OAuth oder anderes?</li>
+    </ul>
+  </div>
+
+  <div class="page-number">5</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SEITE 6: KONTAKT                                    -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+  <img src="nta-logo.png" class="cover-logo" alt="NTA SkyNav Logo" />
+  <div style="font-family: 'Rajdhani', sans-serif; font-size: 28px; font-weight: 600; color: #fff; margin-bottom: 8px;">
+    Lassen Sie uns das gemeinsam umsetzen.
+  </div>
+  <div class="cover-divider"></div>
+  <div style="font-size: 14px; color: #94a3b8; margin-bottom: 40px; max-width: 440px; line-height: 1.8;">
+    Wir freuen uns &uuml;ber die M&ouml;glichkeit, NTA SkyNav mit CapzLog zu integrieren
+    und ein nahtloses Erlebnis f&uuml;r Ballonpiloten weltweit zu schaffen.
+  </div>
+
+  <div style="background: rgba(17,24,39,0.7); border: 1px solid rgba(255,165,0,0.15); border-radius: 14px; padding: 30px 40px; backdrop-filter: blur(12px);">
+    <div style="font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 4px;">
+      NTA SkyNav
+    </div>
+    <div style="font-size: 13px; color: rgba(255,165,0,0.8); margin-bottom: 16px;">
+      ntaskynav.app
+    </div>
+    <div style="font-size: 13px; color: #cbd5e1; line-height: 1.8;">
+      Lukas Reinberger<br/>
+      Gr&uuml;nder &amp; Entwickler<br/>
+      <span style="color: rgba(255,165,0,0.7);">info@ntaskynav.app</span>
+    </div>
+  </div>
+
+  <div style="position: absolute; bottom: 40px; font-size: 11px; color: #475569;">
+    Made in Austria &middot; F&uuml;r Ballonpiloten weltweit
+  </div>
+  <div class="page-number">6</div>
+</div>
+
+</body>
+</html>

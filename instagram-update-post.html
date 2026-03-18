@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NTA SkyNav – Instagram Update Post</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0A0E1A; --navy-light: #111827; --amber: #FFA500;
+    --amber-dim: rgba(255,165,0,0.15); --cyan: #00C8FF;
+    --cyan-dim: rgba(0,200,255,0.12); --text: #C8D4F0;
+    --text-dim: rgba(200,212,240,0.75); --text-muted: rgba(200,212,240,0.55);
+    --border: rgba(200,212,240,0.08); --green: #22c55e;
+  }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+    flex-direction: column;
+    gap: 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3,h4 { font-family: 'Rajdhani', sans-serif; font-weight: 700; color: #fff; line-height: 1.1; }
+
+  .post {
+    width: 1080px;
+    height: 1080px;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Grid pattern */
+  .post::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,212,240,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,212,240,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Amber lines */
+  .line-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--amber), #ffb732, var(--amber));
+    z-index: 10;
+  }
+  .line-bot {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--amber), #ffb732, var(--amber));
+    z-index: 10;
+  }
+
+  /* Glows */
+  .glow-tl {
+    position: absolute;
+    top: -180px; left: -180px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .glow-br {
+    position: absolute;
+    bottom: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* Logo watermark */
+  .logo-bg {
+    position: absolute;
+    top: -40px;
+    right: -20px;
+    left: auto;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .logo-bg img {
+    width: 450px;
+    height: 450px;
+    object-fit: contain;
+    opacity: 0.08;
+  }
+
+  .content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 80px;
+    text-align: center;
+    gap: 24px;
+  }
+
+  /* Brand */
+  .brand {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+  .brand .accent { color: var(--amber); }
+
+  /* Version badge */
+  .badge {
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: rgba(34,197,94,0.12);
+    color: var(--green);
+    border: 1px solid rgba(34,197,94,0.3);
+  }
+
+  /* Headline */
+  .headline {
+    font-size: 72px;
+    line-height: 1.05;
+    max-width: 800px;
+  }
+  .headline .green { color: var(--green); }
+
+  /* Subtext */
+  .subtext {
+    font-size: 24px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    max-width: 700px;
+  }
+  .subtext strong { color: #fff; }
+
+  /* Divider */
+  .divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green), transparent);
+  }
+
+  /* Fix boxes */
+  .fixes {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    max-width: 800px;
+  }
+  .fix-box {
+    flex: 1;
+    background: rgba(34,197,94,0.06);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: left;
+  }
+  .fix-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .fix-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .fix-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ETA */
+  .eta {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .hint {
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    color: rgba(200,212,240,0.4);
+  }
+</style>
+</head>
+<body>
+
+<div class="post">
+  <div class="line-top"></div>
+  <div class="line-bot"></div>
+  <div class="glow-tl"></div>
+  <div class="glow-br"></div>
+
+  <div class="logo-bg">
+    <img src="nta-logo-b.png" alt="">
+  </div>
+
+  <div class="content">
+    <div class="brand">NTA <span class="accent">SkyNav</span></div>
+    <div class="badge" style="background:rgba(34,197,94,0.12);color:#22c55e;border-color:rgba(34,197,94,0.3);">Beta is Live</div>
+
+    <h1 class="headline">We're live.<br><span class="green">First patch incoming.</span></h1>
+
+    <div class="subtext">
+      The NTA SkyNav Beta is officially rolling out to our first pilots on <strong>Android &amp; iOS.</strong><br>
+      You reported issues &mdash; we already fixed them. <strong>Update goes live within hours.</strong>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="fixes">
+      <div class="fix-box">
+        <div class="fix-label">v1.0.1 Fix</div>
+        <div class="fix-title">Altitude Display</div>
+        <div class="fix-desc">Now using GPS + EGM96. iOS barometer returned incorrect absolute values.</div>
+      </div>
+      <div class="fix-box">
+        <div class="fix-label">v1.0.1 Fix</div>
+        <div class="fix-title">Android Variometer</div>
+        <div class="fix-desc">Added barometer plugin (TYPE_PRESSURE) for accurate climb &amp; descent rate.</div>
+      </div>
+    </div>
+
+    <div class="eta">Beta is open &mdash; Patch rolling out now</div>
+  </div>
+</div>
+
+<div class="hint">1080 &times; 1080px &middot; Instagram Post &middot; Export as PNG</div>
+
+</body>
+</html>

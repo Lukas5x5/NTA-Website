@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Play Store Screenshots</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a1a;
+    font-family: 'Barlow', sans-serif;
+    padding: 40px;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: 'Rajdhani', sans-serif; }
+
+  .info {
+    text-align: center;
+    color: rgba(200,212,240,0.5);
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+
+  .screenshots {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Each screenshot frame: phone aspect ratio for Play Store */
+  .screen-frame {
+    width: 400px;
+    height: 800px;
+    background: linear-gradient(170deg, #0A0E1A 0%, #111827 50%, #0d1225 100%);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(200,212,240,0.06);
+  }
+
+  /* Grid pattern */
+  .screen-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,212,240,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,212,240,0.015) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Top amber line */
+  .screen-frame .line {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FFA500, #ffb732, #FFA500);
+    z-index: 10;
+  }
+
+  .screen-header {
+    position: relative;
+    z-index: 2;
+    padding: 36px 28px 16px;
+    text-align: center;
+  }
+  .screen-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 6px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: rgba(255,165,0,0.12);
+    color: #FFA500;
+    border: 1px solid rgba(255,165,0,0.25);
+    margin-bottom: 12px;
+  }
+  .screen-badge.cyan {
+    background: rgba(0,200,255,0.1);
+    color: #00C8FF;
+    border: 1px solid rgba(0,200,255,0.25);
+  }
+  .screen-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .screen-title .accent { color: #FFA500; }
+  .screen-title .cyan { color: #00C8FF; }
+  .screen-subtitle {
+    font-size: 14px;
+    color: rgba(200,212,240,0.55);
+    line-height: 1.4;
+  }
+
+  /* Phone mockup inside frame */
+  .phone-wrap {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 36px 0;
+    position: relative;
+    z-index: 2;
+  }
+  .phone {
+    width: 260px;
+    height: 520px;
+    background: #1a1a1e;
+    border-radius: 28px;
+    border: 3px solid #2a2a2e;
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      0 16px 48px rgba(0,0,0,0.5),
+      0 0 0 1px rgba(255,255,255,0.03);
+  }
+  .phone .notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 22px;
+    background: #1a1a1e;
+    border-radius: 0 0 14px 14px;
+    z-index: 5;
+  }
+  .phone .phone-screen {
+    position: absolute;
+    inset: 6px;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #0d0d12;
+  }
+  .phone .phone-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Glow effects */
+  .glow-amber {
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(255,165,0,0.08) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .glow-cyan {
+    position: absolute;
+    bottom: 60px; left: -40px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="info">Play Store Screenshots &middot; 400 &times; 800px each &middot; Export individually as PNG</div>
+
+<div class="screenshots">
+
+  <!-- Screenshot 1: ICAO Map -->
+  <div class="screen-frame">
+    <div class="line"></div>
+    <div class="glow-amber"></div>
+    <div class="glow-cyan"></div>
+    <div class="screen-header">
+      <div class="screen-badge">Navigation</div>
+      <div class="screen-title"><span class="accent">ICAO Maps</span> &amp;<br>Airspace Overlay</div>
+      <div class="screen-subtitle">Full ICAO charts with live airspace boundaries, obstacles &amp; restrictions.</div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="phone-screen">
+          <img src="Iphone Kartenansicht.jpeg" alt="ICAO Map">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshot 2: GPS HUD -->
+  <div class="screen-frame">
+    <div class="line"></div>
+    <div class="glow-amber"></div>
+    <div class="glow-cyan"></div>
+    <div class="screen-header">
+      <div class="screen-badge cyan">Flight Mode</div>
+      <div class="screen-title">GPS <span class="cyan">Head-Up Display</span></div>
+      <div class="screen-subtitle">Real-time altitude, speed, climb rate &amp; heading at a glance.</div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="phone-screen">
+          <img src="GPS HUD.jpeg" alt="GPS HUD">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshot 3: Target Navigation -->
+  <div class="screen-frame">
+    <div class="line"></div>
+    <div class="glow-amber"></div>
+    <div class="glow-cyan"></div>
+    <div class="screen-header">
+      <div class="screen-badge">Navigation</div>
+      <div class="screen-title"><span class="accent">Target Navigation</span><br>&amp; Landing Forecast</div>
+      <div class="screen-subtitle">Set waypoints, track distance &amp; predict your landing zone.</div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="phone-screen">
+          <img src="Ziel navigation.jpeg" alt="Target Navigation">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshot 4: Weather -->
+  <div class="screen-frame">
+    <div class="line"></div>
+    <div class="glow-amber"></div>
+    <div class="glow-cyan"></div>
+    <div class="screen-header">
+      <div class="screen-badge cyan">Weather</div>
+      <div class="screen-title">Live <span class="cyan">Weather</span> &amp;<br>Radar Overlay</div>
+      <div class="screen-subtitle">Wind models, precipitation radar &amp; weather briefings for your flight.</div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="phone-screen">
+          <img src="Wettermodell.jpeg" alt="Weather Model">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshot 5: Load Calculator -->
+  <div class="screen-frame">
+    <div class="line"></div>
+    <div class="glow-amber"></div>
+    <div class="glow-cyan"></div>
+    <div class="screen-header">
+      <div class="screen-badge">Tools</div>
+      <div class="screen-title"><span class="accent">Load Calculator</span><br>for Every Flight</div>
+      <div class="screen-subtitle">Calculate lift, weight &amp; fuel for safe and precise balloon operations.</div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="phone-screen">
+          <img src="Load Calculator 1.jpeg" alt="Load Calculator">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshot 6: Team Tracking -->
+  <div class="screen-frame">
+    <div class="line"></div>
+    <div class="glow-amber"></div>
+    <div class="glow-cyan"></div>
+    <div class="screen-header">
+      <div class="screen-badge cyan">Live</div>
+      <div class="screen-title">Live <span class="cyan">Team Tracking</span></div>
+      <div class="screen-subtitle">Share your position with your chase crew in real time.</div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="phone-screen">
+          <img src="Team Tracking.jpeg" alt="Team Tracking">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshot 7: Logbook -->
+  <div class="screen-frame">
+    <div class="line"></div>
+    <div class="glow-amber"></div>
+    <div class="glow-cyan"></div>
+    <div class="screen-header">
+      <div class="screen-badge">Logbook</div>
+      <div class="screen-title">Digital <span class="accent">Flight Logbook</span></div>
+      <div class="screen-subtitle">Automatic logging with GPS tracks, stats &amp; export options.</div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="phone-screen">
+          <img src="Logbuch Übersicht.jpeg" alt="Logbook">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshot 8: Obstacles & Airspace -->
+  <div class="screen-frame">
+    <div class="line"></div>
+    <div class="glow-amber"></div>
+    <div class="glow-cyan"></div>
+    <div class="screen-header">
+      <div class="screen-badge cyan">Safety</div>
+      <div class="screen-title"><span class="cyan">Obstacles</span> &amp;<br>Airspace Alerts</div>
+      <div class="screen-subtitle">Power lines, masts &amp; restricted zones displayed directly on your map.</div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="phone-screen">
+          <img src="Hindernisse.jpeg" alt="Obstacles">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

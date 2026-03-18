@@ -21,10 +21,13 @@
       "Bash(FFMPEG=\"/c/Users/LRAus/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.0.1-full_build/bin/ffmpeg.exe\")",
       "Bash(\"$FFMPEG\" -i \"C:/Users/LRAus/Desktop/weather-briefing-post.webm\" -c:v libx264 -pix_fmt yuv420p -crf 18 -preset slow \"C:/Users/LRAus/Desktop/weather-briefing-post.mp4\")",
       "Read(//c/Users/LRAus/Desktop/_frames/**)",
-      "Bash(npx vercel:*)"
+      "Bash(npx vercel:*)",
+      "Read(//c/Users/LRAus/Downloads/**)",
+      "WebFetch(domain:play.google.com)"
     ],
     "additionalDirectories": [
-      "C:\\Users\\LRAus\\Desktop"
+      "C:\\Users\\LRAus\\Desktop",
+      "C:\\Users\\LRAus\\Downloads"
     ]
   }
 }

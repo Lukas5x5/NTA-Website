@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NTA SkyNav – Instagram Beta Post</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0A0E1A; --navy-light: #111827; --amber: #FFA500;
+    --amber-dim: rgba(255,165,0,0.15); --cyan: #00C8FF;
+    --cyan-dim: rgba(0,200,255,0.12); --text: #C8D4F0;
+    --text-dim: rgba(200,212,240,0.75); --text-muted: rgba(200,212,240,0.55);
+    --border: rgba(200,212,240,0.08); --green: #22c55e;
+  }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3,h4 { font-family: 'Rajdhani', sans-serif; font-weight: 700; color: #fff; line-height: 1.1; }
+
+  .post {
+    width: 1080px;
+    height: 1080px;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+  }
+
+  /* Subtiles Grid-Pattern wie auf der Webseite */
+  .post::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,212,240,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,212,240,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Ambient Glow */
+  .glow-tl {
+    position: absolute;
+    top: -180px; left: -180px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,165,0,0.08) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .glow-br {
+    position: absolute;
+    bottom: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* Amber accent lines */
+  .line-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--amber), #ffb732, var(--amber));
+    z-index: 10;
+  }
+  .line-bot {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--amber), #ffb732, var(--amber));
+    z-index: 10;
+  }
+
+  .content {
+    position: relative;
+    z-index: 3;
+    padding: 64px 56px 36px;
+    height: auto;
+    display: flex;
+    gap: 32px;
+  }
+  .col-left {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+  .col-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  /* Logo watermark background */
+  .logo-bg {
+    position: absolute;
+    top: 160px;
+    left: 39.5%;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .logo-bg img {
+    width: 450px;
+    height: 450px;
+    object-fit: contain;
+    opacity: 0.15;
+  }
+
+  /* Beta Badge */
+  .badge {
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: var(--amber-dim);
+    color: var(--amber);
+    border: 1px solid rgba(255,165,0,0.3);
+    margin-bottom: 10px;
+    align-self: flex-start;
+  }
+
+  /* Headline */
+  .headline {
+    font-size: 66px;
+    line-height: 1.05;
+    margin-bottom: 10px;
+    max-width: 500px;
+  }
+  .headline .accent { color: var(--amber); }
+
+  /* Body text */
+  .body-text {
+    font-size: 23px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    max-width: 520px;
+    margin-bottom: 4px;
+  }
+  .body-highlight {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* Divider */
+  .divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--amber), transparent);
+    margin: 8px 0;
+  }
+
+  /* Launch line */
+  .launch {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .url {
+    font-family: 'Barlow', sans-serif;
+    font-size: 18px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* Tablet Mockup */
+  .tablet-wrap {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%) perspective(1200px) rotateY(-8deg) rotateX(2deg);
+    z-index: 2;
+    width: 960px;
+    aspect-ratio: 16 / 10.5;
+  }
+  .tablet {
+    width: 100%;
+    height: 100%;
+    background: #1a1a1e;
+    border-radius: 24px;
+    border: 3px solid #2a2a2e;
+    overflow: hidden;
+    box-shadow:
+      0 20px 60px rgba(0,0,0,0.5),
+      0 0 0 1px rgba(255,255,255,0.03),
+      inset 0 0 0 1px rgba(255,255,255,0.02);
+    position: relative;
+  }
+  .tablet .screen {
+    position: absolute;
+    inset: 8px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #0d0d12;
+  }
+  .tablet .screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Placeholder wenn kein Bild */
+  .tablet .screen .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background:
+      linear-gradient(135deg, rgba(255,165,0,0.03) 0%, transparent 50%),
+      linear-gradient(225deg, rgba(0,200,255,0.03) 0%, transparent 50%);
+  }
+
+  /* Camera dot auf Tablet */
+  .tablet .cam {
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    transform: translateY(-50%);
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #222;
+    border: 1px solid #333;
+    z-index: 5;
+  }
+
+  /* Kleiner Reflex auf Tablet */
+  .tablet::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 50%; bottom: 60%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+    border-radius: 24px 0 0 0;
+    pointer-events: none;
+  }
+
+  /* CTA / Notification */
+  .cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: var(--amber-dim);
+    border: 1px solid rgba(255,165,0,0.3);
+    border-radius: 12px;
+    align-self: flex-start;
+  }
+  .cta-icon {
+    font-size: 26px;
+    line-height: 1;
+  }
+  .cta-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--amber);
+    line-height: 1.2;
+  }
+  .cta-arrow {
+    font-size: 32px;
+    color: var(--amber);
+    text-align: center;
+    margin-top: 6px;
+    align-self: flex-start;
+    padding-left: 24px;
+    line-height: 1;
+    animation: bounce 1.5s ease infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* Instagram-Hinweis unter dem Post */
+  .hint {
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    color: rgba(200,212,240,0.4);
+    max-width: 1080px;
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="post">
+    <div class="line-top"></div>
+    <div class="line-bot"></div>
+    <div class="glow-tl"></div>
+    <div class="glow-br"></div>
+
+    <div class="logo-bg">
+      <img src="nta-logo-b.png" alt="">
+    </div>
+
+    <div class="content">
+      <div class="col-left">
+        <div style="font-family: 'Rajdhani', sans-serif; font-size: 72px; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 8px;">NTA <span style="color: var(--amber);">SkyNav</span></div>
+        <div class="badge">Beta Launch</div>
+        <h1 class="headline">Tomorrow is<br><span class="accent">the day.</span></h1>
+      </div>
+
+      <div class="col-right">
+        <div class="body-text">
+          NTA SkyNav is entering beta. <span class="body-highlight">50 selected balloon pilots</span> will be the first to test what we've built.
+        </div>
+        <div class="body-text" style="font-size: 16px; margin-bottom: 0;">
+          Your feedback will shape the app for the official launch. <span class="body-highlight">Every insight counts.</span>
+        </div>
+        <div class="divider"></div>
+        <div class="launch">Official launch coming soon.</div>
+        <div class="cta">
+          <div class="cta-icon">&#128276;</div>
+          <div class="cta-title">Get notified at launch</div>
+        </div>
+        <div class="cta-arrow">&#8595;</div>
+      </div>
+    </div>
+
+    <!-- Android Tablet im Querformat -->
+    <div class="tablet-wrap">
+      <div class="tablet">
+        <div class="cam"></div>
+        <div class="screen">
+          <img src="beta-screenshot.jpg" alt="NTA SkyNav Beta">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hint">1080 &times; 1080px &middot; Instagram Post &middot; Replace placeholder with: &lt;img src="your-image.jpg"&gt;</div>
+</div>
+
+</body>
+</html>
