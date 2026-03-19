@@ -412,6 +412,30 @@ const translations = {
   'updates.removed': { de: 'Entfernt', en: 'Removed' },
   'updates.prefixes': { de: 'Fixes (Pre-Launch)', en: 'Fixes (Pre-Launch)' },
 
+  'updates.improved': { de: 'Verbessert', en: 'Improved' },
+
+  // v1.0.5
+  'updates.105date': { de: '19. März 2026', en: 'March 19, 2026' },
+  'updates.105title': { de: 'NTA Precision GPS™, Geländehöhe & Stabilität', en: 'NTA Precision GPS™, Terrain Elevation & Stability' },
+  'updates.105desc': { de: 'Neues GPS-System für flüssige 60fps Cursor-Bewegung, automatische Geländehöhen weltweit, Debug Console und GPS Simulator für Admins, sowie zahlreiche Verbesserungen und Bugfixes.', en: 'New GPS system for smooth 60fps cursor movement, automatic worldwide terrain elevation, Debug Console and GPS Simulator for admins, plus numerous improvements and bugfixes.' },
+  'updates.105f1': { de: '<strong>NTA Precision GPS™</strong>: Neues GPS-System für flüssige 60fps Cursor-Bewegung mit Kalman-Filter, Sprung-Erkennung, Dead Reckoning und Echtzeit-Extrapolation', en: '<strong>NTA Precision GPS™</strong>: New GPS system for smooth 60fps cursor movement with Kalman filter, jump detection, dead reckoning and real-time extrapolation' },
+  'updates.105f2': { de: '<strong>Geländehöhe weltweit</strong>: Automatischer Download von SRTM-Höhendaten (30m Auflösung) — keine manuelle Konfiguration nötig, offline verfügbar', en: '<strong>Worldwide Terrain Elevation</strong>: Automatic SRTM elevation data download (30m resolution) — no manual configuration needed, available offline' },
+  'updates.105f3': { de: '<strong>Debug Console</strong> (Admin): Live-Fehler-Overlay mit Filter und GPS-Log', en: '<strong>Debug Console</strong> (Admin): Live error overlay with filter and GPS log' },
+  'updates.105f4': { de: '<strong>GPS Simulator</strong> (Admin): Simulierte GPS-Bewegung zum Testen im Browser', en: '<strong>GPS Simulator</strong> (Admin): Simulated GPS movement for browser testing' },
+  'updates.105i1': { de: '<strong>GPS-Cursor</strong>: Flüssige Bewegung bei allen Geschwindigkeiten, kein Springen bei Stillstand, Heading-Linie reagiert sofort', en: '<strong>GPS Cursor</strong>: Smooth movement at all speeds, no jumping when stationary, heading line reacts instantly' },
+  'updates.105i2': { de: '<strong>Tap-to-Measure</strong>: Linie folgt dem Cursor flüssig, Label skaliert beim Zoomen', en: '<strong>Tap-to-Measure</strong>: Line follows cursor smoothly, label scales when zooming' },
+  'updates.105i3': { de: '<strong>Weather-PDF</strong>: Schnelleres Speichern (nur lokal), PDF-Löschen pro Fahrt, Dateiname mit Ortsnamen', en: '<strong>Weather PDF</strong>: Faster saving (local only), per-flight PDF deletion, filename includes location name' },
+  'updates.105i4': { de: '<strong>Windprofil</strong>: Übersichtlicheres Layout — Position und Kartenauswahl prominent, Modell+Zeit+Laden kompakt', en: '<strong>Wind Profile</strong>: Cleaner layout — position and map selection prominent, model+time+load compact' },
+  'updates.105i5': { de: '<strong>Landeprognose</strong>: Geländedaten laden automatisch, keine manuelle Tile-Verwaltung mehr', en: '<strong>Landing Prediction</strong>: Terrain data loads automatically, no manual tile management needed' },
+  'updates.105i6': { de: '<strong>Radar</strong>: Optimiert für viele Nutzer (CDN-Cache, 15s Poll, Error-Backoff)', en: '<strong>Radar</strong>: Optimized for many users (CDN cache, 15s poll, error backoff)' },
+  'updates.105i7': { de: '<strong>Offline</strong>: Bessere Fehlermeldungen, Fetch-URLs in Debug Console', en: '<strong>Offline</strong>: Better error messages, fetch URLs in Debug Console' },
+  'updates.105x1': { de: 'GPS Restart-Hänger auf iOS, Button-Spam-Schutz', en: 'GPS restart hang on iOS, button spam protection' },
+  'updates.105x2': { de: 'Hamburger-Menü Verschiebung bei GPS-Aktivierung', en: 'Hamburger menu shift on GPS activation' },
+  'updates.105x3': { de: 'NavigationPanel React Error #185', en: 'NavigationPanel React Error #185' },
+  'updates.105x4': { de: 'Track-Dauer nach App-Idle', en: 'Track duration after app idle' },
+  'updates.105x5': { de: 'Gespeicherte Tracks: Koordinaten werden zu Ortsnamen aufgelöst', en: 'Saved tracks: coordinates resolved to place names' },
+  'updates.105x6': { de: 'Radar-Einheiten (ft/kt/fpm) bei Feet-Einstellung', en: 'Radar units (ft/kt/fpm) with feet setting' },
+
   // v1.0.4
   'updates.104date': { de: '18. März 2026', en: 'March 18, 2026' },
   'updates.104title': { de: 'Großes Update – Tap-to-Measure, Offline-Karten, Tracks & Stabilität', en: 'Major Update – Tap-to-Measure, Offline Maps, Tracks & Stability' },

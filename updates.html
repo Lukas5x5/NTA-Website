@@ -219,6 +219,45 @@
   <!-- ─── Updates Feed ─── -->
   <section class="updates-feed">
 
+    <!-- ═══ v1.0.5 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.105date">19. März 2026</div>
+      <div class="update-version feature">v1.0.5 – Feature Update</div>
+      <h2 class="update-title" data-i18n="updates.105title">NTA Precision GPS™, Geländehöhe & Stabilität</h2>
+      <div class="update-body">
+        <p data-i18n="updates.105desc">Neues GPS-System für flüssige 60fps Cursor-Bewegung, automatische Geländehöhen weltweit, Debug Console und GPS Simulator für Admins, sowie zahlreiche Verbesserungen und Bugfixes.</p>
+
+        <div class="change-section-label" data-i18n="updates.added">Hinzugefügt</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.105f1"><strong>NTA Precision GPS™</strong>: Neues GPS-System für flüssige 60fps Cursor-Bewegung mit Kalman-Filter, Sprung-Erkennung, Dead Reckoning und Echtzeit-Extrapolation</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.105f2"><strong>Geländehöhe weltweit</strong>: Automatischer Download von SRTM-Höhendaten (30m Auflösung) — keine manuelle Konfiguration nötig, offline verfügbar</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.105f3"><strong>Debug Console</strong> (Admin): Live-Fehler-Overlay mit Filter und GPS-Log</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.105f4"><strong>GPS Simulator</strong> (Admin): Simulierte GPS-Bewegung zum Testen im Browser</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.improved">Verbessert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.105i1"><strong>GPS-Cursor</strong>: Flüssige Bewegung bei allen Geschwindigkeiten, kein Springen bei Stillstand, Heading-Linie reagiert sofort</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.105i2"><strong>Tap-to-Measure</strong>: Linie folgt dem Cursor flüssig, Label skaliert beim Zoomen</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.105i3"><strong>Weather-PDF</strong>: Schnelleres Speichern (nur lokal), PDF-Löschen pro Fahrt, Dateiname mit Ortsnamen</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.105i4"><strong>Windprofil</strong>: Übersichtlicheres Layout — Position und Kartenauswahl prominent, Modell+Zeit+Laden kompakt</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.105i5"><strong>Landeprognose</strong>: Geländedaten laden automatisch, keine manuelle Tile-Verwaltung mehr</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.105i6"><strong>Radar</strong>: Optimiert für viele Nutzer (CDN-Cache, 15s Poll, Error-Backoff)</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.105i7"><strong>Offline</strong>: Bessere Fehlermeldungen, Fetch-URLs in Debug Console</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.105x1">GPS Restart-Hänger auf iOS, Button-Spam-Schutz</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.105x2">Hamburger-Menü Verschiebung bei GPS-Aktivierung</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.105x3">NavigationPanel React Error #185</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.105x4">Track-Dauer nach App-Idle</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.105x5">Gespeicherte Tracks: Koordinaten werden zu Ortsnamen aufgelöst</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.105x6">Radar-Einheiten (ft/kt/fpm) bei Feet-Einstellung</span></li>
+        </ul>
+      </div>
+    </div>
+
     <!-- ═══ v1.0.4 ═══ -->
     <div class="update-card reveal">
       <div class="update-date" data-i18n="updates.104date">18. März 2026</div>
