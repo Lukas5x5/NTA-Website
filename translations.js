@@ -414,6 +414,20 @@ const translations = {
 
   'updates.improved': { de: 'Verbessert', en: 'Improved' },
 
+  // v1.0.6
+  'updates.106date': { de: '20. März 2026', en: 'March 20, 2026' },
+  'updates.106title': { de: 'Höhenanzeige nach Luftfahrt-Standard & Bugfixes', en: 'Aviation-Standard Altitude Display & Bugfixes' },
+  'updates.106desc': { de: 'Die Höhenanzeige nutzt jetzt den Barometer nach Luftfahrt-Standard (ISA-Druckhöhe + QNH-Korrektur), unabhängig von GPS-Genauigkeit. Dazu App-Start-Performance und mehrere Bugfixes.', en: 'Altitude display now uses the barometer per aviation standard (ISA pressure altitude + QNH correction), independent of GPS accuracy. Plus app start performance and several bugfixes.' },
+  'updates.106i1': { de: '<strong>Höhenanzeige (Luftfahrt-Standard)</strong>: Barometer liefert ISA-Druckhöhe (1013.25 hPa), QNH-Korrektur → MSL — unabhängig von GPS-Genauigkeit', en: '<strong>Altitude Display (Aviation Standard)</strong>: Barometer provides ISA pressure altitude (1013.25 hPa), QNH correction → MSL — independent of GPS accuracy' },
+  'updates.106i2': { de: '<strong>Barometer-Plugins</strong>: iOS + Android liefern jetzt absolute ISA-Druckhöhe statt GPS-basierter Drift', en: '<strong>Barometer Plugins</strong>: iOS + Android now deliver absolute ISA pressure altitude instead of GPS-based drift' },
+  'updates.106i3': { de: '<strong>QNH-Bestätigung</strong>: Popup beim REC-Start zeigt QNH zur Bestätigung (automatisch von Open-Meteo, aus Briefing oder manuell)', en: '<strong>QNH Confirmation</strong>: Popup at REC start shows QNH for confirmation (automatic from Open-Meteo, from briefing or manual)' },
+  'updates.106x1': { de: 'App-Start bei schlechter Internetverbindung: 3s Timeout statt 10s+ hängen (gecachter Login-Status)', en: 'App start on poor internet: 3s timeout instead of 10s+ hang (cached login status)' },
+  'updates.106x2': { de: 'HGT-Löschen funktioniert auf nativem Build (confirm/alert durch Modal ersetzt)', en: 'HGT deletion works on native build (confirm/alert replaced with modal)' },
+  'updates.106x3': { de: 'Hamburger-Menü auf Android abgeschnitten (doppeltes Safe-Area-Padding entfernt)', en: 'Hamburger menu cut off on Android (duplicate safe area padding removed)' },
+  'updates.106x4': { de: 'AGL zeigt 0 auf iOS/Android obwohl ALT und GND korrekt (Baro-Höhe statt GPS für AGL-Berechnung)', en: 'AGL shows 0 on iOS/Android despite correct ALT and GND (baro altitude used instead of GPS for AGL calculation)' },
+  'updates.106x5': { de: 'ALT-Sprünge bei GPS-Simulation (echtes GPS lief parallel, doppelte Geoid-Korrektur)', en: 'ALT jumps during GPS simulation (real GPS running in parallel, double geoid correction)' },
+  'updates.106x6': { de: 'Doppelte Geoid-Korrektur auf Höhenwerte (mobileGps speicherte MSL statt WGS84)', en: 'Double geoid correction on altitude values (mobileGps stored MSL instead of WGS84)' },
+
   // v1.0.5
   'updates.105date': { de: '19. März 2026', en: 'March 19, 2026' },
   'updates.105title': { de: 'NTA Precision GPS™, Geländehöhe & Stabilität', en: 'NTA Precision GPS™, Terrain Elevation & Stability' },
