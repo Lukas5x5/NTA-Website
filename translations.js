@@ -414,6 +414,32 @@ const translations = {
 
   'updates.improved': { de: 'Verbessert', en: 'Improved' },
 
+  // v1.0.7
+  'updates.107date': { de: '20. März 2026', en: 'March 20, 2026' },
+  'updates.107title': { de: 'Kompass-Heading, Farbiger Track & Fahrt fortsetzen', en: 'Compass Heading, Colored Track & Resume Flight' },
+  'updates.107desc': { de: 'Echtes Kompass-Heading per Magnetometer, farbcodierte Tracks nach Speed/Höhe, Aufzeichnung nach Absturz fortsetzen, GPS-Engine weiter verfeinert und zahlreiche Bugfixes.', en: 'Real compass heading via magnetometer, color-coded tracks by speed/altitude, resume recording after crash, GPS engine further refined and numerous bugfixes.' },
+  'updates.107f1': { de: '<strong>Kompass-Heading</strong>: Magnetometer für sofortiges Heading — Kompass unter 0.8 m/s, GPS/Kompass-Mix bis 2.0, reines GPS darüber', en: '<strong>Compass Heading</strong>: Magnetometer for instant heading — compass below 0.8 m/s, GPS/compass mix up to 2.0, pure GPS above' },
+  'updates.107f2': { de: '<strong>Farbiger Track</strong>: Track farblich nach Speed oder Höhe mit sanftem Gradient, Farbskala-Legende am Bildschirmrand (ein/ausschaltbar)', en: '<strong>Colored Track</strong>: Track colored by speed or altitude with smooth gradient, color scale legend on screen edge (toggleable)' },
+  'updates.107f3': { de: '<strong>Fahrt fortsetzen</strong>: Nach App-Neustart oder Absturz kann die Aufzeichnung fortgesetzt werden — Track, Wind, Ziele, Gas und Marker bleiben erhalten', en: '<strong>Resume Flight</strong>: After app restart or crash, recording can be resumed — track, wind, targets, gas and markers preserved' },
+  'updates.107i1': { de: '<strong>GPS-Engine</strong>: Extrapolation mit stabilem Heading, geglättete Distanz, Output-Smoothing', en: '<strong>GPS Engine</strong>: Extrapolation with stable heading, smoothed distance, output smoothing' },
+  'updates.107i2': { de: '<strong>Kompass/GPS Fusion</strong>: 60fps Magnet-System, Crossover bei 2.5 km/h, Heading Rate-Limit (max 30°/s)', en: '<strong>Compass/GPS Fusion</strong>: 60fps magnet system, crossover at 2.5 km/h, heading rate limit (max 30°/s)' },
+  'updates.107i3': { de: '<strong>Heading-Linie</strong>: EMA-geglättete Drehbewegung (kein Zittern)', en: '<strong>Heading Line</strong>: EMA-smoothed rotation (no jitter)' },
+  'updates.107i4': { de: '<strong>Gas-Tracker</strong>: Gewichtsbereinigter Verbrauch, automatischer Flaschenwechsel wenn leer, Long-Press zum Leeren', en: '<strong>Gas Tracker</strong>: Weight-adjusted consumption, automatic cylinder switch when empty, long-press to empty' },
+  'updates.107i5': { de: '<strong>Windprofil</strong>: Panel schmaler, Höhenbalken ein/ausschaltbar, Auto-Scroll zur aktuellen Höhe', en: '<strong>Wind Profile</strong>: Panel narrower, altitude bar toggleable, auto-scroll to current altitude' },
+  'updates.107i6': { de: '<strong>GPS-Simulation</strong>: Korreliertes Rauschen statt Random-Springen, 5 km/h Default', en: '<strong>GPS Simulation</strong>: Correlated noise instead of random jumping, 5 km/h default' },
+  'updates.107x1': { de: 'Navigations-Linie zum Ziel: 60fps flüssig mit EMA-Glättung', en: 'Navigation line to target: 60fps smooth with EMA smoothing' },
+  'updates.107x2': { de: 'Kompass nutzte Gyroscope statt Magnetometer (native DeviceOrientation API)', en: 'Compass used gyroscope instead of magnetometer (native DeviceOrientation API)' },
+  'updates.107x3': { de: 'Kompass-Heading 60fps im Render-Loop (war 1 Hz)', en: 'Compass heading 60fps in render loop (was 1 Hz)' },
+  'updates.107x4': { de: 'Kompass-Permission im nativen Build (WKWebView)', en: 'Compass permission in native build (WKWebView)' },
+  'updates.107x5': { de: 'Cursor + Heading-Linie nutzten Buffer-Heading statt Kompass-Fusion', en: 'Cursor + heading line used buffer heading instead of compass fusion' },
+  'updates.107x6': { de: 'Stillstand bei schlechter GPS-Accuracy (>15 m) erzwungen', en: 'Standstill enforced on poor GPS accuracy (>15 m)' },
+  'updates.107x7': { de: 'TrackLine-Lücke nach Background→Foreground', en: 'TrackLine gap after background→foreground' },
+  'updates.107x8': { de: 'GPS wird erst nach QNH-Bestätigung aktiviert', en: 'GPS only activated after QNH confirmation' },
+  'updates.107x9': { de: 'QNH-Nummernfeld öffnet erst bei Klick (kein autoFocus)', en: 'QNH number field opens only on click (no autoFocus)' },
+  'updates.107x10': { de: 'QNH-Status unterscheidet GPS deaktiviert / Offline / Fehler', en: 'QNH status distinguishes GPS disabled / offline / error' },
+  'updates.107x11': { de: 'Luftraum blockierte Ziel-Erstellung per Long-Press', en: 'Airspace blocked target creation via long-press' },
+  'updates.107x12': { de: 'Gasflaschen werden bei neuem REC-Start zurückgesetzt', en: 'Gas cylinders reset on new REC start' },
+
   // v1.0.6
   'updates.106date': { de: '20. März 2026', en: 'March 20, 2026' },
   'updates.106title': { de: 'Höhenanzeige nach Luftfahrt-Standard & Bugfixes', en: 'Aviation-Standard Altitude Display & Bugfixes' },

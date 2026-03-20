@@ -219,6 +219,49 @@
   <!-- ─── Updates Feed ─── -->
   <section class="updates-feed">
 
+    <!-- ═══ v1.0.7 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.107date">20. März 2026</div>
+      <div class="update-version feature">v1.0.7 – Feature Update</div>
+      <h2 class="update-title" data-i18n="updates.107title">Kompass-Heading, Farbiger Track & Fahrt fortsetzen</h2>
+      <div class="update-body">
+        <p data-i18n="updates.107desc">Echtes Kompass-Heading per Magnetometer, farbcodierte Tracks nach Speed/Höhe, Aufzeichnung nach Absturz fortsetzen, GPS-Engine weiter verfeinert und zahlreiche Bugfixes.</p>
+
+        <div class="change-section-label" data-i18n="updates.added">Hinzugefügt</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.107f1"><strong>Kompass-Heading</strong>: Magnetometer für sofortiges Heading — Kompass unter 0.8 m/s, GPS/Kompass-Mix bis 2.0, reines GPS darüber</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.107f2"><strong>Farbiger Track</strong>: Track farblich nach Speed oder Höhe mit sanftem Gradient, Farbskala-Legende am Bildschirmrand (ein/ausschaltbar)</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.107f3"><strong>Fahrt fortsetzen</strong>: Nach App-Neustart oder Absturz kann die Aufzeichnung fortgesetzt werden — Track, Wind, Ziele, Gas und Marker bleiben erhalten</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.improved">Verbessert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.107i1"><strong>GPS-Engine</strong>: Extrapolation mit stabilem Heading, geglättete Distanz, Output-Smoothing</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.107i2"><strong>Kompass/GPS Fusion</strong>: 60fps Magnet-System, Crossover bei 2.5 km/h, Heading Rate-Limit (max 30°/s)</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.107i3"><strong>Heading-Linie</strong>: EMA-geglättete Drehbewegung (kein Zittern)</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.107i4"><strong>Gas-Tracker</strong>: Gewichtsbereinigter Verbrauch, automatischer Flaschenwechsel wenn leer, Long-Press zum Leeren</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.107i5"><strong>Windprofil</strong>: Panel schmaler, Höhenbalken ein/ausschaltbar, Auto-Scroll zur aktuellen Höhe</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.107i6"><strong>GPS-Simulation</strong>: Korreliertes Rauschen statt Random-Springen, 5 km/h Default</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x1">Navigations-Linie zum Ziel: 60fps flüssig mit EMA-Glättung</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x2">Kompass nutzte Gyroscope statt Magnetometer (native DeviceOrientation API)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x3">Kompass-Heading 60fps im Render-Loop (war 1 Hz)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x4">Kompass-Permission im nativen Build (WKWebView)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x5">Cursor + Heading-Linie nutzten Buffer-Heading statt Kompass-Fusion</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x6">Stillstand bei schlechter GPS-Accuracy (&gt;15 m) erzwungen</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x7">TrackLine-Lücke nach Background→Foreground</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x8">GPS wird erst nach QNH-Bestätigung aktiviert</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x9">QNH-Nummernfeld öffnet erst bei Klick (kein autoFocus)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x10">QNH-Status unterscheidet GPS deaktiviert / Offline / Fehler</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x11">Luftraum blockierte Ziel-Erstellung per Long-Press</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.107x12">Gasflaschen werden bei neuem REC-Start zurückgesetzt</span></li>
+        </ul>
+      </div>
+    </div>
+
     <!-- ═══ v1.0.6 ═══ -->
     <div class="update-card reveal">
       <div class="update-date" data-i18n="updates.106date">20. März 2026</div>
