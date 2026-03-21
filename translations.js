@@ -414,6 +414,19 @@ const translations = {
 
   'updates.improved': { de: 'Verbessert', en: 'Improved' },
 
+  // v1.0.8
+  'updates.108date': { de: '21. März 2026', en: 'March 21, 2026' },
+  'updates.108title': { de: 'Akkuverbrauch reduziert, Windschicht-Höhe & Bugfixes', en: 'Battery Usage Reduced, Wind Layer Altitude & Bugfixes' },
+  'updates.108desc': { de: 'Deutlich weniger Akkuverbrauch durch optimierte Sensor-Polling-Raten, verbesserte Windschicht-Höhenberechnung mit QNH-Korrektur und mehrere Bugfixes.', en: 'Significantly reduced battery usage through optimized sensor polling rates, improved wind layer altitude calculation with QNH correction and several bugfixes.' },
+  'updates.108i1': { de: '<strong>Windschicht-Höhe</strong>: Nutzt jetzt getMslAltitude mit QNH-Korrektur (gleiche Berechnung wie NavPanel ALT)', en: '<strong>Wind Layer Altitude</strong>: Now uses getMslAltitude with QNH correction (same calculation as NavPanel ALT)' },
+  'updates.108i2': { de: '<strong>Gemessene Winde</strong>: Werden bei neuem REC-Start gelöscht (importierte bleiben)', en: '<strong>Measured Winds</strong>: Cleared on new REC start (imported ones remain)' },
+  'updates.108x1': { de: '<strong>Akkuverbrauch drastisch reduziert</strong>: Kompass + Heading 30fps bei Stillstand, Kompass-Listener 30 Hz, StatusBar-Clock optimiert, MapView Polling→Events, AircraftLayer nur bei Zoom > 7, Proximity-Checks 5 s statt 2–3 s', en: '<strong>Battery usage drastically reduced</strong>: Compass + heading 30fps when stationary, compass listener 30 Hz, StatusBar clock optimized, MapView polling→events, AircraftLayer only at zoom > 7, proximity checks 5s instead of 2–3s' },
+  'updates.108x2': { de: 'Barometer-Warnung kommt nur noch einmal (nicht bei jedem GPS-Fix)', en: 'Barometer warning only shows once (not on every GPS fix)' },
+  'updates.108x3': { de: 'Kompass auf Android: beide Events registriert (deviceorientationabsolute + deviceorientation Fallback)', en: 'Compass on Android: both events registered (deviceorientationabsolute + deviceorientation fallback)' },
+  'updates.108x4': { de: 'QNH aus Wettersheet wird im QNH-Popup übernommen und gelb hervorgehoben', en: 'QNH from weather sheet is applied in QNH popup and highlighted in yellow' },
+  'updates.108x5': { de: 'GPS-Accuracy >15 m erzwingt Stillstand (kein Cursor-Springen drinnen)', en: 'GPS accuracy >15m enforces standstill (no cursor jumping indoors)' },
+  'updates.108x6': { de: 'Background→Foreground: fehlende TrackLine-Punkte werden nachgefüllt', en: 'Background→foreground: missing TrackLine points are backfilled' },
+
   // v1.0.7
   'updates.107date': { de: '20. März 2026', en: 'March 20, 2026' },
   'updates.107title': { de: 'Kompass-Heading, Farbiger Track & Fahrt fortsetzen', en: 'Compass Heading, Colored Track & Resume Flight' },

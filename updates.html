@@ -219,6 +219,32 @@
   <!-- ─── Updates Feed ─── -->
   <section class="updates-feed">
 
+    <!-- ═══ v1.0.8 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.108date">21. März 2026</div>
+      <div class="update-version patch">v1.0.8 – Patch</div>
+      <h2 class="update-title" data-i18n="updates.108title">Akkuverbrauch reduziert, Windschicht-Höhe & Bugfixes</h2>
+      <div class="update-body">
+        <p data-i18n="updates.108desc">Deutlich weniger Akkuverbrauch durch optimierte Sensor-Polling-Raten, verbesserte Windschicht-Höhenberechnung mit QNH-Korrektur und mehrere Bugfixes.</p>
+
+        <div class="change-section-label" data-i18n="updates.improved">Verbessert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.108i1"><strong>Windschicht-Höhe</strong>: Nutzt jetzt getMslAltitude mit QNH-Korrektur (gleiche Berechnung wie NavPanel ALT)</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.108i2"><strong>Gemessene Winde</strong>: Werden bei neuem REC-Start gelöscht (importierte bleiben)</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.108x1"><strong>Akkuverbrauch drastisch reduziert</strong>: Kompass + Heading 30fps bei Stillstand, Kompass-Listener 30 Hz, StatusBar-Clock optimiert, MapView Polling→Events, AircraftLayer nur bei Zoom &gt; 7, Proximity-Checks 5 s statt 2–3 s</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.108x2">Barometer-Warnung kommt nur noch einmal (nicht bei jedem GPS-Fix)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.108x3">Kompass auf Android: beide Events registriert (deviceorientationabsolute + deviceorientation Fallback)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.108x4">QNH aus Wettersheet wird im QNH-Popup übernommen und gelb hervorgehoben</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.108x5">GPS-Accuracy &gt;15 m erzwingt Stillstand (kein Cursor-Springen drinnen)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.108x6">Background→Foreground: fehlende TrackLine-Punkte werden nachgefüllt</span></li>
+        </ul>
+      </div>
+    </div>
+
     <!-- ═══ v1.0.7 ═══ -->
     <div class="update-card reveal">
       <div class="update-date" data-i18n="updates.107date">20. März 2026</div>
