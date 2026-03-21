@@ -152,6 +152,10 @@
       background: rgba(239,68,68,0.12);
       color: var(--red);
     }
+    .change-tag.cleanup {
+      background: rgba(168,85,247,0.12);
+      color: #a855f7;
+    }
 
     .update-divider {
       height: 1px;
@@ -218,6 +222,66 @@
 
   <!-- ─── Updates Feed ─── -->
   <section class="updates-feed">
+
+    <!-- ═══ v1.0.9 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.109date">21. März 2026</div>
+      <div class="update-version feature">v1.0.9 – Feature Update</div>
+      <h2 class="update-title" data-i18n="updates.109title">Light-Mode, Crew-Slots, Pinch-to-Zoom & massive Bugfixes</h2>
+      <div class="update-body">
+        <p data-i18n="updates.109desc">Komplettes Outdoor Light-Mode Theming für alle Panels, neues Crew-Slot-System, Pinch-to-Zoom für Panels, Session-Management komplett überarbeitet und zahlreiche Bugfixes.</p>
+
+        <div class="change-section-label" data-i18n="updates.added">Hinzugefügt</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.109f1"><strong>Crew-Slot-Limit System</strong>: Piloten bringen Crew-Slots mit ins Team, Tracker-Verfolger werden gegen Slots geprüft, RevenueCat Entitlement</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.109f2"><strong>Pinch-to-Zoom</strong> für alle Panels: FlightWindsPanel, NavigationPanel, Landeprognose und Stopuhr (0.6x–1.5x, wird gespeichert)</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.109f3"><strong>Fahrt speichern</strong>: IndexedDB-Fehler zeigt jetzt Error-Feedback statt stillem Datenverlust</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.changed">Geändert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.109c1"><strong>Light-Mode Header</strong>: Hamburger-Menü, alle Popups/Modals nutzen jetzt Outdoor-Theme Tokens</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.109c2"><strong>Light-Mode Fahrten</strong>: Fahrten-Menü, Detail, Karten, Delete-Dialog, PDF-Viewer komplett auf Outdoor-Theme</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.109c3"><strong>Light-Mode Briefing</strong>: Ziel-Panel, Header, Ziel-Liste, Inputs komplett auf Outdoor-Theme</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.109c4"><strong>Light-Mode Load Calculator</strong>: Panel, Dialoge, Calc-View, Profil-Editor und alle Sub-Komponenten</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.109c5"><strong>Light-Mode StatusBar</strong>: Chips, Footer-Bar, GPS-Button, Toggles, Logo-Hintergrund</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.109c6"><strong>Light-Mode Wind &amp; Navigation</strong>: WindPanel, NavPanel, Landeprognose, Stopuhr, GasBottleBar</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.improved">Verbessert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.109i1"><strong>WindPanel kompakter</strong>: 270px breit, engere Zeilen, kleinere Schrift, vereinfachter Import</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.109i2"><strong>NavPanel Labels</strong> fetter + dunkler im Light-Mode, Feldfarben automatisch invertiert</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.109i3"><strong>Karten-Zittern bei GPS-Start behoben</strong>: flyTo und Follow-Loop liefen gleichzeitig</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x1"><strong>Bug Report hängt bei „Senden…"</strong>: getSession() ohne Timeout — neuer getSessionSafe() Wrapper mit Token-Refresh</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x2"><strong>Admin Panel lädt nicht</strong>: Fehler wurden verschluckt — jetzt Error-State mit Retry-Button</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x3"><strong>Sprechfunk hängt</strong>: PTT Token-Request nutzt getSessionSafe() mit Timeout</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x4"><strong>Supabase nach Hintergrund</strong>: Proaktiver Token-Refresh bei visibilitychange</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x5"><strong>Settings bei App-Schließen verloren</strong>: IndexedDB Write war debounced — wird jetzt bei pagehide sofort geflusht</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x6"><strong>Settings nach Neuinstallation weg</strong>: syncOnLogin() wartete nicht auf IndexedDB Hydration</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x7"><strong>Fahrten-Sync silent failure</strong>: Offline-Queue synkte ohne Auth-Check</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x8"><strong>iPhone Kompass-Popup</strong> bei jedem GPS-Start: Permission wird auf nativem Build übersprungen</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x9"><strong>QNH-Popup ohne Barometer</strong>: Wird übersprungen wenn kein Barometer vorhanden</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x10"><strong>REC-Flow verbessert</strong>: GPS sofort bei Klick, QNH von Open-Meteo (8s GPS-Timeout), Offline → manuell</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x11"><strong>Ziel Long-Press erst beim 2. Mal</strong>: Ring-SVG Cleanup + Marker immer draggable</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x12"><strong>App-Name</strong>: Überall „NTA SkyNav" (war iOS „Navigator Lite", Android „Balloon Navigator")</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x13"><strong>Live Team im Hintergrund</strong>: Native App sendet Position weiter wenn minimiert</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x14"><strong>Team erstellen/beitreten hängt</strong>: Auth-Check mit 5s Timeout</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.109x15"><strong>Tracker Background</strong>: Wake Lock, Silent Audio Keep-Alive, Realtime-Reconnect</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.cleanup">Aufgeräumt</div>
+        <ul class="change-list">
+          <li><span class="change-tag cleanup">Cleanup</span> <span data-i18n="updates.109d1">Unbenutzte Dependencies entfernt: date-fns, pixi.js, proj4, react-draggable, sql.js u.a.</span></li>
+          <li><span class="change-tag cleanup">Cleanup</span> <span data-i18n="updates.109d2">Unbenutzte Komponenten gelöscht: BriefingSidebar, GasManagementPanel, WindPanel</span></li>
+          <li><span class="change-tag cleanup">Cleanup</span> <span data-i18n="updates.109d3">Unbenutzte Utils + toter Code entfernt: coordinates.ts, igcExport.ts, pzParser, pttService u.a.</span></li>
+        </ul>
+      </div>
+    </div>
 
     <!-- ═══ v1.0.8 ═══ -->
     <div class="update-card reveal">
