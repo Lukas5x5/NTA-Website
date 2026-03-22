@@ -538,23 +538,36 @@ function showPage(src, el) {
   el.classList.add('active');
 }
 
-function submitFeedback(e) {
+async function submitFeedback(e) {
   e.preventDefault();
-  const name = document.getElementById('fbName').value;
-  const email = document.getElementById('fbEmail').value;
-  const message = document.getElementById('fbMessage').value;
+  const btn = e.target.querySelector('.submit-btn');
+  const orig = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
 
-  // Send via mailto as fallback
-  const subject = encodeURIComponent('Weather Briefing Feedback' + (name ? ' — ' + name : ''));
-  const body = encodeURIComponent(
-    (name ? 'Name: ' + name + '\n' : '') +
-    (email ? 'Email: ' + email + '\n' : '') +
-    '\nFeedback:\n' + message
-  );
-  window.location.href = 'mailto:info@ntaskynav.app?subject=' + subject + '&body=' + body;
+  try {
+    const res = await fetch('/api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: document.getElementById('fbName').value,
+        email: document.getElementById('fbEmail').value,
+        message: document.getElementById('fbMessage').value,
+      }),
+    });
 
-  document.getElementById('submitSuccess').style.display = 'block';
-  document.getElementById('feedbackForm').reset();
+    if (res.ok) {
+      document.getElementById('submitSuccess').style.display = 'block';
+      document.getElementById('feedbackForm').reset();
+    } else {
+      alert('Fehler beim Senden. Bitte versuche es erneut oder schreibe an info@ntaskynav.app');
+    }
+  } catch {
+    alert('Fehler beim Senden. Bitte versuche es erneut oder schreibe an info@ntaskynav.app');
+  }
+
+  btn.textContent = orig;
+  btn.disabled = false;
 }
 </script>
 </body>
