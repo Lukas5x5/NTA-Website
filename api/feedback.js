@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: 'NTA SkyNav Feedback <onboarding@resend.dev>',
-        to: 'info@ntaskynav.app',
+        to: 'lraustria@hotmail.com',
         subject: `Weather Briefing Feedback${name ? ` — ${name}` : ''}`,
         text: [
           name ? `Name: ${name}` : null,
