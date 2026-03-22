@@ -225,6 +225,46 @@
   <!-- ─── Updates Feed ─── -->
   <section class="updates-feed">
 
+    <!-- ═══ v1.1.0 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.110date">22. März 2026</div>
+      <div class="update-version feature">v1.1.0 – Feature Update</div>
+      <h2 class="update-title" data-i18n="updates.110title">FIS-Frequenzen, weltweite Lufträume, Kartentyp-Wechsel & Bugfixes</h2>
+      <div class="update-body">
+        <p data-i18n="updates.110desc">Automatische FIS-Frequenzen im NavPanel, Luftraumdaten für 113 Länder, neuer Kartentyp-Wechsel (OSM/Topo/SAT) und zahlreiche Bugfixes und Light-Mode Verbesserungen.</p>
+
+        <div class="change-section-label" data-i18n="updates.added">Hinzugefügt</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.110f1"><strong>FIS-Frequenzen im NavPanel</strong>: Zeigt automatisch die nächste FIS-Frequenz basierend auf GPS-Position</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.110f2"><strong>Luftraum-Popup Frequenzen</strong>: Tower/Radio-Frequenzen + FIS-Frequenz als Fallback</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.110f3"><strong>Airspace Daten weltweit</strong>: 113 Länder auf Supabase Storage, on-demand Download + IndexedDB Cache</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.110f4"><strong>Kartentyp-Dropdown</strong>: OSM/Topo/SAT Auswahl im Hamburger-Menü</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.110f5"><strong>Kartentyp-Schnellwechsel</strong>: Optionaler Toggle-Button auf der Karte mit Outdoor-Modus</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.110x1"><strong>Supabase nach 1h Inaktivität</strong>: Token-Refresh komplett überarbeitet — proaktiver Refresh beim App-Start</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.110x2"><strong>Offline-Meldungen</strong>: „Keine Internetverbindung" statt irreführendes „Nicht eingeloggt"</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.110x3"><strong>Airspace Dropdown Crash</strong>: ReferenceError in TaskSettingsPanel gefixt</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.110x4"><strong>Airspace E-Lufträume AT</strong>: 36 E-Lufträume (TMAs + CTAs) wiederhergestellt</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.110x5"><strong>Startplatz bleibt bei GPS-Start</strong>: clearFlightData resettet Briefing-Koordinaten nicht mehr</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.110x6"><strong>Startplatz-Dropdown</strong>: Zeigt nicht mehr automatisch „GPS" bei ähnlicher Höhe</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.110x7"><strong>PDF-Teilen Button</strong>: Falsche Übersetzung korrigiert</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.110x8"><strong>Wetterbriefing Ortsname</strong>: Zeigt Startplatz-Namen statt Reverse-Geocoding</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.improved">Verbessert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.110i1"><strong>Ziel-Navigation Toggle</strong>: Klick auf Ziel aktiviert/deaktiviert Navigation, aktives Ziel grün</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.110i2"><strong>Gasflasche leeren</strong>: Bestätigungs-Popup vor dem Leeren mit Outdoor-Modus + i18n</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.110i3"><strong>Light-Mode</strong>: Footer-Buttons, Gasflaschen, Luftraum-Popup, Resume-Recording angepasst</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.110i4"><strong>Navigationslinien-Breite</strong>: Minimum von 1px auf 0.5px reduziert (0.5er Schritte)</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.110i5"><strong>Airspace Daten aktualisiert</strong>: HR, HU, IT, PL, SK neu von OpenAIP geladen</span></li>
+        </ul>
+      </div>
+    </div>
+
     <!-- ═══ v1.0.9 ═══ -->
     <div class="update-card reveal">
       <div class="update-date" data-i18n="updates.109date">21. März 2026</div>

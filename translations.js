@@ -415,6 +415,29 @@ const translations = {
 
   'updates.improved': { de: 'Verbessert', en: 'Improved' },
 
+  // v1.1.0
+  'updates.110date': { de: '22. März 2026', en: 'March 22, 2026' },
+  'updates.110title': { de: 'FIS-Frequenzen, weltweite Lufträume, Kartentyp-Wechsel & Bugfixes', en: 'FIS Frequencies, Worldwide Airspace, Map Type Switcher & Bugfixes' },
+  'updates.110desc': { de: 'Automatische FIS-Frequenzen im NavPanel, Luftraumdaten für 113 Länder, neuer Kartentyp-Wechsel (OSM/Topo/SAT) und zahlreiche Bugfixes und Light-Mode Verbesserungen.', en: 'Automatic FIS frequencies in NavPanel, airspace data for 113 countries, new map type switcher (OSM/Topo/SAT) and numerous bugfixes and light mode improvements.' },
+  'updates.110f1': { de: '<strong>FIS-Frequenzen im NavPanel</strong>: Zeigt automatisch die nächste FIS-Frequenz basierend auf GPS-Position', en: '<strong>FIS Frequencies in NavPanel</strong>: Automatically shows the nearest FIS frequency based on GPS position' },
+  'updates.110f2': { de: '<strong>Luftraum-Popup Frequenzen</strong>: Tower/Radio-Frequenzen + FIS-Frequenz als Fallback', en: '<strong>Airspace Popup Frequencies</strong>: Tower/radio frequencies + FIS frequency as fallback' },
+  'updates.110f3': { de: '<strong>Airspace Daten weltweit</strong>: 113 Länder auf Supabase Storage, on-demand Download + IndexedDB Cache', en: '<strong>Worldwide Airspace Data</strong>: 113 countries on Supabase Storage, on-demand download + IndexedDB cache' },
+  'updates.110f4': { de: '<strong>Kartentyp-Dropdown</strong>: OSM/Topo/SAT Auswahl im Hamburger-Menü', en: '<strong>Map Type Dropdown</strong>: OSM/Topo/SAT selection in hamburger menu' },
+  'updates.110f5': { de: '<strong>Kartentyp-Schnellwechsel</strong>: Optionaler Toggle-Button auf der Karte mit Outdoor-Modus', en: '<strong>Map Type Quick Switch</strong>: Optional toggle button on the map with outdoor mode' },
+  'updates.110x1': { de: '<strong>Supabase nach 1h Inaktivität</strong>: Token-Refresh komplett überarbeitet — proaktiver Refresh beim App-Start', en: '<strong>Supabase after 1h inactivity</strong>: Token refresh completely reworked — proactive refresh on app start' },
+  'updates.110x2': { de: '<strong>Offline-Meldungen</strong>: „Keine Internetverbindung" statt irreführendes „Nicht eingeloggt"', en: '<strong>Offline messages</strong>: "No internet connection" instead of misleading "Not logged in"' },
+  'updates.110x3': { de: '<strong>Airspace Dropdown Crash</strong>: ReferenceError in TaskSettingsPanel gefixt', en: '<strong>Airspace dropdown crash</strong>: ReferenceError in TaskSettingsPanel fixed' },
+  'updates.110x4': { de: '<strong>Airspace E-Lufträume AT</strong>: 36 E-Lufträume (TMAs + CTAs) wiederhergestellt', en: '<strong>Airspace class E Austria</strong>: 36 E-airspaces (TMAs + CTAs) restored' },
+  'updates.110x5': { de: '<strong>Startplatz bleibt bei GPS-Start</strong>: clearFlightData resettet Briefing-Koordinaten nicht mehr', en: '<strong>Launch site stays on GPS start</strong>: clearFlightData no longer resets briefing coordinates' },
+  'updates.110x6': { de: '<strong>Startplatz-Dropdown</strong>: Zeigt nicht mehr automatisch „GPS" bei ähnlicher Höhe', en: '<strong>Launch site dropdown</strong>: No longer auto-shows "GPS" at similar altitude' },
+  'updates.110x7': { de: '<strong>PDF-Teilen Button</strong>: Falsche Übersetzung korrigiert', en: '<strong>PDF share button</strong>: Wrong translation fixed' },
+  'updates.110x8': { de: '<strong>Wetterbriefing Ortsname</strong>: Zeigt Startplatz-Namen statt Reverse-Geocoding', en: '<strong>Weather briefing location</strong>: Shows launch site name instead of reverse geocoding' },
+  'updates.110i1': { de: '<strong>Ziel-Navigation Toggle</strong>: Klick auf Ziel aktiviert/deaktiviert Navigation, aktives Ziel grün', en: '<strong>Target navigation toggle</strong>: Click on target enables/disables navigation, active target highlighted green' },
+  'updates.110i2': { de: '<strong>Gasflasche leeren</strong>: Bestätigungs-Popup vor dem Leeren mit Outdoor-Modus + i18n', en: '<strong>Empty gas bottle</strong>: Confirmation popup before emptying with outdoor mode + i18n' },
+  'updates.110i3': { de: '<strong>Light-Mode</strong>: Footer-Buttons, Gasflaschen, Luftraum-Popup, Resume-Recording angepasst', en: '<strong>Light mode</strong>: Footer buttons, gas bottles, airspace popup, resume recording adjusted' },
+  'updates.110i4': { de: '<strong>Navigationslinien-Breite</strong>: Minimum von 1px auf 0.5px reduziert (0.5er Schritte)', en: '<strong>Navigation line width</strong>: Minimum reduced from 1px to 0.5px (0.5 steps)' },
+  'updates.110i5': { de: '<strong>Airspace Daten aktualisiert</strong>: HR, HU, IT, PL, SK neu von OpenAIP geladen', en: '<strong>Airspace data updated</strong>: HR, HU, IT, PL, SK freshly loaded from OpenAIP' },
+
   // v1.0.9
   'updates.109date': { de: '21. März 2026', en: 'March 21, 2026' },
   'updates.109title': { de: 'Light-Mode, Crew-Slots, Pinch-to-Zoom & massive Bugfixes', en: 'Light Mode, Crew Slots, Pinch-to-Zoom & Massive Bugfixes' },
