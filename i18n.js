@@ -45,6 +45,7 @@
         'agb.html': { de: 'AGB – NTA SkyNav', en: 'Terms – NTA SkyNav' },
         'beta-access.html': { de: 'Beta Zugang – NTA SkyNav', en: 'Beta Access – NTA SkyNav' },
         'updates.html': { de: 'Updates & Patches – NTA SkyNav', en: 'Updates & Patches – NTA SkyNav' },
+        'briefing.html': { de: 'Weather Briefing Feedback – NTA SkyNav', en: 'Weather Briefing Feedback – NTA SkyNav' },
       };
       var page = window.location.pathname.split('/').pop() || 'index.html';
       if (titleMap[page] && titleMap[page][lang]) {

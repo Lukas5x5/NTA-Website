@@ -6,6 +6,7 @@ const translations = {
   'nav.beta': { de: 'Beta', en: 'Beta' },
   'nav.about': { de: 'Über uns', en: 'About' },
   'nav.updates': { de: 'Updates', en: 'Updates' },
+  'nav.briefing': { de: 'Briefing', en: 'Briefing' },
   'nav.cta': { de: 'Beta testen', en: 'Try Beta' },
 
   // ═══ FOOTER (shared across all pages) ═══
@@ -613,4 +614,31 @@ const translations = {
   // ═══ LANGUAGE TOGGLE ═══
   'lang.de': { de: 'DE', en: 'DE' },
   'lang.en': { de: 'EN', en: 'EN' },
+
+  // ═══ BRIEFING PAGE ═══
+  'briefing.label': { de: 'Community Feedback', en: 'Community Feedback' },
+  'briefing.title': { de: 'Weather <span style="color: var(--amber);">Briefing</span>', en: 'Weather <span style="color: var(--amber);">Briefing</span>' },
+  'briefing.desc': { de: 'Wir bauen das Wetterbriefing neu — und brauchen dein Feedback als Pilot. Schau dir das aktuelle Briefing an und sag uns was fehlt, was stört und was perfekt ist.', en: 'We\'re redesigning the weather briefing — and we need your feedback as a pilot. Check out the current briefing and tell us what\'s missing, what\'s wrong, and what\'s perfect.' },
+  'briefing.pdfTitle': { de: 'Aktuelles Briefing ansehen', en: 'View Current Briefing' },
+  'briefing.pdfDesc': { de: 'Klicke auf eine Seite um sie zu vergrößern. Echte Wetterdaten, echtes Layout — genau so sehen es unsere Piloten vor jeder Fahrt.', en: 'Click a page to enlarge. Real weather data, real layout — exactly what our pilots see before every flight.' },
+  'briefing.page1': { de: 'Seite 1', en: 'Page 1' },
+  'briefing.page2': { de: 'Seite 2', en: 'Page 2' },
+  'briefing.page3': { de: 'Seite 3', en: 'Page 3' },
+  'briefing.download': { de: 'PDF Herunterladen', en: 'Download PDF' },
+  'briefing.downloadInfo': { de: '3 Seiten · Wetterbriefing Annaberg-Lungötz · 21. März 2026', en: '3 pages · Weather Briefing Annaberg-Lungötz · March 21, 2026' },
+  'briefing.questionsTitle': { de: 'Was wir wissen möchten', en: 'What We Want to Know' },
+  'briefing.q1': { de: 'Sind alle <strong>Informationen</strong> da die du für ein Briefing brauchst?', en: 'Is every piece of <strong>information</strong> you need actually there?' },
+  'briefing.q2': { de: 'Ist die <strong>Reihenfolge</strong> logisch — liest es sich wie ein echtes Briefing?', en: 'Does the <strong>order</strong> match how you go through a real briefing?' },
+  'briefing.q3': { de: 'Fehlt etwas das du von deinem <strong>bisherigen Briefing</strong> kennst?', en: 'Is anything <strong>missing</strong> that you rely on before a flight?' },
+  'briefing.q4': { de: 'Gibt es etwas das <strong>überflüssig</strong> ist oder stört?', en: 'Is anything there that <strong>shouldn\'t be</strong>?' },
+  'briefing.q5': { de: 'Was würde dieses Briefing <strong>perfekt für dich</strong> machen?', en: 'What would make this briefing <strong>perfect for you</strong>?' },
+  'briefing.feedbackTitle': { de: 'Dein Feedback', en: 'Your Feedback' },
+  'briefing.feedbackDesc': { de: 'Jede Antwort hilft — auch ein kurzes „Punkt 3 fehlt mir XY" ist Gold wert.', en: 'Every response helps — even a short "Point 3 is missing XY" is worth gold.' },
+  'briefing.nameLabel': { de: 'Name (optional)', en: 'Name (optional)' },
+  'briefing.emailLabel': { de: 'E-Mail (optional)', en: 'Email (optional)' },
+  'briefing.messageLabel': { de: 'Dein Feedback', en: 'Your Feedback' },
+  'briefing.submit': { de: 'Feedback senden', en: 'Send Feedback' },
+  'briefing.success': { de: 'Danke für dein Feedback! Wir melden uns. 🎈', en: 'Thanks for your feedback! We\'ll get back to you. 🎈' },
+  'briefing.whatsapp': { de: 'WhatsApp Gruppe', en: 'WhatsApp Group' },
+  'briefing.whatsappDesc': { de: 'Beta-Tester Gruppe', en: 'Beta Tester Group' },
 };
