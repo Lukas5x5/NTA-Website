@@ -225,6 +225,60 @@
   <!-- ─── Updates Feed ─── -->
   <section class="updates-feed">
 
+    <!-- ═══ v1.1.1 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.111date">24. März 2026</div>
+      <div class="update-version feature">v1.1.1 – Feature Update</div>
+      <h2 class="update-title" data-i18n="updates.111title">Live-Windprofil aus GPS, Cloud-Backup, Android Login & 17 Bugfixes</h2>
+      <div class="update-body">
+        <p data-i18n="updates.111desc">Automatisches Windprofil aus der Ballonbewegung, GPS-Track Cloud-Backup mit Geräte-Sync, interaktiver farbiger Track und umfangreiche Stabilitätsverbesserungen für Android, Hintergrund-GPS und Team-Tracking.</p>
+
+        <div class="change-section-label" data-i18n="updates.added">Hinzugefügt</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.111f1"><strong>Live-Windprofil aus GPS</strong>: Windschichten werden automatisch aus der Ballonbewegung aufgezeichnet — konfigurierbare Intervalle (100ft, 200ft, 500ft)</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.111f2"><strong>GPS-Track Cloud-Backup</strong>: Tracks werden automatisch in die Cloud hochgeladen und bei Neuinstallation/Gerätewechsel geladen</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.111f3"><strong>Geräte-Sync</strong>: „In Cloud speichern" und „Von Cloud laden" für manuellen Settings-Sync zwischen Geräten</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.111f4"><strong>Farbige Track-Leiste interaktiv</strong>: Klick/Touch auf den Farbbalken zeigt den Wert an der Stelle</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.111f5"><strong>Track klickbar</strong>: Tippe auf den Track → Popup mit Uhrzeit, Höhe, Speed, Heading und Vario</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.111f6"><strong>GPS-Sim Steuerkreuz</strong>: Schwebendes Steuerkreuz bei aktiver Simulation (Steigrate, Heading)</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x1"><strong>Login auf Android</strong>: Token wurden nach Login nicht sofort gespeichert</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x2"><strong>Token-Verlust auf Android</strong>: Tokens werden jetzt in SharedPreferences gespeichert — überleben App-Kill und Force-Stop</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x3"><strong>Kein Auth-Token nach App-Neustart</strong>: Eigene Token-Verwaltung über REST API statt Supabase-Methoden in der nativen WebView</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x4"><strong>Cursor friert ein nach Hintergrund</strong>: Render-Callbacks bleiben jetzt erhalten</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x5"><strong>Cursor friert ein nach Bildschirmsperre</strong>: Render-Loop wird immer neu gestartet</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x6"><strong>GPS bei Bildschirmsperre</strong>: Hintergrund-GPS startet jetzt auch bei Bildschirmsperre</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x7"><strong>Team offline bei Bildschirmsperre</strong>: Position + Heartbeat werden im Hintergrund gesendet</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x8"><strong>Cursor springt in Kurven</strong>: Vorausprojektion wird bei Kursänderung automatisch reduziert</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x9"><strong>Doppelte Höhenkorrektur</strong>: ALT zeigte ~85m zu wenig — Geoid-Korrektur wurde zweimal angewendet</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x10"><strong>AGL immer 0</strong>: Bodenhöhe wird korrekt an GPS-Berechnung weitergegeben</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x11"><strong>Track-Zickzack</strong>: Track wird mit Kalman-gefilterter Position aufgezeichnet (±0,5m statt ±3m)</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x12"><strong>Track-Lücke bei Bildschirmsperre</strong>: Fehlende Punkte werden beim Entsperren nachgefüllt</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x13"><strong>Auth nach 1 Stunde</strong>: Automatischer Token-Refresh statt Logout</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x14"><strong>Auth bei schlechtem Netz</strong>: Gespeicherter Login-Status wird verwendet statt Logout</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x15"><strong>Supabase Deadlock nach Hintergrund</strong>: Internes Locking deaktiviert</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x16"><strong>QNH-Popup doppelt</strong>: Wird nur noch einmal angezeigt beim REC-Start</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x17"><strong>Barometer nach Hintergrund</strong>: Sensor wird automatisch neugestartet</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.111x18"><strong>Settings-Sync unvollständig</strong>: 101 fehlende Einstellungsfelder werden jetzt synchronisiert</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.improved">Verbessert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.111i1"><strong>Team Auto-Reconnect</strong>: Automatische Wiederverbindung bei Verbindungsverlust (bis zu 5 Versuche), Sprachchat wird mitreconnected</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.111i2"><strong>Team Offline-Erkennung</strong>: Push-to-Talk wird bei Verbindungsverlust deaktiviert und zeigt „Offline"</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.111i3"><strong>Team Rejoin</strong>: Letztes Team wird 12 Stunden gespeichert — ein Tippen zum sofortigen Beitreten</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.111i4"><strong>Team Offline-Queue</strong>: 30 Minuten Positions-Puffer statt 5 Minuten</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.111i5"><strong>iOS Push-to-Talk</strong>: Audio mischt sich mit anderen Apps statt sie zu unterbrechen, AirPods unterstützt</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.111i6"><strong>Wind-Import Höhen</strong>: Importierte Windschichten werden auf das eingestellte Intervall gerundet</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.111i7"><strong>Fahrten pro Nutzer</strong>: Bei Account-Wechsel sieht jeder Nutzer nur seine eigenen Fahrten</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.111i8"><strong>GPS-Pipeline Neustart</strong>: Kompletter Neustart aller GPS-Komponenten beim Zurückkehren aus dem Hintergrund</span></li>
+        </ul>
+      </div>
+    </div>
+
     <!-- ═══ v1.1.0 ═══ -->
     <div class="update-card reveal">
       <div class="update-date" data-i18n="updates.110date">22. März 2026</div>
