@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slide 1 – Beta Status</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0A0E1A; --navy-light: #111827; --amber: #FFA500;
+    --cyan: #00C8FF; --text: #C8D4F0;
+    --text-dim: rgba(200,212,240,0.75);
+    --text-muted: rgba(200,212,240,0.55);
+    --green: #22c55e;
+  }
+  html, body {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    font-family: 'Barlow', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1080px;
+    height: 1350px;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,212,240,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,212,240,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .line-top { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--amber), #ffb732, var(--amber)); z-index: 10; }
+  .line-bot { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--amber), #ffb732, var(--amber)); z-index: 10; }
+
+  .glow-tl { position: absolute; top: -150px; left: -150px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,165,0,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+  .glow-br { position: absolute; bottom: -150px; right: -150px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+
+  .content {
+    position: relative;
+    z-index: 3;
+    padding: 60px 72px 56px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand img { width: 80px; height: 80px; }
+  .brand span {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+  }
+  .version-badge {
+    background: var(--cyan);
+    color: var(--navy);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 6px 18px;
+    border-radius: 6px;
+  }
+
+  .headline-area { margin-bottom: 44px; }
+  .tag {
+    display: inline-block;
+    background: rgba(255,165,0,0.12);
+    border: 1px solid rgba(255,165,0,0.25);
+    color: var(--amber);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 6px 18px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  h1 span { color: var(--amber); }
+  .subtitle {
+    font-size: 22px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    max-width: 700px;
+  }
+
+  .tablet-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .tablet {
+    width: 960px;
+    height: 590px;
+    border-radius: 22px;
+    border: 4px solid #333;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.05),
+      0 24px 60px rgba(0,0,0,0.5),
+      0 0 80px rgba(0,200,255,0.05);
+  }
+  .tablet .camera-dot {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1a1a2e;
+    border: 1px solid #333;
+    z-index: 5;
+  }
+  .tablet .screen {
+    position: absolute;
+    inset: 6px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #111;
+  }
+  .tablet .screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .device-caption {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 18px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .device-caption strong { color: #fff; }
+
+  .bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+  .cta {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .balloon-emoji { font-size: 32px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="line-top"></div>
+  <div class="line-bot"></div>
+  <div class="glow-tl"></div>
+  <div class="glow-br"></div>
+
+  <div class="content">
+    <div class="top-bar">
+      <div class="brand">
+        <img src="nta-logo.png" alt="NTA SkyNav">
+        <span>NTA SKYNAV</span>
+      </div>
+      <div class="version-badge">Beta v1.0.7</div>
+    </div>
+
+    <div class="headline-area">
+      <div class="tag">Beta Update</div>
+      <h1>The beta is running.<br><span>Every single day.</span></h1>
+      <p class="subtitle">We build, test, optimize — until every detail is right. GPS cursor, heading, altitude, tracks, wind profile. Everything gets touched, everything gets better.</p>
+    </div>
+
+    <div class="tablet-wrap">
+      <div class="tablet">
+        <div class="camera-dot"></div>
+        <div class="screen">
+          <img src="balloon-basket-2.jpeg" alt="NTA SkyNav on tablet">
+        </div>
+      </div>
+    </div>
+    <p class="device-caption"><strong>7 updates in 4 days.</strong> 60fps GPS. Zero crashes.</p>
+
+    <div class="bottom-bar">
+      <div class="cta">Launch is coming → Stay tuned</div>
+      <div class="balloon-emoji">🎈</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

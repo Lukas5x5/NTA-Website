@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NavPanel Post</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A0E1A;
+    --amber: #FFA500;
+    --cyan: #00C8FF;
+    --text: #C8D4F0;
+    --green: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; display: flex; justify-content: center; align-items: flex-start; padding: 40px; min-height: 100vh; }
+
+  .slide {
+    width: 1080px; height: 1350px;
+    background: var(--navy);
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    font-family: 'Barlow', sans-serif;
+    color: var(--text);
+  }
+
+  /* Grid overlay */
+  .slide::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(200,212,240,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,212,240,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  /* Accent line top */
+  .slide::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--amber), var(--cyan));
+    z-index: 10;
+  }
+
+  /* Glows */
+  .glow-1 { position: absolute; top: -150px; left: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,165,0,0.07), transparent 70%); pointer-events: none; }
+  .glow-2 { position: absolute; bottom: -150px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,200,255,0.06), transparent 70%); pointer-events: none; }
+
+  /* ─── Header ─── */
+  .header {
+    padding: 52px 64px 0;
+    display: flex; align-items: center; justify-content: space-between;
+    position: relative; z-index: 5;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand img { width: 72px; height: 72px; }
+  .brand-name { font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text); }
+  .badge {
+    font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 18px; border-radius: 6px;
+    background: rgba(255,165,0,0.12); color: var(--amber); border: 1px solid rgba(255,165,0,0.2);
+  }
+
+  /* ─── Headline ─── */
+  .headline {
+    padding: 40px 64px 0;
+    position: relative; z-index: 5;
+  }
+  .tag {
+    font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 14px;
+  }
+  .headline h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 64px; font-weight: 700; line-height: 1.0; color: #fff;
+  }
+  .headline h1 span { color: var(--amber); }
+  .headline p {
+    margin-top: 16px;
+    font-size: 20px; color: rgba(200,212,240,0.55); line-height: 1.55;
+    max-width: 560px;
+  }
+
+  /* ─── 3D Device Scene ─── */
+  .scene {
+    flex: 1;
+    position: relative; z-index: 2;
+    perspective: 1800px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 30px;
+  }
+
+  .devices {
+    position: relative;
+    width: 940px; height: 560px;
+    transform-style: preserve-3d;
+  }
+
+  /* iPhone */
+  .iphone {
+    position: absolute;
+    width: 260px; height: 564px;
+    background: #111;
+    border: 3px solid #2a2a3e;
+    border-radius: 42px;
+    overflow: hidden;
+    box-shadow:
+      0 0 60px rgba(0,200,255,0.1),
+      0 40px 80px rgba(0,0,0,0.4),
+      0 15px 30px rgba(0,0,0,0.25);
+    left: 40px; top: 0;
+    transform: rotateY(16deg) rotateX(3deg) rotateZ(-1.5deg) translateZ(40px);
+    z-index: 3;
+  }
+  .iphone::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 45%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+    border-radius: 42px 42px 0 0; z-index: 4; pointer-events: none;
+  }
+
+  .iphone-screen {
+    position: absolute; inset: 3px;
+    border-radius: 39px; background: #0d1117; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: rgba(200,212,240,0.2); font-family: 'Barlow', sans-serif;
+  }
+
+  .dynamic-island {
+    position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+    width: 84px; height: 24px; background: #000; border-radius: 16px; z-index: 6;
+  }
+  .home-indicator {
+    position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 4px; background: rgba(255,255,255,0.18); border-radius: 3px; z-index: 6;
+  }
+
+  /* iPad */
+  .ipad {
+    position: absolute;
+    width: 520px; height: 380px;
+    background: #111;
+    border: 3px solid #2a2a3e;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow:
+      0 0 60px rgba(255,165,0,0.08),
+      0 40px 80px rgba(0,0,0,0.4),
+      0 15px 30px rgba(0,0,0,0.25);
+    right: 20px; top: 90px;
+    transform: rotateY(-12deg) rotateX(4deg) rotateZ(1deg) translateZ(-20px);
+    z-index: 2;
+  }
+  .ipad::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 40%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+    border-radius: 22px 22px 0 0; z-index: 4; pointer-events: none;
+  }
+  .ipad-camera {
+    position: absolute; top: 50%; right: 7px; transform: translateY(-50%);
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #1a1a2e; border: 1px solid #333; z-index: 5;
+  }
+  .ipad-screen {
+    position: absolute; inset: 3px;
+    border-radius: 19px; background: #0d1117; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: rgba(200,212,240,0.2); font-family: 'Barlow', sans-serif;
+  }
+
+  /* ─── Bottom ─── */
+  .bottom {
+    padding: 0 64px 48px;
+    position: relative; z-index: 5;
+  }
+
+  .customize-strip {
+    display: flex; gap: 14px; margin-bottom: 24px;
+  }
+  .cs-item {
+    flex: 1;
+    background: rgba(200,212,240,0.04);
+    border: 1px solid rgba(200,212,240,0.06);
+    border-radius: 12px;
+    padding: 16px 10px;
+    text-align: center;
+  }
+  .cs-icon { font-size: 20px; margin-bottom: 5px; }
+  .cs-label {
+    font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; color: #fff;
+  }
+  .cs-sub { font-size: 10px; color: rgba(200,212,240,0.4); margin-top: 2px; }
+
+  .bottom-bar {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .bottom-left {
+    font-family: 'Rajdhani', sans-serif; font-size: 15px;
+    color: rgba(200,212,240,0.3); letter-spacing: 1px; text-transform: uppercase;
+  }
+  .bottom-right {
+    font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 700;
+    color: var(--amber); letter-spacing: 1px; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <div class="header">
+    <div class="brand">
+      <img src="nta-logo.png" alt="NTA SkyNav">
+      <span class="brand-name">NTA SkyNav</span>
+    </div>
+    <div class="badge">Customizable</div>
+  </div>
+
+  <div class="headline">
+    <div class="tag">Navigation Panel</div>
+    <h1>Your panel.<br><span>Your way.</span></h1>
+    <p>Choose what you see, how it looks, which units you fly with. Every field, every color, every layout — fully yours.</p>
+  </div>
+
+  <div class="scene">
+    <div class="devices">
+      <!-- iPhone portrait -->
+      <div class="iphone">
+        <div class="dynamic-island"></div>
+        <div class="iphone-screen">iPhone Screenshot</div>
+        <div class="home-indicator"></div>
+      </div>
+
+      <!-- iPad landscape -->
+      <div class="ipad">
+        <div class="ipad-camera"></div>
+        <div class="ipad-screen">iPad Screenshot</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="customize-strip">
+      <div class="cs-item"><div class="cs-icon">📐</div><div class="cs-label">Layout</div><div class="cs-sub">Drag & arrange</div></div>
+      <div class="cs-item"><div class="cs-icon">📏</div><div class="cs-label">Units</div><div class="cs-sub">ft · m · kt · km/h</div></div>
+      <div class="cs-item"><div class="cs-icon">🎨</div><div class="cs-label">Theme</div><div class="cs-sub">Dark · Light · Outdoor</div></div>
+      <div class="cs-item"><div class="cs-icon">🔤</div><div class="cs-label">Fields</div><div class="cs-sub">Show / hide any</div></div>
+      <div class="cs-item"><div class="cs-icon">🤏</div><div class="cs-label">Scale</div><div class="cs-sub">Pinch to resize</div></div>
+    </div>
+    <div class="bottom-bar">
+      <div class="bottom-left">Built for balloon pilots</div>
+      <div class="bottom-right">NTA SkyNav →</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

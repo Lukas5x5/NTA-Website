@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NTA SkyNav – Die Navigations-App für Ballonpiloten</title>
+  <meta name="description" content="NTA SkyNav – Die erste App speziell für Ballonpiloten. ICAO Karten, Windprofil, Load Calculator, Live Team Tracking und mehr. Für iPhone, iPad &amp; Android.">
+  <meta name="keywords" content="Ballon, Ballonfahrt, Navigation, GPS, ICAO, Windprofil, Load Calculator, Heißluftballon, Hot Air Balloon">
+  <meta property="og:title" content="NTA SkyNav – Balloon Navigation App">
+  <meta property="og:description" content="Die erste App nur für Ballonpiloten. GPS Navigation, ICAO Karten, Wettermodelle, Load Calculator und Live Team Tracking.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="nta-logo.png">
+  <link rel="apple-touch-icon" href="nta-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ─── Index-specific hero styles ─── */
+    .hero-notify {
+      margin-top: 36px;
+      max-width: 480px;
+    }
+    .hero-notify-box {
+      display: flex;
+      gap: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,165,0,0.25);
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(12px);
+    }
+    .hero-notify-box input {
+      flex: 1;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      outline: none;
+      min-width: 0;
+    }
+    .hero-notify-box input::placeholder {
+      color: rgba(200,212,240,0.35);
+    }
+    .hero-notify-box button {
+      padding: 16px 28px;
+      background: var(--amber);
+      border: none;
+      color: var(--navy);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-notify-box button:hover {
+      background: #ffb732;
+    }
+    .hero-notify-hint {
+      font-size: 12px;
+      color: rgba(200,212,240,0.3);
+      margin-top: 10px;
+    }
+    .hero-notify-success {
+      display: none;
+      padding: 14px 20px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 14px;
+      color: #22c55e;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .hero-notify-success.show { display: block; }
+
+    /* Stats bar */
+    .stats-bar {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-number {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: rgba(200,212,240,0.4);
+      margin-top: 4px;
+    }
+
+    /* Notification badge like Ventara */
+    .float-notification {
+      position: absolute;
+      top: 80px;
+      right: -30px;
+      background: rgba(17,24,39,0.9);
+      border: 1px solid rgba(255,165,0,0.2);
+      border-radius: 14px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      backdrop-filter: blur(12px);
+      animation: floatIn 0.8s ease 1s both;
+      z-index: 5;
+      white-space: nowrap;
+    }
+    .float-notification-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255,165,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--amber);
+      flex-shrink: 0;
+    }
+    .float-notification-text {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .float-notification-sub {
+      font-size: 11px;
+      color: rgba(200,212,240,0.4);
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Hero override for this page */
+    .hero-home .hero-title {
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.05;
+      margin-bottom: 4px;
+    }
+    .hero-home .hero-title .line-accent {
+      color: var(--amber);
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .stats-bar { gap: 24px; }
+      .stat-number { font-size: 28px; }
+      .float-notification { display: none; }
+      .hero-notify-box { flex-direction: column; border-radius: 12px; }
+      .hero-notify-box input { padding: 14px 16px; font-size: 14px; }
+      .hero-notify-box button { padding: 14px 18px; font-size: 12px; justify-content: center; }
+      .hero-notify { max-width: 100%; }
+      .hero-home .hero-title { font-size: clamp(28px, 8vw, 48px); }
+      .hero-desc { font-size: 14px !important; }
+      .hero-notify-hint { font-size: 11px; }
+    }
+  </style>
+</head>
+<body style="padding-top: calc(64px + 36px);">
+
+<!-- Starfield Background -->
+<canvas id="starfield"></canvas>
+<div class="grid-overlay"></div>
+
+<!-- ═══ Navigation ═══ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active" data-i18n="nav.home">Home</a></li>
+      <li><a href="features.html" data-i18n="nav.features">Features</a></li>
+      <li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li>
+      <li><a href="beta.html" data-i18n="nav.beta">Beta</a></li>
+      <li><a href="about.html" data-i18n="nav.about">Über uns</a></li>
+      <li><a href="updates.html" data-i18n="nav.updates">Updates</a></li>
+      <li><a href="briefing.html" data-i18n="nav.briefing">Briefing</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-toggle-btn active" data-lang="de">DE</button>
+      <button class="lang-toggle-btn" data-lang="en">EN</button>
+    </div>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <a href="index.html" class="active" data-i18n="nav.home">Home</a>
+  <a href="features.html" data-i18n="nav.features">Features</a>
+  <a href="pricing.html" data-i18n="nav.pricing">Preise</a>
+  <a href="beta.html" data-i18n="nav.beta">Beta</a>
+  <a href="about.html" data-i18n="nav.about">Über uns</a>
+<a href="updates.html" data-i18n="nav.updates">Updates</a>
+  <a href="briefing.html" data-i18n="nav.briefing">Briefing</a>
+</div>
+
+<!-- ─── Instagram Banner ─── -->
+<div id="ig-banner" style="background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); padding: 8px 0; text-align: center; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;">
+  <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; color: #fff; text-decoration: none; font-family: 'Barlow', sans-serif; font-size: 14px; font-weight: 600;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+    <span data-i18n="index.igFollow">Folge uns auf Instagram für Updates!</span>
+    <span style="opacity: 0.8; font-size: 12px;">@nta_skynav</span>
+  </a>
+</div>
+
+<!-- ═══ Main Content ═══ -->
+<main>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- HERO – Ventara-inspired with notification  -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="hero hero-home">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="hero-badge reveal">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--amber); display: inline-block; animation: pulse 2s infinite;"></span>
+            <span data-i18n="index.badge">Bald verfügbar für iPhone, iPad &amp; Android</span>
+          </div>
+
+          <h1 class="hero-title reveal delay-1">
+            <span data-i18n="index.heroTitle1">Deine Ballon-<br>Navigation.</span>
+            <span class="line-accent" data-i18n="index.heroTitle2">Einfach professionell.</span>
+          </h1>
+
+          <p class="hero-desc reveal delay-2" data-i18n="index.heroDesc">
+            NTA SkyNav ist die erste App speziell für Ballonpiloten.
+            GPS, ICAO-Karten, Wettermodelle, Load Calculator und
+            Live Team Tracking — alles an einem Ort, auch offline.
+          </p>
+
+          <div class="reveal delay-3" style="margin-top: 24px;">
+            <!-- ─── Warteliste ─── -->
+            <div style="background: rgba(212,160,23,0.06); border: 1px solid rgba(212,160,23,0.2); border-radius: 14px; padding: 20px 24px; text-align: center;">
+              <div style="font-family:'Tektur',sans-serif; font-weight:700; font-size:16px; color:var(--amber); letter-spacing:1px;" data-i18n="index.waitlistTitle">Auf die Warteliste</div>
+              <div style="font-size:13px; color:rgba(255,255,255,0.6); margin-top:6px; margin-bottom:14px;" data-i18n="index.waitlistDesc">Werde benachrichtigt beim Launch — inkl. 7 Tage kostenlos testen.</div>
+              <div class="hero-notify-box" id="waitlistBox">
+                <input type="email" id="waitlistEmail" placeholder="deine@email.at" autocomplete="email" style="flex:1;" data-i18n="index.waitlistPlaceholder" data-i18n-attr="placeholder">
+                <button onclick="handleWaitlist()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                  <span data-i18n="index.waitlistBtn">Platz sichern</span>
+                </button>
+              </div>
+              <div class="hero-notify-success" id="waitlistSuccess" style="display:none;">
+                <span data-i18n="index.waitlistSuccess">Du bist auf der Warteliste! Wir melden uns beim Launch.</span>
+                <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px; padding: 10px 18px; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-radius: 10px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+                  <span data-i18n="index.igFollow">Folge uns auf Instagram für Updates!</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ─── Phone Mockup with floating notification ─── -->
+        <div class="hero-mockups reveal-right delay-3" style="position: relative;">
+          <!-- SCREENSHOT: iPhone mit Hauptnavigation/Karte der App -->
+          <div class="mockup-iphone mockup-lg">
+            <div class="screen">
+              <!-- Video placeholder — replace src when ready -->
+              <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
+                <source src="hero-video.mp4" type="video/mp4">
+                <img src="Start 1.jpeg" alt="NTA SkyNav Kartenansicht">
+              </video>
+            </div>
+            <div class="shine"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Feature Overview (6 Cards) ─── -->
+  <section class="section" id="features-overview">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label" data-i18n="index.featLabel">Was NTA SkyNav kann</div>
+        <h2 class="section-title" data-i18n="index.featTitle">Alles was du als Ballonpilot brauchst</h2>
+        <p class="section-desc" data-i18n="index.featDesc">Professionelle Werkzeuge, speziell für die Ballonfahrt entwickelt. Offline-fähig, präzise, zuverlässig.</p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="card reveal delay-1">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+          </div>
+          <h3 data-i18n="index.feat1Title">ICAO Karten &amp; Lufträume</h3>
+          <p data-i18n="index.feat1Desc">ICAO-Karten mit allen Lufträumen (A-G), Hindernissen, Hochspannungsleitungen und Flugplätzen. Dazu OSM und OpenTopoMap – alles offline verfügbar mit dem 4-Ecken Download-System.</p>
+        </div>
+
+        <div class="card reveal delay-2">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+          </div>
+          <h3 data-i18n="index.feat2Title">5 Wettermodelle</h3>
+          <p data-i18n="index.feat2Desc">ICON-D2 (2km Auflösung), ICON-EU, ICON Global, ECMWF IFS und GPS Live-Daten. Wind, Temperatur und Niederschlag bis +12h voraus – direkt auf der Karte mit Zeitauswahl.</p>
+        </div>
+
+        <div class="card reveal delay-3">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+          </div>
+          <h3 data-i18n="index.feat3Title">Load Calculator</h3>
+          <p data-i18n="index.feat3Desc">Professionelle Tragkraftberechnung mit QNH, Temperatur, Startplatzhöhe, Ballonprofil und individuellen Passagiergewichten. GO/NO-GO Entscheidung mit MTOW-Prüfung und Reserve-Anzeige.</p>
+        </div>
+
+        <div class="card reveal delay-4">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3 data-i18n="index.feat4Title">Live Team Tracking &amp; Sprachchat</h3>
+          <p data-i18n="index.feat4Desc">Mehrere Ballone auf einer Karte mit Push-to-Talk Sprachchat. Echtzeit-Positionen, Callsigns und Farben. Verfolger-Link für die Chase Crew – ohne App, direkt im Browser.</p>
+        </div>
+
+        <div class="card reveal delay-5">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <h3 data-i18n="index.feat5Title">Gas Management</h3>
+          <p data-i18n="index.feat5Desc">Gasflaschen einzeln verwalten mit Füllstand-Tracking. Verbrauch pro Fahrt automatisch erfasst, Restmenge jederzeit im Blick. Alles wird im Logbuch mitgespeichert.</p>
+        </div>
+
+        <div class="card reveal delay-6">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3 data-i18n="index.feat6Title">Logbuch &amp; Excel Export</h3>
+          <p data-i18n="index.feat6Desc">Fahrten automatisch aufzeichnen mit Track, Beladung, Gasverbrauch, Start/Ende, Maximalhöhe und Dauer. Ganze Fahrten-Ordner als formatierte Excel-Datei exportieren.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Device Showcase ─── -->
+  <section class="section-sm" style="border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;">
+        <!-- SCREENSHOT: iPhone mit Navigation/GPS Anzeige -->
+        <div class="mockup-iphone mockup-md reveal-left delay-1">
+          <div class="screen">
+            <img src="Start 2.jpeg" alt="GPS Navigation">
+          </div>
+          <div class="shine"></div>
+        </div>
+<!-- SCREENSHOT: Android Phone mit Wettermodell-Overlay -->
+        <div class="mockup-android mockup-md reveal-right delay-3">
+          <div class="screen">
+            <img src="Start 3.jpeg" alt="App Ansicht">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── More Features ─── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label" data-i18n="index.moreLabel">Und noch mehr</div>
+        <h2 class="section-title" data-i18n="index.moreTitle">Alles durchdacht</h2>
+      </div>
+
+      <div class="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <div class="card reveal delay-1">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 data-i18n="index.mf1Title">Ziel &amp; Target Navigation</h3>
+          <p data-i18n="index.mf1Desc">Ziele setzen und Distanz, Richtung und voraussichtliche Ankunft in Echtzeit tracken. Perfekt für Wettbewerbs-Tasks.</p>
+        </div>
+        <div class="card reveal delay-2">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 data-i18n="index.mf2Title">Uhr / Stoppuhr</h3>
+          <p data-i18n="index.mf2Desc">Wettbewerbs-Timer für Tasks. Countdown und Stoppuhr direkt in der Navigation integriert.</p>
+        </div>
+        <div class="card reveal delay-3">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 data-i18n="index.mf3Title">Landeprognose</h3>
+          <p data-i18n="index.mf3Desc">Berechnet den voraussichtlichen Landepunkt basierend auf Wind, Position und einstellbarer Sinkrate. Live auf der Karte angezeigt.</p>
+        </div>
+        <div class="card reveal delay-4">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <h3 data-i18n="index.mf4Title">Flugzeug-Radar</h3>
+          <p data-i18n="index.mf4Desc">ADS-B Live-Flugverkehr direkt auf der Karte. Sieh in Echtzeit, welche Flugzeuge in deiner Nähe sind — powered by airplanes.live.</p>
+        </div>
+        <div class="card reveal delay-5">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h3 data-i18n="index.mf5Title">Hindernisse &amp; Warnungen</h3>
+          <p data-i18n="index.mf5Desc">Hochspannungsleitungen, Windräder und Masten auf der Karte. Proximity-Warnungen mit Audio bei Annäherung — für mehr Sicherheit bei der Landung.</p>
+        </div>
+        <div class="card reveal delay-6">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/></svg>
+          </div>
+          <h3 data-i18n="index.mf6Title">Windlinien &amp; Wind-Layer</h3>
+          <p data-i18n="index.mf6Desc">Animierte Windlinien auf der Karte zeigen Richtung und Stärke in Echtzeit. Farbe, Länge und Dichte individuell einstellbar.</p>
+        </div>
+        <div class="card reveal delay-1">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 data-i18n="index.mf7Title">Chase Crew Tracking</h3>
+          <p data-i18n="index.mf7Desc">Deine Verfolger sehen deinen Ballon live im Browser – ganz ohne App. Ein Link genügt. Position, Höhe, Heading in Echtzeit.</p>
+        </div>
+        <div class="card reveal delay-2">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+          </div>
+          <h3 data-i18n="index.mf8Title">Lufträume (A–G)</h3>
+          <p data-i18n="index.mf8Desc">Alle Lufträume auf der Karte: CTR, TMA, Sperrgebiete und mehr. Klasse A bis G farblich dargestellt für sofortige Orientierung.</p>
+        </div>
+        <div class="card reveal delay-3">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3 data-i18n="index.mf9Title">QNH Korrektur</h3>
+          <p data-i18n="index.mf9Desc">Barometrische Höhenkorrektur mit QNH-Eingabe für präzise Druckhöhe. Wichtig für die korrekte Luftraum-Beurteilung.</p>
+        </div>
+        <div class="card reveal delay-4">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3 data-i18n="index.mf10Title">HGT Import &amp; Download</h3>
+          <p data-i18n="index.mf10Desc">Höhendaten (HGT) importieren oder direkt herunterladen für präzise AGL-Berechnung (Above Ground Level) in jedem Gelände.</p>
+        </div>
+        <div class="card reveal delay-5">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <h3 data-i18n="index.mf11Title">Outdoor-Modus</h3>
+          <p data-i18n="index.mf11Desc">Optimierte Darstellung für den Einsatz im Freien. Höherer Kontrast und größere Elemente bei direkter Sonneneinstrahlung.</p>
+        </div>
+        <div class="card reveal delay-6">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <h3 data-i18n="index.mf12Title">Offline-Modus</h3>
+          <p data-i18n="index.mf12Desc">Karten vorab herunterladen (4-Ecken-System), Fahrten offline speichern und anlegen. Synchronisation sobald wieder online.</p>
+        </div>
+        <div class="card reveal delay-1">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+          <h3 data-i18n="index.mf13Title">Push-to-Talk Sprachchat</h3>
+          <p data-i18n="index.mf13Desc">Walkie-Talkie für Ballonpiloten. Sprachchat im Team per Push-to-Talk — funktioniert mit AirPods und mischt sich mit Musik.</p>
+        </div>
+        <div class="card reveal delay-2">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15l3 3 3-3"/></svg>
+          </div>
+          <h3 data-i18n="index.mf14Title">Wetter-Briefing PDF</h3>
+          <p data-i18n="index.mf14Desc">Komplettes Briefing als PDF generieren mit 5 Wettermodellen, Inversionen, Wolken, Wind — speichern und teilen.</p>
+        </div>
+        <div class="card reveal delay-3">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/></svg>
+          </div>
+          <h3 data-i18n="index.mf15Title">Live-Windprofil aus GPS</h3>
+          <p data-i18n="index.mf15Desc">Windschichten automatisch aus der Ballonbewegung aufzeichnen. Konfigurierbare Intervalle — der Ballon ist die Windsonde.</p>
+        </div>
+        <div class="card reveal delay-4">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </div>
+          <h3 data-i18n="index.mf16Title">Cloud-Sync</h3>
+          <p data-i18n="index.mf16Desc">Settings und Tracks automatisch zwischen Geräten synchronisiert. Bei Neuinstallation oder Gerätewechsel ist alles da.</p>
+        </div>
+        <div class="card reveal delay-5">
+          <div class="card-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3 data-i18n="index.mf17Title">Track-Farbmodus</h3>
+          <p data-i18n="index.mf17Desc">Track farblich nach Speed oder Höhe mit interaktiver Farbskala. Auf einen Blick die ganze Geschichte deiner Fahrt.</p>
+        </div>
+        <div class="card reveal delay-6">
+          <div class="card-icon amber">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+          </div>
+          <h3 data-i18n="index.mf18Title">FIS-Frequenzen</h3>
+          <p data-i18n="index.mf18Desc">Automatisch die nächste FIS-Frequenz basierend auf deiner Position. Immer die richtige Frequenz im Blick.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Pricing Teaser ─── -->
+  <section class="section-sm" style="text-align: center;">
+    <div class="container reveal">
+      <div class="section-label" data-i18n="index.priceLabel">Preise</div>
+      <h2 class="section-title" data-i18n="index.priceTitle">Ab <span style="color: var(--amber);">€9,99</span>/Monat</h2>
+      <p class="section-desc" style="margin: 0 auto 24px;" data-i18n="index.priceDesc">7 Tage kostenlos testen. Basis-GPS und Karte ohne Account nutzbar.</p>
+      <div class="divider divider-center"></div>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
+        <a href="pricing.html" class="btn btn-outline" data-i18n="index.priceAll">Alle Preise ansehen</a>
+        <a href="beta.html" class="btn btn-amber" data-i18n="index.priceFounder">Founder-Preis sichern</a>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon">
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">Die Navigations-App für Ballonpiloten.<br>Entwickelt in Österreich.</p>
+        <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 16px; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-radius: 8px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+          <span data-i18n="index.igBtn">@nta_skynav folgen</span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer.product">Produkt</div>
+        <ul class="footer-links">
+          <li><a href="features.html" data-i18n="nav.features">Features</a></li>
+          <li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li>
+          <li><a href="beta.html" data-i18n="footer.betaDownload">Beta &amp; Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer.legal">Rechtliches</div>
+        <ul class="footer-links">
+          <li><a href="datenschutz.html" data-i18n="footer.privacy">Datenschutz</a></li>
+          <li><a href="agb.html" data-i18n="footer.terms">AGB</a></li>
+          <li><a href="impressum.html" data-i18n="footer.imprint">Impressum</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer.contact">Kontakt</div>
+        <ul class="footer-links">
+          <li><a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a></li>
+          <li><a href="about.html" data-i18n="footer.aboutUs">Über uns</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div data-i18n="footer.madeIn">Made in Austria 🇦🇹 · For Balloon Pilots Worldwide</div>
+      <div>
+        <a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather data by Open-Meteo.com</a> ·
+        <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  const SUPABASE_URL = 'https://vbemzgqxvbezyakllzfv.supabase.co'
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZiZW16Z3F4dmJlenlha2xsemZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4Mjc5MzEsImV4cCI6MjA4ODQwMzkzMX0.v4Wrm3c8k9o3hYrUcOPbraVqq3CLievZWKS-BcYMjMQ'
+
+  async function handleWaitlist() {
+    const input = document.getElementById('waitlistEmail')
+    const box = document.getElementById('waitlistBox')
+    const success = document.getElementById('waitlistSuccess')
+    const email = input.value.trim()
+
+    if (!email || !email.includes('@')) {
+      input.style.borderColor = '#ef4444'
+      input.focus()
+      return
+    }
+
+    const btn = box.querySelector('button')
+    btn.disabled = true
+    btn.innerHTML = 'Wird gesendet...'
+
+    try {
+      const { createClient } = supabase
+      const sb = createClient(SUPABASE_URL, SUPABASE_KEY)
+      const { error } = await sb
+        .from('notify_signups')
+        .insert([{ email, created_at: new Date().toISOString() }])
+
+      if (error && error.code === '23505') {
+        btn.disabled = false
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Platz sichern'
+        alert('Du bist bereits auf der Warteliste!')
+        return
+      } else if (error) {
+        throw error
+      }
+      box.style.display = 'none'
+      success.style.display = 'block'
+    } catch (e) {
+      console.error('Waitlist error:', e)
+      btn.disabled = false
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Platz sichern'
+      alert('Etwas ist schief gelaufen. Versuche es nochmal.')
+    }
+  }
+
+  document.getElementById('waitlistEmail')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleWaitlist()
+  })
+</script>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
+</body>
+</html>

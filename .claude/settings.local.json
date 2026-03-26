@@ -23,11 +23,24 @@
       "Read(//c/Users/LRAus/Desktop/_frames/**)",
       "Bash(npx vercel:*)",
       "Read(//c/Users/LRAus/Downloads/**)",
-      "WebFetch(domain:play.google.com)"
+      "WebFetch(domain:play.google.com)",
+      "Bash(where magick:*)",
+      "Bash(where convert:*)",
+      "Bash(where pdftocairo:*)",
+      "Bash(where npx:*)",
+      "Bash(npx --yes pdf-poppler --version)",
+      "Bash(where python:*)",
+      "Bash(where python3:*)",
+      "Bash(python -c \"import fitz; print\\(''pymupdf available''\\)\")",
+      "Bash(python -c \"from pdf2image import convert_from_path; print\\(''pdf2image available''\\)\")",
+      "Bash(python -c \":*)",
+      "Bash(curl -s -X POST \"https://ntaskynav.app/api/feedback\" -H \"Content-Type: application/json\" -d '{\"\"name\"\":\"\"Test\"\",\"\"email\"\":\"\"test@test.com\"\",\"\"message\"\":\"\"Test feedback\"\"}')"
     ],
     "additionalDirectories": [
       "C:\\Users\\LRAus\\Desktop",
-      "C:\\Users\\LRAus\\Downloads"
+      "C:\\Users\\LRAus\\Downloads",
+      "c:\\Users\\LRAus\\Downloads\\Bilder",
+      "c:\\Users\\LRAus\\Downloads\\Bilder\\Neuer Ordner"
     ]
   }
 }

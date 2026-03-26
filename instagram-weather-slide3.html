@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weather Briefing — Slide 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; display: flex; justify-content: center; align-items: center; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+  .slide {
+    width: 1080px; height: 1350px;
+    background: #0A0E1A;
+    position: relative; overflow: hidden;
+  }
+  .slide::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(200,212,240,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,212,240,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .line-t { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #FFA500, #ffb732, #FFA500); z-index: 10; }
+  .line-b { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #FFA500, #ffb732, #FFA500); z-index: 10; }
+
+  .glow1 { position: absolute; top: -150px; left: -150px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,165,0,0.07) 0%, transparent 70%); pointer-events: none; }
+  .glow2 { position: absolute; bottom: -150px; right: -150px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,200,255,0.05) 0%, transparent 70%); pointer-events: none; }
+
+  .logo-bg { position: absolute; top: 60px; right: -40px; z-index: 0; pointer-events: none; }
+  .logo-bg img { width: 350px; height: 350px; object-fit: contain; opacity: 0.06; }
+
+  .inner {
+    position: relative; z-index: 3;
+    padding: 56px 68px 48px;
+    height: 100%; display: flex; flex-direction: column; align-items: center;
+  }
+
+  /* ─── Top ─── */
+  .top { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 40px; }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand img { width: 72px; height: 72px; }
+  .brand span { font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 2px; }
+  .badge {
+    background: rgba(0,200,255,0.1); border: 1px solid rgba(0,200,255,0.25);
+    color: #00C8FF; font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2.5px; padding: 6px 18px; border-radius: 6px;
+  }
+
+  /* ─── Headline ─── */
+  .tag {
+    display: inline-block;
+    font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700;
+    color: #FFA500; letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'Rajdhani', sans-serif; font-size: 50px; font-weight: 700;
+    color: #fff; line-height: 1.05; text-align: center; margin-bottom: 6px;
+  }
+  h2 .a { color: #FFA500; }
+  .page-desc {
+    font-family: 'Barlow', sans-serif; font-size: 17px;
+    color: rgba(200,212,240,0.4); text-align: center; margin-bottom: 32px;
+  }
+
+  /* ─── Tablet portrait ─── */
+  .device-wrap { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .tablet {
+    width: 540px; height: 760px;
+    border-radius: 24px; border: 3.5px solid rgba(200,212,240,0.12);
+    background: #000; position: relative; overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 30px 80px rgba(0,0,0,0.5),
+      0 0 120px rgba(255,165,0,0.03);
+  }
+  .tablet::before {
+    content: ''; position: absolute;
+    top: 10px; left: 50%; transform: translateX(-50%);
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #111827; border: 1px solid rgba(200,212,240,0.12); z-index: 5;
+  }
+  .tablet .screen {
+    position: absolute; inset: 6px; border-radius: 19px;
+    overflow: hidden; background: #fff;
+  }
+  .tablet .screen img {
+    width: 100%; height: 100%;
+    object-fit: contain; object-position: top center;
+  }
+
+  /* ─── CTA box ─── */
+  .cta-box {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    margin-top: 28px; width: 100%;
+    background: linear-gradient(135deg, rgba(0,200,255,0.06), rgba(255,165,0,0.06));
+    border: 1px solid rgba(255,165,0,0.15);
+    border-radius: 14px; padding: 20px 32px;
+  }
+  .cta-text {
+    font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700;
+    color: #fff;
+  }
+  .cta-sub {
+    font-family: 'Barlow', sans-serif; font-size: 15px;
+    color: rgba(200,212,240,0.5);
+  }
+  .cta-sub strong { color: #FFA500; font-weight: 600; }
+
+  /* ─── Bottom ─── */
+  .bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; margin-top: auto; padding-top: 20px;
+  }
+  .foot-left {
+    font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600;
+    color: rgba(200,212,240,0.35); letter-spacing: 1px;
+  }
+  .emoji { font-size: 28px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="line-t"></div><div class="line-b"></div>
+  <div class="glow1"></div><div class="glow2"></div>
+  <div class="logo-bg"><img src="nta-logo-b.png" alt=""></div>
+
+  <div class="inner">
+    <div class="top">
+      <div class="brand"><img src="nta-logo.png" alt=""><span>NTA SkyNav</span></div>
+      <div class="badge">Weather Briefing</div>
+    </div>
+
+    <div class="tag">Current Version</div>
+    <h2>Wind profile, airspace &<br><span class="a">flight conditions.</span></h2>
+    <div class="page-desc">Page 2 — Wind rose, sounding, airspace, NOTAM, sunrise & sunset</div>
+
+    <div class="device-wrap">
+      <div class="tablet">
+        <div class="screen"><img src="weather-briefing-latest-p2.png" alt="Weather Briefing Page 2"></div>
+      </div>
+    </div>
+
+    <div class="pdf-hint" style="display:flex;align-items:center;gap:10px;margin-top:24px;background:rgba(255,165,0,0.06);border:1px solid rgba(255,165,0,0.15);border-radius:10px;padding:12px 24px;">
+      <span style="font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:#FFA500;letter-spacing:1.5px;text-transform:uppercase;">📄</span>
+      <span style="font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:#FFA500;letter-spacing:1.5px;text-transform:uppercase;">Full PDF → Link in bio</span>
+    </div>
+
+    <div class="bottom">
+      <span class="foot-left">Built for balloon pilots. With balloon pilots.</span>
+      <span style="font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:#FFA500;text-transform:uppercase;letter-spacing:2px;">Swipe →</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

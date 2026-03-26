@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weather Briefing — Slide 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; display: flex; justify-content: center; align-items: center; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+  .slide {
+    width: 1080px; height: 1350px;
+    background: #0A0E1A;
+    position: relative; overflow: hidden;
+  }
+
+  /* Grid overlay */
+  .slide::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(200,212,240,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,212,240,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .line-t { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #FFA500, #ffb732, #FFA500); z-index: 10; }
+  .line-b { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #FFA500, #ffb732, #FFA500); z-index: 10; }
+
+  .glow1 { position: absolute; top: -150px; left: -150px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,165,0,0.08) 0%, transparent 70%); pointer-events: none; }
+  .glow2 { position: absolute; bottom: -150px; right: -150px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,200,255,0.05) 0%, transparent 70%); pointer-events: none; }
+
+  .logo-bg { position: absolute; top: 160px; right: -40px; z-index: 0; pointer-events: none; }
+  .logo-bg img { width: 350px; height: 350px; object-fit: contain; opacity: 0.06; }
+
+  .inner {
+    position: relative; z-index: 3;
+    padding: 56px 68px 48px;
+    height: 100%; display: flex; flex-direction: column;
+  }
+
+  /* ─── Top ─── */
+  .top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 52px; }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand img { width: 72px; height: 72px; }
+  .brand span { font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 2px; }
+  .badge {
+    background: rgba(255,165,0,0.1); border: 1px solid rgba(255,165,0,0.25);
+    color: #FFA500; font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2.5px; padding: 6px 18px; border-radius: 6px;
+  }
+
+  /* ─── Hero ─── */
+  .tag {
+    display: inline-block;
+    background: rgba(0,200,255,0.1); border: 1px solid rgba(0,200,255,0.2);
+    color: #00C8FF; font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 3px; padding: 5px 16px; border-radius: 6px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Rajdhani', sans-serif; font-size: 72px; font-weight: 700;
+    color: #fff; line-height: 1.0; margin-bottom: 20px;
+  }
+  h1 .a { color: #FFA500; }
+
+  .sub {
+    font-family: 'Barlow', sans-serif; font-size: 22px;
+    color: rgba(200,212,240,0.65); line-height: 1.65; max-width: 760px;
+    margin-bottom: 40px;
+  }
+  .sub strong { color: #fff; font-weight: 600; }
+
+  .divider { width: 56px; height: 3px; background: #FFA500; border-radius: 2px; margin-bottom: 36px; }
+
+  /* ─── Questions ─── */
+  .questions { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+  .q {
+    flex: 1; display: flex; align-items: center; gap: 20px;
+    background: rgba(255,255,255,0.025); border: 1px solid rgba(200,212,240,0.06);
+    border-radius: 14px; padding: 0 28px;
+  }
+  .q-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .q-icon.i1 { background: rgba(255,165,0,0.1); border: 1px solid rgba(255,165,0,0.2); }
+  .q-icon.i2 { background: rgba(0,200,255,0.1); border: 1px solid rgba(0,200,255,0.2); }
+  .q-icon.i3 { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); }
+  .q-icon.i4 { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); }
+  .q-icon.i5 { background: rgba(255,165,0,0.1); border: 1px solid rgba(255,165,0,0.2); }
+  .q-text {
+    font-family: 'Barlow', sans-serif; font-size: 20px;
+    color: rgba(200,212,240,0.7); line-height: 1.4;
+  }
+  .q-text strong { color: #fff; font-weight: 600; }
+
+  /* ─── Bottom ─── */
+  .bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: auto; padding-top: 20px;
+  }
+  .contact {
+    font-family: 'Barlow', sans-serif; font-size: 15px; font-weight: 500;
+    color: rgba(200,212,240,0.4);
+  }
+  .contact strong { color: #FFA500; font-weight: 600; }
+  .swipe {
+    font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700;
+    color: #FFA500; text-transform: uppercase; letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="line-t"></div><div class="line-b"></div>
+  <div class="glow1"></div><div class="glow2"></div>
+  <div class="logo-bg"><img src="nta-logo-b.png" alt=""></div>
+
+  <div class="inner">
+    <div class="top">
+      <div class="brand"><img src="nta-logo.png" alt=""><span>NTA SkyNav</span></div>
+      <div class="badge">Community Feedback</div>
+    </div>
+
+    <div class="tag">Weather Briefing</div>
+    <h1>We're redesigning the<br>weather briefing.<br><span class="a">Help us get it right.</span></h1>
+    <p class="sub">The briefing is the foundation of every flight. We're rebuilding ours from scratch — and we need <strong>your perspective as a pilot</strong>.</p>
+
+    <div class="divider"></div>
+
+    <div class="questions">
+      <div class="q"><div class="q-icon i1">📋</div><span class="q-text">Is every piece of <strong>information</strong> you need there?</span></div>
+      <div class="q"><div class="q-icon i2">🔄</div><span class="q-text">Does the <strong>order</strong> match a real briefing flow?</span></div>
+      <div class="q"><div class="q-icon i3">➕</div><span class="q-text">Is anything <strong>missing</strong> that you rely on?</span></div>
+      <div class="q"><div class="q-icon i4">✂️</div><span class="q-text">Is anything there that <strong>shouldn't be</strong>?</span></div>
+      <div class="q"><div class="q-icon i5">☀️</div><span class="q-text">What would make this briefing <strong>perfect for you</strong>?</span></div>
+    </div>
+
+    <div class="bottom">
+      <div class="contact"><strong>DM</strong> · info@ntaskynav.app · <strong>Beta WhatsApp</strong></div>
+      <div class="swipe">See the briefing →</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
