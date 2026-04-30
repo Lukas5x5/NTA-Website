@@ -8,6 +8,10 @@
     {
       "source": "/auth/confirm",
       "destination": "/auth/confirm.html"
+    },
+    {
+      "source": "/auth/reset",
+      "destination": "/auth/reset.html"
     }
   ]
 }
