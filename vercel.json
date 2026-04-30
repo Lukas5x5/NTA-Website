@@ -1,8 +1,13 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/api/tiles/:z/:x/:y.png",
       "destination": "/api/tiles?z=:z&x=:x&y=:y"
+    },
+    {
+      "source": "/auth/confirm",
+      "destination": "/auth/confirm.html"
     }
   ]
 }
