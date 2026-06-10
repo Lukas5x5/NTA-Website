@@ -188,7 +188,7 @@
       <li><a href="index.html" data-i18n="nav.home">Home</a></li>
       <li><a href="features.html" data-i18n="nav.features">Features</a></li>
       <li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li>
-      <li><a href="beta.html" data-i18n="nav.beta">Beta</a></li>
+      <li><a href="beta.html" data-i18n="nav.beta">Download</a></li>
       <li><a href="about.html" data-i18n="nav.about">Über uns</a></li>
       <li><a href="updates.html" data-i18n="nav.updates">Updates</a></li>
       <li><a href="briefing.html" data-i18n="nav.briefing">Briefing</a></li>
@@ -204,7 +204,7 @@
   <a href="index.html" data-i18n="nav.home">Home</a>
   <a href="features.html" data-i18n="nav.features">Features</a>
   <a href="pricing.html" data-i18n="nav.pricing">Preise</a>
-  <a href="beta.html" data-i18n="nav.beta">Beta</a>
+  <a href="beta.html" data-i18n="nav.beta">Download</a>
   <a href="about.html" data-i18n="nav.about">Über uns</a>
 <a href="updates.html" data-i18n="nav.updates">Updates</a>
   <a href="briefing.html" data-i18n="nav.briefing">Briefing</a>
@@ -224,6 +224,186 @@
 
   <!-- ─── Updates Feed ─── -->
   <section class="updates-feed">
+
+    <!-- ═══ v1.2.0 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.120date">8. Juni 2026</div>
+      <div class="update-version feature">v1.2.0 – Feature Update</div>
+      <h2 class="update-title" data-i18n="updates.120title">capzlog.aero ist live, Schnell-Notizen, Flight Summary & Flotten-Buchung</h2>
+      <div class="update-body">
+        <p data-i18n="updates.120desc">Das größte Update seit dem Beta-Start: Die capzlog.aero-Integration ist offiziell live — Fahrten werden automatisch ins digitale Flugbuch übertragen. Dazu handschriftliche Schnell-Notizen, eine neue Fahrtübersicht im Boarding-Pass-Stil, Bug-Reports mit Antwort-Chat und ein Buchungskalender für Ballonbetriebe.</p>
+
+        <div class="change-section-label" data-i18n="updates.added">Hinzugefügt</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.120f1"><strong>capzlog.aero-Integration (Go-Live)</strong>: Fahrten werden automatisch ins capzlog.aero-Flugbuch übertragen — Auto-Push nach der Landung, Initial-Push für bestehende Fahrten, Status-Anzeige & manueller Retry. Für alle Nutzer in den Account-Einstellungen</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.120f2"><strong>Schnell-Notizen mit Handschrift</strong>: Zeichenfläche für Finger oder Stift (mit Druckempfindlichkeit), optionales Textfeld, mehrere Notizen mit Vorschau — perfekt für Frequenzen oder Freigaben während der Fahrt</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.120f3"><strong>Flight-Summary-Karte</strong>: Gespeicherte Fahrten erscheinen als elegante Boarding-Pass-Karte — Route, Datum, Dauer, Start/Landung, PIC, Ballon, Max-Höhe und Gasverbrauch auf einen Blick</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.120f4"><strong>Bug-Report-Chat</strong>: Direkter Zwei-Wege-Dialog mit dem Support inkl. geführter Fragen und automatischer Diagnose — jetzt für alle Nutzer freigeschaltet</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.120f5"><strong>Flotten- & Buchungsverwaltung für Ballonbetriebe</strong>: Ballone mit vollständigen Technikdaten, zentrale Gasflaschen-Bibliothek, Buchungskalender — gebuchte Ballone werden im Flight Planner automatisch vorgeschlagen</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.120f6"><strong>Startplatz auf der Karte wählen</strong>: Der Startplatz fürs Wetter-Briefing kann jetzt direkt auf der Karte gesetzt werden</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.120f7"><strong>Aktiver Fahrten-Ordner</strong>: Bewusst festlegen, in welchem Ordner neue Fahrten gespeichert werden (Stern-Button + Hinweis-Banner)</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.120f8"><strong>Automatische Sprache</strong>: Die App startet bei Erstnutzung in der Gerätesprache (Deutsch → DE, sonst Englisch)</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.120x1"><strong>Abo-Sicherheit</strong>: Pro-Status ist jetzt an genau einen Account gebunden — Übertragung nur noch bewusst über „Käufe wiederherstellen"</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.120x2"><strong>Start-/Lande-Pins</strong>: Sitzen nach „Track laden" wieder exakt an den gespeicherten Orten</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.120x3"><strong>Ortsnamen präziser</strong>: Start-/Landeort zeigt den Ortsteil statt nur die Gemeinde — und ohne angehängtes Bundesland</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.120x4"><strong>Höhendiagramme</strong>: Wetter-Briefing-Diagramme starten jetzt am Startplatz statt am Meeresspiegel, gewählte Startplatz-Höhe gilt im ganzen Wettersheet</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.120x5"><strong>Kennzeichen in der Fahrtübersicht</strong>: Wird aus dem mit der Fahrt gespeicherten Ballon gelesen — neues separates Kennzeichen-Feld im Ballonprofil</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.120x6"><strong>„Abo verwalten"</strong>: Öffnet jetzt zuverlässig die Abo-Verwaltung von Apple bzw. Google</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.improved">Verbessert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.120i1"><strong>Start- & Lande-Marker</strong>: Eigene Karten-Marker mit Ortsname und Uhrzeit im Popup</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.120i2"><strong>Track-Farbbalken</strong>: Umschalter zwischen Höhe und Geschwindigkeit direkt am Farbbalken</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.120i3"><strong>Team-Code speichern</strong>: Ein beigetretener Team-Code kann als eigener fester Code gespeichert werden</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.120i4"><strong>Aufgeräumtes System-Menü</strong>: Klarere Struktur, Vario wird auf Geräten ohne Barometer ausgeblendet</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══ v1.1.6 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.116date">14. April 2026</div>
+      <div class="update-version feature">v1.1.6 – Feature Update</div>
+      <h2 class="update-title" data-i18n="updates.116title">Precision GPS V2, Auto-Save, METAR-QNH & neue Onboardings</h2>
+      <div class="update-body">
+        <p data-i18n="updates.116desc">Komplett überarbeitete GPS-Pipeline im ForeFlight-Stil, automatisches Speichern jeder Fahrt, echtes Stations-QNH von METAR und geführte Einführungen für NaviPanel, Team, Gas und Wind.</p>
+
+        <div class="change-section-label" data-i18n="updates.added">Hinzugefügt</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.116f1"><strong>Auto-Save</strong>: Jede Fahrt wird bei Aufzeichnungsende oder Landeerkennung automatisch gespeichert (lokal + Cloud) — inkl. Start-/Landeort per Geocoding</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.116f2"><strong>Onboardings</strong>: Geführte Erklärungen beim ersten Öffnen von NaviPanel, Team, Gas und Wind</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.116f3"><strong>Ballon-Kennzeichen</strong>: Neues Feld „Registration" im Ballon-Editor</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.improved">Verbessert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.116i1"><strong>Precision GPS V2</strong>: „Render in the Past" — der Cursor läuft 1s gepuffert zwischen echten GPS-Fixes → 100% genaue Position bei butterweichen 60fps, kein Springen mehr</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.116i2"><strong>QNH von METAR</strong>: Echter Stationswert der nächsten METAR-Station statt Modellwert — automatisch bei GPS-Start und Takeoff</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.116i3"><strong>Track-Farben</strong>: 5-stufige Farbpalette (Grün → Rot) für feinere Differenzierung, Speed-Einheit aus den Settings</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.116i4"><strong>Excel-Export</strong>: Start-/Landeort als Ortsname statt Koordinaten</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.116i5"><strong>Settings-Backup</strong>: Alle Einstellungen + Ballonprofile werden nach dem Onboarding automatisch in die Cloud gesichert</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.116x1"><strong>Bildschirmsperre</strong>: Wake Lock verhindert automatisches Sperren während die App aktiv ist</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.116x2"><strong>iOS Cursor-Freeze</strong>: Permanenter Watchdog startet die Anzeige nach App-Wechsel zuverlässig neu</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.116x3"><strong>Stabilität</strong>: Main-Thread-Freezes behoben (GPS-Throttle, Track-Save-Debounce), Token-Refresh robuster</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.116x4"><strong>Kartentyp springt zurück</strong>: Gewählte Karte (OSM/Topo/SAT) bleibt gespeichert</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.116x5"><strong>„Aufzeichnung starten?"-Popup</strong>: Erscheint nur noch bei echter Bewegung oder echtem Steigen</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══ v1.1.5 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.115date">7. April 2026</div>
+      <div class="update-version feature">v1.1.5 – Feature Update</div>
+      <h2 class="update-title" data-i18n="updates.115title">Flight Planner Wizard, Offline-Karten in Topo & Luftraum-Fixes</h2>
+      <div class="update-body">
+        <p data-i18n="updates.115desc">Neuer geführter Flugplanungs-Wizard von Ballonwahl bis Wetter-PDF, Offline-Karten jetzt auch als Topo-Karte und viele Detailverbesserungen.</p>
+
+        <div class="change-section-label" data-i18n="updates.added">Hinzugefügt</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.115f1"><strong>Flight Planner Wizard</strong>: Geführter 4-Schritt-Flow — Ballon auswählen → Passagiere → Flugparameter → Wetter (Standort, Tag, Uhrzeit, Modell) → erstellt automatisch das Briefing-PDF</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.115f2"><strong>Offline-Karten in Topo</strong>: Beim Download ist jetzt OSM oder Topo wählbar</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.115f3"><strong>Eigener Hüllentyp</strong>: Beim Ballon-Erstellen frei eingebbar (z. B. Sonderformen)</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.improved">Verbessert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.115i1"><strong>Pilotengewicht global</strong>: Wird einmal unter Account → Einstellungen gepflegt und automatisch für alle Berechnungen verwendet</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.115i2"><strong>Wetter-API stabiler</strong>: Anfragen gedrosselt, automatischer Retry, klare Fehlermeldung statt kryptischer API-Fehler</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.115i3"><strong>Briefing-Erfolgsmeldung</strong>: Nach PDF-Erstellung mit direktem PDF-Viewer-Button</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.115x1"><strong>Lufträume verschwinden beim Zoomen</strong>: Große Lufträume werden jetzt auch erkannt, wenn alle Eckpunkte außerhalb des Bildschirms liegen</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.115x2"><strong>HDG/Speed nach GPS-Neustart</strong>: Rohe GPS-Werte als Startwert, HDG zeigt „--" bei Stillstand</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.115x3"><strong>Track-Sprung bei Landeprognose</strong>: Sprung-Guard verwirft Punkte über 500m Distanz</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.115x4"><strong>Outdoor-Modus</strong>: Inaktive Footer-Buttons sind wieder sichtbar</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══ v1.1.4 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.114date">4. April 2026</div>
+      <div class="update-version patch">v1.1.4 – Patch</div>
+      <h2 class="update-title" data-i18n="updates.114title">Stabilität: Gas-Tracker & Auto-Abheben</h2>
+      <div class="update-body">
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.114x1"><strong>Gas-Tracker Crash (Android)</strong>: Endlose Schleife bei leeren Gasflaschen behoben</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.114x2"><strong>Tastatur-Crash (iOS)</strong>: Absturz bei bestimmten Tastatur-Events behoben</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.114x3"><strong>Auto-Abheben empfindlicher</strong>: Vario-Schwelle gesenkt — erkennt auch langsames Abheben zuverlässig</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══ v1.1.3 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.113date">2. April 2026</div>
+      <div class="update-version patch">v1.1.3 – Patch</div>
+      <h2 class="update-title" data-i18n="updates.113title">Cloud-Sync Dialog, Live-Vario für die Landeprognose & Android-Glättung</h2>
+      <div class="update-body">
+        <div class="change-section-label" data-i18n="updates.improved">Verbessert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.113i1"><strong>Cloud-Sync Dialog</strong>: Beim Schließen der Einstellungen fragt die App, ob Änderungen in der Cloud gespeichert werden sollen</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.113i2"><strong>Landeprognose mit Live-Vario</strong>: Neuer Toggle nutzt die aktuelle Sinkgeschwindigkeit vom Barometer/GPS statt des manuellen Sliders</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.113i3"><strong>NavPanel-Einstellungen</strong>: Feld-Editor bleibt offen, bis man ihn bewusst schließt</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.113x1"><strong>Höhe/Vario springt (Android)</strong>: Barometer-Glättung + sauberere Vario-Berechnung</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.113x2"><strong>Landung-Popup</strong>: Hat jetzt einen X-Button zum Schließen</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.113x3"><strong>Crew Add-on Kauf</strong>: Fallback über direkte Produkt-ID, wenn das Package nicht im Angebot enthalten ist</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══ v1.1.2 ═══ -->
+    <div class="update-card reveal">
+      <div class="update-date" data-i18n="updates.112date">2. April 2026</div>
+      <div class="update-version feature">v1.1.2 – Feature Update</div>
+      <h2 class="update-title" data-i18n="updates.112title">Automatische Start- & Lande-Erkennung, Pro-Abo, E-Mail-Login & GFS-Modell</h2>
+      <div class="update-body">
+        <p data-i18n="updates.112desc">Die App erkennt Abheben und Landung jetzt automatisch und steuert die Aufzeichnung selbst. Dazu E-Mail-Registrierung, das Pro-Abo als In-App-Kauf, offene Anmeldung für alle und GFS als fünftes Wettermodell.</p>
+
+        <div class="change-section-label" data-i18n="updates.added">Hinzugefügt</div>
+        <ul class="change-list">
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.112f1"><strong>Automatische Abheben-Erkennung</strong>: Erkennt den Start über Vario + GPS-Höhe und beginnt die Aufzeichnung von selbst (abschaltbar)</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.112f2"><strong>Automatische Landeerkennung</strong>: Erkennt die Landung und pausiert Aufzeichnung + Gas-Tracker — „Nicht gelandet" setzt alles fort</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.112f3"><strong>E-Mail-Registrierung & Passwort-Reset</strong>: Account mit E-Mail + Passwort, zusätzlich zu Apple- und Google-Login</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.112f4"><strong>Pro-Abo als In-App-Kauf</strong>: Jährlich oder monatlich direkt im App Store / Play Store, inkl. Crew Add-on — Preise live aus dem Store</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.112f5"><strong>GFS-Wettermodell</strong>: NOAA GFS (weltweit) als fünftes Modell beim Briefing wählbar</span></li>
+          <li><span class="change-tag new">New</span> <span data-i18n="updates.112f6"><strong>Nutzungsbedingungen in der App</strong>: Disclaimer beim ersten Login, jederzeit unter Account → Rechtliches einsehbar</span></li>
+        </ul>
+
+        <div class="change-section-label" data-i18n="updates.improved">Verbessert</div>
+        <ul class="change-list">
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.112i1"><strong>Offene Anmeldung</strong>: Der Beta-Check ist Geschichte — jeder kann sich registrieren, der Beta-Status bestimmt nur noch den Preis</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.112i2"><strong>AUTO-REC-Button</strong>: Zeigt bei aktiver Auto-Erkennung ein grünes AUTO-Design</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.112i3"><strong>Frequenz-Klick</strong>: Tippe auf die FIS-Frequenz im NavPanel → zeigt alle Lufträume an der aktuellen Position</span></li>
+          <li><span class="change-tag change">Changed</span> <span data-i18n="updates.112i4"><strong>Track-Farbe</strong>: Höhen-Farbverlauf ist jetzt Standard</span></li>
+        </ul>
+
+        <div class="change-section-label">Fixes</div>
+        <ul class="change-list">
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.112x1"><strong>Hindernis-Warnton</strong>: Warnt jetzt auch, wenn Hindernisse nicht auf der Karte eingeblendet sind</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.112x2"><strong>Große Beschränkungsgebiete</strong>: Proximity-Check von 5 km auf 30 km erweitert — große Sperrgebiete werden korrekt erkannt</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.112x3"><strong>Fahrten offline</strong>: Ordner laden sofort aus dem Cache — kein 30s-Hänger mehr</span></li>
+          <li><span class="change-tag fix">Fix</span> <span data-i18n="updates.112x4"><strong>Track-Lücke beim Fortsetzen</strong>: Keine falsche Verbindungslinie nach App-Neustart</span></li>
+        </ul>
+      </div>
+    </div>
 
     <!-- ═══ v1.1.1 ═══ -->
     <div class="update-card reveal">

@@ -1,585 +1,883 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NTA SkyNav – Die Navigations-App für Ballonpiloten</title>
-  <meta name="description" content="NTA SkyNav – Die erste App speziell für Ballonpiloten. GPS Navigation, ICAO Karten, Wettermodelle, Load Calculator, Sprachchat und Live Team Tracking.">
-  <meta property="og:title" content="NTA SkyNav – Balloon Navigation App">
-  <meta property="og:description" content="Die erste App nur für Ballonpiloten. GPS Navigation, ICAO Karten, Wettermodelle, Load Calculator und Live Team Tracking.">
-  <meta property="og:type" content="website">
-  <link rel="icon" type="image/png" href="nta-logo.png">
-  <link rel="apple-touch-icon" href="nta-logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* ═══ INDEX PAGE STYLES ═══ */
-
-    /* ─── Hero fullscreen ─── */
-    .idx-hero {
-      min-height: 100vh; display: flex; align-items: center; position: relative;
-      overflow: hidden; padding: 120px 0 80px;
-    }
-    .idx-hero .container {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
-    }
-
-    /* Animated gradient blob behind phone */
-    .hero-blob {
-      position: absolute; width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,165,0,0.12), rgba(0,200,255,0.06), transparent 70%);
-      right: 5%; top: 50%; transform: translateY(-50%);
-      animation: blobFloat 8s ease-in-out infinite;
-      pointer-events: none; z-index: 0;
-    }
-    @keyframes blobFloat {
-      0%, 100% { transform: translateY(-50%) scale(1) rotate(0deg); }
-      33% { transform: translateY(-52%) scale(1.05) rotate(5deg); }
-      66% { transform: translateY(-48%) scale(0.97) rotate(-3deg); }
-    }
-
-    .idx-badge {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 6px 18px 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 600;
-      background: rgba(255,165,0,0.08); border: 1px solid rgba(255,165,0,0.15);
-      color: var(--amber); margin-bottom: 24px;
-      animation: badgeFadeIn 0.8s ease both;
-    }
-    .idx-badge .dot {
-      width: 8px; height: 8px; border-radius: 50%; background: var(--amber);
-      animation: pulse 2s infinite;
-    }
-    @keyframes badgeFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-    .idx-title {
-      font-size: clamp(36px, 5.5vw, 72px); line-height: 1.02; margin-bottom: 20px;
-      animation: titleSlideUp 0.9s ease 0.15s both;
-    }
-    .idx-title .accent { color: var(--amber); }
-    @keyframes titleSlideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .idx-desc {
-      font-size: 17px; color: var(--text-muted); line-height: 1.7; max-width: 480px;
-      animation: fadeUp 0.8s ease 0.3s both;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Waitlist */
-    .idx-waitlist {
-      margin-top: 32px; max-width: 460px;
-      animation: fadeUp 0.8s ease 0.45s both;
-    }
-    .idx-wl-label { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px; color: var(--amber); letter-spacing: 1px; margin-bottom: 10px; }
-    .idx-wl-row {
-      display: flex; border-radius: 14px; overflow: hidden;
-      border: 1px solid rgba(255,165,0,0.2); background: rgba(17,24,39,0.65);
-      backdrop-filter: blur(16px); transition: border-color 0.3s;
-    }
-    .idx-wl-row:focus-within { border-color: var(--amber); }
-    .idx-wl-row input {
-      flex: 1; padding: 15px 18px; background: transparent; border: none;
-      color: #fff; font-family: 'Barlow', sans-serif; font-size: 15px; outline: none; min-width: 0;
-    }
-    .idx-wl-row input::placeholder { color: rgba(200,212,240,0.3); }
-    .idx-wl-row button {
-      padding: 15px 26px; background: var(--amber); border: none; color: var(--navy);
-      font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer;
-      text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;
-      transition: background 0.2s, transform 0.15s; display: flex; align-items: center; gap: 8px;
-    }
-    .idx-wl-row button:hover { background: #ffb732; transform: scale(1.02); }
-    .idx-wl-row button:active { transform: scale(0.98); }
-    .idx-wl-hint { font-size: 12px; color: rgba(200,212,240,0.25); margin-top: 8px; }
-    .idx-wl-success {
-      display: none; padding: 14px; background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.2); border-radius: 14px;
-      color: #22c55e; font-size: 14px; font-weight: 600; text-align: center;
-    }
-
-    /* Phone mockup in hero */
-    .idx-hero-phone {
-      position: relative; z-index: 2; display: flex; justify-content: center;
-      animation: phoneFloat 6s ease-in-out infinite, phoneAppear 1s ease 0.4s both;
-    }
-    @keyframes phoneFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-    @keyframes phoneAppear {
-      from { opacity: 0; transform: translateY(40px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    /* ─── Scrolling marquee ─── */
-    .idx-marquee {
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      overflow: hidden; padding: 18px 0; position: relative;
-    }
-    .idx-marquee::before, .idx-marquee::after {
-      content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2;
-    }
-    .idx-marquee::before { left: 0; background: linear-gradient(90deg, var(--navy), transparent); }
-    .idx-marquee::after { right: 0; background: linear-gradient(270deg, var(--navy), transparent); }
-    .marquee-track {
-      display: flex; gap: 48px; animation: marqueeScroll 30s linear infinite; width: max-content;
-    }
-    .marquee-item {
-      display: flex; align-items: center; gap: 10px; white-space: nowrap;
-      font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 600;
-      color: rgba(200,212,240,0.4); letter-spacing: 1px; text-transform: uppercase;
-    }
-    .marquee-item svg { width: 18px; height: 18px; stroke: var(--amber); fill: none; stroke-width: 2; opacity: 0.6; }
-    @keyframes marqueeScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* ─── Stats with counter animation ─── */
-    .idx-stats {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .idx-stat {
-      text-align: center; padding: 48px 20px;
-      border-right: 1px solid var(--border);
-      transition: background 0.4s;
-    }
-    .idx-stat:last-child { border-right: none; }
-    .idx-stat:hover { background: rgba(255,165,0,0.03); }
-    .idx-stat-num {
-      font-family: 'Rajdhani', sans-serif; font-size: 48px; font-weight: 700;
-      color: var(--amber); line-height: 1;
-    }
-    .idx-stat-label { font-size: 13px; color: rgba(200,212,240,0.35); margin-top: 6px; letter-spacing: 0.5px; }
-
-    /* ─── Feature showcases ─── */
-    .idx-showcase {
-      padding: 100px 0; position: relative;
-    }
-    .idx-showcase + .idx-showcase { border-top: 1px solid var(--border); }
-    .idx-sc-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-      max-width: 1100px; margin: 0 auto; padding: 0 40px;
-    }
-    .idx-sc-grid.flip { direction: rtl; }
-    .idx-sc-grid.flip > * { direction: ltr; }
-
-    .idx-sc-label {
-      font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 700;
-      letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px;
-    }
-    .idx-sc-title {
-      font-family: 'Rajdhani', sans-serif; font-size: 38px; font-weight: 700;
-      color: #fff; line-height: 1.1; margin-bottom: 16px;
-    }
-    .idx-sc-title em { font-style: normal; color: var(--amber); }
-    .idx-sc-desc { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
-    .idx-sc-list { list-style: none; padding: 0; }
-    .idx-sc-list li {
-      padding: 7px 0; font-size: 14px; color: rgba(200,212,240,0.6);
-      display: flex; align-items: flex-start; gap: 12px;
-    }
-    .idx-sc-list li .bullet {
-      width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0; margin-top: 1px;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(255,165,0,0.1);
-    }
-    .idx-sc-list li .bullet svg { width: 12px; height: 12px; stroke: var(--amber); fill: none; stroke-width: 2.5; }
-
-    .idx-sc-phone { display: flex; justify-content: center; position: relative; }
-
-    /* Glow ring behind phone in showcase */
-    .idx-sc-phone::before {
-      content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,200,255,0.08), transparent 70%);
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-    }
-
-    /* ─── All features ticker grid ─── */
-    .idx-grid-section { padding: 80px 0; border-top: 1px solid var(--border); }
-    .idx-grid-header { text-align: center; margin-bottom: 48px; }
-    .idx-feat-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1px; background: var(--border); max-width: 1200px; margin: 0 auto;
-    }
-    .idx-feat-card {
-      background: var(--navy); padding: 28px 24px; position: relative; overflow: hidden;
-      transition: background 0.3s, transform 0.25s;
-    }
-    .idx-feat-card::after {
-      content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0;
-      background: var(--amber); transition: height 0.4s ease;
-    }
-    .idx-feat-card:hover { background: rgba(255,165,0,0.02); }
-    .idx-feat-card:hover::after { height: 100%; }
-    .idx-fc-icon {
-      width: 36px; height: 36px; border-radius: 9px; margin-bottom: 14px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .idx-fc-icon.a { background: rgba(255,165,0,0.1); color: var(--amber); }
-    .idx-fc-icon.c { background: rgba(0,200,255,0.1); color: var(--cyan); }
-    .idx-feat-card h3 { font-family: 'Rajdhani', sans-serif; font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .idx-feat-card p { font-size: 12.5px; color: rgba(200,212,240,0.4); line-height: 1.5; }
-
-    /* ─── CTA ─── */
-    .idx-cta {
-      text-align: center; padding: 100px 40px; border-top: 1px solid var(--border);
-      position: relative; overflow: hidden;
-    }
-    .idx-cta::before {
-      content: ''; position: absolute; bottom: -200px; left: 50%; transform: translateX(-50%);
-      width: 700px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,165,0,0.06), transparent 70%);
-      pointer-events: none;
-    }
-
-    /* ─── Responsive ─── */
-    @media (max-width: 900px) {
-      .idx-hero .container { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-      .idx-hero .container .idx-hero-phone { order: -1; }
-      .idx-desc { margin: 0 auto; }
-      .idx-waitlist { margin: 32px auto 0; }
-      .hero-blob { display: none; }
-      .idx-stats { grid-template-columns: repeat(2, 1fr); }
-      .idx-stat { border-bottom: 1px solid var(--border); }
-      .idx-sc-grid, .idx-sc-grid.flip { grid-template-columns: 1fr; gap: 40px; text-align: center; direction: ltr; }
-      .idx-sc-list { display: inline-block; text-align: left; }
-      .idx-sc-phone::before { width: 200px; height: 200px; }
-    }
-    @media (max-width: 600px) {
-      .idx-title { font-size: clamp(28px, 9vw, 48px); }
-      .idx-desc { font-size: 14px; }
-      .idx-wl-row { flex-direction: column; }
-      .idx-wl-row input { padding: 14px 16px; }
-      .idx-wl-row button { padding: 14px; justify-content: center; }
-      .idx-stats { grid-template-columns: 1fr 1fr; }
-      .idx-stat-num { font-size: 36px; }
-      .idx-feat-grid { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTA SkyNav – Die Navigations-App für Ballonpiloten</title>
+<meta name="description" content="Die erste App speziell für Ballonpiloten. GPS, ICAO-Karten, 5 Wettermodelle, Load Calculator, Live Team Tracking und capzlog.aero-Integration — alles offline.">
+<meta property="og:title" content="NTA SkyNav – Die Navigations-App für Ballonpiloten">
+<meta property="og:description" content="Die erste App speziell für Ballonpiloten. GPS, ICAO-Karten, 5 Wettermodelle, Load Calculator, Live Team Tracking und capzlog.aero-Integration — alles offline.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="nta-logo.png">
+<link rel="apple-touch-icon" href="nta-logo.png">
+<script src="./support.js"></script>
 </head>
 <body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:ital,opsz,wght@1,9..144,300..600&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #070b16; overflow-x: hidden; }
+    ::selection { background: #FFA500; color: #070b16; }
+    img { -webkit-user-drag: none; }
+    @keyframes marqueeL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes marqueeR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+    @keyframes glowpulse { 0%, 100% { opacity: .5; } 50% { opacity: .9; } }
+    @keyframes scrollhint { 0% { transform: translateY(-100%); } 60% { transform: translateY(100%); } 100% { transform: translateY(100%); } }
+    @keyframes twinkle { 0%, 100% { opacity: .12; } 50% { opacity: .65; } }
+    @keyframes blip { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,200,255,.5); } 50% { box-shadow: 0 0 0 6px rgba(0,200,255,0); } }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+    @media (max-width: 860px) { [data-mq-hide] { display: none !important; } }
+  </style>
+</helmet>
 
-<canvas id="starfield"></canvas>
-<div class="grid-overlay"></div>
+<div style="background: #070b16; color: #EDF1F7; font-family: 'Rajdhani', sans-serif; line-height: 1.4; min-height: 100vh">
 
-<!-- ═══ Navigation ═══ -->
-<nav class="navbar">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon"></a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active" data-i18n="nav.home">Home</a></li>
-      <li><a href="features.html" data-i18n="nav.features">Features</a></li>
-      <li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li>
-      <li><a href="beta.html" data-i18n="nav.beta">Beta</a></li>
-      <li><a href="about.html" data-i18n="nav.about">Über uns</a></li>
-      <li><a href="updates.html" data-i18n="nav.updates">Updates</a></li>
-      <li><a href="briefing.html" data-i18n="nav.briefing">Briefing</a></li>
-    </ul>
-    <div class="lang-toggle">
-      <button class="lang-toggle-btn active" data-lang="de">DE</button>
-      <button class="lang-toggle-btn" data-lang="en">EN</button>
+  <!-- ════ NAV ════ -->
+  <header data-nav="" style="position: fixed; top: 0; left: 0; right: 0; z-index: 80; transition: background .4s ease, border-color .4s ease, transform .5s cubic-bezier(.2,.65,.2,1); border-bottom: 1px solid transparent">
+    <!-- announcement bar -->
+    <div data-announce="" style="overflow: hidden; background: linear-gradient(90deg, rgba(255,165,0,.14), rgba(0,200,255,.1)); border-bottom: 1px solid rgba(255,255,255,.07); transition: max-height .5s ease, opacity .4s ease; max-height: 40px">
+      <div style="max-width: 1480px; margin: 0 auto; padding: 8px clamp(20px, 4vw, 48px); display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(237,241,247,.8)">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #FFA500; box-shadow: 0 0 8px #FFA500; animation: blip 2.4s ease-in-out infinite"></span>
+        <span>Neu: capzlog.aero-Partnerschaft — Fahrtenbuch schreibt sich von selbst</span>
+        <a href="#partner" style="color: #FFA500; text-decoration: none; white-space: nowrap" style-hover="color: #ffb733">Mehr →</a>
+      </div>
     </div>
-    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-<div class="mobile-nav">
-  <a href="index.html" class="active" data-i18n="nav.home">Home</a>
-  <a href="features.html" data-i18n="nav.features">Features</a>
-  <a href="pricing.html" data-i18n="nav.pricing">Preise</a>
-  <a href="beta.html" data-i18n="nav.beta">Beta</a>
-  <a href="about.html" data-i18n="nav.about">Über uns</a>
-  <a href="updates.html" data-i18n="nav.updates">Updates</a>
-  <a href="briefing.html" data-i18n="nav.briefing">Briefing</a>
-</div>
+    <nav style="max-width: 1480px; margin: 0 auto; padding: 14px clamp(20px, 4vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 24px">
+      <a data-navitem="" href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #EDF1F7; opacity: 0; transform: translateY(-16px)">
+        <img src="assets/nta-logo-b.png" alt="NTA SkyNav Logo" style="width: 60px; height: 60px; object-fit: contain; filter: drop-shadow(0 0 12px rgba(255,165,0,.25))">
+        <span style="display: flex; flex-direction: column; line-height: 1">
+          <span style="font-weight: 700; font-size: 19px; letter-spacing: .04em">NTA <span style="color: #FFA500">SkyNav</span></span>
+          <span style="font-size: 10px; letter-spacing: .32em; text-transform: uppercase; color: rgba(237,241,247,.5); margin-top: 3px">Balloon Navigation</span>
+        </span>
+      </a>
+      <div data-mq-hide="" style="display: flex; align-items: center; gap: clamp(16px, 2.2vw, 34px); font-weight: 600; font-size: 16px; letter-spacing: .08em; text-transform: uppercase">
+        <a data-navitem="" data-navlink="story" href="#story" style="position: relative; color: rgba(237,241,247,.75); text-decoration: none; padding: 4px 0; opacity: 0; transform: translateY(-16px)" style-hover="color: #FFA500">Story<span data-underline="" style="position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%; background: #FFA500; transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2,.65,.2,1)"></span></a>
+        <a data-navitem="" data-navlink="fahrten" href="#fahrten" style="position: relative; color: rgba(237,241,247,.75); text-decoration: none; padding: 4px 0; opacity: 0; transform: translateY(-16px)" style-hover="color: #FFA500">Fahrten<span data-underline="" style="position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%; background: #FFA500; transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2,.65,.2,1)"></span></a>
+        <a data-navitem="" data-navlink="features" href="#features" style="position: relative; color: rgba(237,241,247,.75); text-decoration: none; padding: 4px 0; opacity: 0; transform: translateY(-16px)" style-hover="color: #FFA500">Features<span data-underline="" style="position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%; background: #FFA500; transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2,.65,.2,1)"></span></a>
+        <a data-navitem="" data-navlink="partner" href="#partner" style="position: relative; color: rgba(237,241,247,.75); text-decoration: none; padding: 4px 0; opacity: 0; transform: translateY(-16px)" style-hover="color: #FFA500">Partner<span data-underline="" style="position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%; background: #FFA500; transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2,.65,.2,1)"></span></a>
+        <a data-navitem="" data-navlink="preise" href="#preise" style="position: relative; color: rgba(237,241,247,.75); text-decoration: none; padding: 4px 0; opacity: 0; transform: translateY(-16px)" style-hover="color: #FFA500">Preise<span data-underline="" style="position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%; background: #FFA500; transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2,.65,.2,1)"></span></a>
+      </div>
+      <div data-navitem="" style="display: flex; align-items: center; gap: 16px; opacity: 0; transform: translateY(-16px)">
+        <a data-magnetic="" href="#abheben" style="display: inline-block; background: #FFA500; color: #070b16; font-weight: 700; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; padding: 11px 24px; border-radius: 999px; text-decoration: none; box-shadow: 0 0 24px rgba(255,165,0,.25)" style-hover="background: #ffb733">App holen</a>
+      </div>
+    </nav>
+    <!-- scroll progress -->
+    <div style="position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: transparent">
+      <div data-progress="" style="height: 100%; width: 0%; background: linear-gradient(90deg, #FFA500, #00C8FF)"></div>
+    </div>
+  </header>
 
-<main>
+  <!-- ════ 1 · HERO ════ -->
+  <section id="top" data-screen-label="Hero" style="position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; text-align: center; padding: clamp(120px, 16vh, 170px) 20px 0; background: radial-gradient(1100px 560px at 50% -8%, rgba(0,200,255,.09), transparent 65%), radial-gradient(900px 500px at 85% 30%, rgba(255,165,0,.05), transparent 60%); overflow: hidden">
 
-  <!-- ═══ HERO ═══ -->
-  <section class="idx-hero">
-    <div class="hero-blob"></div>
-    <div class="container">
-      <div>
-        <div class="idx-badge">
-          <span class="dot"></span>
-          <span data-i18n="index.badge">Bald verfügbar für iPhone, iPad & Android</span>
-        </div>
+    <div style="display: inline-flex; align-items: center; gap: 14px; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: 10px 22px; backdrop-filter: blur(12px); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 12px 36px rgba(0,0,0,.35); margin-bottom: clamp(24px, 4vh, 44px); font-size: 13px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(237,241,247,.85)">
+      <span>iPhone</span>
+      <span style="width: 3px; height: 3px; border-radius: 50%; background: #FFA500"></span>
+      <span>iPad</span>
+      <span style="width: 3px; height: 3px; border-radius: 50%; background: #FFA500"></span>
+      <span>Android</span>
+    </div>
 
-        <h1 class="idx-title">
-          <span data-i18n="index.heroTitle1">Deine Ballon-<br>Navigation.</span><br>
-          <span class="accent" data-i18n="index.heroTitle2">Einfach professionell.</span>
-        </h1>
+    <h1 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(46px, 10.5vw, 176px); line-height: .96; letter-spacing: -.015em; text-transform: uppercase; color: #EDF1F7">
+      <span data-hero-word="" style="display: block">Deine</span>
+      <span data-hero-word="" style="display: block">Ballon-</span>
+      <span data-hero-word="" style="display: block">Navigation<span style="color: #FFA500">.</span></span>
+    </h1>
 
-        <p class="idx-desc" data-i18n="index.heroDesc">
-          NTA SkyNav ist die erste App speziell für Ballonpiloten.
-          GPS, ICAO-Karten, Wettermodelle, Load Calculator und
-          Live Team Tracking — alles an einem Ort, auch offline.
-        </p>
+    <p style="margin: clamp(10px, 2vh, 22px) 0 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 380; font-size: clamp(26px, 4.4vw, 64px); color: #FFA500; opacity: 0; transform: translateY(36px)" data-reveal="" data-delay="650">Einfach professionell.</p>
 
-        <div class="idx-waitlist">
-          <div class="idx-wl-label" data-i18n="index.waitlistTitle">Auf die Warteliste</div>
-          <div class="idx-wl-row" id="waitlistBox">
-            <input type="email" id="waitlistEmail" placeholder="deine@email.at" autocomplete="email" data-i18n="index.waitlistPlaceholder" data-i18n-attr="placeholder">
-            <button onclick="handleWaitlist()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              <span data-i18n="index.waitlistBtn">Platz sichern</span>
-            </button>
+    <p style="max-width: 660px; margin: clamp(20px, 3vh, 34px) auto 0; font-size: clamp(17px, 1.6vw, 21px); font-weight: 500; color: rgba(237,241,247,.66); text-wrap: pretty; opacity: 0; transform: translateY(36px)" data-reveal="" data-delay="800">Schluss mit fünf Apps im Korb. SkyNav vereint Präzisions-GPS, ICAO-Karten für 113 Länder, fünf Wettermodelle, Load Calculator und Live Team Tracking in einer App — gebaut von einem Piloten, der sie selbst jede Fahrt nutzt. Funktioniert auch ganz ohne Empfang.</p>
+
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: clamp(26px, 4vh, 42px); opacity: 0; transform: translateY(36px)" data-reveal="" data-delay="950">
+      <a data-magnetic="" href="#abheben" style="display: inline-block; background: #FFA500; color: #070b16; font-weight: 700; font-size: 17px; letter-spacing: .1em; text-transform: uppercase; padding: 16px 38px; border-radius: 999px; text-decoration: none; box-shadow: 0 12px 40px rgba(255,165,0,.3)" style-hover="background: #ffb733">App holen</a>
+      <a data-magnetic="" href="#features" style="display: inline-block; background: transparent; color: #EDF1F7; font-weight: 600; font-size: 17px; letter-spacing: .1em; text-transform: uppercase; padding: 16px 38px; border-radius: 999px; text-decoration: none; border: 1px solid rgba(237,241,247,.28)" style-hover="border-color: #00C8FF; color: #00C8FF">Features ansehen</a>
+    </div>
+
+    <!-- ambient particles -->
+    <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 1">
+      <span style="position: absolute; top: 18%; left: 8%; width: 5px; height: 5px; border-radius: 50%; background: #00C8FF; animation: twinkle 4.2s ease-in-out infinite, floaty 11s ease-in-out infinite"></span>
+      <span style="position: absolute; top: 30%; left: 16%; width: 3px; height: 3px; border-radius: 50%; background: #EDF1F7; animation: twinkle 5.8s ease-in-out 1s infinite, floaty 9s ease-in-out infinite"></span>
+      <span style="position: absolute; top: 62%; left: 11%; width: 4px; height: 4px; border-radius: 50%; background: #FFA500; animation: twinkle 5s ease-in-out .4s infinite, floaty 13s ease-in-out infinite"></span>
+      <span style="position: absolute; top: 44%; left: 27%; width: 3px; height: 3px; border-radius: 50%; background: #00C8FF; animation: twinkle 6.4s ease-in-out 2s infinite, floaty 10s ease-in-out infinite"></span>
+      <span style="position: absolute; top: 22%; right: 9%; width: 4px; height: 4px; border-radius: 50%; background: #FFA500; animation: twinkle 4.6s ease-in-out .8s infinite, floaty 12s ease-in-out infinite"></span>
+      <span style="position: absolute; top: 38%; right: 19%; width: 3px; height: 3px; border-radius: 50%; background: #EDF1F7; animation: twinkle 6s ease-in-out 1.6s infinite, floaty 9.5s ease-in-out infinite"></span>
+      <span style="position: absolute; top: 66%; right: 12%; width: 5px; height: 5px; border-radius: 50%; background: #00C8FF; animation: twinkle 5.4s ease-in-out 2.4s infinite, floaty 11.5s ease-in-out infinite"></span>
+      <span style="position: absolute; top: 78%; left: 38%; width: 3px; height: 3px; border-radius: 50%; background: #EDF1F7; animation: twinkle 7s ease-in-out .2s infinite, floaty 10.5s ease-in-out infinite"></span>
+      <span style="position: absolute; top: 74%; right: 30%; width: 3px; height: 3px; border-radius: 50%; background: #FFA500; animation: twinkle 5.2s ease-in-out 1.2s infinite, floaty 12.5s ease-in-out infinite"></span>
+    </div>
+
+    <!-- floating phone -->
+    <div style="position: relative; margin-top: clamp(48px, 8vh, 90px); margin-bottom: clamp(56px, 9vh, 100px); z-index: 2">
+      <div data-hero-glow="" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: min(760px, 110vw); height: min(760px, 110vw); background: radial-gradient(circle, rgba(255,165,0,.26) 0%, rgba(0,200,255,.10) 42%, transparent 68%); filter: blur(46px); animation: glowpulse 7s ease-in-out infinite; pointer-events: none"></div>
+
+      <!-- giant outline word behind phone -->
+      <div aria-hidden="true" style="position: absolute; inset: -8vw 0; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 0">
+        <span data-plx="-0.3" style="font-family: 'Archivo Black', sans-serif; font-size: clamp(120px, 24vw, 400px); line-height: 1; text-transform: uppercase; white-space: nowrap; color: transparent; -webkit-text-stroke: 1.5px rgba(237,241,247,.07)">SkyNav</span>
+      </div>
+
+      <!-- editorial statements beside the phone -->
+      <div data-mq-hide="" aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; z-index: 3">
+        <div data-plx="0.55" style="position: absolute; top: 24%; left: -330px; width: 250px; text-align: right">
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 12px; animation: floaty 10s ease-in-out infinite">
+            <span style="display: block; width: 56px; height: 1px; background: linear-gradient(to left, #FFA500, transparent)"></span>
+            <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 360; font-size: 27px; line-height: 1.25; color: rgba(237,241,247,.8)">Entwickelt in Österreich —</span>
+            <span style="font-size: 13px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: rgba(237,241,247,.45)">aus dem Korb heraus</span>
           </div>
-          <div class="idx-wl-hint" data-i18n="index.waitlistDesc">Werde benachrichtigt beim Launch — inkl. 7 Tage kostenlos testen.</div>
-          <div class="idx-wl-success" id="waitlistSuccess">
-            <span data-i18n="index.waitlistSuccess">Du bist auf der Warteliste! Wir melden uns beim Launch.</span>
+        </div>
+        <div data-plx="0.75" style="position: absolute; bottom: 26%; right: -335px; width: 255px; text-align: left">
+          <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px; animation: floaty 11.5s ease-in-out -5s infinite">
+            <span style="display: block; width: 56px; height: 1px; background: linear-gradient(to right, #00C8FF, transparent)"></span>
+            <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 360; font-size: 27px; line-height: 1.25; color: rgba(237,241,247,.8)">von einem aktiven Ballonpiloten.</span>
+            <span style="font-size: 13px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: rgba(237,241,247,.45)">für Piloten</span>
           </div>
         </div>
       </div>
 
-      <div class="idx-hero-phone">
-        <div class="mockup-iphone mockup-lg">
-          <div class="screen">
-            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;filter:brightness(1.7);">
-              <source src="Video 26.03.26, 09 50 34.mp4" type="video/mp4">
-              <img src="Start 1.jpeg" alt="NTA SkyNav">
-            </video>
+      <div style="animation: floaty 9s ease-in-out infinite; position: relative; z-index: 2">
+        <div style="position: relative; width: min(330px, 72vw); aspect-ratio: 784 / 1600; background: #0b101e; border-radius: clamp(40px, 11vw, 54px); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 60px 140px rgba(0,0,0,.7), 0 0 0 10px #04060c, 0 0 80px rgba(255,165,0,.12); overflow: hidden">
+          <img src="assets/GPS HUD.jpeg" alt="NTA SkyNav GPS-Navigation mit NAV-Panel" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit">
+          <div style="position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 32%; height: 24px; background: #04060c; border-radius: 16px"></div>
+        </div>
+      </div>
+    </div>
+
+    <div data-mq-hide="" style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; color: rgba(237,241,247,.45); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; font-weight: 600; z-index: 3">
+      Scroll
+      <span style="display: block; width: 1px; height: 44px; background: rgba(237,241,247,.15); overflow: hidden; position: relative"><span style="position: absolute; inset: 0; background: linear-gradient(#FFA500, #00C8FF); animation: scrollhint 2.2s ease-in-out infinite"></span></span>
+    </div>
+  </section>
+
+  <!-- ════ 1b · FILM ════ -->
+  <section id="film" data-screen-label="Film" style="position: relative; border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); background: #04060c">
+    <div style="max-width: 1480px; margin: 0 auto; padding: clamp(70px, 10vh, 120px) clamp(20px, 4vw, 48px) clamp(28px, 4vh, 48px); display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+      <div data-reveal="" style="opacity: 0; transform: translateY(40px)">
+        <div style="font-size: 14px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #00C8FF; margin-bottom: 14px">Der Film — 01:15</div>
+        <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(40px, 6.5vw, 110px); line-height: .94; text-transform: uppercase; letter-spacing: -.015em; color: #EDF1F7">SkyNav <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 380; text-transform: none; letter-spacing: 0; color: #FFA500">im Einsatz.</span></h2>
+      </div>
+      <button data-magnetic="" onClick="{{ toggleFilmSound }}" style="cursor: pointer; display: inline-flex; align-items: center; gap: 12px; background: rgba(255,255,255,.04); color: #EDF1F7; border: 1px solid rgba(237,241,247,.3); font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: .12em; text-transform: uppercase; padding: 15px 32px; border-radius: 999px" style-hover="border-color: #FFA500; color: #FFA500">
+        <span style="width: 0; height: 0; border-left: 11px solid currentColor; border-top: 7px solid transparent; border-bottom: 7px solid transparent"></span>
+        {{ filmBtnLabel }}
+      </button>
+    </div>
+    <div style="position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #000">
+      <video data-film="" src="assets/app-film.mp4" muted="" loop="" playsinline="" preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain"></video>
+    </div>
+  </section>
+
+  <!-- ════ 2 · SCROLL-STORY ════ -->
+  <section id="story" data-story="" data-screen-label="Scroll-Story" style="position: relative; height: 380vh; scroll-margin-top: 0px">
+    <div style="position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center">
+
+      <!-- phone, right side -->
+      <div style="position: absolute; right: clamp(10px, 6vw, 110px); top: 50%; transform: translateY(-50%); z-index: 5">
+        <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: min(640px, 100vw); height: min(640px, 100vw); background: radial-gradient(circle, rgba(0,200,255,.14) 0%, rgba(255,165,0,.08) 45%, transparent 70%); filter: blur(40px); pointer-events: none"></div>
+        <div style="position: relative; width: clamp(180px, 23vw, 310px); aspect-ratio: 9 / 19.3; background: #0b101e; border-radius: clamp(36px, 10vw, 50px); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 60px 140px rgba(0,0,0,.75), 0 0 0 9px #04060c; overflow: hidden">
+          <img data-story-img="" src="assets/GPS HUD.jpeg" alt="Precision GPS mit NAV-Panel" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit; opacity: 1; transition: opacity .25s linear">
+          <img data-story-img="" src="assets/Farbiger Track.jpg" alt="Automatisch aufgezeichneter, farbiger Track" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit; opacity: 0; transition: opacity .25s linear">
+          <img data-story-img="" src="assets/Live Team.jpg" alt="Live Team Tracking auf der Karte" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit; opacity: 0; transition: opacity .25s linear">
+          <div style="position: absolute; top: 13px; left: 50%; transform: translateX(-50%); width: 32%; height: 22px; background: #04060c; border-radius: 14px; z-index: 4"></div>
+        </div>
+      </div>
+
+      <!-- scene A -->
+      <div data-scene="" style="position: absolute; inset: 0; z-index: 6; opacity: 1; will-change: opacity, transform">
+        <div style="position: absolute; top: 50%; transform: translateY(-50%); left: clamp(16px, 5vw, 90px); right: clamp(170px, 34vw, 460px); z-index: 6; display: flex; flex-direction: column; align-items: flex-start; gap: clamp(14px, 2.4vh, 24px); text-shadow: 0 6px 40px rgba(7,11,22,.55)">
+          <div style="font-size: 14px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #00C8FF">01 — Navigation</div>
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: clamp(36px, 6vw, 96px); line-height: .92; text-transform: uppercase; letter-spacing: -.01em; color: #EDF1F7">So präzise<span style="color: #FFA500">.</span></div>
+          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 350; font-size: clamp(24px, 3.6vw, 54px); color: #FFA500; line-height: 1.05">Es ist dein Copilot.</div>
+          <div style="margin-top: clamp(8px, 1.6vh, 18px); max-width: 460px; background: rgba(7,11,22,.65); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 8px 22px; text-align: left; text-shadow: none">
+            <div style="display: flex; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07)">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #FFA500; flex-shrink: 0; transform: translateY(-2px)"></span>
+              <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.65)"><strong style="font-weight: 700; color: #EDF1F7">60 fps Cursor</strong> mit Kalman-Filter — butterweich, ohne Springen</div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07)">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #FFA500; flex-shrink: 0; transform: translateY(-2px)"></span>
+              <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.65)"><strong style="font-weight: 700; color: #EDF1F7">MSL- &amp; AGL-Höhe</strong> — du weißt immer, wie hoch du wirklich bist</div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: baseline; padding: 12px 0">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #FFA500; flex-shrink: 0; transform: translateY(-2px)"></span>
+              <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.65)"><strong style="font-weight: 700; color: #EDF1F7">QNH automatisch</strong> von echten METAR-Stationen in deiner Nähe</div>
+            </div>
           </div>
-          <div class="shine"></div>
+        </div>
+      </div>
+
+      <!-- scene B -->
+      <div data-scene="" style="position: absolute; inset: 0; z-index: 6; opacity: 0; will-change: opacity, transform">
+        <div style="position: absolute; top: 50%; transform: translateY(-50%); left: clamp(16px, 5vw, 90px); right: clamp(170px, 34vw, 460px); z-index: 6; display: flex; flex-direction: column; align-items: flex-start; gap: clamp(14px, 2.4vh, 24px); text-shadow: 0 6px 40px rgba(7,11,22,.55)">
+          <div style="font-size: 14px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #00C8FF">02 — Automatik</div>
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: clamp(30px, 5vw, 80px); line-height: .92; text-transform: uppercase; letter-spacing: -.01em; color: #EDF1F7">Erkennt Start<br>&amp; Landung<span style="color: #FFA500">.</span></div>
+          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 350; font-size: clamp(24px, 3.6vw, 54px); color: #FFA500; line-height: 1.05">Von selbst.</div>
+          <div style="margin-top: clamp(8px, 1.6vh, 18px); max-width: 460px; background: rgba(7,11,22,.65); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 8px 22px; text-align: left; text-shadow: none">
+            <div style="display: flex; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07)">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #FFA500; flex-shrink: 0; transform: translateY(-2px)"></span>
+              <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.65)"><strong style="font-weight: 700; color: #EDF1F7">Abheben &amp; Landung</strong> werden automatisch erkannt — kein Knopfdruck</div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07)">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #FFA500; flex-shrink: 0; transform: translateY(-2px)"></span>
+              <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.65)"><strong style="font-weight: 700; color: #EDF1F7">Auto-Save</strong> — jede Fahrt landet von selbst im Fahrtenspeicher</div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: baseline; padding: 12px 0">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #FFA500; flex-shrink: 0; transform: translateY(-2px)"></span>
+              <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.65)"><strong style="font-weight: 700; color: #EDF1F7">Ort &amp; Uhrzeit</strong> von Start und Landung sauber protokolliert</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- scene C -->
+      <div data-scene="" style="position: absolute; inset: 0; z-index: 6; opacity: 0; will-change: opacity, transform">
+        <div style="position: absolute; top: 50%; transform: translateY(-50%); left: clamp(16px, 5vw, 90px); right: clamp(170px, 34vw, 460px); z-index: 6; display: flex; flex-direction: column; align-items: flex-start; gap: clamp(14px, 2.4vh, 24px); text-shadow: 0 6px 40px rgba(7,11,22,.55)">
+          <div style="font-size: 14px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #00C8FF">03 — Team</div>
+          <div style="font-family: 'Archivo Black', sans-serif; font-size: clamp(36px, 6vw, 96px); line-height: .92; text-transform: uppercase; letter-spacing: -.01em; color: #EDF1F7">Dein Team<span style="color: #FFA500">.</span></div>
+          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 350; font-size: clamp(26px, 4vw, 60px); color: #00C8FF; line-height: 1.05">Live.</div>
+          <div style="margin-top: clamp(8px, 1.6vh, 18px); max-width: 460px; background: rgba(7,11,22,.65); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 8px 22px; text-align: left; text-shadow: none">
+            <div style="display: flex; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07)">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #00C8FF; flex-shrink: 0; transform: translateY(-2px)"></span>
+              <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.65)"><strong style="font-weight: 700; color: #EDF1F7">Live Team Tracking</strong> — alle Positionen auf einer Karte</div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.07)">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #00C8FF; flex-shrink: 0; transform: translateY(-2px)"></span>
+              <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.65)"><strong style="font-weight: 700; color: #EDF1F7">Push-to-Talk</strong> Sprachchat mit der Crew — Hände bleiben frei</div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: baseline; padding: 12px 0">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #00C8FF; flex-shrink: 0; transform: translateY(-2px)"></span>
+              <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.65)"><strong style="font-weight: 700; color: #EDF1F7">Chase Crew im Browser</strong> — verfolgen ohne App-Installation</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════ 4 · MARQUEE-WAND ════ -->
+  <section data-screen-label="Marquee" style="position: relative; padding: clamp(44px, 7vh, 80px) 0; border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); overflow: hidden; background: radial-gradient(1000px 500px at 50% 50%, rgba(255,165,0,.04), transparent 70%)">
+    <div style="display: flex; flex-direction: column; gap: clamp(2px, 1vh, 10px); transform: rotate(-1.6deg) scale(1.04)">
+      <div style="overflow: hidden; white-space: nowrap"><div style="display: inline-flex; width: max-content; animation: marqueeL 42s linear infinite"><span style="font-family: 'Archivo Black', sans-serif; font-size: clamp(22px, 3.4vw, 52px); line-height: 1.1; text-transform: uppercase; color: #EDF1F7; padding-right: .6em">Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;</span><span aria-hidden="true" style="font-family: 'Archivo Black', sans-serif; font-size: clamp(22px, 3.4vw, 52px); line-height: 1.1; text-transform: uppercase; color: #EDF1F7; padding-right: .6em">Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;</span></div></div>
+      <div style="overflow: hidden; white-space: nowrap"><div style="display: inline-flex; width: max-content; animation: marqueeR 36s linear infinite"><span style="font-family: 'Archivo Black', sans-serif; font-size: clamp(22px, 3.4vw, 52px); line-height: 1.1; text-transform: uppercase; color: transparent; -webkit-text-stroke: 2px rgba(237,241,247,.32); padding-right: .6em">Weltweit im Einsatz&nbsp;✦&nbsp;Weltweit im Einsatz&nbsp;✦&nbsp;Weltweit im Einsatz&nbsp;✦&nbsp;Weltweit im Einsatz&nbsp;✦&nbsp;</span><span aria-hidden="true" style="font-family: 'Archivo Black', sans-serif; font-size: clamp(22px, 3.4vw, 52px); line-height: 1.1; text-transform: uppercase; color: transparent; -webkit-text-stroke: 2px rgba(237,241,247,.32); padding-right: .6em">Weltweit im Einsatz&nbsp;✦&nbsp;Weltweit im Einsatz&nbsp;✦&nbsp;Weltweit im Einsatz&nbsp;✦&nbsp;Weltweit im Einsatz&nbsp;✦&nbsp;</span></div></div>
+      <div style="overflow: hidden; white-space: nowrap"><div style="display: inline-flex; width: max-content; animation: marqueeL 30s linear infinite"><span style="font-family: 'Archivo Black', sans-serif; font-size: clamp(22px, 3.4vw, 52px); line-height: 1.1; text-transform: uppercase; color: #FFA500; padding-right: .6em">Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;</span><span aria-hidden="true" style="font-family: 'Archivo Black', sans-serif; font-size: clamp(22px, 3.4vw, 52px); line-height: 1.1; text-transform: uppercase; color: #FFA500; padding-right: .6em">Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;</span></div></div>
+      <div style="overflow: hidden; white-space: nowrap"><div style="display: inline-flex; width: max-content; animation: marqueeR 46s linear infinite"><span style="font-family: 'Archivo Black', sans-serif; font-size: clamp(22px, 3.4vw, 52px); line-height: 1.1; text-transform: uppercase; color: transparent; -webkit-text-stroke: 2px rgba(255,165,0,.4); padding-right: .6em">GPS · Wetter · Lufträume · Team&nbsp;✦&nbsp;GPS · Wetter · Lufträume · Team&nbsp;✦&nbsp;</span><span aria-hidden="true" style="font-family: 'Archivo Black', sans-serif; font-size: clamp(22px, 3.4vw, 52px); line-height: 1.1; text-transform: uppercase; color: transparent; -webkit-text-stroke: 2px rgba(255,165,0,.4); padding-right: .6em">GPS · Wetter · Lufträume · Team&nbsp;✦&nbsp;GPS · Wetter · Lufträume · Team&nbsp;✦&nbsp;</span></div></div>
+      <div style="overflow: hidden; white-space: nowrap"><div style="display: inline-flex; width: max-content; animation: marqueeL 38s linear infinite"><span style="font-family: 'Archivo Black', sans-serif; font-size: clamp(22px, 3.4vw, 52px); line-height: 1.1; text-transform: uppercase; color: #EDF1F7; padding-right: .6em">Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;</span><span aria-hidden="true" style="font-family: 'Archivo Black', sans-serif; font-size: clamp(22px, 3.4vw, 52px); line-height: 1.1; text-transform: uppercase; color: #EDF1F7; padding-right: .6em">Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;Ballonpiloten fahren mit NTA SkyNav&nbsp;✦&nbsp;</span></div></div>
+    </div>
+  </section>
+
+  <!-- ════ 5 · EDITORIAL ════ -->
+  <section data-screen-label="Editorial" style="position: relative; padding: clamp(90px, 14vh, 160px) clamp(20px, 4vw, 48px)">
+    <div style="max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: clamp(36px, 5vw, 80px); align-items: center">
+
+      <!-- magazine cover card -->
+      <div data-reveal="" data-delay="0" style="opacity: 0; transform: translateY(40px)">
+        <div data-tilt="-2" style="transform: rotate(-2deg); background: #F4F1EA; color: #14342B; border-radius: 8px; padding: clamp(28px, 3.5vw, 48px); box-shadow: 0 50px 110px rgba(0,0,0,.55); max-width: 520px; margin: 0 auto">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #14342B; padding-bottom: 12px; font-weight: 700; font-size: 13px; letter-spacing: .26em; text-transform: uppercase">
+            <span>NTA SkyNav</span><span>Ausgabe 01</span>
+          </div>
+          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 420; font-size: clamp(78px, 11vw, 150px); line-height: .96; margin: 24px 0 18px; letter-spacing: -.02em">Fahrt<span style="color: #FFA500">.</span></div>
+          <div style="font-size: 17px; font-weight: 500; color: rgba(20,52,43,.75); text-wrap: pretty">Entwickelt in Österreich — von einem aktiven Ballonpiloten, der genau wusste, was im Korb gefehlt hat.</div>
+          <div style="margin-top: 22px; border-radius: 6px; overflow: hidden; aspect-ratio: 16 / 10">
+            <img src="assets/balloon-basket-2.jpeg" alt="Blick aus dem Ballonkorb" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block">
+          </div>
+          <div style="margin-top: 14px; display: flex; justify-content: space-between; font-weight: 700; font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: rgba(20,52,43,.6)">
+            <span>Aus dem Korb</span><span>2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- tilted photo grid -->
+      <div style="position: relative; min-height: clamp(440px, 56vw, 640px)">
+        <div data-reveal="" data-delay="150" style="opacity: 0; transform: translateY(40px); position: absolute; top: 0; left: 0; width: min(66%, 460px)">
+          <div data-tilt="-3" style="transform: rotate(-3deg); background: #fff; padding: 12px 12px 40px; border-radius: 4px; box-shadow: 0 40px 90px rgba(0,0,0,.55)">
+            <img src="assets/balloon-basket.jpeg" alt="NTA SkyNav auf dem iPad im Ballonkorb, in der Luft" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block">
+            <div style="margin-top: 12px; font-weight: 600; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: #444">Im Einsatz · 2.276 m MSL</div>
+          </div>
+        </div>
+        <div data-reveal="" data-delay="300" style="opacity: 0; transform: translateY(40px); position: absolute; top: 32%; right: 0; width: min(38%, 250px)">
+          <div data-tilt="2.5" style="transform: rotate(2.5deg); background: #fff; padding: 10px 10px 32px; border-radius: 4px; box-shadow: 0 40px 90px rgba(0,0,0,.55)">
+            <img src="assets/Landeprognose.jpg" alt="Landeprognose live auf der Karte" loading="lazy" style="width: 100%; aspect-ratio: 9 / 17; object-fit: cover; object-position: top; display: block">
+            <div style="margin-top: 10px; font-weight: 600; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #444">Landeprognose</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════ 5b · GESPEICHERTE FAHRTEN ════ -->
+  <section id="fahrten" data-screen-label="Gespeicherte Fahrten" style="scroll-margin-top: 90px; position: relative; padding: clamp(80px, 12vh, 150px) clamp(20px, 4vw, 48px); border-top: 1px solid rgba(255,255,255,.06); background: radial-gradient(900px 500px at 15% 50%, rgba(0,200,255,.06), transparent 65%)">
+    <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(40px, 6vw, 90px); align-items: center">
+
+      <div data-reveal="" style="opacity: 0; transform: translateY(40px); display: flex; justify-content: center">
+        <div style="position: relative">
+          <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: min(560px, 90vw); height: min(560px, 90vw); background: radial-gradient(circle, rgba(255,165,0,.16) 0%, rgba(0,200,255,.07) 45%, transparent 70%); filter: blur(38px); pointer-events: none"></div>
+          <div style="position: relative; width: clamp(230px, 26vw, 320px); aspect-ratio: 1179 / 2556; background: #0b101e; border-radius: clamp(38px, 5vw, 50px); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 50px 120px rgba(0,0,0,.65), 0 0 0 9px #04060c; overflow: hidden">
+            <img src="assets/gespeicherter track.jpg" alt="Gespeicherte Fahrt mit Start, Landung, Dauer, Max-Höhe und Gasverbrauch" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit">
+            <div style="position: absolute; top: 13px; left: 50%; transform: translateX(-50%); width: 32%; height: 22px; background: #04060c; border-radius: 14px"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div data-reveal="" style="opacity: 0; transform: translateY(40px)">
+          <div style="font-size: 14px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #00C8FF; margin-bottom: 16px">Fahrtenspeicher</div>
+          <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(36px, 5vw, 84px); line-height: .95; text-transform: uppercase; color: #EDF1F7">Jede Fahrt<span style="color: #FFA500">.</span></h2>
+          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 380; font-size: clamp(26px, 3.2vw, 52px); color: #FFA500; margin-top: 6px">Für immer gespeichert.</div>
+          <p style="margin: 22px 0 0; max-width: 520px; font-size: clamp(17px, 1.6vw, 20px); font-weight: 500; color: rgba(237,241,247,.65); text-wrap: pretty">Nach der Landung ist alles schon da: der komplette Track mit allen Details — sauber abgelegt in Ordnern, jederzeit wieder auf die Karte ladbar.</p>
+        </div>
+        <div style="margin-top: 34px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 clamp(24px, 3vw, 48px)">
+          <div data-reveal="" data-delay="100" style="opacity: 0; transform: translateY(40px); border-top: 1px solid rgba(255,255,255,.1); padding: 16px 0">
+            <div style="font-weight: 700; font-size: 17px; letter-spacing: .04em; text-transform: uppercase; color: #EDF1F7">Start &amp; Landung</div>
+            <div style="font-size: 15px; font-weight: 500; color: rgba(237,241,247,.55)">Mit Ort und Uhrzeit, automatisch erkannt.</div>
+          </div>
+          <div data-reveal="" data-delay="180" style="opacity: 0; transform: translateY(40px); border-top: 1px solid rgba(255,255,255,.1); padding: 16px 0">
+            <div style="font-weight: 700; font-size: 17px; letter-spacing: .04em; text-transform: uppercase; color: #EDF1F7">Dauer &amp; Max-Höhe</div>
+            <div style="font-size: 15px; font-weight: 500; color: rgba(237,241,247,.55)">Die Eckdaten jeder Fahrt auf einen Blick.</div>
+          </div>
+          <div data-reveal="" data-delay="260" style="opacity: 0; transform: translateY(40px); border-top: 1px solid rgba(255,255,255,.1); padding: 16px 0">
+            <div style="font-weight: 700; font-size: 17px; letter-spacing: .04em; text-transform: uppercase; color: #EDF1F7">Gas &amp; Load</div>
+            <div style="font-size: 15px; font-weight: 500; color: rgba(237,241,247,.55)">Gasverbrauch pro Zylinder plus Load Calculation.</div>
+          </div>
+          <div data-reveal="" data-delay="340" style="opacity: 0; transform: translateY(40px); border-top: 1px solid rgba(255,255,255,.1); padding: 16px 0">
+            <div style="font-weight: 700; font-size: 17px; letter-spacing: .04em; text-transform: uppercase; color: #EDF1F7">PDF &amp; Export</div>
+            <div style="font-size: 15px; font-weight: 500; color: rgba(237,241,247,.55)">Fahrtbericht als PDF, Fahrtenbuch als Excel.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════ 6 · FEATURE-GRID ════ -->
+  <section id="features" data-screen-label="Features" style="position: relative; padding: clamp(80px, 12vh, 150px) clamp(20px, 4vw, 48px); border-top: 1px solid rgba(255,255,255,.06); scroll-margin-top: 80px">
+    <div style="max-width: 1480px; margin: 0 auto">
+      <div data-reveal="" style="opacity: 0; transform: translateY(40px); margin-bottom: clamp(40px, 6vh, 70px); display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 20px">
+        <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(38px, 6vw, 96px); line-height: .95; text-transform: uppercase; color: #EDF1F7">Alles an Bord<span style="color: #FFA500">.</span></h2>
+        <div style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(20px, 2.2vw, 30px); color: rgba(237,241,247,.6)">30 Features. Hier die wichtigsten zwölf.</div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr)); gap: 14px">
+        <div data-reveal="" data-delay="0" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #00C8FF">01</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">ICAO-Karten &amp; Lufträume</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">Luftraumklassen A–G in 113 Ländern — immer dabei, auch offline.</div>
+        </div>
+        <div data-reveal="" data-delay="60" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #00C8FF">02</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">5 Wettermodelle</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">ICON-D2, ICON-EU, ICON Global, ECMWF und GFS im direkten Vergleich.</div>
+        </div>
+        <div data-reveal="" data-delay="120" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #00C8FF">03</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">Wetter-Briefing als PDF</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">Komplettes Briefing in Sekunden erstellt — teilen mit Crew und Passagieren.</div>
+        </div>
+        <div data-reveal="" data-delay="180" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #FFA500">04</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">Load Calculator</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">Traglast rechnen mit klarem GO / NO-GO — bevor der Brenner zündet.</div>
+        </div>
+        <div data-reveal="" data-delay="240" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #00C8FF">05</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">Gas-Management</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">Verbrauch und Restzeit pro Zylinder — jederzeit im Blick.</div>
+        </div>
+        <div data-reveal="" data-delay="300" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #FFA500">06</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">Landeprognose</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">Wo du landen wirst — live auf der Karte, während du fährst.</div>
+        </div>
+        <div data-reveal="" data-delay="0" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #00C8FF">07</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">Flight Planner Wizard</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">Von der Idee zur fertigen Fahrtplanung — Schritt für Schritt.</div>
+        </div>
+        <div data-reveal="" data-delay="60" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #FFA500">08</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">Live-Windprofil</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">Windrichtung und -stärke aus deinem GPS — Schicht für Schicht.</div>
+        </div>
+        <div data-reveal="" data-delay="120" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #FFA500">09</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">Hindernis-Warnungen</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">Stromleitungen, Windräder und Seilbahnen — rechtzeitig gewarnt.</div>
+        </div>
+        <div data-reveal="" data-delay="180" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #00C8FF">10</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">Aircraft Radar</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">ADS-B Verkehr direkt auf deiner Karte — du siehst, wer kommt.</div>
+        </div>
+        <div data-reveal="" data-delay="240" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #00C8FF">11</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">Digitales Fahrtenbuch</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">Automatisch geführt, mit Excel-Export für Behörde und Verein.</div>
+        </div>
+        <div data-reveal="" data-delay="300" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #FFA500">12</div>
+          <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">Schnell-Notizen</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">Handschrift-Notizen im Flug — funktioniert auch mit Handschuhen.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ Scrolling Marquee ═══ -->
-  <div class="idx-marquee">
-    <div class="marquee-track">
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> Precision GPS</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg> 5 Weather Models</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/></svg> Push-to-Talk</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Team Tracking</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/></svg> Load Calculator</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Briefing PDF</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Offline Mode</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2"/></svg> Wind Profile</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0"/><circle cx="12" cy="20" r="1"/></svg> FIS Frequencies</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10"/></svg> Aircraft Radar</div>
-      <!-- Duplicate for seamless loop -->
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg> Precision GPS</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg> 5 Weather Models</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/></svg> Push-to-Talk</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Team Tracking</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/></svg> Load Calculator</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Briefing PDF</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Offline Mode</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2"/></svg> Wind Profile</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0"/><circle cx="12" cy="20" r="1"/></svg> FIS Frequencies</div>
-      <div class="marquee-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10"/></svg> Aircraft Radar</div>
-    </div>
-  </div>
-
-  <!-- ═══ Stats ═══ -->
-  <div class="idx-stats">
-    <div class="idx-stat reveal">
-      <div class="idx-stat-num" data-count="25">0</div>
-      <div class="idx-stat-label" data-i18n="index.stat1Label">Features</div>
-    </div>
-    <div class="idx-stat reveal delay-1">
-      <div class="idx-stat-num" data-count="5">0</div>
-      <div class="idx-stat-label" data-i18n="index.stat2Label">Wettermodelle</div>
-    </div>
-    <div class="idx-stat reveal delay-2">
-      <div class="idx-stat-num" data-count="113">0</div>
-      <div class="idx-stat-label" data-i18n="index.stat3Label">Länder Lufträume</div>
-    </div>
-    <div class="idx-stat reveal delay-3">
-      <div class="idx-stat-num" data-count="100" data-suffix="%">0</div>
-      <div class="idx-stat-label" data-i18n="index.stat4Label">Offline-fähig</div>
-    </div>
-  </div>
-
-  <!-- ═══ Showcase 1: GPS & Karten ═══ -->
-  <section class="idx-showcase">
-    <div class="idx-sc-grid reveal">
-      <div>
-        <div class="idx-sc-label" data-i18n="index.sc1Label">Navigation</div>
-        <h2 class="idx-sc-title" data-i18n="index.sc1Title">Precision GPS mit <em>ICAO-Karten</em></h2>
-        <p class="idx-sc-desc" data-i18n="index.sc1Desc">60fps Cursor-Bewegung mit Kalman-Filter, Kompass-Fusion und Echtzeit-Extrapolation. ICAO-Karten mit Lufträumen, Hindernissen und Flugplätzen — OSM, Topo und Satellit, alles offline verfügbar.</p>
-        <ul class="idx-sc-list">
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc1l1">NTA Precision GPS mit 60fps Cursor</span></li>
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc1l2">ICAO-Karten mit Lufträumen A-G</span></li>
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc1l3">OSM, Topo & Satellitenansicht</span></li>
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc1l4">Offline-Download mit 4-Ecken-System</span></li>
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc1l5">FIS-Frequenzen automatisch im NavPanel</span></li>
-        </ul>
-      </div>
-      <div class="idx-sc-phone">
-        <div class="mockup-iphone mockup-md"><div class="screen"><img src="Farbiger Track.jpg" alt="GPS Navigation"></div><div class="shine"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ Showcase 2: Team & PTT ═══ -->
-  <section class="idx-showcase">
-    <div class="idx-sc-grid flip reveal">
-      <div>
-        <div class="idx-sc-label" data-i18n="index.sc2Label">Live Team</div>
-        <h2 class="idx-sc-title" data-i18n="index.sc2Title">Team Tracking mit <em>Sprachchat</em></h2>
-        <p class="idx-sc-desc" data-i18n="index.sc2Desc">Mehrere Ballone auf einer Karte mit Push-to-Talk. Chase Crew sieht alles live im Browser — keine App nötig. Auto-Reconnect, Offline-Queue und AirPods-Support.</p>
-        <ul class="idx-sc-list">
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc2l1">Push-to-Talk Sprachchat (LiveKit)</span></li>
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc2l2">Chase Crew Browser-Link ohne App</span></li>
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc2l3">30 Min Offline-Queue für Positionen</span></li>
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc2l4">Auto-Reconnect bei Verbindungsverlust</span></li>
-        </ul>
-      </div>
-      <div class="idx-sc-phone">
-        <div class="mockup-iphone mockup-md"><div class="screen"><img src="Live Team.jpg" alt="Team Tracking"></div><div class="shine"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ Showcase 3: Wetter & Briefing ═══ -->
-  <section class="idx-showcase">
-    <div class="idx-sc-grid reveal">
-      <div>
-        <div class="idx-sc-label" data-i18n="index.sc3Label">Wetter</div>
-        <h2 class="idx-sc-title" data-i18n="index.sc3Title">5 Weather Models & <em>Briefing PDF</em></h2>
-        <p class="idx-sc-desc" data-i18n="index.sc3Desc">ICON-D2, ICON-EU, ICON Global, ECMWF IFS und GPS Live-Daten. Komplettes Briefing als PDF generieren mit Windprofil, Inversionen, Wolken und Load Calculation.</p>
-        <ul class="idx-sc-list">
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc3l1">5 Weather Models bis +12h voraus</span></li>
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc3l2">Briefing PDF generieren & teilen</span></li>
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc3l3">Live-Windprofil aus GPS-Bewegung</span></li>
-          <li><span class="bullet"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="index.sc3l5">Landeprognose live auf der Karte</span></li>
-        </ul>
-      </div>
-      <div class="idx-sc-phone">
-        <div class="mockup-iphone mockup-md"><div class="screen"><img src="Wind import.jpg" alt="Wettermodell"></div><div class="shine"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ All Features Grid ═══ -->
-  <section class="idx-grid-section">
-    <div class="idx-grid-header reveal">
-      <div class="section-label" data-i18n="index.allLabel">Alle Features</div>
-      <h2 class="section-title" data-i18n="index.allTitle">Alles was du als Ballonpilot brauchst</h2>
-    </div>
-    <div class="idx-feat-grid">
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg></div><h3 data-i18n="index.feat1Title">ICAO Karten & Lufträume</h3><p data-i18n="index.feat1Short">Lufträume A-G, Hindernisse, Flugplätze. OSM, Topo & Satellit — alles offline.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon c"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></div><h3 data-i18n="index.feat2Title">5 Weather Models</h3><p data-i18n="index.feat2Short">ICON-D2, ICON-EU, ICON Global, ECMWF IFS und GPS Live-Daten.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg></div><h3 data-i18n="index.feat3Title">Load Calculator</h3><p data-i18n="index.feat3Short">QNH, Temperatur, Ballonprofil, Passagiergewichte. GO/NO-GO mit MTOW.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon c"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h3 data-i18n="index.feat4Title">Live Team Tracking & Sprachchat</h3><p data-i18n="index.feat4Short">PTT Sprachchat, Live-Positionen, Chase Crew Browser-Link.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/></svg></div><h3 data-i18n="index.mf13Title">Push-to-Talk</h3><p data-i18n="index.mf13Short">Walkie-Talkie per LiveKit. AirPods, Bluetooth, mischt mit Musik.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon c"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3 data-i18n="index.mf14Title">Briefing PDF</h3><p data-i18n="index.mf14Short">Komplettes Briefing als PDF mit 5 Modellen, Wolken, Wind.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2"/></svg></div><h3 data-i18n="index.mf15Title">Live-Windprofil</h3><p data-i18n="index.mf15Short">Windschichten aus Ballonbewegung. Import: Windsond, CSV, KML.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon c"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h3 data-i18n="index.mf3Title">Landeprognose</h3><p data-i18n="index.mf3Short">Wind-basierte Vorhersage live auf der Karte mit Sinkrate.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div><h3 data-i18n="index.mf1Title">Target Navigation</h3><p data-i18n="index.mf1Short">DTG, BRG, ETA im NavPanel. Perfekt für Wettbewerbs-Tasks.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon c"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3 data-i18n="index.mf17Title">Track-Farbmodus</h3><p data-i18n="index.mf17Short">Speed/Altitude-Einfärbung mit interaktiver Farbskala.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10"/></svg></div><h3 data-i18n="index.mf4Title">Aircraft Radar</h3><p data-i18n="index.mf4Short">ADS-B Live-Flugverkehr auf der Karte — airplanes.live.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon c"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg></div><h3 data-i18n="index.mf5Title">Hindernisse & Warnungen</h3><p data-i18n="index.mf5Short">Hochspannungsleitungen, Windräder. Proximity-Audio-Warnungen.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg></div><h3 data-i18n="index.feat5Title">Gas Management</h3><p data-i18n="index.feat5Short">Flaschen einzeln verwalten, Verbrauch automatisch erfasst.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon c"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></div><h3 data-i18n="index.feat6Title">Logbuch & Export</h3><p data-i18n="index.feat6Short">Track, Beladung, Gas, Start/Ende. Excel-Export pro Ordner.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><circle cx="12" cy="20" r="1"/></svg></div><h3 data-i18n="index.mf18Title">FIS-Frequenzen</h3><p data-i18n="index.mf18Short">Automatisch die nächste Frequenz basierend auf Position.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon c"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div><h3 data-i18n="index.mf16Title">Cloud-Sync</h3><p data-i18n="index.mf16Short">Settings & Tracks automatisch zwischen Geräten synchronisiert.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10"/></svg></div><h3 data-i18n="index.mf11Title">Outdoor-Modus</h3><p data-i18n="index.mf11Short">High-Contrast für Sonneneinstrahlung. Alles lesbar.</p></div>
-      <div class="idx-feat-card reveal"><div class="idx-fc-icon c"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h3 data-i18n="index.mf12Title">Offline-Modus</h3><p data-i18n="index.mf12Short">Karten herunterladen, offline speichern, sync wenn online.</p></div>
-    </div>
-  </section>
-
-  <!-- ═══ Pricing Teaser ═══ -->
-  <section class="idx-cta">
-    <div class="container reveal">
-      <div class="section-label" data-i18n="index.priceLabel">Preise</div>
-      <h2 class="section-title" data-i18n="index.priceTitle">Ab <span style="color: var(--amber);">€9,99</span>/Monat</h2>
-      <p class="section-desc" style="margin: 0 auto 24px;" data-i18n="index.priceDesc">7 Tage kostenlos testen. Basis-GPS und Karte ohne Account nutzbar.</p>
-      <div class="divider divider-center"></div>
-      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
-        <a href="pricing.html" class="btn btn-outline" data-i18n="index.priceAll">Alle Preise ansehen</a>
-        <a href="beta.html" class="btn btn-amber" data-i18n="index.priceBeta">Beta testen</a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<!-- ═══ Footer ═══ -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo"><img src="nta-logo.png" alt="NTA SkyNav" class="nav-logo-icon"></a>
-        <p class="footer-tagline" data-i18n="footer.tagline">Die Navigations-App für Ballonpiloten.<br>Entwickelt in Österreich.</p>
-        <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:8px 16px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:8px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
-          <span data-i18n="index.igBtn">@nta_skynav folgen</span>
+  <!-- ════ 7 · PARTNERSCHAFT (Szenenwechsel hell) ════ -->
+  <section id="partner" data-screen-label="Partnerschaft" style="position: relative; background: #F4F1EA; color: #14342B; padding: clamp(90px, 14vh, 170px) clamp(20px, 4vw, 48px); scroll-margin-top: 0px">
+    <div style="max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(36px, 4vw, 72px); align-items: center">
+      <div data-reveal="" style="opacity: 0; transform: translateY(40px)">
+        <div style="font-size: 14px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: rgba(20,52,43,.55); margin-bottom: 20px">Offizieller Partner</div>
+        <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(40px, 5.6vw, 92px); line-height: .96; text-transform: uppercase; letter-spacing: -.01em">Gelandet<span style="color: #FFA500">.</span><br><span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 380; text-transform: none; letter-spacing: 0; font-size: .82em">Eingetragen.</span></h2>
+        <p style="margin: 28px 0 0; font-size: clamp(18px, 1.7vw, 22px); font-weight: 500; max-width: 560px; color: rgba(20,52,43,.8); text-wrap: pretty">Jede Fahrt wird nach der Landung automatisch in dein digitales Flugbuch bei <strong style="font-weight: 700">capzlog.aero</strong> übertragen. Einmal verbinden — nie wieder manuell eintragen.</p>
+        <a href="https://capzlog.aero" target="_blank" rel="noopener" style="margin-top: 36px; display: inline-flex; align-items: center; gap: 14px; border: 2px solid #14342B; border-radius: 12px; padding: 14px 24px; color: #14342B; text-decoration: none" style-hover="background: rgba(20,52,43,.06)">
+          <span style="font-weight: 700; font-size: 15px; letter-spacing: .22em; text-transform: uppercase">NTA SkyNav</span>
+          <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: 20px; color: #FFA500">&#215;</span>
+          <span style="font-weight: 700; font-size: 16px; letter-spacing: .1em">capzlog.aero ↗</span>
         </a>
       </div>
-      <div><div class="footer-heading" data-i18n="footer.product">Produkt</div><ul class="footer-links"><li><a href="features.html" data-i18n="nav.features">Features</a></li><li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li><li><a href="beta.html" data-i18n="footer.betaDownload">Beta & Download</a></li><li><a href="updates.html" data-i18n="nav.updates">Updates</a></li></ul></div>
-      <div><div class="footer-heading" data-i18n="footer.legal">Rechtliches</div><ul class="footer-links"><li><a href="datenschutz.html" data-i18n="footer.privacy">Datenschutz</a></li><li><a href="agb.html" data-i18n="footer.terms">AGB</a></li><li><a href="impressum.html" data-i18n="footer.imprint">Impressum</a></li></ul></div>
-      <div><div class="footer-heading" data-i18n="footer.contact">Kontakt</div><ul class="footer-links"><li><a href="mailto:info@ntaskynav.app">info@ntaskynav.app</a></li><li><a href="about.html" data-i18n="footer.aboutUs">Über uns</a></li><li><a href="briefing.html" data-i18n="nav.briefing">Briefing</a></li></ul></div>
-    </div>
-    <div class="footer-bottom">
-      <div data-i18n="footer.madeIn">Made in Austria · For Balloon Pilots Worldwide</div>
-      <div><a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather data by Open-Meteo.com</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></div>
-    </div>
-  </div>
-</footer>
+      <div data-reveal="" data-delay="80" style="opacity: 0; transform: translateY(40px); display: flex; flex-direction: column; align-items: center; gap: 18px">
+        <div style="position: relative; width: clamp(230px, 23vw, 300px); aspect-ratio: 9 / 16; background: #080d16; border-radius: clamp(30px, 4vw, 42px); border: 1px solid rgba(255,255,255,.2); box-shadow: 0 40px 90px rgba(20,52,43,.4), 0 0 0 8px #04060c; overflow: hidden">
+          <iframe src="assets/capzlog-launch.html" title="NTA SkyNav × capzlog.aero — Launch-Film" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; border: none; border-radius: inherit; background: #080d16; pointer-events: none"></iframe>
+        </div>
+        <div style="font-weight: 700; font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: rgba(20,52,43,.55)">Landen · Übertragen · Fertig — der Film</div>
+      </div>
 
-<script src="nav.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script>
-  // ─── Counter Animation ───
-  function animateCounters() {
-    document.querySelectorAll('[data-count]').forEach(el => {
-      if (el.dataset.animated) return
-      const rect = el.getBoundingClientRect()
-      if (rect.top > window.innerHeight) return
-      el.dataset.animated = '1'
-      const target = parseInt(el.dataset.count)
-      const suffix = el.dataset.suffix || '+'
-      const duration = 1500
-      const start = performance.now()
-      function tick(now) {
-        const p = Math.min((now - start) / duration, 1)
-        const eased = 1 - Math.pow(1 - p, 3) // ease-out cubic
-        el.textContent = Math.round(eased * target) + (p >= 1 ? suffix : '')
-        if (p < 1) requestAnimationFrame(tick)
+      <div style="display: flex; flex-direction: column; gap: 0">
+        <div data-reveal="" data-delay="100" style="opacity: 0; transform: translateY(40px); display: flex; gap: 22px; align-items: baseline; border-top: 2px solid rgba(20,52,43,.2); padding: 26px 4px">
+          <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(34px, 3.4vw, 52px); color: #FFA500; min-width: 64px">01</span>
+          <div>
+            <div style="font-weight: 700; font-size: 22px; letter-spacing: .04em; text-transform: uppercase">Landen</div>
+            <div style="font-size: 17px; font-weight: 500; color: rgba(20,52,43,.7)">SkyNav erkennt die Landung automatisch und schließt die Fahrt ab.</div>
+          </div>
+        </div>
+        <div data-reveal="" data-delay="220" style="opacity: 0; transform: translateY(40px); display: flex; gap: 22px; align-items: baseline; border-top: 2px solid rgba(20,52,43,.2); padding: 26px 4px">
+          <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(34px, 3.4vw, 52px); color: #FFA500; min-width: 64px">02</span>
+          <div>
+            <div style="font-weight: 700; font-size: 22px; letter-spacing: .04em; text-transform: uppercase">Übertragen</div>
+            <div style="font-size: 17px; font-weight: 500; color: rgba(20,52,43,.7)">Track, Zeiten und Daten wandern automatisch ins capzlog.aero-Flugbuch.</div>
+          </div>
+        </div>
+        <div data-reveal="" data-delay="340" style="opacity: 0; transform: translateY(40px); display: flex; gap: 22px; align-items: baseline; border-top: 2px solid rgba(20,52,43,.2); border-bottom: 2px solid rgba(20,52,43,.2); padding: 26px 4px">
+          <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(34px, 3.4vw, 52px); color: #FFA500; min-width: 64px">03</span>
+          <div>
+            <div style="font-weight: 700; font-size: 22px; letter-spacing: .04em; text-transform: uppercase">Fertig</div>
+            <div style="font-size: 17px; font-weight: 500; color: rgba(20,52,43,.7)">Dein Flugbuch ist aktuell, bevor der Ballon verpackt ist.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 8 · PRICING ════ -->
+  <section id="preise" data-screen-label="Preise" style="position: relative; padding: clamp(90px, 14vh, 170px) clamp(20px, 4vw, 48px); background: radial-gradient(1000px 600px at 50% 0%, rgba(0,200,255,.06), transparent 65%); scroll-margin-top: 60px">
+    <div style="max-width: 1280px; margin: 0 auto">
+      <div data-reveal="" style="opacity: 0; transform: translateY(40px); text-align: center; margin-bottom: clamp(44px, 7vh, 80px)">
+        <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(38px, 6vw, 96px); line-height: .95; text-transform: uppercase; color: #EDF1F7">Ein Preis<span style="color: #FFA500">.</span> <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 380; text-transform: none; letter-spacing: 0">Alles drin.</span></h2>
+        <p style="margin: 18px auto 0; max-width: 560px; font-size: 18px; font-weight: 500; color: rgba(237,241,247,.6)">7 Tage kostenlos testen · Jederzeit kündbar · Basis-GPS ohne Account gratis</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr)); gap: 18px; align-items: stretch">
+        <div data-reveal="" data-delay="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.1); border-radius: 22px; padding: 36px 30px; display: flex; flex-direction: column; gap: 6px">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .26em; text-transform: uppercase; color: rgba(237,241,247,.55)">Monatlich</div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 10px">
+            <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 62px; line-height: 1; color: #EDF1F7">€9,99</span>
+            <span style="font-size: 16px; font-weight: 600; color: rgba(237,241,247,.5)">/ Monat</span>
+          </div>
+          <div style="margin-top: 14px; font-size: 16px; font-weight: 500; color: rgba(237,241,247,.65); text-wrap: pretty">Voller Funktionsumfang. Flexibel bleiben, monatlich kündigen.</div>
+          <div style="flex: 1"></div>
+          <a href="#abheben" style="display: block; text-align: center; margin-top: 26px; border: 1px solid rgba(237,241,247,.3); color: #EDF1F7; font-weight: 700; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; padding: 14px 20px; border-radius: 999px; text-decoration: none" style-hover="border-color: #FFA500; color: #FFA500">Kostenlos testen</a>
+        </div>
+
+        <div data-reveal="" data-delay="140" style="opacity: 0; transform: translateY(40px); position: relative; background: linear-gradient(180deg, rgba(255,165,0,.12), rgba(255,165,0,.04)); border: 1px solid rgba(255,165,0,.65); border-radius: 22px; padding: 44px 30px 36px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 30px 90px rgba(255,165,0,.12)">
+          <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #FFA500; color: #070b16; font-weight: 700; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; padding: 7px 18px; border-radius: 999px; white-space: nowrap">Beliebteste Wahl</div>
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .26em; text-transform: uppercase; color: #FFA500">Jährlich</div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 10px">
+            <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 62px; line-height: 1; color: #EDF1F7">€89,99</span>
+            <span style="font-size: 16px; font-weight: 600; color: rgba(237,241,247,.5)">/ Jahr</span>
+          </div>
+          <div style="margin-top: 14px; font-size: 16px; font-weight: 500; color: rgba(237,241,247,.75); text-wrap: pretty">2 Monate gratis gegenüber dem Monatsabo. Eine ganze Saison Ruhe.</div>
+          <div style="flex: 1"></div>
+          <a data-magnetic="" href="#abheben" style="display: block; text-align: center; margin-top: 26px; background: #FFA500; color: #070b16; font-weight: 700; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; padding: 15px 20px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 36px rgba(255,165,0,.3)" style-hover="background: #ffb733">Kostenlos testen</a>
+        </div>
+
+        <div data-reveal="" data-delay="280" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(0,200,255,.3); border-radius: 22px; padding: 36px 30px; display: flex; flex-direction: column; gap: 6px">
+          <div style="font-weight: 700; font-size: 14px; letter-spacing: .26em; text-transform: uppercase; color: #00C8FF">Crew Add-on</div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 10px">
+            <span style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 62px; line-height: 1; color: #EDF1F7">+€2,99</span>
+            <span style="font-size: 16px; font-weight: 600; color: rgba(237,241,247,.5)">/ Monat</span>
+          </div>
+          <div style="margin-top: 14px; font-size: 16px; font-weight: 500; color: rgba(237,241,247,.65); text-wrap: pretty">5 Live-Verfolger statt 1 — für Chase Crew, Verein und Familie.</div>
+          <div style="flex: 1"></div>
+          <a href="#abheben" style="display: block; text-align: center; margin-top: 26px; border: 1px solid rgba(0,200,255,.45); color: #00C8FF; font-weight: 700; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; padding: 14px 20px; border-radius: 999px; text-decoration: none" style-hover="background: rgba(0,200,255,.1)">Dazubuchen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 9 · FINALE CTA + FOOTER ════ -->
+  <section id="abheben" data-screen-label="Finale CTA" style="position: relative; min-height: 92vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: clamp(100px, 14vh, 160px) 20px 0; background: radial-gradient(900px 540px at 50% 85%, rgba(255,165,0,.13), transparent 65%); overflow: hidden; scroll-margin-top: 0px">
+    <div data-reveal="" style="opacity: 0; transform: translateY(40px)">
+      <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(48px, 11vw, 180px); line-height: .94; text-transform: uppercase; letter-spacing: -.015em; color: #EDF1F7">Bereit zum</h2>
+      <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 380; font-size: clamp(56px, 12vw, 200px); line-height: 1; color: #FFA500; margin-top: .02em">Abheben?</div>
+    </div>
+    <p data-reveal="" data-delay="150" style="opacity: 0; transform: translateY(40px); margin: clamp(24px, 4vh, 40px) 0 0; font-size: 18px; font-weight: 500; color: rgba(237,241,247,.6)">7 Tage kostenlos testen — ganz ohne Kreditkarte. Basis-GPS bleibt gratis.</p>
+    <div data-reveal="" data-delay="300" style="opacity: 0; transform: translateY(40px); display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: clamp(26px, 4vh, 44px)">
+      <a data-magnetic="" href="#" style="display: inline-flex; align-items: center; text-decoration: none">
+        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/de-de?size=250x83" alt="Laden im App Store" style="height: 56px; display: block">
+      </a>
+      <a data-magnetic="" href="#" style="display: inline-flex; align-items: center; text-decoration: none">
+        <img src="https://play.google.com/intl/de_de/badges/static/images/badges/de_badge_web_generic.png" alt="Jetzt bei Google Play" style="height: 76px; display: block; margin: -10px -8px">
+      </a>
+    </div>
+
+    <footer style="width: 100%; max-width: 1480px; margin: clamp(80px, 12vh, 140px) auto 0; border-top: 1px solid rgba(255,255,255,.08); padding: 34px clamp(4px, 2vw, 20px) 40px; display: flex; flex-wrap: wrap; gap: 24px 40px; align-items: center; justify-content: space-between; text-align: left">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <img src="assets/nta-logo-b.png" alt="" style="width: 36px; height: 36px; object-fit: contain">
+        <div style="line-height: 1.3">
+          <div style="font-weight: 700; font-size: 16px">© 2026 NTA SkyNav</div>
+          <div style="font-size: 14px; font-weight: 500; color: rgba(237,241,247,.5)">Entwickelt in Österreich — von einem aktiven Ballonpiloten.</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px 26px; font-weight: 600; font-size: 14px; letter-spacing: .1em; text-transform: uppercase">
+        <a href="#features" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Features</a>
+        <a href="#preise" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Preise</a>
+        <a href="datenschutz.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Datenschutz</a>
+        <a href="agb.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">AGB</a>
+        <a href="impressum.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Impressum</a>
+      </div>
+      <div style="display: flex; gap: 22px; font-weight: 600; font-size: 14px; letter-spacing: .06em">
+        <a href="https://www.instagram.com/nta_skynav/" target="_blank" rel="noopener" style="color: #00C8FF; text-decoration: none" style-hover="color: #FFA500">Instagram @nta_skynav</a>
+        <a href="mailto:info@ntaskynav.app" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">info@ntaskynav.app</a>
+      </div>
+    </footer>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    if (this._wired) return;
+    this._wired = true;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const finePointer = window.matchMedia('(pointer: fine)').matches;
+    const $$ = (s) => Array.from(document.querySelectorAll(s));
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+    /* ---- Film: muted, starts only when scrolled into view ---- */
+    const film = document.querySelector('[data-film]');
+    if (film) {
+      film.defaultMuted = true;
+      film.muted = true;
+      film.volume = 1;
+      film.pause();
+      this.setState({ filmSound: false });
+      const fio = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const p = film.play();
+            if (p && p.catch) p.catch(() => {});
+          } else {
+            film.pause();
+          }
+        });
+      }, { threshold: 0.35 });
+      fio.observe(film);
+    }
+
+    /* ---- Nav items stagger in ---- */
+    $$('[data-navitem]').forEach((el, i) => {
+      if (reduce) { el.style.opacity = '1'; el.style.transform = 'none'; return; }
+      setTimeout(() => {
+        el.style.transition = 'opacity .6s ease, transform .7s cubic-bezier(.2,.65,.2,1)';
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }, 150 + i * 90);
+    });
+
+    /* ---- Hero headline: cinematic per-letter reveal ---- */
+    const words = $$('[data-hero-word]');
+    let charIdx = 0;
+    words.forEach((w) => {
+      const units = [];
+      Array.from(w.childNodes).forEach((node) => {
+        if (node.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          node.textContent.split('').forEach((ch) => {
+            const s = document.createElement('span');
+            s.textContent = ch;
+            s.style.display = 'inline-block';
+            if (ch === ' ') s.style.whiteSpace = 'pre';
+            frag.appendChild(s);
+            units.push(s);
+          });
+          w.replaceChild(frag, node);
+        } else if (node.nodeType === 1) {
+          node.style.display = 'inline-block';
+          units.push(node);
+        }
+      });
+      if (reduce) return;
+      units.forEach((s) => {
+        s.style.opacity = '0';
+        s.style.transform = 'translateY(.55em) scaleY(1.25)';
+        s.style.filter = 'blur(14px)';
+        s.style.willChange = 'opacity, transform, filter';
+        const delay = 250 + charIdx * 38;
+        setTimeout(() => {
+          s.style.transition = 'opacity .55s ease, transform .85s cubic-bezier(.2,.7,.15,1), filter .7s ease';
+          s.style.opacity = '1';
+          s.style.transform = 'none';
+          s.style.filter = 'blur(0px)';
+          setTimeout(() => { s.style.willChange = 'auto'; }, 900);
+        }, delay);
+        charIdx++;
+      });
+    });
+
+    /* ---- Scroll reveals ---- */
+    const reveals = $$('[data-reveal]');
+    if (reduce) {
+      reveals.forEach((el) => { el.style.opacity = '1'; el.style.transform = 'none'; });
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const el = e.target;
+          el.style.transitionDelay = (el.dataset.delay || 0) + 'ms';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          io.unobserve(el);
+        });
+      }, { threshold: 0.12 });
+      reveals.forEach((el) => {
+        el.style.transition = 'opacity .85s ease, transform .95s cubic-bezier(.2,.65,.2,1)';
+        io.observe(el);
+      });
+    }
+
+    /* ---- Animated counters ---- */
+    const counters = $$('[data-count]');
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        cio.unobserve(el);
+        const target = parseFloat(el.dataset.count);
+        if (reduce) { el.textContent = String(target); return; }
+        const t0 = performance.now();
+        const dur = 1500;
+        const tick = (t) => {
+          const p = Math.min(1, (t - t0) / dur);
+          const ease = 1 - Math.pow(1 - p, 3);
+          el.textContent = String(Math.round(target * ease));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        el.textContent = '0';
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.6 });
+    counters.forEach((el) => cio.observe(el));
+
+    /* ---- Scroll: nav, hero parallax, story scenes ---- */
+    const nav = document.querySelector('[data-nav]');
+    const glow = document.querySelector('[data-hero-glow]');
+    const story = document.querySelector('[data-story]');
+    const scenes = $$('[data-scene]');
+    const storyImgs = $$('[data-story-img]');
+    let ticking = false;
+
+    const announce = document.querySelector('[data-announce]');
+    const progress = document.querySelector('[data-progress]');
+    const navLinks = $$('[data-navlink]');
+    const sectionIds = ['story', 'fahrten', 'features', 'partner', 'preise'];
+
+    const applyScroll = () => {
+      ticking = false;
+      if (nav) {
+        const on = window.scrollY > 40;
+        nav.style.background = on ? 'rgba(7,11,22,.82)' : 'transparent';
+        nav.style.backdropFilter = on ? 'blur(14px)' : 'none';
+        nav.style.webkitBackdropFilter = on ? 'blur(14px)' : 'none';
+        nav.style.borderBottomColor = on ? 'rgba(255,255,255,.07)' : 'transparent';
       }
-      requestAnimationFrame(tick)
-    })
-  }
-  window.addEventListener('scroll', animateCounters)
-  window.addEventListener('load', animateCounters)
+      if (announce) {
+        const hide = window.scrollY > 120;
+        announce.style.maxHeight = hide ? '0px' : '40px';
+        announce.style.opacity = hide ? '0' : '1';
+      }
+      if (progress) {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
+      }
+      if (navLinks.length) {
+        let active = '';
+        sectionIds.forEach((id) => {
+          const sec = document.getElementById(id);
+          if (sec && sec.getBoundingClientRect().top < window.innerHeight * 0.45) active = id;
+        });
+        navLinks.forEach((a) => {
+          const on = a.dataset.navlink === active;
+          const u = a.querySelector('[data-underline]');
+          if (u) u.style.transform = on ? 'scaleX(1)' : 'scaleX(0)';
+          a.style.color = on ? '#FFA500' : 'rgba(237,241,247,.75)';
+        });
+      }
+      if (glow && !reduce) {
+        glow.style.transform = 'translate(-50%,-50%) translateY(' + (window.scrollY * 0.1) + 'px)';
+      }
+      if (story && scenes.length) {
+        const total = story.offsetHeight - window.innerHeight;
+        const p = clamp(-story.getBoundingClientRect().top / total, 0, 1);
+        const n = scenes.length;
+        scenes.forEach((sc, i) => {
+          let t = (p - (i + 0.5) / n) * n;
+          if (i === 0) t = Math.max(t, 0);
+          if (i === n - 1) t = Math.min(t, 0);
+          const op = clamp(1.25 - Math.abs(t) * 2.5, 0, 1);
+          sc.style.opacity = op;
+          sc.style.visibility = op <= 0 ? 'hidden' : 'visible';
+          if (!reduce) sc.style.transform = 'translateY(' + (-t * 56) + 'px)';
+        });
+        storyImgs.forEach((im, i) => {
+          let t = (p - (i + 0.5) / n) * n;
+          if (i === 0) t = Math.max(t, 0);
+          if (i === n - 1) t = Math.min(t, 0);
+          im.style.opacity = clamp(1.6 - Math.abs(t) * 3.2, 0, 1);
+        });
+      }
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(applyScroll);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    applyScroll();
 
-  // ─── Waitlist ───
-  const SUPABASE_URL = 'https://vbemzgqxvbezyakllzfv.supabase.co'
-  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZiZW16Z3F4dmJlenlha2xsemZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4Mjc5MzEsImV4cCI6MjA4ODQwMzkzMX0.v4Wrm3c8k9o3hYrUcOPbraVqq3CLievZWKS-BcYMjMQ'
+    /* ---- Feature cards: click to expand details ---- */
+    const featureDetails = [
+      'Offizielle ICAO-Karten mit allen Luftraumklassen von A bis G, Kontrollzonen und Gefahrengebieten — für 113 Länder weltweit. Einmal geladen, komplett offline verfügbar. SkyNav warnt dich, bevor du in kontrollierten Luftraum einfährst.',
+      'ICON-D2 für die nächsten Stunden, ICON-EU und ICON Global für die Großlage, ECMWF und GFS zum Quervergleich. Wind in allen relevanten Höhenschichten — du erkennst, ob die Fahrt geht, bevor du den Anhänger ankuppelst.',
+      'Ein Tipp, und SkyNav baut dein komplettes Briefing: Windprofile in allen Höhen, Modellvergleich, Bodenwetter und Vorhersage — als sauberes PDF zum Teilen mit Crew, Passagieren oder dem Veranstalter.',
+      'Temperatur, Startplatzhöhe, Hüllenvolumen, Passagiere und Gas: SkyNav rechnet die Traglast und zeigt ein klares GO oder NO-GO mit Reserve. Jede Rechnung wird zusammen mit der Fahrt gespeichert.',
+      'Zylinder einmal anlegen, fertig: Während der Fahrt trackt SkyNav Verbrauch und Restzeit pro Zylinder. Du weißt jederzeit, wie lange der Brenner noch kann — ohne Kopfrechnen in der Luft.',
+      'Aus Höhe, Windprofil und Sinkrate berechnet SkyNav laufend, wo du aufsetzen wirst — als Korridor direkt auf der Karte. So umfährst du Wälder, Leitungen und Ortschaften, lange bevor sie zum Problem werden.',
+      'Schritt für Schritt von der Idee zur fertigen Planung: Startplatz, Wetterfenster, Zielgebiet und Alternativen. Am Ende steht ein kompletter Fahrtplan, den du direkt mit deiner Crew teilst.',
+      'Während du steigst und sinkst, misst SkyNav den Wind in jeder Schicht aus deiner echten GPS-Bewegung. Dein persönliches Windprofil entsteht live — und wird mit jeder Minute genauer.',
+      'Stromleitungen, Windräder, Seilbahnen, Masten: SkyNav warnt akustisch und auf der Karte, bevor sie gefährlich werden — auch bei Gegenlicht, Dunst oder schlechter Sicht.',
+      'Motorflieger, Hubschrauber und Segelflieger mit ADS-B siehst du direkt auf deiner Karte — mit Höhe, Kurs und Entfernung. Du weißt, wer kommt, bevor du ihn hörst.',
+      'Jede Fahrt automatisch erfasst: Start, Landung, Dauer, Strecke und Max-Höhe. Export als Excel für Behörde, Verein oder Versicherung — und auf Wunsch automatisch zu capzlog.aero übertragen.',
+      'Frequenzen, Freigaben, Telefonnummern: schnell mit dem Finger oder Stift notiert. Die Handschrift-Erkennung funktioniert auch mit Handschuhen — gemacht für kalte Morgenstarts.'
+    ];
+    const fcards = $$('#features [data-tilt]');
+    fcards.forEach((card, i) => {
+      if (card.querySelector('[data-fdetail]')) return;
+      card.style.cursor = 'pointer';
+      card.style.position = 'relative';
+      const plus = document.createElement('span');
+      plus.textContent = '+';
+      plus.style.cssText = 'position:absolute;top:20px;right:20px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(237,241,247,.25);border-radius:50%;color:rgba(237,241,247,.7);font-size:19px;font-weight:600;line-height:1;transition:transform .45s cubic-bezier(.2,.65,.2,1),border-color .3s ease,color .3s ease;pointer-events:none';
+      card.appendChild(plus);
+      const det = document.createElement('div');
+      det.setAttribute('data-fdetail', '');
+      det.style.cssText = 'max-height:0;overflow:hidden;opacity:0;transition:max-height .55s cubic-bezier(.2,.65,.2,1),opacity .4s ease';
+      det.innerHTML = '<div style="padding-top:14px;margin-top:6px;border-top:1px solid rgba(255,165,0,.3);font-size:15.5px;font-weight:500;line-height:1.55;color:rgba(237,241,247,.78)">' + (featureDetails[i] || '') + '</div>';
+      card.appendChild(det);
+      card.addEventListener('click', () => {
+        const open = card.dataset.open === '1';
+        card.dataset.open = open ? '' : '1';
+        det.style.maxHeight = open ? '0px' : (det.scrollHeight + 20) + 'px';
+        det.style.opacity = open ? '0' : '1';
+        plus.style.transform = open ? 'rotate(0deg)' : 'rotate(45deg)';
+        plus.style.borderColor = open ? 'rgba(237,241,247,.25)' : '#FFA500';
+        plus.style.color = open ? 'rgba(237,241,247,.7)' : '#FFA500';
+        card.style.borderColor = open ? 'rgba(255,255,255,.08)' : 'rgba(255,165,0,.55)';
+      });
+    });
 
-  async function handleWaitlist() {
-    const input = document.getElementById('waitlistEmail')
-    const box = document.getElementById('waitlistBox')
-    const success = document.getElementById('waitlistSuccess')
-    const email = input.value.trim()
-    if (!email || !email.includes('@')) { input.style.borderColor = '#ef4444'; input.focus(); return }
-    const btn = box.querySelector('button')
-    btn.disabled = true; btn.innerHTML = 'Wird gesendet...'
-    try {
-      const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
-      const { error } = await sb.from('notify_signups').insert([{ email, created_at: new Date().toISOString() }])
-      if (error && error.code === '23505') { btn.disabled = false; btn.innerHTML = 'Platz sichern'; alert('Du bist bereits auf der Warteliste!'); return }
-      if (error) throw error
-      box.style.display = 'none'; success.style.display = 'block'
-    } catch (e) {
-      console.error(e); btn.disabled = false; btn.innerHTML = 'Platz sichern'; alert('Etwas ist schief gelaufen.')
+    /* ---- Hover tilt + magnetic buttons (fine pointers only) ---- */
+    if (!reduce && finePointer) {
+      $$('[data-tilt]').forEach((card) => {
+        const base = parseFloat(card.dataset.tilt) || 0;
+        const rest = base === 0 ? 'none' : 'rotate(' + base + 'deg)';
+        card.style.willChange = 'transform';
+        card.addEventListener('mousemove', (ev) => {
+          const r = card.getBoundingClientRect();
+          const x = (ev.clientX - r.left) / r.width - 0.5;
+          const y = (ev.clientY - r.top) / r.height - 0.5;
+          card.style.transition = 'transform .18s ease-out';
+          card.style.transform = 'perspective(800px) rotateX(' + (-y * 5).toFixed(2) + 'deg) rotateY(' + (x * 7).toFixed(2) + 'deg) rotate(' + base + 'deg) translateY(-4px)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transition = 'transform .5s cubic-bezier(.2,.65,.2,1)';
+          card.style.transform = rest;
+        });
+      });
+      /* hero mouse parallax */
+      const hero = document.getElementById('top');
+      const plx = $$('[data-plx]');
+      if (hero && plx.length) {
+        hero.addEventListener('mousemove', (ev) => {
+          const r = hero.getBoundingClientRect();
+          const nx = (ev.clientX - r.left) / r.width - 0.5;
+          const ny = (ev.clientY - r.top) / r.height - 0.5;
+          plx.forEach((el) => {
+            const d = parseFloat(el.dataset.plx) || 0;
+            el.style.transform = 'translate3d(' + (nx * d * 70).toFixed(1) + 'px,' + (ny * d * 70).toFixed(1) + 'px,0)';
+          });
+        });
+        hero.addEventListener('mouseleave', () => {
+          plx.forEach((el) => {
+            el.style.transition = 'transform .7s cubic-bezier(.2,.65,.2,1)';
+            el.style.transform = 'translate3d(0,0,0)';
+            setTimeout(() => { el.style.transition = ''; }, 700);
+          });
+        });
+      }
+      $$('[data-magnetic]').forEach((btn) => {
+        btn.addEventListener('mousemove', (ev) => {
+          const r = btn.getBoundingClientRect();
+          const dx = (ev.clientX - (r.left + r.width / 2)) * 0.22;
+          const dy = (ev.clientY - (r.top + r.height / 2)) * 0.22;
+          btn.style.transition = 'transform .15s ease-out';
+          btn.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)';
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transition = 'transform .45s cubic-bezier(.2,.65,.2,1)';
+          btn.style.transform = 'translate(0,0)';
+        });
+      });
     }
   }
-  document.getElementById('waitlistEmail')?.addEventListener('keydown', e => { if (e.key === 'Enter') handleWaitlist() })
+
+  renderVals() {
+    const soundOn = (this.state && this.state.filmSound) || false;
+    return {
+      filmBtnLabel: soundOn ? 'Ton aus' : 'Mit Ton ansehen',
+      toggleFilmSound: () => {
+        const v = document.querySelector('[data-film]');
+        if (!v) return;
+        if (v.muted) {
+          v.muted = false;
+          v.currentTime = 0;
+          v.play();
+          this.setState({ filmSound: true });
+        } else {
+          v.muted = true;
+          this.setState({ filmSound: false });
+        }
+      }
+    };
+  }
+}
 </script>
-<script src="translations.js"></script>
-<script src="i18n.js"></script>
 </body>
 </html>

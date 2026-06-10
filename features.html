@@ -28,7 +28,7 @@
       <li><a href="index.html" data-i18n="nav.home">Home</a></li>
       <li><a href="features.html" class="active" data-i18n="nav.features">Features</a></li>
       <li><a href="pricing.html" data-i18n="nav.pricing">Preise</a></li>
-      <li><a href="beta.html" data-i18n="nav.beta">Beta</a></li>
+      <li><a href="beta.html" data-i18n="nav.beta">Download</a></li>
       <li><a href="about.html" data-i18n="nav.about">Über uns</a></li>
       <li><a href="updates.html" data-i18n="nav.updates">Updates</a></li>
       <li><a href="briefing.html" data-i18n="nav.briefing">Briefing</a></li>
@@ -46,7 +46,7 @@
   <a href="index.html" data-i18n="nav.home">Home</a>
   <a href="features.html" class="active" data-i18n="nav.features">Features</a>
   <a href="pricing.html" data-i18n="nav.pricing">Preise</a>
-  <a href="beta.html" data-i18n="nav.beta">Beta</a>
+  <a href="beta.html" data-i18n="nav.beta">Download</a>
   <a href="about.html" data-i18n="nav.about">Über uns</a>
 <a href="updates.html" data-i18n="nav.updates">Updates</a>
   <a href="briefing.html" data-i18n="nav.briefing">Briefing</a>
@@ -440,6 +440,120 @@
           <div class="shine"></div>
         </div>
       </div>
+    </div>
+
+    <!-- ─── 10a. capzlog.aero Integration ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--amber-dim); color: var(--amber);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><polyline points="10 8 13 11 18 6"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.capzlogLabel">Partnerschaft</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.capzlogTitle">capzlog.aero Integration</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.capzlogDesc">
+          NTA SkyNav ist offizieller Partner von capzlog.aero — dem digitalen Flugbuch für Piloten. Jede aufgezeichnete Fahrt wird auf Wunsch automatisch in dein capzlog.aero-Flugbuch übertragen. Einmal verbinden, nie wieder manuell eintragen.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.capzlog.l1">Auto-Push: Fahrt wird nach der Landung automatisch übertragen</li>
+          <li data-i18n="feat.capzlog.l2">Initial-Push: Bestehende Fahrten gesammelt nachübertragen</li>
+          <li data-i18n="feat.capzlog.l3">Vollständige Daten: Route, Zeiten, Ballon-Kennzeichen, PIC, Passagiere</li>
+          <li data-i18n="feat.capzlog.l4">Marker-Mapping: CrossCountry, Prüfung, Schulung, Lehrer/Prüfer</li>
+          <li data-i18n="feat.capzlog.l5">Status-Anzeige pro Fahrt mit manuellem Erneut-Senden</li>
+          <li data-i18n="feat.capzlog.l6">Einfache Einrichtung: Token in den Account-Einstellungen eintragen — fertig</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <!-- TODO: Echten capzlog.aero-Screenshot einsetzen -->
+        <div class="mockup-iphone mockup-md reveal-left delay-2">
+          <div class="screen">
+            <img src="Logbuch Übersicht.jpeg" alt="capzlog.aero Integration">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 10b. Flight Planner Wizard ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--cyan-dim); color: var(--cyan);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.plannerLabel">Flugplanung</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.plannerTitle">Flight Planner Wizard</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.plannerDesc">
+          Die komplette Fahrtvorbereitung in einem geführten Ablauf: Ballon wählen, Passagiere und Flugparameter festlegen, Wetter konfigurieren — am Ende stehen Wetter-Briefing-PDF und Lastberechnung bereit.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.planner.l1">Geführter 4-Schritt-Flow: Ballon → Passagiere → Parameter → Wetter</li>
+          <li data-i18n="feat.planner.l2">Erstellt automatisch das Wetter-Briefing-PDF</li>
+          <li data-i18n="feat.planner.l3">Lastberechnung mit dem gewählten Ballonprofil</li>
+          <li data-i18n="feat.planner.l4">Startplatz per GPS, Suche oder direkt auf der Karte</li>
+          <li data-i18n="feat.planner.l5">Alle Werte werden für die nächste Fahrt gespeichert</li>
+          <li data-i18n="feat.planner.l6">Bestehende Planung bearbeiten oder frisch starten</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <!-- TODO: Echten Flight-Planner-Screenshot einsetzen -->
+        <div class="mockup-iphone mockup-md reveal-right delay-2">
+          <div class="screen">
+            <img src="Wetter PDF erstellen.jpg" alt="Flight Planner Wizard">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 10c. Auto Start-/Lande-Erkennung ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--amber-dim); color: var(--amber);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.autoLabel">Automatik</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.autoTitle">Automatische Start- &amp; Lande-Erkennung</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.autoDesc">
+          Hände frei beim Start: Die App erkennt über Variometer und GPS-Höhe, wann der Ballon abhebt, und startet die Aufzeichnung von selbst. Bei der Landung wird automatisch pausiert — die Fahrt wird komplett ohne Zutun gespeichert.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.auto.l1">Abheben-Erkennung über Vario + GPS-Höhe — Aufzeichnung startet automatisch</li>
+          <li data-i18n="feat.auto.l2">Landeerkennung pausiert Aufzeichnung und Gas-Tracker</li>
+          <li data-i18n="feat.auto.l3">„Nicht gelandet"-Button setzt alles nahtlos fort</li>
+          <li data-i18n="feat.auto.l4">Auto-Save: Fahrt wird lokal + in der Cloud gespeichert, inkl. Start-/Landeort</li>
+          <li data-i18n="feat.auto.l5">QNH wird automatisch von der nächsten METAR-Station geladen</li>
+          <li data-i18n="feat.auto.l6">Jederzeit abschaltbar — klassischer REC-Button bleibt verfügbar</li>
+        </ul>
+      </div>
+      <div class="feature-detail-mockup">
+        <!-- TODO: Echten Auto-Detection-Screenshot einsetzen -->
+        <div class="mockup-iphone mockup-md reveal-left delay-2">
+          <div class="screen">
+            <img src="GPS HUD.jpeg" alt="Automatische Start- und Lande-Erkennung">
+          </div>
+          <div class="shine"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 10d. Schnell-Notizen ─── -->
+    <div class="feature-detail reveal">
+      <div class="feature-detail-text">
+        <div class="feature-detail-icon" style="background: var(--cyan-dim); color: var(--cyan);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <div class="section-label" data-i18n="feat.toolsLabel">Werkzeuge</div>
+        <h2 style="font-size: 28px; margin-bottom: 12px;" data-i18n="feat.notesTitle">Schnell-Notizen mit Handschrift</h2>
+        <p style="color: var(--text-dim); line-height: 1.7; margin-bottom: 16px;" data-i18n="feat.notesDesc">
+          Frequenz vom FIS bekommen? Freigabe notieren? Eine Wischgeste öffnet die Notiz-Fläche — schreibe mit Finger oder Stift direkt aufs Display, ohne die Navigation zu verlassen.
+        </p>
+        <ul class="feature-list">
+          <li data-i18n="feat.notes.l1">Zeichenfläche für Finger und Stift — mit Druckempfindlichkeit</li>
+          <li data-i18n="feat.notes.l2">Optionales Textfeld für getippte Notizen</li>
+          <li data-i18n="feat.notes.l3">Mehrere Notizen, lokal am Gerät gespeichert</li>
+          <li data-i18n="feat.notes.l4">Übersicht mit Vorschau-Bildern aller Notizen</li>
+        </ul>
+      </div>
+      <!-- TODO: Screenshot der Schnell-Notizen ergänzen (feature-detail-mockup wie bei den anderen Sektionen) -->
     </div>
 
     <!-- ─── 11. Ziel / Target Navigation ─── -->
@@ -857,7 +971,7 @@
       <h2 class="section-title" data-i18n="cta.title">Bereit zum Abheben?</h2>
       <p class="section-desc" style="margin: 0 auto 32px;" data-i18n="cta.descFeat">Teste NTA SkyNav 7 Tage kostenlos – alle Features, voller Umfang.</p>
       <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-        <a href="beta.html" class="btn btn-amber" data-i18n="cta.betaTest">Beta testen</a>
+        <a href="beta.html" class="btn btn-amber" data-i18n="cta.betaTest">App holen</a>
         <a href="pricing.html" class="btn btn-outline" data-i18n="cta.viewPricing">Preise ansehen</a>
       </div>
     </div>

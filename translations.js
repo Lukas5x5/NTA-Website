@@ -3,7 +3,7 @@ const translations = {
   'nav.home': { de: 'Home', en: 'Home' },
   'nav.features': { de: 'Features', en: 'Features' },
   'nav.pricing': { de: 'Preise', en: 'Pricing' },
-  'nav.beta': { de: 'Beta', en: 'Beta' },
+  'nav.beta': { de: 'Download', en: 'Download' },
   'nav.about': { de: 'Über uns', en: 'About' },
   'nav.updates': { de: 'Updates', en: 'Updates' },
   'nav.briefing': { de: 'Briefing', en: 'Briefing' },
@@ -22,7 +22,7 @@ const translations = {
   'footer.madeIn': { de: 'Made in Austria 🇦🇹 · For Balloon Pilots Worldwide', en: 'Made in Austria 🇦🇹 · For Balloon Pilots Worldwide' },
 
   // ═══ INDEX PAGE ═══
-  'index.badge': { de: 'Bald verfügbar für iPhone, iPad & Android', en: 'Coming soon for iPhone, iPad & Android' },
+  'index.badge': { de: 'Für iPhone, iPad & Android', en: 'For iPhone, iPad & Android' },
   'index.heroTitle1': { de: 'Deine Ballon-<br>Navigation.', en: 'Your Balloon<br>Navigation.' },
   'index.heroTitle2': { de: 'Einfach professionell.', en: 'Simply professional.' },
   'index.heroDesc': { de: 'NTA SkyNav ist die erste App speziell für Ballonpiloten. GPS, ICAO-Karten, Wettermodelle, Load Calculator und Live Team Tracking — alles an einem Ort, auch offline.', en: 'NTA SkyNav is the first app built specifically for balloon pilots. GPS, ICAO charts, weather models, load calculator and live team tracking — all in one place, even offline.' },
@@ -106,7 +106,7 @@ const translations = {
   'index.priceTitle': { de: 'Ab <span style="color: var(--amber);">€9,99</span>/Monat', en: 'From <span style="color: var(--amber);">€9.99</span>/month' },
   'index.priceDesc': { de: '7 Tage kostenlos testen. Basis-GPS und Karte ohne Account nutzbar.', en: '7-day free trial. Basic GPS and map usable without account.' },
   'index.priceAll': { de: 'Alle Preise ansehen', en: 'View all pricing' },
-  'index.priceBeta': { de: 'Beta testen', en: 'Try Beta' },
+  'index.priceBeta': { de: 'App holen', en: 'Get the App' },
 
   // Stats
   'index.stat1Num': { de: '25+', en: '25+' },
@@ -171,6 +171,14 @@ const translations = {
   'index.mf5Short': { de: 'Hochspannungsleitungen, Windräder. Proximity-Audio-Warnungen.', en: 'Power lines, wind turbines. Proximity audio warnings.' },
   'index.mf11Short': { de: 'High-Contrast für Sonneneinstrahlung. Alles lesbar.', en: 'High-contrast for sun exposure. Everything readable.' },
   'index.mf12Short': { de: 'Karten herunterladen, offline speichern, sync wenn online.', en: 'Download maps, save offline, sync when online.' },
+  'index.mf19Title': { de: 'capzlog.aero Sync', en: 'capzlog.aero Sync' },
+  'index.mf19Short': { de: 'Fahrten automatisch ins digitale Flugbuch — offizielle Partnerschaft.', en: 'Flights pushed automatically to your digital logbook — official partnership.' },
+  'index.mf20Title': { de: 'Flight Planner Wizard', en: 'Flight Planner Wizard' },
+  'index.mf20Short': { de: 'Ballon → Passagiere → Wetter → Briefing-PDF in einem geführten Flow.', en: 'Balloon → passengers → weather → briefing PDF in one guided flow.' },
+  'index.mf21Title': { de: 'Auto Start & Landung', en: 'Auto Takeoff & Landing' },
+  'index.mf21Short': { de: 'Erkennt Abheben und Landung automatisch — Aufzeichnung läuft von selbst.', en: 'Detects takeoff and landing automatically — recording runs by itself.' },
+  'index.mf22Title': { de: 'Schnell-Notizen', en: 'Quick Notes' },
+  'index.mf22Short': { de: 'Handschrift-Notizen mit Finger oder Stift — direkt während der Fahrt.', en: 'Handwritten notes with finger or stylus — right during the flight.' },
   'index.mf13Short': { de: 'Walkie-Talkie per LiveKit. AirPods, Bluetooth, mischt mit Musik.', en: 'Walkie-talkie via LiveKit. AirPods, Bluetooth, mixes with music.' },
   'index.mf14Short': { de: 'Komplettes Briefing als PDF mit 5 Modellen, Wolken, Wind.', en: 'Complete briefing as PDF with 5 models, clouds, wind.' },
   'index.mf15Short': { de: 'Windschichten aus Ballonbewegung. Import: Windsond, CSV, KML.', en: 'Wind layers from balloon movement. Import: Windsond, CSV, KML.' },
@@ -260,7 +268,7 @@ const translations = {
   'cta.title': { de: 'Bereit zum Abheben?', en: 'Ready for takeoff?' },
   'cta.descFeat': { de: 'Teste NTA SkyNav 7 Tage kostenlos – alle Features, voller Umfang.', en: 'Try NTA SkyNav free for 7 days – all features, full scope.' },
   'cta.descAbout': { de: 'Teste NTA SkyNav als einer der ersten Beta-Tester.', en: 'Try NTA SkyNav as one of the first beta testers.' },
-  'cta.betaTest': { de: 'Beta testen', en: 'Try Beta' },
+  'cta.betaTest': { de: 'App holen', en: 'Get the App' },
   'cta.viewPricing': { de: 'Preise ansehen', en: 'View pricing' },
 
   // ═══ PRICING PAGE ═══
@@ -310,6 +318,10 @@ const translations = {
   'price.compBallooning': { de: 'Speziell für Ballonfahrt', en: 'Built for ballooning' },
   'price.compPartial': { de: 'Teilweise', en: 'Partial' },
   'price.compPriceFrom': { de: 'Preis ab', en: 'Price from' },
+  'price.compCapzlog': { de: 'capzlog.aero Flugbuch-Sync', en: 'capzlog.aero logbook sync' },
+  'price.crewTitle': { de: 'Crew Add-on', en: 'Crew Add-on' },
+  'price.crewDesc': { de: 'Erweitere dein Live Team Tracking von 1 auf 5 Verfolger — für Chase Crew, Familie und Team. Buchbar zusätzlich zum Pro-Abo direkt in der App.', en: 'Expand your live team tracking from 1 to 5 followers — for chase crew, family and team. Bookable in addition to the Pro subscription directly in the app.' },
+  'price.crewPeriod': { de: 'pro Monat', en: 'per month' },
 
   // FAQ
   'price.faqLabel': { de: 'FAQ', en: 'FAQ' },
@@ -328,9 +340,9 @@ const translations = {
   'price.faq6a': { de: 'NTA SkyNav ist für Android (Smartphones + Tablets) und iOS (iPhone + iPad) verfügbar. Optimiert für Tablets im Querformat, funktioniert aber genauso auf dem Smartphone.', en: 'NTA SkyNav is available for Android (smartphones + tablets) and iOS (iPhone + iPad). Optimized for tablets in landscape mode, but works just as well on smartphones.' },
 
   // ═══ BETA PAGE ═══
-  'beta.founderCheck': { de: 'Founder Programm geschlossen', en: 'Founder Program Closed' },
-  'beta.closedTitle': { de: 'Alle 50 Plätze wurden in 72 Stunden vergeben', en: 'All 50 spots were taken in 72 hours' },
-  'beta.closedDesc': { de: 'Sei dabei wenn wir live gehen — trage dich auf die Warteliste ein und teste NTA SkyNav 7 Tage kostenlos.', en: 'Be there when we go live — join the waitlist and try NTA SkyNav free for 7 days.' },
+  'beta.founderCheck': { de: 'Beta erfolgreich — Founder Programm geschlossen', en: 'Beta successful — Founder Program closed' },
+  'beta.closedTitle': { de: 'Hol dir NTA SkyNav', en: 'Get NTA SkyNav' },
+  'beta.closedDesc': { de: 'Der offizielle Release steht unmittelbar bevor. Trage dich auf die Warteliste ein — wir benachrichtigen dich zum Launch und du testest 7 Tage kostenlos.', en: 'The official release is just around the corner. Join the waitlist — we will notify you at launch and you can try it free for 7 days.' },
   'beta.waitlistTitle': { de: 'Auf die Warteliste', en: 'Join the Waitlist' },
   'beta.waitlistDesc': { de: 'Launch-Benachrichtigung + 7 Tage kostenlos testen.', en: 'Launch notification + 7 days free trial.' },
   'beta.waitlistPlaceholder': { de: 'deine@email.at', en: 'your@email.com' },
@@ -454,6 +466,47 @@ const translations = {
   'feat.log.l6': { de: 'Excel-Export: Übersicht, Beladung, Gas, Track-Daten', en: 'Excel export: overview, load, gas, track data' },
   'feat.log.l7': { de: 'Offline-Speicherung, Auto-Sync bei Verbindung', en: 'Offline storage, auto-sync when connected' },
   'feat.log.l8': { de: 'Cloud-Backup über Supabase', en: 'Cloud backup via Supabase' },
+
+  // capzlog.aero Integration
+  'feat.capzlogLabel': { de: 'Partnerschaft', en: 'Partnership' },
+  'feat.capzlogTitle': { de: 'capzlog.aero Integration', en: 'capzlog.aero Integration' },
+  'feat.capzlogDesc': { de: 'NTA SkyNav ist offizieller Partner von capzlog.aero — dem digitalen Flugbuch für Piloten. Jede aufgezeichnete Fahrt wird auf Wunsch automatisch in dein capzlog.aero-Flugbuch übertragen. Einmal verbinden, nie wieder manuell eintragen.', en: 'NTA SkyNav is an official partner of capzlog.aero — the digital logbook for pilots. Every recorded flight can be pushed automatically to your capzlog.aero logbook. Connect once, never enter flights manually again.' },
+  'feat.capzlog.l1': { de: 'Auto-Push: Fahrt wird nach der Landung automatisch übertragen', en: 'Auto-push: Flight is transferred automatically after landing' },
+  'feat.capzlog.l2': { de: 'Initial-Push: Bestehende Fahrten gesammelt nachübertragen', en: 'Initial push: Transfer existing flights in one batch' },
+  'feat.capzlog.l3': { de: 'Vollständige Daten: Route, Zeiten, Ballon-Kennzeichen, PIC, Passagiere', en: 'Complete data: route, times, balloon registration, PIC, passengers' },
+  'feat.capzlog.l4': { de: 'Marker-Mapping: CrossCountry, Prüfung, Schulung, Lehrer/Prüfer', en: 'Marker mapping: cross-country, check flight, training, instructor/examiner' },
+  'feat.capzlog.l5': { de: 'Status-Anzeige pro Fahrt mit manuellem Erneut-Senden', en: 'Status display per flight with manual re-send' },
+  'feat.capzlog.l6': { de: 'Einfache Einrichtung: Token in den Account-Einstellungen eintragen — fertig', en: 'Easy setup: enter your token in account settings — done' },
+
+  // Flight Planner Wizard
+  'feat.plannerLabel': { de: 'Flugplanung', en: 'Flight Planning' },
+  'feat.plannerTitle': { de: 'Flight Planner Wizard', en: 'Flight Planner Wizard' },
+  'feat.plannerDesc': { de: 'Die komplette Fahrtvorbereitung in einem geführten Ablauf: Ballon wählen, Passagiere und Flugparameter festlegen, Wetter konfigurieren — am Ende stehen Wetter-Briefing-PDF und Lastberechnung bereit.', en: 'Complete flight preparation in one guided flow: select balloon, set passengers and flight parameters, configure weather — at the end your weather briefing PDF and load calculation are ready.' },
+  'feat.planner.l1': { de: 'Geführter 4-Schritt-Flow: Ballon → Passagiere → Parameter → Wetter', en: 'Guided 4-step flow: balloon → passengers → parameters → weather' },
+  'feat.planner.l2': { de: 'Erstellt automatisch das Wetter-Briefing-PDF', en: 'Automatically creates the weather briefing PDF' },
+  'feat.planner.l3': { de: 'Lastberechnung mit dem gewählten Ballonprofil', en: 'Load calculation with the selected balloon profile' },
+  'feat.planner.l4': { de: 'Startplatz per GPS, Suche oder direkt auf der Karte', en: 'Launch site via GPS, search or directly on the map' },
+  'feat.planner.l5': { de: 'Alle Werte werden für die nächste Fahrt gespeichert', en: 'All values are saved for the next flight' },
+  'feat.planner.l6': { de: 'Bestehende Planung bearbeiten oder frisch starten', en: 'Edit an existing plan or start fresh' },
+
+  // Auto Start-/Lande-Erkennung
+  'feat.autoLabel': { de: 'Automatik', en: 'Automation' },
+  'feat.autoTitle': { de: 'Automatische Start- & Lande-Erkennung', en: 'Automatic Takeoff & Landing Detection' },
+  'feat.autoDesc': { de: 'Hände frei beim Start: Die App erkennt über Variometer und GPS-Höhe, wann der Ballon abhebt, und startet die Aufzeichnung von selbst. Bei der Landung wird automatisch pausiert — die Fahrt wird komplett ohne Zutun gespeichert.', en: 'Hands free at launch: the app detects via variometer and GPS altitude when the balloon takes off and starts recording by itself. On landing it pauses automatically — the flight is saved entirely without any input.' },
+  'feat.auto.l1': { de: 'Abheben-Erkennung über Vario + GPS-Höhe — Aufzeichnung startet automatisch', en: 'Takeoff detection via vario + GPS altitude — recording starts automatically' },
+  'feat.auto.l2': { de: 'Landeerkennung pausiert Aufzeichnung und Gas-Tracker', en: 'Landing detection pauses recording and gas tracker' },
+  'feat.auto.l3': { de: '„Nicht gelandet"-Button setzt alles nahtlos fort', en: '"Not landed" button resumes everything seamlessly' },
+  'feat.auto.l4': { de: 'Auto-Save: Fahrt wird lokal + in der Cloud gespeichert, inkl. Start-/Landeort', en: 'Auto-save: flight is saved locally + in the cloud, incl. takeoff/landing location' },
+  'feat.auto.l5': { de: 'QNH wird automatisch von der nächsten METAR-Station geladen', en: 'QNH is loaded automatically from the nearest METAR station' },
+  'feat.auto.l6': { de: 'Jederzeit abschaltbar — klassischer REC-Button bleibt verfügbar', en: 'Can be disabled anytime — the classic REC button stays available' },
+
+  // Schnell-Notizen
+  'feat.notesTitle': { de: 'Schnell-Notizen mit Handschrift', en: 'Quick Notes with Handwriting' },
+  'feat.notesDesc': { de: 'Frequenz vom FIS bekommen? Freigabe notieren? Eine Wischgeste öffnet die Notiz-Fläche — schreibe mit Finger oder Stift direkt aufs Display, ohne die Navigation zu verlassen.', en: 'Got a frequency from FIS? Need to note a clearance? One swipe opens the note canvas — write with your finger or stylus directly on the display without leaving navigation.' },
+  'feat.notes.l1': { de: 'Zeichenfläche für Finger und Stift — mit Druckempfindlichkeit', en: 'Drawing canvas for finger and stylus — pressure-sensitive' },
+  'feat.notes.l2': { de: 'Optionales Textfeld für getippte Notizen', en: 'Optional text field for typed notes' },
+  'feat.notes.l3': { de: 'Mehrere Notizen, lokal am Gerät gespeichert', en: 'Multiple notes, stored locally on the device' },
+  'feat.notes.l4': { de: 'Übersicht mit Vorschau-Bildern aller Notizen', en: 'Overview with preview images of all notes' },
 
   // Target Navigation
   'feat.target.l1': { de: 'Ziel auf der Karte antippen oder Koordinaten eingeben', en: 'Tap target on map or enter coordinates' },
@@ -579,6 +632,98 @@ const translations = {
   'updates.prefixes': { de: 'Fixes (Pre-Launch)', en: 'Fixes (Pre-Launch)' },
 
   'updates.improved': { de: 'Verbessert', en: 'Improved' },
+
+  // v1.2.0
+  'updates.120date': { de: '8. Juni 2026', en: 'June 8, 2026' },
+  'updates.120title': { de: 'capzlog.aero ist live, Schnell-Notizen, Flight Summary & Flotten-Buchung', en: 'capzlog.aero is live, Quick Notes, Flight Summary & Fleet Booking' },
+  'updates.120desc': { de: 'Das größte Update seit dem Beta-Start: Die capzlog.aero-Integration ist offiziell live — Fahrten werden automatisch ins digitale Flugbuch übertragen. Dazu handschriftliche Schnell-Notizen, eine neue Fahrtübersicht im Boarding-Pass-Stil, Bug-Reports mit Antwort-Chat und ein Buchungskalender für Ballonbetriebe.', en: 'The biggest update since the beta launch: the capzlog.aero integration is officially live — flights are pushed automatically to your digital logbook. Plus handwritten quick notes, a new boarding-pass-style flight summary, bug reports with reply chat and a booking calendar for balloon operators.' },
+  'updates.120f1': { de: '<strong>capzlog.aero-Integration (Go-Live)</strong>: Fahrten werden automatisch ins capzlog.aero-Flugbuch übertragen — Auto-Push nach der Landung, Initial-Push für bestehende Fahrten, Status-Anzeige & manueller Retry. Für alle Nutzer in den Account-Einstellungen', en: '<strong>capzlog.aero integration (go-live)</strong>: Flights are pushed automatically to your capzlog.aero logbook — auto-push after landing, initial push for existing flights, status display & manual retry. Available to all users in account settings' },
+  'updates.120f2': { de: '<strong>Schnell-Notizen mit Handschrift</strong>: Zeichenfläche für Finger oder Stift (mit Druckempfindlichkeit), optionales Textfeld, mehrere Notizen mit Vorschau — perfekt für Frequenzen oder Freigaben während der Fahrt', en: '<strong>Quick Notes with handwriting</strong>: Drawing canvas for finger or stylus (pressure-sensitive), optional text field, multiple notes with preview — perfect for frequencies or clearances during flight' },
+  'updates.120f3': { de: '<strong>Flight-Summary-Karte</strong>: Gespeicherte Fahrten erscheinen als elegante Boarding-Pass-Karte — Route, Datum, Dauer, Start/Landung, PIC, Ballon, Max-Höhe und Gasverbrauch auf einen Blick', en: '<strong>Flight Summary card</strong>: Saved flights appear as an elegant boarding-pass card — route, date, duration, takeoff/landing, PIC, balloon, max altitude and gas consumption at a glance' },
+  'updates.120f4': { de: '<strong>Bug-Report-Chat</strong>: Direkter Zwei-Wege-Dialog mit dem Support inkl. geführter Fragen und automatischer Diagnose — jetzt für alle Nutzer freigeschaltet', en: '<strong>Bug report chat</strong>: Direct two-way dialog with support incl. guided questions and automatic diagnostics — now available to all users' },
+  'updates.120f5': { de: '<strong>Flotten- & Buchungsverwaltung für Ballonbetriebe</strong>: Ballone mit vollständigen Technikdaten, zentrale Gasflaschen-Bibliothek, Buchungskalender — gebuchte Ballone werden im Flight Planner automatisch vorgeschlagen', en: '<strong>Fleet & booking management for balloon operators</strong>: Balloons with full technical data, central gas cylinder library, booking calendar — booked balloons are suggested automatically in the Flight Planner' },
+  'updates.120f6': { de: '<strong>Startplatz auf der Karte wählen</strong>: Der Startplatz fürs Wetter-Briefing kann jetzt direkt auf der Karte gesetzt werden', en: '<strong>Pick launch site on the map</strong>: The launch site for the weather briefing can now be set directly on the map' },
+  'updates.120f7': { de: '<strong>Aktiver Fahrten-Ordner</strong>: Bewusst festlegen, in welchem Ordner neue Fahrten gespeichert werden (Stern-Button + Hinweis-Banner)', en: '<strong>Active flights folder</strong>: Deliberately choose which folder new flights are saved to (star button + hint banner)' },
+  'updates.120f8': { de: '<strong>Automatische Sprache</strong>: Die App startet bei Erstnutzung in der Gerätesprache (Deutsch → DE, sonst Englisch)', en: '<strong>Automatic language</strong>: On first use the app starts in your device language (German → DE, otherwise English)' },
+  'updates.120x1': { de: '<strong>Abo-Sicherheit</strong>: Pro-Status ist jetzt an genau einen Account gebunden — Übertragung nur noch bewusst über „Käufe wiederherstellen"', en: '<strong>Subscription security</strong>: Pro status is now bound to exactly one account — transfer only deliberately via "Restore purchases"' },
+  'updates.120x2': { de: '<strong>Start-/Lande-Pins</strong>: Sitzen nach „Track laden" wieder exakt an den gespeicherten Orten', en: '<strong>Takeoff/landing pins</strong>: Sit exactly at the saved locations again after "Load track"' },
+  'updates.120x3': { de: '<strong>Ortsnamen präziser</strong>: Start-/Landeort zeigt den Ortsteil statt nur die Gemeinde — und ohne angehängtes Bundesland', en: '<strong>More precise place names</strong>: Takeoff/landing location shows the district instead of just the municipality — without the appended state' },
+  'updates.120x4': { de: '<strong>Höhendiagramme</strong>: Wetter-Briefing-Diagramme starten jetzt am Startplatz statt am Meeresspiegel, gewählte Startplatz-Höhe gilt im ganzen Wettersheet', en: '<strong>Altitude charts</strong>: Weather briefing charts now start at the launch site instead of sea level, the chosen launch-site elevation applies across the whole weather sheet' },
+  'updates.120x5': { de: '<strong>Kennzeichen in der Fahrtübersicht</strong>: Wird aus dem mit der Fahrt gespeicherten Ballon gelesen — neues separates Kennzeichen-Feld im Ballonprofil', en: '<strong>Registration in flight summary</strong>: Read from the balloon saved with the flight — new separate registration field in the balloon profile' },
+  'updates.120x6': { de: '<strong>„Abo verwalten"</strong>: Öffnet jetzt zuverlässig die Abo-Verwaltung von Apple bzw. Google', en: '<strong>"Manage subscription"</strong>: Now reliably opens the Apple or Google subscription management' },
+  'updates.120i1': { de: '<strong>Start- & Lande-Marker</strong>: Eigene Karten-Marker mit Ortsname und Uhrzeit im Popup', en: '<strong>Takeoff & landing markers</strong>: Dedicated map markers with place name and time in the popup' },
+  'updates.120i2': { de: '<strong>Track-Farbbalken</strong>: Umschalter zwischen Höhe und Geschwindigkeit direkt am Farbbalken', en: '<strong>Track color bar</strong>: Toggle between altitude and speed directly on the color bar' },
+  'updates.120i3': { de: '<strong>Team-Code speichern</strong>: Ein beigetretener Team-Code kann als eigener fester Code gespeichert werden', en: '<strong>Save team code</strong>: A joined team code can be saved as your own fixed code' },
+  'updates.120i4': { de: '<strong>Aufgeräumtes System-Menü</strong>: Klarere Struktur, Vario wird auf Geräten ohne Barometer ausgeblendet', en: '<strong>Cleaned-up system menu</strong>: Clearer structure, vario is hidden on devices without a barometer' },
+
+  // v1.1.6
+  'updates.116date': { de: '14. April 2026', en: 'April 14, 2026' },
+  'updates.116title': { de: 'Precision GPS V2, Auto-Save, METAR-QNH & neue Onboardings', en: 'Precision GPS V2, Auto-Save, METAR QNH & New Onboardings' },
+  'updates.116desc': { de: 'Komplett überarbeitete GPS-Pipeline im ForeFlight-Stil, automatisches Speichern jeder Fahrt, echtes Stations-QNH von METAR und geführte Einführungen für NaviPanel, Team, Gas und Wind.', en: 'Completely reworked ForeFlight-style GPS pipeline, automatic saving of every flight, real station QNH from METAR and guided intros for NavPanel, Team, Gas and Wind.' },
+  'updates.116f1': { de: '<strong>Auto-Save</strong>: Jede Fahrt wird bei Aufzeichnungsende oder Landeerkennung automatisch gespeichert (lokal + Cloud) — inkl. Start-/Landeort per Geocoding', en: '<strong>Auto-save</strong>: Every flight is saved automatically when recording ends or landing is detected (local + cloud) — incl. takeoff/landing location via geocoding' },
+  'updates.116f2': { de: '<strong>Onboardings</strong>: Geführte Erklärungen beim ersten Öffnen von NaviPanel, Team, Gas und Wind', en: '<strong>Onboardings</strong>: Guided explanations when opening NavPanel, Team, Gas and Wind for the first time' },
+  'updates.116f3': { de: '<strong>Ballon-Kennzeichen</strong>: Neues Feld „Registration" im Ballon-Editor', en: '<strong>Balloon registration</strong>: New "Registration" field in the balloon editor' },
+  'updates.116i1': { de: '<strong>Precision GPS V2</strong>: „Render in the Past" — der Cursor läuft 1s gepuffert zwischen echten GPS-Fixes → 100% genaue Position bei butterweichen 60fps, kein Springen mehr', en: '<strong>Precision GPS V2</strong>: "Render in the past" — the cursor runs 1s buffered between real GPS fixes → 100% accurate position at buttery 60fps, no more jumping' },
+  'updates.116i2': { de: '<strong>QNH von METAR</strong>: Echter Stationswert der nächsten METAR-Station statt Modellwert — automatisch bei GPS-Start und Takeoff', en: '<strong>QNH from METAR</strong>: Real station value from the nearest METAR station instead of a model value — automatic at GPS start and takeoff' },
+  'updates.116i3': { de: '<strong>Track-Farben</strong>: 5-stufige Farbpalette (Grün → Rot) für feinere Differenzierung, Speed-Einheit aus den Settings', en: '<strong>Track colors</strong>: 5-step color palette (green → red) for finer differentiation, speed unit from settings' },
+  'updates.116i4': { de: '<strong>Excel-Export</strong>: Start-/Landeort als Ortsname statt Koordinaten', en: '<strong>Excel export</strong>: Takeoff/landing location as place name instead of coordinates' },
+  'updates.116i5': { de: '<strong>Settings-Backup</strong>: Alle Einstellungen + Ballonprofile werden nach dem Onboarding automatisch in die Cloud gesichert', en: '<strong>Settings backup</strong>: All settings + balloon profiles are backed up to the cloud automatically after onboarding' },
+  'updates.116x1': { de: '<strong>Bildschirmsperre</strong>: Wake Lock verhindert automatisches Sperren während die App aktiv ist', en: '<strong>Screen lock</strong>: Wake lock prevents automatic locking while the app is active' },
+  'updates.116x2': { de: '<strong>iOS Cursor-Freeze</strong>: Permanenter Watchdog startet die Anzeige nach App-Wechsel zuverlässig neu', en: '<strong>iOS cursor freeze</strong>: Permanent watchdog reliably restarts rendering after app switching' },
+  'updates.116x3': { de: '<strong>Stabilität</strong>: Main-Thread-Freezes behoben (GPS-Throttle, Track-Save-Debounce), Token-Refresh robuster', en: '<strong>Stability</strong>: Main-thread freezes fixed (GPS throttle, track-save debounce), more robust token refresh' },
+  'updates.116x4': { de: '<strong>Kartentyp springt zurück</strong>: Gewählte Karte (OSM/Topo/SAT) bleibt gespeichert', en: '<strong>Map type resets</strong>: Selected map (OSM/Topo/SAT) stays saved' },
+  'updates.116x5': { de: '<strong>„Aufzeichnung starten?"-Popup</strong>: Erscheint nur noch bei echter Bewegung oder echtem Steigen', en: '<strong>"Start recording?" popup</strong>: Only appears on real movement or real climbing' },
+
+  // v1.1.5
+  'updates.115date': { de: '7. April 2026', en: 'April 7, 2026' },
+  'updates.115title': { de: 'Flight Planner Wizard, Offline-Karten in Topo & Luftraum-Fixes', en: 'Flight Planner Wizard, Offline Maps in Topo & Airspace Fixes' },
+  'updates.115desc': { de: 'Neuer geführter Flugplanungs-Wizard von Ballonwahl bis Wetter-PDF, Offline-Karten jetzt auch als Topo-Karte und viele Detailverbesserungen.', en: 'New guided flight planning wizard from balloon selection to weather PDF, offline maps now also available as topo map, and many detail improvements.' },
+  'updates.115f1': { de: '<strong>Flight Planner Wizard</strong>: Geführter 4-Schritt-Flow — Ballon auswählen → Passagiere → Flugparameter → Wetter (Standort, Tag, Uhrzeit, Modell) → erstellt automatisch das Briefing-PDF', en: '<strong>Flight Planner Wizard</strong>: Guided 4-step flow — select balloon → passengers → flight parameters → weather (location, day, time, model) → automatically creates the briefing PDF' },
+  'updates.115f2': { de: '<strong>Offline-Karten in Topo</strong>: Beim Download ist jetzt OSM oder Topo wählbar', en: '<strong>Offline maps in topo</strong>: OSM or topo can now be selected when downloading' },
+  'updates.115f3': { de: '<strong>Eigener Hüllentyp</strong>: Beim Ballon-Erstellen frei eingebbar (z. B. Sonderformen)', en: '<strong>Custom envelope type</strong>: Freely enterable when creating a balloon (e.g. special shapes)' },
+  'updates.115i1': { de: '<strong>Pilotengewicht global</strong>: Wird einmal unter Account → Einstellungen gepflegt und automatisch für alle Berechnungen verwendet', en: '<strong>Global pilot weight</strong>: Maintained once under Account → Settings and used automatically for all calculations' },
+  'updates.115i2': { de: '<strong>Wetter-API stabiler</strong>: Anfragen gedrosselt, automatischer Retry, klare Fehlermeldung statt kryptischer API-Fehler', en: '<strong>More stable weather API</strong>: Requests throttled, automatic retry, clear error message instead of cryptic API errors' },
+  'updates.115i3': { de: '<strong>Briefing-Erfolgsmeldung</strong>: Nach PDF-Erstellung mit direktem PDF-Viewer-Button', en: '<strong>Briefing success screen</strong>: After PDF creation, with a direct PDF viewer button' },
+  'updates.115x1': { de: '<strong>Lufträume verschwinden beim Zoomen</strong>: Große Lufträume werden jetzt auch erkannt, wenn alle Eckpunkte außerhalb des Bildschirms liegen', en: '<strong>Airspaces disappearing while zooming</strong>: Large airspaces are now detected even if all vertices are off-screen' },
+  'updates.115x2': { de: '<strong>HDG/Speed nach GPS-Neustart</strong>: Rohe GPS-Werte als Startwert, HDG zeigt „--" bei Stillstand', en: '<strong>HDG/speed after GPS restart</strong>: Raw GPS values as starting point, HDG shows "--" when stationary' },
+  'updates.115x3': { de: '<strong>Track-Sprung bei Landeprognose</strong>: Sprung-Guard verwirft Punkte über 500m Distanz', en: '<strong>Track jump in landing prediction</strong>: Jump guard discards points beyond 500m distance' },
+  'updates.115x4': { de: '<strong>Outdoor-Modus</strong>: Inaktive Footer-Buttons sind wieder sichtbar', en: '<strong>Outdoor mode</strong>: Inactive footer buttons are visible again' },
+
+  // v1.1.4
+  'updates.114date': { de: '4. April 2026', en: 'April 4, 2026' },
+  'updates.114title': { de: 'Stabilität: Gas-Tracker & Auto-Abheben', en: 'Stability: Gas Tracker & Auto Takeoff' },
+  'updates.114x1': { de: '<strong>Gas-Tracker Crash (Android)</strong>: Endlose Schleife bei leeren Gasflaschen behoben', en: '<strong>Gas tracker crash (Android)</strong>: Fixed endless loop with empty gas cylinders' },
+  'updates.114x2': { de: '<strong>Tastatur-Crash (iOS)</strong>: Absturz bei bestimmten Tastatur-Events behoben', en: '<strong>Keyboard crash (iOS)</strong>: Fixed crash on certain keyboard events' },
+  'updates.114x3': { de: '<strong>Auto-Abheben empfindlicher</strong>: Vario-Schwelle gesenkt — erkennt auch langsames Abheben zuverlässig', en: '<strong>More sensitive auto takeoff</strong>: Vario threshold lowered — reliably detects slow takeoffs too' },
+
+  // v1.1.3
+  'updates.113date': { de: '2. April 2026', en: 'April 2, 2026' },
+  'updates.113title': { de: 'Cloud-Sync Dialog, Live-Vario für die Landeprognose & Android-Glättung', en: 'Cloud Sync Dialog, Live Vario for Landing Prediction & Android Smoothing' },
+  'updates.113i1': { de: '<strong>Cloud-Sync Dialog</strong>: Beim Schließen der Einstellungen fragt die App, ob Änderungen in der Cloud gespeichert werden sollen', en: '<strong>Cloud sync dialog</strong>: When closing settings, the app asks whether changes should be saved to the cloud' },
+  'updates.113i2': { de: '<strong>Landeprognose mit Live-Vario</strong>: Neuer Toggle nutzt die aktuelle Sinkgeschwindigkeit vom Barometer/GPS statt des manuellen Sliders', en: '<strong>Landing prediction with live vario</strong>: New toggle uses the current sink rate from barometer/GPS instead of the manual slider' },
+  'updates.113i3': { de: '<strong>NavPanel-Einstellungen</strong>: Feld-Editor bleibt offen, bis man ihn bewusst schließt', en: '<strong>NavPanel settings</strong>: Field editor stays open until deliberately closed' },
+  'updates.113x1': { de: '<strong>Höhe/Vario springt (Android)</strong>: Barometer-Glättung + sauberere Vario-Berechnung', en: '<strong>Altitude/vario jumping (Android)</strong>: Barometer smoothing + cleaner vario calculation' },
+  'updates.113x2': { de: '<strong>Landung-Popup</strong>: Hat jetzt einen X-Button zum Schließen', en: '<strong>Landing popup</strong>: Now has an X button to close' },
+  'updates.113x3': { de: '<strong>Crew Add-on Kauf</strong>: Fallback über direkte Produkt-ID, wenn das Package nicht im Angebot enthalten ist', en: '<strong>Crew add-on purchase</strong>: Fallback via direct product ID when the package is not in the offering' },
+
+  // v1.1.2
+  'updates.112date': { de: '2. April 2026', en: 'April 2, 2026' },
+  'updates.112title': { de: 'Automatische Start- & Lande-Erkennung, Pro-Abo, E-Mail-Login & GFS-Modell', en: 'Automatic Takeoff & Landing Detection, Pro Subscription, Email Login & GFS Model' },
+  'updates.112desc': { de: 'Die App erkennt Abheben und Landung jetzt automatisch und steuert die Aufzeichnung selbst. Dazu E-Mail-Registrierung, das Pro-Abo als In-App-Kauf, offene Anmeldung für alle und GFS als fünftes Wettermodell.', en: 'The app now detects takeoff and landing automatically and controls recording itself. Plus email registration, the Pro subscription as in-app purchase, open registration for everyone and GFS as the fifth weather model.' },
+  'updates.112f1': { de: '<strong>Automatische Abheben-Erkennung</strong>: Erkennt den Start über Vario + GPS-Höhe und beginnt die Aufzeichnung von selbst (abschaltbar)', en: '<strong>Automatic takeoff detection</strong>: Detects launch via vario + GPS altitude and starts recording by itself (can be disabled)' },
+  'updates.112f2': { de: '<strong>Automatische Landeerkennung</strong>: Erkennt die Landung und pausiert Aufzeichnung + Gas-Tracker — „Nicht gelandet" setzt alles fort', en: '<strong>Automatic landing detection</strong>: Detects landing and pauses recording + gas tracker — "Not landed" resumes everything' },
+  'updates.112f3': { de: '<strong>E-Mail-Registrierung & Passwort-Reset</strong>: Account mit E-Mail + Passwort, zusätzlich zu Apple- und Google-Login', en: '<strong>Email registration & password reset</strong>: Account with email + password, in addition to Apple and Google login' },
+  'updates.112f4': { de: '<strong>Pro-Abo als In-App-Kauf</strong>: Jährlich oder monatlich direkt im App Store / Play Store, inkl. Crew Add-on — Preise live aus dem Store', en: '<strong>Pro subscription as in-app purchase</strong>: Yearly or monthly directly in the App Store / Play Store, incl. crew add-on — prices live from the store' },
+  'updates.112f5': { de: '<strong>GFS-Wettermodell</strong>: NOAA GFS (weltweit) als fünftes Modell beim Briefing wählbar', en: '<strong>GFS weather model</strong>: NOAA GFS (worldwide) selectable as fifth model for briefings' },
+  'updates.112f6': { de: '<strong>Nutzungsbedingungen in der App</strong>: Disclaimer beim ersten Login, jederzeit unter Account → Rechtliches einsehbar', en: '<strong>Terms of use in the app</strong>: Disclaimer at first login, viewable anytime under Account → Legal' },
+  'updates.112i1': { de: '<strong>Offene Anmeldung</strong>: Der Beta-Check ist Geschichte — jeder kann sich registrieren, der Beta-Status bestimmt nur noch den Preis', en: '<strong>Open registration</strong>: The beta check is history — everyone can register, beta status only determines the price' },
+  'updates.112i2': { de: '<strong>AUTO-REC-Button</strong>: Zeigt bei aktiver Auto-Erkennung ein grünes AUTO-Design', en: '<strong>AUTO REC button</strong>: Shows a green AUTO design when auto detection is active' },
+  'updates.112i3': { de: '<strong>Frequenz-Klick</strong>: Tippe auf die FIS-Frequenz im NavPanel → zeigt alle Lufträume an der aktuellen Position', en: '<strong>Frequency tap</strong>: Tap the FIS frequency in the NavPanel → shows all airspaces at the current position' },
+  'updates.112i4': { de: '<strong>Track-Farbe</strong>: Höhen-Farbverlauf ist jetzt Standard', en: '<strong>Track color</strong>: Altitude gradient is now the default' },
+  'updates.112x1': { de: '<strong>Hindernis-Warnton</strong>: Warnt jetzt auch, wenn Hindernisse nicht auf der Karte eingeblendet sind', en: '<strong>Obstacle warning sound</strong>: Now warns even when obstacles are not shown on the map' },
+  'updates.112x2': { de: '<strong>Große Beschränkungsgebiete</strong>: Proximity-Check von 5 km auf 30 km erweitert — große Sperrgebiete werden korrekt erkannt', en: '<strong>Large restricted areas</strong>: Proximity check extended from 5 km to 30 km — large restricted areas are detected correctly' },
+  'updates.112x3': { de: '<strong>Fahrten offline</strong>: Ordner laden sofort aus dem Cache — kein 30s-Hänger mehr', en: '<strong>Flights offline</strong>: Folders load instantly from cache — no more 30s hang' },
+  'updates.112x4': { de: '<strong>Track-Lücke beim Fortsetzen</strong>: Keine falsche Verbindungslinie nach App-Neustart', en: '<strong>Track gap on resume</strong>: No false connecting line after app restart' },
 
   // v1.1.1
   'updates.111date': { de: '24. März 2026', en: 'March 24, 2026' },
