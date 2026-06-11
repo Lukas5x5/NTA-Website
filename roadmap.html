@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roadmap – NTA SkyNav</title>
+<meta name="description" content="Die Roadmap von NTA SkyNav — was als Nächstes kommt und was bereits live ist.">
+<link rel="icon" type="image/png" href="nta-logo.png">
+<link rel="apple-touch-icon" href="nta-logo.png">
+<script src="./support.js"></script>
+<script src="./lang.js" defer></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:ital,opsz,wght@1,9..144,300..600&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #070b16; }
+    ::selection { background: #FFA500; color: #070b16; }
+    @keyframes nodepulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,165,0,.5); } 50% { box-shadow: 0 0 0 14px rgba(255,165,0,0); } }
+    @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</helmet>
+
+<div style="background: #070b16; color: #EDF1F7; font-family: 'Rajdhani', sans-serif; line-height: 1.4; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden">
+
+  <header style="border-bottom: 1px solid rgba(255,255,255,.07); position: sticky; top: 0; z-index: 50; background: rgba(7,11,22,.85); backdrop-filter: blur(14px)">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 16px clamp(20px, 4vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 20px">
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #EDF1F7">
+        <img src="assets/nta-logo-b.png" alt="NTA SkyNav Logo" style="width: 46px; height: 46px; object-fit: contain">
+        <span style="font-weight: 700; font-size: 18px; letter-spacing: .04em">NTA <span style="color: #FFA500">SkyNav</span></span>
+      </a>
+      <a href="index.html" style="color: rgba(237,241,247,.7); text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: .1em; text-transform: uppercase" style-hover="color: #FFA500">← Zur Startseite</a>
+    </div>
+  </header>
+
+  <main data-screen-label="Roadmap" style="flex: 1; width: 100%; max-width: 1180px; margin: 0 auto; padding: clamp(60px, 10vh, 120px) clamp(20px, 4vw, 48px) clamp(80px, 12vh, 140px); box-sizing: border-box">
+
+    <!-- hero -->
+    <div style="text-align: center; margin-bottom: clamp(60px, 12vh, 130px)">
+      <div data-rise="" style="font-size: 14px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #00C8FF; opacity: 0; transform: translateY(30px)">Wohin die Fahrt geht</div>
+      <h1 data-rise="" data-rise-delay="120" style="margin: 16px 0 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(44px, 9vw, 130px); line-height: .94; text-transform: uppercase; letter-spacing: -.015em; opacity: 0; transform: translateY(30px)">Roadmap<span style="color: #FFA500">.</span></h1>
+      <div data-rise="" data-rise-delay="260" style="margin-top: 18px; font-family: 'Fraunces', serif; font-style: italic; font-weight: 380; font-size: clamp(20px, 2.6vw, 34px); color: #FFA500; opacity: 0; transform: translateY(30px)">Geplant wie eine gute Ballonfahrt.</div>
+      <p data-rise="" data-rise-delay="400" style="max-width: 600px; margin: clamp(18px, 3vh, 28px) auto 0; font-size: clamp(16px, 1.5vw, 19px); font-weight: 500; color: rgba(237,241,247,.65); text-wrap: pretty; opacity: 0; transform: translateY(30px)">Vier Etappen — und eure Wünsche bestimmen die Route mit. Scroll dich durch die Reise.</p>
+    </div>
+
+    <!-- timeline -->
+    <div data-timeline="" style="position: relative; max-width: 880px; margin: 0 auto">
+
+      <!-- track + progress + balloon -->
+      <div style="position: absolute; top: 0; bottom: 0; left: clamp(22px, 4vw, 32px); width: 3px; background: rgba(255,255,255,.08); border-radius: 2px"></div>
+      <div data-progressline="" style="position: absolute; top: 0; left: clamp(22px, 4vw, 32px); width: 3px; height: 0%; background: linear-gradient(180deg, #FFA500, #00C8FF); border-radius: 2px; box-shadow: 0 0 18px rgba(255,165,0,.45)"></div>
+      <div data-balloon="" style="position: absolute; top: 0%; left: clamp(22px, 4vw, 32px); transform: translate(-50%, -50%); z-index: 5; pointer-events: none">
+        <div style="animation: floaty 4s ease-in-out infinite">
+          <img src="assets/nta-logo-b.png" alt="" style="width: clamp(44px, 6vw, 60px); height: clamp(44px, 6vw, 60px); object-fit: contain; filter: drop-shadow(0 0 18px rgba(255,165,0,.55))">
+        </div>
+      </div>
+
+      <!-- ── Etappe 1: Release ── -->
+      <div data-stop="" style="position: relative; padding: 0 0 clamp(70px, 12vh, 130px) clamp(64px, 11vw, 110px)">
+        <div data-node="" style="position: absolute; left: clamp(22px, 4vw, 32px); top: 8px; transform: translateX(-50%); width: 18px; height: 18px; border-radius: 50%; background: #070b16; border: 3px solid rgba(255,255,255,.25); transition: all .5s ease; z-index: 4"></div>
+        <div data-card="" style="opacity: 0; transform: translateX(60px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.1); border-radius: 22px; padding: clamp(24px, 3.5vw, 40px); transition: opacity .9s ease, transform 1s cubic-bezier(.2,.65,.2,1), border-color .5s ease">
+          <div style="display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 14px">
+            <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(26px, 3vw, 38px); color: #FFA500">Etappe 01</span>
+            <span data-badge="" style="font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; background: rgba(255,165,0,.15); border: 1px solid #FFA500; color: #FFA500">Jetzt live</span>
+          </div>
+          <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(28px, 4.4vw, 56px); line-height: .96; text-transform: uppercase; letter-spacing: -.01em">Release<span style="color: #FFA500">.</span></h2>
+          <p style="margin: 14px 0 0; font-size: clamp(16px, 1.5vw, 18px); font-weight: 500; color: rgba(237,241,247,.68); text-wrap: pretty">SkyNav ist da — für iPhone, iPad und Android. 30 Features, von Precision GPS bis Team Tracking, ab dem ersten Tag im Korb.</p>
+          <div style="margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px">
+            <span style="font-size: 14px; font-weight: 600; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); color: rgba(237,241,247,.7)">30 Features</span>
+            <span style="font-size: 14px; font-weight: 600; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); color: rgba(237,241,247,.7)">iOS · iPadOS · Android</span>
+            <span style="font-size: 14px; font-weight: 600; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); color: rgba(237,241,247,.7)">100% Offline-fähig</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Etappe 2: Fehlerbehebungen ── -->
+      <div data-stop="" style="position: relative; padding: 0 0 clamp(70px, 12vh, 130px) clamp(64px, 11vw, 110px)">
+        <div data-node="" style="position: absolute; left: clamp(22px, 4vw, 32px); top: 8px; transform: translateX(-50%); width: 18px; height: 18px; border-radius: 50%; background: #070b16; border: 3px solid rgba(255,255,255,.25); transition: all .5s ease; z-index: 4"></div>
+        <div data-card="" style="opacity: 0; transform: translateX(60px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.1); border-radius: 22px; padding: clamp(24px, 3.5vw, 40px); transition: opacity .9s ease, transform 1s cubic-bezier(.2,.65,.2,1), border-color .5s ease">
+          <div style="display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 14px">
+            <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(26px, 3vw, 38px); color: #FFA500">Etappe 02</span>
+            <span data-badge="" style="font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; background: rgba(0,200,255,.12); border: 1px solid #00C8FF; color: #00C8FF">In Arbeit</span>
+          </div>
+          <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(28px, 4.4vw, 56px); line-height: .96; text-transform: uppercase; letter-spacing: -.01em">Fehler raus<span style="color: #FFA500">.</span></h2>
+          <p style="margin: 14px 0 0; font-size: clamp(16px, 1.5vw, 18px); font-weight: 500; color: rgba(237,241,247,.68); text-wrap: pretty">Stabilität vor allem anderen. Jeder gemeldete Fehler wird priorisiert und behoben — schnelle Updates, kurze Wege, direkter Draht zum Entwickler.</p>
+          <div style="margin-top: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; font-weight: 500; color: rgba(237,241,247,.7)">
+            <div style="display: flex; gap: 10px"><span style="color: #00C8FF">✦</span> Schnelle Bugfix-Updates in kurzen Abständen</div>
+            <div style="display: flex; gap: 10px"><span style="color: #00C8FF">✦</span> Fehlerberichte aus der App direkt an den Entwickler</div>
+            <div style="display: flex; gap: 10px"><span style="color: #00C8FF">✦</span> Performance-Feinschliff für lange Fahrten</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Etappe 3: Verbesserungen ── -->
+      <div data-stop="" style="position: relative; padding: 0 0 clamp(70px, 12vh, 130px) clamp(64px, 11vw, 110px)">
+        <div data-node="" style="position: absolute; left: clamp(22px, 4vw, 32px); top: 8px; transform: translateX(-50%); width: 18px; height: 18px; border-radius: 50%; background: #070b16; border: 3px solid rgba(255,255,255,.25); transition: all .5s ease; z-index: 4"></div>
+        <div data-card="" style="opacity: 0; transform: translateX(60px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.1); border-radius: 22px; padding: clamp(24px, 3.5vw, 40px); transition: opacity .9s ease, transform 1s cubic-bezier(.2,.65,.2,1), border-color .5s ease">
+          <div style="display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 14px">
+            <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(26px, 3vw, 38px); color: #FFA500">Etappe 03</span>
+            <span data-badge="" style="font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid rgba(237,241,247,.35); color: rgba(237,241,247,.75)">Als Nächstes</span>
+          </div>
+          <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(28px, 4.4vw, 56px); line-height: .96; text-transform: uppercase; letter-spacing: -.01em">Besser machen<span style="color: #FFA500">.</span></h2>
+          <p style="margin: 14px 0 0; font-size: clamp(16px, 1.5vw, 18px); font-weight: 500; color: rgba(237,241,247,.68); text-wrap: pretty">Bestehende Features werden verfeinert — basierend auf dem, was ihr uns aus der Praxis meldet. Kleinigkeiten, die im Korb den Unterschied machen.</p>
+          <div style="margin-top: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; font-weight: 500; color: rgba(237,241,247,.7)">
+            <div style="display: flex; gap: 10px"><span style="color: #FFA500">✦</span> Noch schnellere Karten und flüssigeres Zoomen</div>
+            <div style="display: flex; gap: 10px"><span style="color: #FFA500">✦</span> Verfeinerte Landeprognose und Windprofile</div>
+            <div style="display: flex; gap: 10px"><span style="color: #FFA500">✦</span> Komfort-Details in Briefing, Fahrtenbuch &amp; Planung</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Etappe 4: Wunsch-Features ── -->
+      <div data-stop="" style="position: relative; padding: 0 0 0 clamp(64px, 11vw, 110px)">
+        <div data-node="" style="position: absolute; left: clamp(22px, 4vw, 32px); top: 8px; transform: translateX(-50%); width: 18px; height: 18px; border-radius: 50%; background: #070b16; border: 3px solid rgba(255,255,255,.25); transition: all .5s ease; z-index: 4"></div>
+        <div data-card="" style="opacity: 0; transform: translateX(60px); background: linear-gradient(180deg, rgba(255,165,0,.1), rgba(255,165,0,.03)); border: 1px solid rgba(255,165,0,.45); border-radius: 22px; padding: clamp(24px, 3.5vw, 40px); transition: opacity .9s ease, transform 1s cubic-bezier(.2,.65,.2,1), border-color .5s ease">
+          <div style="display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 14px">
+            <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(26px, 3vw, 38px); color: #FFA500">Etappe 04</span>
+            <span data-badge="" style="font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; background: rgba(255,165,0,.15); border: 1px solid #FFA500; color: #FFA500">Ihr entscheidet</span>
+          </div>
+          <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(28px, 4.4vw, 56px); line-height: .96; text-transform: uppercase; letter-spacing: -.01em">Eure Wünsche<span style="color: #FFA500">.</span></h2>
+          <p style="margin: 14px 0 0; font-size: clamp(16px, 1.5vw, 18px); font-weight: 500; color: rgba(237,241,247,.68); text-wrap: pretty">Die spannendste Etappe schreibt ihr: Neue Features entstehen aus euren Anfragen. Jede wird gelesen, bewertet und — wenn möglich und relevant — umgesetzt.</p>
+          <a href="feedback.html" style="display: inline-block; margin-top: 22px; background: #FFA500; color: #070b16; font-weight: 700; font-size: 16px; letter-spacing: .1em; text-transform: uppercase; padding: 14px 32px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 36px rgba(255,165,0,.3); transition: all .25s ease" style-hover="background: #ffb733; transform: translateY(-2px)">Wunsch einreichen →</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer style="border-top: 1px solid rgba(255,255,255,.07); padding: 24px clamp(20px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; justify-content: space-between; font-size: 14px; font-weight: 500; color: rgba(237,241,247,.5)">
+    <span>© 2026 NTA SkyNav · Entwickelt in Österreich</span>
+    <span style="display: flex; gap: 22px">
+      <a href="feedback.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Feedback</a>
+      <a href="datenschutz.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Datenschutz</a>
+      <a href="agb.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">AGB</a>
+      <a href="impressum.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Impressum</a>
+    </span>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    if (this._wired) return;
+    this._wired = true;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const $$ = (s) => Array.from(document.querySelectorAll(s));
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+    /* hero rise-in */
+    $$('[data-rise]').forEach((el) => {
+      const d = parseInt(el.dataset.riseDelay || 0, 10);
+      if (reduce) { el.style.opacity = '1'; el.style.transform = 'none'; return; }
+      el.style.transition = 'opacity .9s ease, transform 1s cubic-bezier(.2,.65,.2,1)';
+      setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, 250 + d);
+    });
+
+    /* card reveals */
+    const cards = $$('[data-card]');
+    if (reduce) {
+      cards.forEach((c) => { c.style.opacity = '1'; c.style.transform = 'none'; });
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0.18 });
+      cards.forEach((c) => io.observe(c));
+    }
+
+    /* scroll-driven progress line, balloon + node activation */
+    const timeline = document.querySelector('[data-timeline]');
+    const line = document.querySelector('[data-progressline]');
+    const balloon = document.querySelector('[data-balloon]');
+    const stops = $$('[data-stop]');
+    const nodes = $$('[data-node]');
+    let ticking = false;
+
+    const apply = () => {
+      ticking = false;
+      if (!timeline) return;
+      const r = timeline.getBoundingClientRect();
+      const anchor = window.innerHeight * 0.55;
+      const p = clamp((anchor - r.top) / r.height, 0, 1);
+      if (line) line.style.height = (p * 100) + '%';
+      if (balloon) balloon.style.top = (p * 100) + '%';
+      stops.forEach((stop, i) => {
+        const sr = stop.getBoundingClientRect();
+        const active = sr.top - r.top <= p * r.height + 2;
+        const node = nodes[i];
+        if (!node) return;
+        if (active) {
+          node.style.borderColor = '#FFA500';
+          node.style.background = '#FFA500';
+          node.style.boxShadow = '0 0 18px rgba(255,165,0,.6)';
+          if (!reduce) node.style.animation = 'nodepulse 2.4s ease-out infinite';
+        } else {
+          node.style.borderColor = 'rgba(255,255,255,.25)';
+          node.style.background = '#070b16';
+          node.style.boxShadow = 'none';
+          node.style.animation = 'none';
+        }
+      });
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(apply);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    apply();
+  }
+
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

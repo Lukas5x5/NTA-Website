@@ -11,6 +11,8 @@
 <link rel="icon" type="image/png" href="nta-logo.png">
 <link rel="apple-touch-icon" href="nta-logo.png">
 <script src="./support.js"></script>
+<script src="./lang.js" defer></script>
+<script src="./menu.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -39,10 +41,15 @@
     @media (max-width: 860px) {
       /* Announcement-Bar: eine Zeile, symmetrisches Padding */
       [data-announce] > div { font-size: 11px !important; letter-spacing: .08em !important; gap: 8px !important; white-space: nowrap; padding-top: 11px !important; padding-bottom: 11px !important; }
-      /* Nav: Logo & Button kompakter */
-      header nav { padding-top: 10px !important; padding-bottom: 10px !important; }
-      header nav img { width: 46px !important; height: 46px !important; }
-      header nav a[data-magnetic] { font-size: 13px !important; padding: 10px 18px !important; }
+      /* Nav: Logo & Button kompakter, Schriftzug bleibt sichtbar */
+      header nav { padding-top: 10px !important; padding-bottom: 10px !important; gap: 12px !important; }
+      header nav img { width: 40px !important; height: 40px !important; }
+      header nav a[href="#top"] { gap: 8px !important; }
+      header nav a[href="#top"] > span > span:first-child { font-size: 15px !important; }
+      header nav a[href="#top"] > span > span:last-child { font-size: 8px !important; letter-spacing: .22em !important; }
+      header nav a[data-magnetic] { font-size: 12px !important; padding: 9px 12px !important; white-space: nowrap; }
+      header nav button { font-size: 11px !important; padding: 8px 10px !important; }
+      header nav > div:last-of-type { gap: 8px !important; }
       /* Editorial (Ausgabe 01): weniger Padding unten */
       section[data-screen-label="Editorial"] { padding-bottom: 28px !important; }
       /* Fahrtenspeicher: Handy unter den Text */
@@ -68,6 +75,13 @@
       #features { padding-top: 48px !important; padding-bottom: 48px !important; }
       /* Partner-Sektion (capzlog): weniger Padding */
       #partner { padding-top: 44px !important; padding-bottom: 44px !important; }
+      /* Partner-Label + Logo nebeneinander auch auf Mobil */
+      [data-partner-row] { flex-wrap: nowrap !important; gap: 14px !important; justify-content: space-between !important; }
+      [data-partner-row] > div { font-size: 11px !important; letter-spacing: .18em !important; white-space: nowrap; }
+      [data-partner-row] a { padding: 9px 13px !important; flex-shrink: 0; }
+      [data-partner-row] a img { height: 14px !important; }
+      [data-partner-row] a[href*="blaser"] { padding: 0 !important; }
+      [data-partner-row] a[href*="blaser"] img { height: 30px !important; }
       /* Preis-Karten: kompakt */
       #preise { padding-top: 48px !important; padding-bottom: 48px !important; }
       #preise div[style*="grid-template-columns"] > div { padding: 24px 20px !important; border-radius: 18px !important; }
@@ -98,7 +112,7 @@
     <div data-announce="" style="overflow: hidden; background: linear-gradient(90deg, rgba(255,165,0,.14), rgba(0,200,255,.1)); border-bottom: 1px solid rgba(255,255,255,.07); transition: max-height .5s ease, opacity .4s ease; max-height: 40px">
       <div style="max-width: 1480px; margin: 0 auto; padding: 8px clamp(20px, 4vw, 48px); display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(237,241,247,.8)">
         <span style="width: 6px; height: 6px; border-radius: 50%; background: #FFA500; box-shadow: 0 0 8px #FFA500; animation: blip 2.4s ease-in-out infinite"></span>
-        <span>Neu: capzlog.aero-Partnerschaft<span data-mq-hide=""> — Fahrtenbuch schreibt sich von selbst</span></span>
+        <span>Neu: capzlog.aero & Blaser-Partnerschaft<span data-mq-hide=""> — Flugbuch & Flotte in einer App</span></span>
         <a href="#partner" style="color: #FFA500; text-decoration: none; white-space: nowrap" style-hover="color: #ffb733">Mehr →</a>
       </div>
     </div>
@@ -116,6 +130,8 @@
         <a data-navitem="" data-navlink="features" href="#features" style="position: relative; color: rgba(237,241,247,.75); text-decoration: none; padding: 4px 0; opacity: 0; transform: translateY(-16px)" style-hover="color: #FFA500">Features<span data-underline="" style="position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%; background: #FFA500; transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2,.65,.2,1)"></span></a>
         <a data-navitem="" data-navlink="partner" href="#partner" style="position: relative; color: rgba(237,241,247,.75); text-decoration: none; padding: 4px 0; opacity: 0; transform: translateY(-16px)" style-hover="color: #FFA500">Partner<span data-underline="" style="position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%; background: #FFA500; transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2,.65,.2,1)"></span></a>
         <a data-navitem="" data-navlink="preise" href="#preise" style="position: relative; color: rgba(237,241,247,.75); text-decoration: none; padding: 4px 0; opacity: 0; transform: translateY(-16px)" style-hover="color: #FFA500">Preise<span data-underline="" style="position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%; background: #FFA500; transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2,.65,.2,1)"></span></a>
+        <a data-navitem="" href="roadmap.html" style="position: relative; color: rgba(237,241,247,.75); text-decoration: none; padding: 4px 0; opacity: 0; transform: translateY(-16px)" style-hover="color: #FFA500">Roadmap</a>
+        <a data-navitem="" href="feedback.html" style="position: relative; color: rgba(237,241,247,.75); text-decoration: none; padding: 4px 0; opacity: 0; transform: translateY(-16px)" style-hover="color: #FFA500">Feedback</a>
       </div>
       <div data-navitem="" style="display: flex; align-items: center; gap: 16px; opacity: 0; transform: translateY(-16px)">
         <a data-magnetic="" href="#abheben" style="display: inline-block; background: #FFA500; color: #070b16; font-weight: 700; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; padding: 11px 24px; border-radius: 999px; text-decoration: none; box-shadow: 0 0 24px rgba(255,165,0,.25)" style-hover="background: #ffb733">App holen</a>
@@ -194,8 +210,8 @@
       </div>
 
       <div style="animation: floaty 9s ease-in-out infinite; position: relative; z-index: 2">
-        <div data-hero-phone="" style="position: relative; width: min(330px, 72vw); aspect-ratio: 784 / 1600; background: #0b101e; border-radius: clamp(40px, 11vw, 54px); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 60px 140px rgba(0,0,0,.7), 0 0 0 10px #04060c, 0 0 80px rgba(255,165,0,.12); overflow: hidden">
-          <img src="assets/GPS HUD.jpeg" alt="NTA SkyNav GPS-Navigation mit NAV-Panel" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit">
+        <div data-hero-phone="" style="position: relative; width: min(330px, 72vw); aspect-ratio: 944 / 2048; background: #0b101e; border-radius: clamp(40px, 11vw, 54px); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 60px 140px rgba(0,0,0,.7), 0 0 0 10px #04060c, 0 0 80px rgba(255,165,0,.12); overflow: hidden">
+          <img src="assets/app-screen-1.jpeg" alt="NTA SkyNav GPS-Navigation mit NAV-Panel" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit">
           <div style="position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 32%; height: 24px; background: #04060c; border-radius: 16px"></div>
         </div>
       </div>
@@ -231,10 +247,10 @@
       <!-- phone, right side -->
       <div data-story-phone="" style="position: absolute; right: clamp(10px, 6vw, 110px); top: 50%; transform: translateY(-50%); z-index: 5">
         <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: min(640px, 100vw); height: min(640px, 100vw); background: radial-gradient(circle, rgba(0,200,255,.14) 0%, rgba(255,165,0,.08) 45%, transparent 70%); filter: blur(40px); pointer-events: none"></div>
-        <div style="position: relative; width: clamp(180px, 23vw, 310px); aspect-ratio: 784 / 1600; background: #0b101e; border-radius: clamp(40px, 11vw, 54px); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 60px 140px rgba(0,0,0,.7), 0 0 0 10px #04060c, 0 0 80px rgba(255,165,0,.12); overflow: hidden">
-          <img data-story-img="" src="assets/GPS HUD.jpeg" alt="Precision GPS mit NAV-Panel" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit; opacity: 1; transition: opacity .25s linear">
-          <img data-story-img="" src="assets/Farbiger Track.jpg" alt="Automatisch aufgezeichneter, farbiger Track" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit; opacity: 0; transition: opacity .25s linear">
-          <img data-story-img="" src="assets/Live Team.jpg" alt="Live Team Tracking auf der Karte" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit; opacity: 0; transition: opacity .25s linear">
+        <div style="position: relative; width: clamp(180px, 23vw, 310px); aspect-ratio: 944 / 2048; background: #0b101e; border-radius: clamp(40px, 11vw, 54px); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 60px 140px rgba(0,0,0,.7), 0 0 0 10px #04060c, 0 0 80px rgba(255,165,0,.12); overflow: hidden">
+          <img data-story-img="" src="assets/app-screen-2.jpeg" alt="Precision GPS mit NAV-Panel" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit; opacity: 1; transition: opacity .25s linear">
+          <img data-story-img="" src="assets/app-screen-3.jpeg" alt="Automatisch aufgezeichneter, farbiger Track" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit; opacity: 0; transition: opacity .25s linear">
+          <img data-story-img="" src="assets/app-screen-4.jpeg" alt="Live Team Tracking auf der Karte" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit; opacity: 0; transition: opacity .25s linear">
           <div style="position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 32%; height: 24px; background: #04060c; border-radius: 16px; z-index: 4"></div>
         </div>
       </div>
@@ -369,8 +385,8 @@
       <div data-reveal="" style="opacity: 0; transform: translateY(40px); display: flex; justify-content: center">
         <div style="position: relative">
           <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: min(560px, 90vw); height: min(560px, 90vw); background: radial-gradient(circle, rgba(255,165,0,.16) 0%, rgba(0,200,255,.07) 45%, transparent 70%); filter: blur(38px); pointer-events: none"></div>
-          <div data-fahrten-phone="" style="position: relative; width: clamp(230px, 26vw, 320px); aspect-ratio: 784 / 1600; background: #0b101e; border-radius: clamp(40px, 11vw, 54px); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 60px 140px rgba(0,0,0,.7), 0 0 0 10px #04060c, 0 0 80px rgba(255,165,0,.12); overflow: hidden">
-            <img src="assets/gespeicherter track.jpg" alt="Gespeicherte Fahrt mit Start, Landung, Dauer, Max-Höhe und Gasverbrauch" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit">
+          <div data-fahrten-phone="" style="position: relative; width: clamp(230px, 26vw, 320px); aspect-ratio: 944 / 2048; background: #0b101e; border-radius: clamp(40px, 11vw, 54px); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 60px 140px rgba(0,0,0,.7), 0 0 0 10px #04060c, 0 0 80px rgba(255,165,0,.12); overflow: hidden">
+            <img src="assets/app-screen-5.jpeg" alt="Gespeicherte Fahrt mit Start, Landung, Dauer, Max-Höhe und Gasverbrauch" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: inherit">
             <div style="position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 32%; height: 24px; background: #04060c; border-radius: 16px"></div>
           </div>
         </div>
@@ -423,7 +439,7 @@
         <div data-reveal="" data-delay="60" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
           <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #00C8FF">02</div>
           <div style="font-weight: 700; font-size: 21px; letter-spacing: .02em; color: #EDF1F7">5 Wettermodelle</div>
-          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">ICON-D2, ICON-EU, ICON Global, ECMWF und GFS im direkten Vergleich.</div>
+          <div style="font-size: 16px; font-weight: 500; color: rgba(237,241,247,.6); text-wrap: pretty">ICON-D2, ICON-EU, ICON Global, ECMWF IFS und GPS-Livedaten im Vergleich.</div>
         </div>
         <div data-reveal="" data-delay="120" data-tilt="0" style="opacity: 0; transform: translateY(40px); background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 10px" style-hover="border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.05)">
           <div style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: #00C8FF">03</div>
@@ -481,9 +497,14 @@
 
   <!-- ════ 7 · PARTNERSCHAFT (Szenenwechsel hell) ════ -->
   <section id="partner" data-screen-label="Partnerschaft" style="position: relative; background: #F4F1EA; color: #14342B; padding: clamp(90px, 14vh, 170px) clamp(20px, 4vw, 48px); scroll-margin-top: 0px">
-    <div style="max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(36px, 4vw, 72px); align-items: center">
+    <div style="max-width: 1480px; margin: 0 auto; background: #fff; border: 1px solid rgba(20,52,43,.08); border-radius: 28px; padding: clamp(28px, 4vw, 56px); box-shadow: 0 30px 80px rgba(20,52,43,.08); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(36px, 4vw, 72px); align-items: center">
       <div data-reveal="" style="opacity: 0; transform: translateY(40px)">
-        <div style="font-size: 14px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: rgba(20,52,43,.55); margin-bottom: 20px">Offizieller Partner</div>
+        <div data-partner-row="" style="display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-bottom: 24px">
+          <div style="font-size: 14px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: rgba(20,52,43,.55)">Offizieller Partner</div>
+          <a href="https://capzlog.aero" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; background: #14342B; border-radius: 10px; padding: 12px 18px; text-decoration: none" style-hover="background: #1d4a3d">
+            <img src="assets/capzlog-logo.svg" alt="capzlog.aero Logo" style="height: 18px; display: block">
+          </a>
+        </div>
         <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(40px, 5.6vw, 92px); line-height: .96; text-transform: uppercase; letter-spacing: -.01em">Gelandet<span style="color: #FFA500">.</span><br><span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 380; text-transform: none; letter-spacing: 0; font-size: .82em">Eingetragen.</span></h2>
         <p style="margin: 28px 0 0; font-size: clamp(18px, 1.7vw, 22px); font-weight: 500; max-width: 560px; color: rgba(20,52,43,.8); text-wrap: pretty">Jede Fahrt wird nach der Landung automatisch in dein digitales Flugbuch bei <strong style="font-weight: 700">capzlog.aero</strong> übertragen. Einmal verbinden — nie wieder manuell eintragen.</p>
         <a href="https://capzlog.aero" target="_blank" rel="noopener" style="margin-top: 36px; display: inline-flex; align-items: center; gap: 14px; border: 2px solid #14342B; border-radius: 12px; padding: 14px 24px; color: #14342B; text-decoration: none" style-hover="background: rgba(20,52,43,.06)">
@@ -519,6 +540,56 @@
           <div>
             <div style="font-weight: 700; font-size: 22px; letter-spacing: .04em; text-transform: uppercase">Fertig</div>
             <div style="font-size: 17px; font-weight: 500; color: rgba(20,52,43,.7)">Dein Flugbuch ist aktuell, bevor der Ballon verpackt ist.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Partner 2: Blaser ─── -->
+    <div data-blaser="" style="max-width: 1480px; margin: clamp(28px, 5vh, 56px) auto 0; background: #fff; border: 1px solid rgba(20,52,43,.08); border-radius: 28px; padding: clamp(28px, 4vw, 56px); box-shadow: 0 30px 80px rgba(20,52,43,.08); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(36px, 4vw, 72px); align-items: center">
+      <div data-reveal="" style="opacity: 0; transform: translateY(40px)">
+        <div data-partner-row="" style="display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-bottom: 24px">
+          <div style="font-size: 14px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: rgba(20,52,43,.55)">Offizieller Partner</div>
+          <a href="https://blaser.com/de/ballonfahren/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; text-decoration: none" style-hover="opacity: .75">
+            <img src="assets/blaser-logo.svg" alt="Blaser Swisslube Logo" style="height: 38px; display: block">
+          </a>
+        </div>
+        <h2 style="margin: 0; font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(40px, 5.6vw, 92px); line-height: .96; text-transform: uppercase; letter-spacing: -.01em">Eine Flotte<span style="color: #FFA500">.</span><br><span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 380; text-transform: none; letter-spacing: 0; font-size: .82em">Eine App.</span></h2>
+        <p style="margin: 28px 0 0; font-size: clamp(18px, 1.7vw, 22px); font-weight: 500; max-width: 560px; color: rgba(20,52,43,.8); text-wrap: pretty">Die <strong style="font-weight: 700">Blaser Ballongruppe</strong> — 16 Heißluftballone in der Schweiz, Deutschland und den USA — organisiert ihre Flotte mit NTA SkyNav: Buchungskalender, Ballon-Technikdaten und Gasflaschen-Bibliothek, direkt verbunden mit Flugplanung und Lastberechnung.</p>
+        <a href="https://blaser.com/de/ballonfahren/" target="_blank" rel="noopener" style="margin-top: 36px; display: inline-flex; align-items: center; gap: 14px; border: 2px solid #14342B; border-radius: 12px; padding: 14px 24px; color: #14342B; text-decoration: none" style-hover="background: rgba(20,52,43,.06)">
+          <span style="font-weight: 700; font-size: 15px; letter-spacing: .22em; text-transform: uppercase">NTA SkyNav</span>
+          <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: 20px; color: #FFA500">&#215;</span>
+          <span style="font-weight: 700; font-size: 16px; letter-spacing: .1em">Blaser Ballooning ↗</span>
+        </a>
+      </div>
+
+      <div data-reveal="" data-delay="80" style="opacity: 0; transform: translateY(40px); display: flex; justify-content: center">
+        <div data-tilt="-2" style="transform: rotate(-2deg); background: #fff; padding: 12px 12px 40px; border-radius: 4px; box-shadow: 0 40px 90px rgba(20,52,43,.35); max-width: 340px">
+          <img src="assets/blaser-flotte.jpeg" alt="Blaser-Ballon im Sonnenaufgang — NTA SkyNav am iPad im Korb" loading="lazy" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block">
+          <div style="margin-top: 12px; font-weight: 600; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: #444">SkyNav an Bord der Blaser-Flotte</div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0">
+        <div data-reveal="" data-delay="100" style="opacity: 0; transform: translateY(40px); display: flex; gap: 22px; align-items: baseline; border-top: 2px solid rgba(20,52,43,.2); padding: 26px 4px">
+          <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(34px, 3.4vw, 52px); color: #FFA500; min-width: 64px">01</span>
+          <div>
+            <div style="font-weight: 700; font-size: 22px; letter-spacing: .04em; text-transform: uppercase">Buchen</div>
+            <div style="font-size: 17px; font-weight: 500; color: rgba(20,52,43,.7)">Ballon im Kalender buchen — Fahrzeuge und Anhänger werden automatisch zugeordnet.</div>
+          </div>
+        </div>
+        <div data-reveal="" data-delay="220" style="opacity: 0; transform: translateY(40px); display: flex; gap: 22px; align-items: baseline; border-top: 2px solid rgba(20,52,43,.2); padding: 26px 4px">
+          <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(34px, 3.4vw, 52px); color: #FFA500; min-width: 64px">02</span>
+          <div>
+            <div style="font-weight: 700; font-size: 22px; letter-spacing: .04em; text-transform: uppercase">Planen</div>
+            <div style="font-size: 17px; font-weight: 500; color: rgba(20,52,43,.7)">Der Flight Planner schlägt den gebuchten Ballon vor — Technikdaten fließen direkt in die Lastberechnung.</div>
+          </div>
+        </div>
+        <div data-reveal="" data-delay="340" style="opacity: 0; transform: translateY(40px); display: flex; gap: 22px; align-items: baseline; border-top: 2px solid rgba(20,52,43,.2); border-bottom: 2px solid rgba(20,52,43,.2); padding: 26px 4px">
+          <span style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(34px, 3.4vw, 52px); color: #FFA500; min-width: 64px">03</span>
+          <div>
+            <div style="font-weight: 700; font-size: 22px; letter-spacing: .04em; text-transform: uppercase">Fahren</div>
+            <div style="font-size: 17px; font-weight: 500; color: rgba(20,52,43,.7)">Jede Fahrt wird mit korrektem Kennzeichen, Beladung und Gasverbrauch dokumentiert.</div>
           </div>
         </div>
       </div>
@@ -598,6 +669,8 @@
       <div style="display: flex; flex-wrap: wrap; gap: 8px 26px; font-weight: 600; font-size: 14px; letter-spacing: .1em; text-transform: uppercase">
         <a href="#features" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Features</a>
         <a href="#preise" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Preise</a>
+        <a href="roadmap.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Roadmap</a>
+        <a href="feedback.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Feedback</a>
         <a href="datenschutz.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Datenschutz</a>
         <a href="agb.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">AGB</a>
         <a href="impressum.html" style="color: rgba(237,241,247,.6); text-decoration: none" style-hover="color: #FFA500">Impressum</a>
@@ -820,7 +893,7 @@ class Component extends DCLogic {
     /* ---- Feature cards: click to expand details ---- */
     const featureDetails = [
       'Offizielle ICAO-Karten mit allen Luftraumklassen von A bis G, Kontrollzonen und Gefahrengebieten — für 113 Länder weltweit. Einmal geladen, komplett offline verfügbar. SkyNav warnt dich, bevor du in kontrollierten Luftraum einfährst.',
-      'ICON-D2 für die nächsten Stunden, ICON-EU und ICON Global für die Großlage, ECMWF und GFS zum Quervergleich. Wind in allen relevanten Höhenschichten — du erkennst, ob die Fahrt geht, bevor du den Anhänger ankuppelst.',
+      'ICON-D2 für die nächsten Stunden, ICON-EU und ICON Global für die Großlage, ECMWF IFS zum Quervergleich — dazu dein Live-Windprofil aus echten GPS-Daten. Du erkennst, ob die Fahrt geht, bevor du den Anhänger ankuppelst.',
       'Ein Tipp, und SkyNav baut dein komplettes Briefing: Windprofile in allen Höhen, Modellvergleich, Bodenwetter und Vorhersage — als sauberes PDF zum Teilen mit Crew, Passagieren oder dem Veranstalter.',
       'Temperatur, Startplatzhöhe, Hüllenvolumen, Passagiere und Gas: SkyNav rechnet die Traglast und zeigt ein klares GO oder NO-GO mit Reserve. Jede Rechnung wird zusammen mit der Fahrt gespeichert.',
       'Zylinder einmal anlegen, fertig: Während der Fahrt trackt SkyNav Verbrauch und Restzeit pro Zylinder. Du weißt jederzeit, wie lange der Brenner noch kann — ohne Kopfrechnen in der Luft.',
