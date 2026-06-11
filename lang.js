@@ -98,7 +98,7 @@
 "Eine App.": "One app.",
 "Die": "The",
 "Blaser Ballongruppe": "Blaser balloon group",
-"— 16 Heißluftballone in der Schweiz, Deutschland und den USA — organisiert ihre Flotte mit NTA SkyNav: Buchungskalender, Ballon-Technikdaten und Gasflaschen-Bibliothek, direkt verbunden mit Flugplanung und Lastberechnung.": "— 16 hot-air balloons across Switzerland, Germany and the USA — organises its fleet with NTA SkyNav: booking calendar, balloon technical data and gas cylinder library, directly connected to flight planning and load calculation.",
+"— 23 Heißluftballone in der Schweiz, Deutschland und den USA — organisiert ihre Flotte mit NTA SkyNav: Buchungskalender, Ballon-Technikdaten und Gasflaschen-Bibliothek, direkt verbunden mit Flugplanung und Lastberechnung.": "— 23 hot-air balloons across Switzerland, Germany and the USA — organises its fleet with NTA SkyNav: booking calendar, balloon technical data and gas cylinder library, directly connected to flight planning and load calculation.",
 "SkyNav an Bord der Blaser-Flotte": "SkyNav aboard the Blaser fleet",
 "Buchen": "Book",
 "Ballon im Kalender buchen — Fahrzeuge und Anhänger werden automatisch zugeordnet.": "Book a balloon in the calendar — vehicles and trailers are assigned automatically.",
