@@ -47,7 +47,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'NTA SkyNav Feedback <onboarding@resend.dev>',
+        from: 'NTA SkyNav Feedback <feedback@ntaskynav.app>',
         to,
         reply_to: email && email.includes('@') ? email : undefined,
         subject: `SkyNav Feedback${name ? ` — ${name}` : ''}`,
